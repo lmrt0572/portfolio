@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Martin Léo, étudiant en Informatique">
+    <title>Portfolio de Martin Léo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Couleurs personnalisées */
+        .primary-bg {
+            background-color: #111827; /* Noir légèrement plus clair */
+        }
+    
+        .secondary-bg {
+            background-color: #1E40AF; /* Bleu plus profond */
+        }
+    
+        .primary-text {
+            color: #1E40AF;
+        }
+    
+        .secondary-text {
+            color: #E5E5E5;
+        }
+    
+        /* Animation de flottement */
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(0, -10px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .button-hover:hover {
+            background-color: #3b82f6;
+            transition: background-color 0.3s ease;
+        }
+    
+        /* Animation des circuits électroniques */
+        @keyframes moveCircuits {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0px 1000px;
+            }
+        }
+    
+        .hero-background {
+            position: relative;
+            background-image: url('circ1.jpg'), url('circ1.jpg'); /* URLs des circuits électroniques */
+            background-size: 300px 300px, 400px 400px; /* Ajuster les tailles */
+            background-repeat: repeat, repeat;
+            animation: moveCircuits 30s linear infinite; /* Animation continue */
+            height: 300px; /* Ajuste la hauteur selon tes besoins */
+            background-blend-mode: overlay; /* Effet de fusion des images */
+        }
+    
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+    </style>
+    
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Navbar -->
+    <nav class="primary-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">Martin Léo</div>
+            <div class="space-x-4">
+                <a href="#about" class="hover:text-gray-300 transition">À propos</a>
+                <a href="#projects" class="hover:text-gray-300 transition">Projets</a>
+                <a href="#testimonials" class="hover:text-gray-300 transition">Témoignages</a>
+                <a href="#contact" class="hover:text-gray-300 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section avec animation de circuits -->
+    <section class="hero-background">
+        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
+            <h1 class="text-5xl font-bold mb-6 floating">Bonjour, je suis Martin Léo</h1>
+            <p class="text-2xl mb-10">Étudiant en Informatique au CESI, passionné par la technologie et l'innovation.</p>
+            <a href="#projects" class="button-hover bg-secondary-bg px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-600 transition">Voir mes projets</a>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about" class="container mx-auto py-24 px-6 animate__animated animate__fadeInUp">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold primary-text">À propos de moi</h2>
+        </div>
+        <div class="md:flex md:justify-center">
+            <div class="md:w-2/3 text-center">
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Je suis passionné par le développement de solutions innovantes et les défis techniques. Je suis constamment à la recherche de nouvelles compétences pour perfectionner mes projets.
+                </p>
+            </div>
+        </div>
+    </section>
+
+<!-- Projects Section -->
+<section id="projects" class="primary-bg text-white py-24">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-16">Mes Projets</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Project 1 -->
+            <a href="strongbox-3000.html">
+                <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
+                    <img src="img.img\systemes-embarques-datascientest.jpg" alt="Projet 1" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-3">Projet 1 : StrongBox 3000</h3>
+                    <p class="text-gray-400 leading-relaxed">Ce projet démontre mes compétences en système embarqué, j'ai appris à développer mes compétences en C++.</p>
+                </div>
+            </a>
+            <!-- Project 2 -->
+            <a href="traitement-signal.html">
+                <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
+                    <img src="img.img\master-tsi-upec-2-signaux.jpg" alt="Projet 2" class="w-full h-48 object-cover mb-4 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-3">Projet 2 : traitement de signal</h3>
+                    <p class="text-gray-400 leading-relaxed">Un projet utilisant mes compétences afin de traduire des signaux analogiques en numériques, etc....</p>
+                </div>
+            </a>
+            <!-- Project 3 -->
+            <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
+                <img src="img.img\fotor-ai-20241002113452.jpg" alt="Projet 3" class="w-full h-48 object-cover mb-4 rounded-lg">
+                <h3 class="text-2xl font-bold mb-3">Projet 3 : StrongBox 2.0</h3>
+                <p class="text-gray-400 leading-relaxed">Projet en cours de développement.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="container mx-auto py-24 px-6 text-center animate__animated animate__fadeInUp">
+        <h2 class="text-4xl font-bold primary-text mb-16">Témoignages</h2>
+        <div class="space-y-10">
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                <p class="text-lg text-gray-300 leading-relaxed">"Martin est un étudiant exceptionnel qui n'hésite jamais à aller au-delà des attentes. Son projet StrongBox a impressionné l'ensemble du corps enseignant."</p>
+                <p class="mt-4 text-sm text-gray-400">- Professeur Jacques</p>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                <p class="text-lg text-gray-300 leading-relaxed">"Martin a une capacité incroyable à résoudre des problèmes complexes avec des solutions élégantes et efficaces."</p>
+                <p class="mt-4 text-sm text-gray-400">- Collègue Étudiant</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container mx-auto py-24 px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold primary-text">Contactez-moi</h2>
+        </div>
+        <div class="md:flex md:justify-center">
+            <form action="mailto:leo.martin1@viacesi.fr" class="md:w-1/2 bg-gray-800 p-8 rounded-lg shadow-lg">
+                <div class="mb-6">
+                    <label for="name" class="block text-left text-gray-300 mb-2">Nom</label>
+                    <input type="text" id="name" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg">
+                </div>
+                <div class="mb-6">
+                    <label for="email" class="block text-left text-gray-300 mb-2">Email</label>
+                    <input type="email" id="email" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-left text-gray-300 mb-2">Message</label>
+                    <textarea id="message" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg" rows="5"></textarea>
+                </div>
+                <button type="submit" class="button-hover bg-secondary-bg text-white px-8 py-4 rounded-lg font-semibold w-full">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="primary-bg text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Martin Léo. Tous droits réservés.</p>
+            <p>Contact: <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
