@@ -1,193 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Léo Martin, étudiant en Informatique">
-    <title>Portfolio de Léo Martin </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <style>
-        /* Couleurs personnalisées */
-        .primary-bg {
-            background-color: #111827; /* Noir légèrement plus clair */
-        }
-    
-        .secondary-bg {
-            background-color: #1E40AF; /* Bleu plus profond */
-        }
-    
-        .primary-text {
-            color: #1E40AF;
-        }
-    
-        .secondary-text {
-            color: #E5E5E5;
-        }
-    
-        /* Animation de flottement */
-        @keyframes float {
-            0% {
-                transform: translate(0, 0);
-            }
-            50% {
-                transform: translate(0, -10px);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-    
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-    
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-    
-        .button-hover:hover {
-            background-color: #3b82f6;
-            transition: background-color 0.3s ease;
-        }
-    
-        /* Animation des circuits électroniques */
-        @keyframes moveCircuits {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 0px 1000px;
-            }
-        }
-    
-        .hero-background {
-            position: relative;
-            background-image: url('circ1.jpg'), url('circ1.jpg'); 
-            background-size: 300px 300px, 400px 400px; 
-            background-repeat: repeat, repeat;
-            animation: moveCircuits 30s linear infinite; 
-            height: 300px; 
-            background-blend-mode: overlay;
-        }
-    
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-        }
-    </style>
-    
+    <title>Complete Responsive Personal Portfolio Website Using HTML CSS & JavaScript | Codehal</title>
+    <!-- boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-gray-900 text-gray-200">
+<body>
 
-    <!-- Navbar -->
-    <nav class="primary-bg text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">Léo Martin</div>
-            <div class="space-x-4">
-                <a href="#about" class="hover:text-gray-300 transition">À propos</a>
-                <a href="#projects" class="hover:text-gray-300 transition">Projets</a>
-                <a href="#contact" class="hover:text-gray-300 transition">Contact</a>
-            </div>
-        </div>
+    <!-- header -->
+<header class="active">
+    <a href="#" class="logo">Léo.</a>
+
+    <i class="bx bx-menu" id="menu-icon"></i>
+
+
+    <nav>
+        <a href="#" class="active">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Resume</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Contact</a>
     </nav>
+</header>
 
-    <!-- Hero Section avec animation de circuits -->
-    <section class="hero-background">
-        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
-            <h1 class="text-5xl font-bold mb-6 floating">Bonjour, je suis Léo Martin</h1>
-            <p class="text-2xl mb-10">Étudiant en Informatique au CESI, je souhaite développer mes compétences et évoluer dans ce domaine.</p>
-            <a href="#projects" class="button-hover bg-secondary-bg px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-600 transition">Voir mes projets</a>
-        </div>
-    </section>
-
-
-    <!-- About Section -->
-    <section id="about" class="container mx-auto py-24 px-6 animate__animated animate__fadeInUp">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold primary-text">À propos de moi</h2>
-        </div>
-        <div class="md:flex md:justify-center">
-            <div class="md:w-2/3 text-center">
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Je suis actuellement en 2ème année d'école d'ingénieur, et je souhaite vous partager les différents projets que j'ai effectués au cours de mon apprentissage. Ce Portfolio n'est que temporaire, je compte l'améliorer afin de développer mes compétences. 
-                </p>
+<!-- bars background -->
+<div class="bars-box active">
+    <div class="bar" style="--i:6;"></div>
+    <div class="bar" style="--i:5;"></div>
+    <div class="bar" style="--i:4;"></div>
+    <div class="bar" style="--i:3;"></div>
+    <div class="bar" style="--i:2;"></div>
+    <div class="bar" style="--i:1;"></div>
+  </div>
+  
+<!-- home section -->
+<section class="home active ">
+    <div class="home-detail">
+        <h1>Léo Martin</h1>
+        <h2>Étudiant au CESI, j'étudie
+            <span style="--i:4;" data-text="la programmation,">la programmation,</span>
+            <span style="--i:3;" data-text="les bases de données">les bases de données</span>
+            <span style="--i:2;" data-text="les réseaux et systèmes">les réseaux et systèmes</span>
+            <span style="--i:1;" data-text="le développement web/app">le développement web/app</span>
+        </h2>        
+        <p>Je suis actuellement en 2<sup>ème</sup> année d'école d'ingénieur, et je souhaite vous partager les différents projets que j'ai effectués au cours de mon apprentissage. Ce Portfolio n'est que temporaire, je compte l'améliorer afin de développer mes compétences.</p>
+        <div class="btn-sci">
+            <a href="images/CV_Léo_Martin_.pdf" class="btn" target="_blank">Télécharger mon CV</a>
+            <div class="sci">
+                <a href="https://github.com/lmrt0572" target="_blank"><i class='bx bxl-github'></i></a>
+                <a href="https://www.linkedin.com/in/l%C3%A9o-martin-1a939b338/" target="_blank"><i class='bx bxl-linkedin'></i></a>
             </div>
         </div>
-    </section>
+    </div>
 
-<!-- Projects Section -->
-<section id="projects" class="primary-bg text-white py-24">
-    <div class="container mx-auto text-center">
-        <h2 class="text-4xl font-bold mb-16">Mes Projets</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <!-- Project 1 -->
-            <a href="strongbox-3000.html">
-                <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
-                    <img src="systemes-embarques-datascientest.jpg" alt="Projet 1" class="w-full h-48 object-cover mb-4 rounded-lg">
-                    <h3 class="text-2xl font-bold mb-3">Projet 1 : StrongBox 3000</h3>
-                    <p class="text-gray-400 leading-relaxed">Ce projet démontre mes compétences en système embarqué, j'ai appris à développer mes compétences en C++.</p>
-                </div>
-            </a>
-            <!-- Project 2 -->
-            <a href="traitement-signal.html">
-                <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
-                    <img src="master-tsi-upec-2-signaux.jpg" alt="Projet 2" class="w-full h-48 object-cover mb-4 rounded-lg">
-                    <h3 class="text-2xl font-bold mb-3">Projet 2 : traitement de signal</h3>
-                    <p class="text-gray-400 leading-relaxed">Un projet utilisant mes compétences afin de traduire des signaux analogiques en numériques, etc....</p>
-                </div>
-            </a>
-            <!-- Project 3 -->
-            <div class="card bg-gray-800 text-gray-200 shadow-lg rounded-lg overflow-hidden p-6">
-                <img src="fotor-ai-20241002113452 - Copie.jpg" alt="Projet 3" class="w-full h-48 object-cover mb-4 rounded-lg">
-                <h3 class="text-2xl font-bold mb-3">Projet 3 : StrongBox 2.0</h3>
-                <p class="text-gray-400 leading-relaxed">Projet en cours de développement.</p>
+    <div class="home-img">
+        <div class="img-box">
+            <div class="img-item">
+                <img src="images/home.png" >
             </div>
         </div>
     </div>
 </section>
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="container mx-auto py-24 px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold primary-text">Contactez-moi</h2>
+<!-- services section -->
+<section class="services ">
+    <h2 class="heading">Mes<span>Projets</span></h2>
+    <div class="services-container">
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bxs-bank"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>Strongbox 3000</h3>
+            <p>Ce projet démontre mes compétences en système embarqué, j'ai appris à développer mes compétences en C++.</p>
         </div>
-        <div class="md:flex md:justify-center">
-            <form action="mailto:leo.martin1@viacesi.fr" class="md:w-1/2 bg-gray-800 p-8 rounded-lg shadow-lg">
-                <div class="mb-6">
-                    <label for="name" class="block text-left text-gray-300 mb-2">Nom</label>
-                    <input type="text" id="name" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg">
+
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bx-no-signal"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>traitement de signal</h3>
+            <p>Un projet utilisant mes compétences afin de traduire des signaux analogiques en numériques, etc...</p>
+        </div>
+
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bx-microchip"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>Prototype de station météo</h3>
+            <p>Programmation d un microcontrôleur, gestion des capteurs, documentation utilisateur.</p>
+        </div>
+
+        
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bx-code-alt"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>Développement web – Application web complète</h3>
+            <p>Backend (PHP), frontend interactif (HTML/CSS, JavaScript), administration Apache.</p>
+        </div>
+
+        
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bx-braille"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>Programmation Orientée Objet</h3>
+            <p>Développement d'un jeu de la vie</p>
+        </div>
+
+
+        
+        <div class="services-box">
+            <div class="icon">
+                <i class="bx bx-network-chart"></i>
+                <a href="#"><i class="bx bx-arrow-back"></i></a>
+            </div>
+            <h3>Réseaux et systèmes – Conception d’un réseau d’entreprise</h3>
+            <p>Plan d’adressage IP, configuration NAT, mise en place d’un environnement client Linux.</p>
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- Resume section -->
+<section class="resume">
+    <div class="resume-container">
+        <div class="resume-box">
+            <h2>Pourquoi me choisir ?</h2>
+            <p class="desc">Avec mon parcours académique et professionnel, j'ai développé des compétences en informatique, en gestion de projet, et en travail d'équipe. Je suis passionné, rigoureux et déterminé à atteindre l'excellence dans tout ce que j'entreprends.</p>
+            <button class="resume-btn active">Expérience</button>
+            <button class="resume-btn">Formation</button>
+            <button class="resume-btn">Compétences</button>
+            <button class="resume-btn">À propos</button>
+        </div>
+
+        <!-- Expérience -->
+        <div class="resume-detail experience active">
+            <h2 class="heading">Mes <span>Expériences</span></h2>
+            <p class="desc">Mes expériences professionnelles m'ont permis de perfectionner mes compétences en gestion du service client, en adaptation à des environnements variés et en collaboration.</p>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <p class="year">Depuis octobre 2024</p>
+                    <h3>Serveur</h3>
+                    <p class="company">Brasserie Desjardins</p>
+                    <p>Gestion efficace du service client et apprentissage du travail sous pression dans un environnement exigeant.</p>
                 </div>
-                <div class="mb-6">
-                    <label for="email" class="block text-left text-gray-300 mb-2">Email</label>
-                    <input type="email" id="email" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg">
+                <div class="resume-item">
+                    <p class="year">Août 2024</p>
+                    <h3>Emploi Saisonnier</h3>
+                    <p class="company">Déchèterie de Bolbec</p>
+                    <p>Gestion des déchets et interaction avec les usagers dans le respect des normes environnementales.</p>
                 </div>
-                <div class="mb-6">
-                    <label for="message" class="block text-left text-gray-300 mb-2">Message</label>
-                    <textarea id="message" class="w-full p-4 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-bg" rows="5"></textarea>
+                <div class="resume-item">
+                    <p class="year">Juillet 2024</p>
+                    <h3>Mission d’intérim - Manutentionnaire</h3>
+                    <p class="company">Récré-Action, Pont-Audemer</p>
+                    <p>Aménagement d’aires de jeux pour enfants, avec un focus sur le travail en équipe et la gestion de projet.</p>
                 </div>
-                <button type="submit" class="button-hover bg-secondary-bg text-white px-8 py-4 rounded-lg font-semibold w-full">Envoyer</button>
+                <div class="resume-item">
+                    <p class="year">2023</p>
+                    <h3>Emploi Saisonnier</h3>
+                    <p class="company">Mairie de Port-Jérôme-sur-Seine</p>
+                    <p>Surveillance et maintenance des infrastructures locales.</p>
+                </div>
+                <div class="resume-item">
+                    <p class="year">2019</p>
+                    <h3>Stage d’observation</h3>
+                    <p class="company">Cabinet de kinésithérapie</p>
+                    <p>Développement de mon sens de l'observation et de mes capacités d'apprentissage dans un environnement médical.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formation -->
+        <div class="resume-detail Education">
+            <h2 class="heading">Ma <span>Formation</span></h2>
+            <p class="desc">Mon parcours académique démontre mon intérêt et mon engagement pour l'ingénierie et les sciences informatiques.</p>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <p class="year">2024 - Actuellement</p>
+                    <h3>Cycle Préparatoire Intégré</h3>
+                    <p class="company">CESI Rouen</p>
+                    <p>Spécialisation en informatique, couvrant les systèmes embarqués, les réseaux et le développement web.</p>
+                </div>
+                <div class="resume-item">
+                    <p class="year">2021</p>
+                    <h3>Baccalauréat Général Mention Bien</h3>
+                    <p class="company">Lycée Guillaume Le Conquérant, Lillebonne</p>
+                    <p>Spécialités : Mathématiques et Sciences de la Vie et de la Terre.</p>
+                </div>
+                <div class="resume-item">
+                    <p class="year">2019</p>
+                    <h3>Brevet Mention Très Bien</h3>
+                    <p class="company">Collège Jehan Le Povremoyne, Saint-Valery-en-Caux</p>
+                    <p>Formation générale avec des résultats d'excellence.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compétences -->
+        <div class="resume-detail skills">
+            <h2 class="heading">Mes <span>Compétences</span></h2>
+            <p class="desc">Voici un aperçu de mes compétences techniques et professionnelles, acquises au cours de ma formation et de mes expériences.</p>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <i class='bx bxl-html5'></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bxl-css3'></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bxl-javascript'></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bxl-c-plus-plus'></i>
+                    <span>C++</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bxs-copyright'></i>
+                    <span>C</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bxl-python'></i>
+                    <span>Python</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bx-data'></i>
+                    <span>SQL</span>
+                </div>
+                <div class="resume-item">
+                    <i class='bx bx-trip'></i>
+                    <span>UML/SYSML</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- À propos -->
+        <div class="resume-detail about">
+            <h2 class="heading">À <span>Propos</span></h2>
+            <p class="desc">Je suis un étudiant motivé et passionné par les technologies. Mon objectif est d'évoluer dans le domaine de l'ingénierie informatique tout en développant mes compétences professionnelles et techniques.</p>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <p>Nom <span>Léo Martin</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Genre <span>Homme</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Âge <span>19 ans</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Statut <span>Célibataire</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Ville <span>Rouen</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Nationalité <span>Français</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>École <span>CESI</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Année d'études <span>2ème année</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Formation <span>Prépa Intégrée</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Mobile <span>(+33) 6 26 60 54 11</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Email <span>leo.martin1@viacesi.fr</span></p>
+                </div>
+                <div class="resume-item">
+                    <p>Langues <span>Français, Anglais, Espagnol</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- portfolio section -->
+<section class="portfolio">
+    <h2 class="heading">Latest <span>Projects</span></h2>
+    <div class="portfolio-container">
+        <div class="portfolio-box">
+            <img src="images/p1.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>StrongBox 3000</h4>
+                <p>Ce Projet démontre mes compétences en système embarqué, j'ai appris à développer mes compétences en C++.</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <div class="portfolio-box">
+            <img src="images/p2.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>Projet 2 : Prototype de station météo</h4>
+                <p>Un projet de Systèmes embarqués mettant en avant mes compétences en programmation de microcontrôleurs et en gestion de capteurs pour concevoir une station météo fonctionnelle.</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <div class="portfolio-box">
+            <img src="images/p3.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>Projet 2 : traitement de signal</h4>
+                <p>Un Projet utilisant mes compétences afin de traduire des signaux analogiques en numériques, etc...</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <div class="portfolio-box">
+            <img src="images/p4.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>Projet 4 : Application web complète (Dév web)</h4>
+                <p>Ce projet illustre mon savoir-faire en développement web, du backend en PHP au frontend interactif avec JavaScript et HTML/CSS.</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <div class="portfolio-box">
+            <img src="images/p5.png" alt="">
+            <div class="portfolio-layer">
+                <h4>Projet 5 : Jeu de la vie (POO)</h4>
+                <p>Un projet illustrant l’utilisation avancée des concepts de programmation orientée objet en C++ pour simuler l’évolution cellulaire dans un automate graphique interactif.</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <div class="portfolio-box">
+            <img src="images/p6.jpg" alt="">
+            <div class="portfolio-layer">
+                <h4>Projet 3 : Conception d’un réseau d’entreprise </h4>
+                <p>Un projet démontrant mes capacités à concevoir des réseaux IP efficaces et à configurer des environnements clients sous Linux.</p>
+                <a href="#"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section class="contact">
+    <div class="contact-container">
+        <!-- Contact Details -->
+        <div class="contact-box">
+            <h2>Travaillons Ensemble</h2>
+            <p class="desc">
+                Je suis toujours à la recherche de nouvelles opportunités pour développer mes compétences et relever de nouveaux défis. N'hésitez pas à me contacter pour discuter de projets, collaborations ou simplement pour échanger.
+            </p>
+            <div class="contact-detail">
+                <i class='bx bx-phone'></i>
+                <div class="detail">
+                    <p>Téléphone</p>
+                    <p>(+33) 6 26 60 54 11</p>
+                </div>
+            </div>
+            <div class="contact-detail">
+                <i class='bx bxs-envelope'></i>
+                <div class="detail">
+                    <p>Email</p>
+                    <p>leo.martin1@viacesi.fr</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-box">
+            <form action="https://formspree.io/f/xbljzkzz" method="POST">
+                <h2 class="heading">Contactez <span>Moi !</span></h2>
+                <div class="field-box">
+                    <input type="text" name="name" placeholder="Votre Nom Complet" required>
+                    <input type="email" name="email" placeholder="Votre Adresse Email" required>
+                    <input type="text" name="phone" placeholder="Votre Numéro de Téléphone">
+                    <input type="text" name="subject" placeholder="Sujet de l'Email" required>
+                    <textarea name="message" placeholder="Votre Message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Envoyer le Message</button>
             </form>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="primary-bg text-white py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Martin Léo. Tous droits réservés.</p>
-            <p>Contact: <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
-        </div>
-    </footer>
+      
 
+  
+
+
+
+
+    <!-- custom js -->
+    <script src="js/script.js"></script>
 </body>
-
 </html>
