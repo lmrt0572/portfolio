@@ -74,3 +74,28 @@ resumeBtns.forEach((btn, idx) => {
         resumeDetails[idx].classList.add('active');
     });
 });
+
+// Votre code existant...
+
+// Gestion des clics sur les projets
+document.querySelectorAll('.portfolio-box a').forEach(link => {
+  link.addEventListener('click', function(event) {
+      if (link.classList.contains('in-progress')) {
+          event.preventDefault();
+          // Afficher le modal
+          document.getElementById('error-modal').style.display = 'block';
+      }
+  });
+});
+
+// Gestion de la fermeture du modal
+document.querySelector('.close-btn').addEventListener('click', function() {
+  document.getElementById('error-modal').style.display = 'none';
+});
+
+// Fermer le modal en cliquant en dehors du contenu
+window.addEventListener('click', function(event) {
+  if (event.target == document.getElementById('error-modal')) {
+      document.getElementById('error-modal').style.display = 'none';
+  }
+});
