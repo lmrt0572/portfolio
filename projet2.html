@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype de Station Météo</title>
+    <a href="index.html" class="text-sm md:text-base text-white-color px-3 py-1 rounded hover:bg-main-color hover:text-bg-color transition duration-300">Retour au Portfolio</a>
+    <!-- Lien CDN pour Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importation de la police Poppins depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Configuration Tailwind pour utiliser la police Poppins et les couleurs personnalisées -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'poppins': ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'bg-color': '#1f242d',
+              'second-bg-color': '#323946',
+              'main-color': '#3693b8',
+              'white-color': '#ffffff',
+              'disabled-color': '#fff3',
+            },
+          }
+        }
+      }
+    </script>
+    <!-- Styles personnalisés -->
+    <style>
+        /* Couleurs personnalisées */
+        .primary-bg {
+            background-color: #1f242d;
+        }
+        .secondary-bg {
+            background-color: #323946;
+        }
+        .primary-text {
+            color: #3693b8;
+        }
+        .secondary-text {
+            color: #ffffff;
+        }
+        /* Hero section background image */
+        .hero-background {
+            background-image: url('images/weather_background.jpg'); /* Remplacez par l'URL de votre image de fond */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(31, 36, 45, 0.7); /* Overlay pour meilleur contraste */
+            z-index: 1;
+        }
+         /* Styles pour agrandir et centrer les images */
+        .livrable-img {
+            width: 100%;
+            height: auto; /* Garde les proportions */
+            max-height: 250px; /* Limite la hauteur maximale */
+            object-fit: cover; /* Assure le recadrage si nécessaire */
+            margin: 0 auto; /* Centre horizontalement */
+            display: block;
+            border-radius: 6px; /* Ajoute un léger arrondi */
+        }
+
+        .card {
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center; /* Centre le contenu de la carte */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(54, 147, 184, 0.3);
+        }
+        /* Animation de flottement */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-bg-color text-white-color font-poppins">
+    <!-- Navbar -->
+    <nav class="primary-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-bold">Projet Station Météo</div>
+            <div class="space-x-4">
+                <a href="index.html" class="hover:text-gray-300 transition">Accueil</a>
+                <a href="#about" class="hover:text-gray-300 transition">Projet</a>
+                <a href="#livrables" class="hover:text-gray-300 transition">Livrables</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section avec image en arrière-plan -->
+    <section class="hero-background primary-bg text-white py-24">
+        <div class="overlay"></div> <!-- Overlay pour contraste -->
+        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 floating">Prototype de Station Météo</h1>
+            <p class="text-xl md:text-2xl mb-10">Projet de système embarqué pour la collecte de données météorologiques.</p>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="container mx-auto py-16 px-6 animate__animated animate__fadeInUp">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold primary-text">Présentation du Projet</h2>
+        </div>
+        <div class="md:flex md:justify-center">
+            <div class="md:w-3/4 text-center">
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Le projet consiste à concevoir un prototype de station météo embarquée destinée à équiper des navires. Ce dispositif permet de mesurer différentes données météorologiques grâce à des capteurs. Les données collectées sont utilisées pour des prévisions instantanées et sont sauvegardées sur une carte SD. À long terme, ce système pourrait aider à prévoir des catastrophes naturelles en partageant ces données.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    La station météo utilise un microcontrôleur AVR ATmega328 intégré à une carte Arduino pour collecter des données telles que la pression atmosphérique, la température, l'hygrométrie, et la luminosité.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Livrables Section -->
+    <section id="livrables" class="primary-bg text-white py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">Livrables du Projet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Livrable 1 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P2_1.png" alt="Livrable 1" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 1 : Analyse du système</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Présentation des fonctionnalités de la station météo sous forme de diagrammes UML/SysML.</p>
+                    <a href="documents/Projet2livrable1.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+                <!-- Livrable 2 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P2_2.jpg" alt="Livrable 2" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 2 : Architecture du programme</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Description de la structure du programme, incluant les fonctions et variables principales.</p>
+                    <a href="https://hdoc.romainmahieu.fr/ZV-1S7ySTam_5-mFdpDr4Q" target="_blank" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2">Consulter</a>
+                </div>
+                <!-- Livrable 3 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P2_3.jpg" alt="Livrable 3" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 3 : Maquette</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Démonstration des fonctionnalités complètes du système avec montage matériel.</p>
+                </div>
+                <!-- Livrable 4 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P2_4.jpg" alt="Livrable 4" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 4 : Documentation</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Documentation technique et utilisateur pour comprendre et utiliser le système.</p>
+                    <a href="documents/Projet2livrable4.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="primary-bg text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">© 2024 Léo Martin - <a href="index.html" class="text-main-color hover:underline">Retour au Portfolio</a></p>
+            <p>Contact : <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
+        </div>
+    </footer>
+    <!-- Lien vers Animate.css pour les animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</body>
+</html>
 
