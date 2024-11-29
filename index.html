@@ -26,9 +26,9 @@
 
     <nav>
         <a href="#" class="active">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Resume</a>
-        <a href="#">Portfolio</a>
+        <!--<a href="#">Services</a>-->
+        <a href="#">About me</a>
+        <a href="#">Projets</a>
         <a href="#">Contact</a>
     </nav>
 </header>
@@ -74,6 +74,7 @@
 
 
 <!-- services section -->
+ <!--
 <section class="services ">
     <h2 class="heading">Mes<span>Projets</span></h2>
     <div class="services-container">
@@ -139,8 +140,9 @@
     </div>
 
 </section>
+-->
 
-<!-- Resume section -->
+<!-- about me section -->
 <section class="resume">
     <div class="resume-container">
         <div class="resume-box">
@@ -302,61 +304,67 @@
     </div>
 </section>
 
-<!-- portfolio section -->
-<section class="portfolio">
-    <h2 class="heading">Latest <span>Projects</span></h2>
+<!-- Projets section -->
+<section class="Portfolio">
+    <h2 class="heading">Mes <span>Projets</span></h2>
     <div class="portfolio-container">
+        <!-- Projet 1 : Terminé -->
         <div class="portfolio-box">
-            <img src="images/p1.jpg" alt="">
+            <img src="images/p1.jpg" alt="Projet 1">
             <div class="portfolio-layer">
-                <h4>StrongBox 3000</h4>
-                <p>Ce Projet démontre mes compétences en système embarqué, j'ai appris à développer mes compétences en C++.</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <h4>Projet 1 : StrongBox 3000</h4>
+                <p>Ce projet démontre mes compétences en système embarqué...</p>
+                <a href="projet1.html"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
 
+        <!-- Projet 2 : Terminé -->
         <div class="portfolio-box">
-            <img src="images/p2.jpg" alt="">
+            <img src="images/p2.jpg" alt="Projet 2">
             <div class="portfolio-layer">
                 <h4>Projet 2 : Prototype de station météo</h4>
-                <p>Un projet de Systèmes embarqués mettant en avant mes compétences en programmation de microcontrôleurs et en gestion de capteurs pour concevoir une station météo fonctionnelle.</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <p>Un projet de systèmes embarqués mettant en avant mes compétences...</p>
+                <a href="projet2.html"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
 
+        <!-- Projet 3 : Terminé -->
         <div class="portfolio-box">
-            <img src="images/p3.jpg" alt="">
+            <img src="images/p3.jpg" alt="Projet 3">
             <div class="portfolio-layer">
-                <h4>Projet 2 : traitement de signal</h4>
-                <p>Un Projet utilisant mes compétences afin de traduire des signaux analogiques en numériques, etc...</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <h4>Projet 3 : Traitement de signal</h4>
+                <p>Un projet utilisant mes compétences afin de traduire des signaux analogiques en numériques...</p>
+                <a href="projet3.html"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
 
+        <!-- Projet 4 : En cours -->
         <div class="portfolio-box">
-            <img src="images/p4.jpg" alt="">
+            <img src="images/p4.jpg" alt="Projet 4">
             <div class="portfolio-layer">
                 <h4>Projet 4 : Application web complète (Dév web)</h4>
-                <p>Ce projet illustre mon savoir-faire en développement web, du backend en PHP au frontend interactif avec JavaScript et HTML/CSS.</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <p>Ce projet illustre mon savoir-faire en développement web...</p>
+                <a href="#" class="in-progress"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
 
+        <!-- Projet 5 : En cours -->
         <div class="portfolio-box">
-            <img src="images/p5.png" alt="">
+            <img src="images/p5.png" alt="Projet 5">
             <div class="portfolio-layer">
                 <h4>Projet 5 : Jeu de la vie (POO)</h4>
-                <p>Un projet illustrant l’utilisation avancée des concepts de programmation orientée objet en C++ pour simuler l’évolution cellulaire dans un automate graphique interactif.</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <p>Un projet illustrant l’utilisation avancée des concepts de programmation orientée objet en C++...</p>
+                <a href="#" class="in-progress"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
 
+        <!-- Projet 6 : En cours -->
         <div class="portfolio-box">
-            <img src="images/p6.jpg" alt="">
+            <img src="images/p6.jpg" alt="Projet 6">
             <div class="portfolio-layer">
-                <h4>Projet 3 : Conception d’un réseau d’entreprise </h4>
-                <p>Un projet démontrant mes capacités à concevoir des réseaux IP efficaces et à configurer des environnements clients sous Linux.</p>
-                <a href="#"><i class='bx bx-link-external'></i></a>
+                <h4>Projet 6 : Conception d’un réseau d’entreprise</h4>
+                <p>Un projet démontrant mes capacités à concevoir des réseaux IP efficaces...</p>
+                <a href="#" class="in-progress"><i class='bx bx-link-external'></i></a>
             </div>
         </div>
     </div>
@@ -405,6 +413,13 @@
 
       
 
+<!-- Modal pour le message d'erreur -->
+<div id="error-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <p>Ce projet est en cours ou n'a pas encore commencé.</p>
+    </div>
+</div>
   
 
 
