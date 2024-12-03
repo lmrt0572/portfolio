@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Modélisation et bases de données</title>
+    <!-- Lien vers le retour au portfolio -->
+    <a href="index.html" class="text-sm md:text-base text-white-color px-3 py-1 rounded hover:bg-main-color hover:text-bg-color transition duration-300">Retour au Portfolio</a>
+    <!-- Lien CDN pour Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importation de la police Poppins depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Configuration Tailwind pour utiliser la police Poppins et les couleurs personnalisées -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'poppins': ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'bg-color': '#1f242d',
+              'second-bg-color': '#323946',
+              'main-color': '#3693b8',
+              'white-color': '#ffffff',
+              'disabled-color': '#fff3',
+            },
+          }
+        }
+      }
+    </script>
+    <!-- Styles personnalisés -->
+    <style>
+        /* Couleurs personnalisées */
+        .primary-bg {
+            background-color: #1f242d;
+        }
+        .secondary-bg {
+            background-color: #323946;
+        }
+        .primary-text {
+            color: #3693b8;
+        }
+        .secondary-text {
+            color: #ffffff;
+        }
+        /* Hero section background image */
+        .hero-background {
+            background-image: url('images/bddBackground.png'); /* URL de l'image pour le nouveau projet */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(31, 36, 45, 0.7); /* Overlay pour meilleur contraste */
+            z-index: 1;
+        }
+         /* Styles pour agrandir et centrer les images */
+        .livrable-img {
+            width: 100%;
+            height: auto; /* Garde les proportions */
+            max-height: 250px; /* Limite la hauteur maximale */
+            object-fit: cover; /* Assure le recadrage si nécessaire */
+            margin: 0 auto; /* Centre horizontalement */
+            display: block;
+            border-radius: 6px; /* Ajoute un léger arrondi */
+        }
+
+        .card {
+            border-radius: 6px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center; /* Centre le contenu de la carte */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(54, 147, 184, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Animation de flottement */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-bg-color text-white-color font-poppins">
+    <!-- Navbar -->
+    <nav class="primary-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-bold">Projet Modélisation et bases de données</div>
+            <div class="space-x-4">
+                <a href="index.html" class="hover:text-gray-300 transition">Accueil</a>
+                <a href="#about" class="hover:text-gray-300 transition">Projet</a>
+                <a href="#livrables" class="hover:text-gray-300 transition">Livrables</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section avec image en arrière-plan -->
+    <section class="hero-background primary-bg text-white py-24">
+        <div class="overlay"></div> <!-- Overlay pour contraste -->
+        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 floating">Projet Modélisation et bases de données</h1>
+            <p class="text-xl md:text-2xl mb-10">Découvrir la modélisation à travers le développement d'une base de données.</p>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="container mx-auto py-16 px-6 animate__animated animate__fadeInUp">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold primary-text">Présentation du Projet</h2>
+        </div>
+        <div class="md:flex md:justify-center">
+            <div class="md:w-3/4 text-center">
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Ce projet a pour thématique les bases de données relationnelles. Il permet de découvrir les rudiments de la modélisation à travers le développement d'une base de données.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Thèmes abordés :
+                </p>
+                <ul class="list-disc list-inside text-left text-lg text-gray-300 leading-relaxed mb-6">
+                    <li>SI et données</li>
+                    <li>Merise</li>
+                    <li>Algèbre relationnelle</li>
+                    <li>Bases de données et SQL</li>
+                    <li>Requêtes SQL</li>
+                    <li>LDD / Transactions / Procédures</li>
+                </ul>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Le projet consiste à réaliser une base de données pour le ministère de l'écologie, afin de stocker et interroger des données publiques sur la qualité de l’air dans les grandes villes de France.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Livrables Section -->
+    <section id="livrables" class="primary-bg text-white py-16">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">Livrables du Projet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Livrable 0 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P4_I1.webp" alt="Livrable 0" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 0 : Organisation du projet</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Présentation de l’équipe projet, reformulation du besoin, organisation et planification générale.</p>
+                    <a href="documents/P4_L0.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+                <!-- Livrable 1 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P4_i2.jpeg" alt="Livrable 1" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 1 : Modélisation des données</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Dictionnaire de données, MCD, MLD, MPD et arbres algébriques des requêtes.</p>
+                    <a href="documents/P4_L1.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+                <!-- Livrable 2 -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P4_i3.jpg" alt="Livrable 2" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Livrable 2 : Requêtes SQL et Base de données</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Requêtes SQL, explications sur la génération et le peuplement de la base de données.</p>
+                    <a href="documents/ProjetDMLivrable2.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+                <!-- Soutenance finale -->
+                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
+                    <img src="images/P4_i4.avif" alt="Soutenance Finale" class="livrable-img">
+                    <h3 class="text-xl font-bold mb-2">Soutenance Finale</h3>
+                    <p class="text-gray-400 leading-relaxed mb-2">Présentation en anglais de la solution finale avec démonstration de la base de données.</p>
+                    <a href="documents/P4_soutenance.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="primary-bg text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">© 2024 Léo Martin - <a href="index.html" class="text-main-color hover:underline">Retour au Portfolio</a></p>
+            <p>Contact : <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
+        </div>
+    </footer>
+    <!-- Lien vers Animate.css pour les animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</body>
+</html>
