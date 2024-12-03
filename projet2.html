@@ -47,12 +47,14 @@
         }
         /* Hero section background image */
         .hero-background {
-            background-image: url('images/weather_background.jpg'); /* Remplacez par l'URL de votre image de fond */
+            background-image: url('images/w.jpg'); /* URL de l'image du coffre-fort */
+            background-image: url('images/w.jpg'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
         }
+
         .hero-content {
             position: absolute;
             top: 50%;
@@ -92,6 +94,7 @@
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 30px rgba(54, 147, 184, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         /* Animation de flottement */
         .floating {
@@ -189,4 +192,3 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </body>
 </html>
-
