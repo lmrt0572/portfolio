@@ -1,0 +1,722 @@
+/* projet.css - Style unifié pour les pages de projets */
+
+/* Variables globales */
+:root {
+    --bg-color: #1f242d;
+    --second-bg-color: #323946;
+    --main-color: #3693b8;
+    --white-color: #fff;
+    --text-color: #e5e5e5;
+    --shadow-color: rgba(54, 147, 184, 0.3);
+    --gradient-overlay: linear-gradient(rgba(31, 36, 45, 0.6), rgba(54, 147, 184, 0.4));
+}
+
+/* Styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--white-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+/* Header et Navigation */
+.projet-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+}
+
+.projet-logo {
+    font-size: 2.8rem;
+    color: var(--white-color);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Ajout pour éviter le soulignement du logo */
+}
+
+.projet-logo i {
+    margin-right: 1rem;
+    font-size: 3.2rem;
+    color: var(--main-color);
+}
+
+.projet-nav {
+    display: flex;
+    gap: 3rem;
+}
+
+.projet-nav a {
+    font-size: 1.8rem;
+    color: var(--white-color);
+    font-weight: 500;
+    transition: .3s ease;
+    text-decoration: none;
+}
+
+.projet-nav a:hover,
+.projet-nav a.active {
+    color: var(--main-color);
+}
+
+/* Menu hamburger pour mobile */
+.menu-icon {
+    display: none; /* Caché par défaut, visible en mobile */
+    font-size: 3.6rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 0; /* Correction pour éviter l'espace au-dessus du hero */
+    padding-top: 7rem; /* Compensation pour le header fixe */
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-overlay);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 80%;
+    z-index: 1;
+    animation: fadeIn 1s ease-in-out;
+    padding: 2rem; /* Ajout de padding pour éviter que le texte touche les bords en mobile */
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-shadow: 0 .2rem .5rem rgba(0, 0, 0, .5);
+}
+
+.hero-subtitle {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+/* Sections communes */
+.projet-section {
+    padding: 10rem 9% 5rem;
+    overflow: hidden; /* Empêche les débordements */
+}
+
+.section-title {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    color: var(--white-color);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8rem;
+    height: .3rem;
+    background: var(--main-color);
+}
+
+.section-title span {
+    color: var(--main-color);
+}
+
+.section-description {
+    font-size: 1.8rem;
+    text-align: center;
+    max-width: 80rem;
+    margin: 0 auto 5rem;
+    color: var(--text-color);
+}
+
+/* Grille de contenu */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+    width: 100%; /* Assure que la grille prend toute la largeur disponible */
+}
+
+/* Cartes */
+.projet-card {
+    background: var(--second-bg-color);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    transition: transform .3s ease, box-shadow .3s ease;
+    width: 100%; /* Assure que la carte prend toute la largeur disponible */
+}
+
+.projet-card:hover {
+    transform: translateY(-1rem);
+    box-shadow: 0 1rem 2rem var(--shadow-color);
+}
+
+.card-image {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 2.5rem;
+}
+
+.card-title {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--main-color);
+}
+
+.card-text {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+/* Boutons */
+.projet-btn {
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    background: var(--main-color);
+    color: var(--bg-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    border-radius: 4rem;
+    text-decoration: none;
+    transition: .5s ease;
+    border: .2rem solid var(--main-color);
+    cursor: pointer; /* Ajout pour indiquer qu'il s'agit d'un élément cliquable */
+}
+
+.projet-btn:hover {
+    background: transparent;
+    color: var(--main-color);
+}
+
+.projet-btn.outline {
+    background: transparent;
+    color: var(--main-color);
+}
+
+.projet-btn.outline:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: .4rem;
+    background: var(--main-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -.2rem;
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 2rem 4rem;
+    background: var(--second-bg-color);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+    clear: both; /* Assure que les éléments ne se chevauchent pas */
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--main-color);
+    border-radius: 50%;
+    top: 2.5rem;
+    z-index: 1;
+}
+
+.timeline-item.left {
+    left: 0;
+    float: left;
+}
+
+.timeline-item.right {
+    left: 50%;
+    float: right;
+}
+
+.timeline-item.left::after {
+    right: -1.25rem;
+}
+
+.timeline-item.right::after {
+    left: -1.25rem;
+}
+
+.timeline-date {
+    font-size: 1.6rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+.timeline-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-text {
+    font-size: 1.6rem;
+    color: var(--text-color);
+}
+
+/* Galerie d'images */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+    width: 100%; /* Assure que la galerie prend toute la largeur disponible */
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    height: 20rem;
+    width: 100%; /* Assure que l'élément prend toute la largeur disponible */
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: var(--gradient-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    height: 100%;
+    opacity: 1;
+}
+
+.gallery-text {
+    color: var(--white-color);
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+/* Technologies utilisées */
+.tech-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin: 4rem 0;
+    width: 100%; /* Assure que le conteneur prend toute la largeur disponible */
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-width: 10rem; /* Largeur minimale pour éviter des éléments trop petits */
+}
+
+.tech-icon {
+    font-size: 5rem;
+    color: var(--main-color);
+}
+
+.tech-name {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-align: center; /* Assure que le texte est centré */
+}
+
+/* Témoignages */
+.testimonial {
+    background: var(--second-bg-color);
+    padding: 3rem;
+    border-radius: 1rem;
+    position: relative;
+    margin-bottom: 3rem; /* Ajoute de l'espace entre les témoignages */
+}
+
+.testimonial::before {
+    content: '\201C';
+    font-size: 8rem;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    color: var(--main-color);
+    opacity: .3;
+}
+
+.testimonial-text {
+    font-size: 1.8rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.author-image {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.author-position {
+    font-size: 1.4rem;
+    color: var(--main-color);
+}
+
+/* Footer */
+.projet-footer {
+    background: var(--second-bg-color);
+    padding: 3rem 9%;
+    text-align: center;
+    width: 100%; /* Assure que le footer prend toute la largeur */
+}
+
+.footer-text {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Permet aux liens de passer à la ligne sur les petits écrans */
+}
+
+.footer-link {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.footer-link:hover {
+    color: var(--main-color);
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Permet aux icônes sociales de passer à la ligne sur les petits écrans */
+}
+
+.social-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: var(--bg-color);
+    border-radius: 50%;
+    transition: .3s ease;
+    text-decoration: none; /* Évite le soulignement des liens */
+}
+
+.social-link:hover {
+    background: var(--main-color);
+}
+
+.social-link i {
+    font-size: 2.5rem;
+    color: var(--white-color);
+}
+
+.copyright {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-1rem);
+    }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+    
+    .projet-header {
+        padding: 2rem 5%;
+    }
+    
+    .projet-section {
+        padding: 10rem 5% 5rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .timeline::after {
+        left: 31px;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 8rem;
+        padding-right: 2rem;
+        float: none; /* Supprime le float pour éviter les problèmes de mise en page */
+    }
+    
+    .timeline-item.right {
+        left: 0;
+    }
+    
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: 1.5rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .projet-header {
+        padding: 2rem 4%;
+    }
+    
+    .menu-icon {
+        display: block; /* Affiche le menu hamburger */
+    }
+    
+    .projet-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem 4%;
+        background: var(--bg-color);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+        z-index: 1;
+        flex-direction: column;
+        gap: 1rem;
+        transform: translateY(-150%); /* Caché par défaut */
+        transition: .3s ease;
+        opacity: 0; /* Invisible par défaut */
+    }
+    
+    .projet-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 3.5rem;
+    }
+    
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    }
+    
+    .tech-container {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content {
+        max-width: 95%;
+    }
+    
+    .timeline-item {
+        padding-left: 6rem;
+        padding-right: 1.5rem;
+    }
+    
+    .testimonial-author {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projet-section {
+        padding: 8rem 4% 4rem;
+    }
+    
+    .tech-item {
+        min-width: 8rem;
+    }
+}
+
+/* Correctif pour le menu mobile */
+.menu-toggle-script {
+    display: none; /* Caché, sera remplacé par JavaScript */
+}
+
+/* Styles pour améliorer l'accessibilité */
+:focus {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
+/* Styles pour les images qui ne se chargent pas correctement */
+img {
+    max-width: 100%;
+}
+
+img.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--second-bg-color);
+    color: var(--text-color);
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 2rem;
+}
