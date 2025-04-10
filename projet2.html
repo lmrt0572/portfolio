@@ -3,192 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prototype de Station Météo</title>
-    <a href="index.html" class="text-sm md:text-base text-white-color px-3 py-1 rounded hover:bg-main-color hover:text-bg-color transition duration-300">Retour au Portfolio</a>
-    <!-- Lien CDN pour Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Importation de la police Poppins depuis Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Configuration Tailwind pour utiliser la police Poppins et les couleurs personnalisées -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              'poppins': ['Poppins', 'sans-serif'],
-            },
-            colors: {
-              'bg-color': '#1f242d',
-              'second-bg-color': '#323946',
-              'main-color': '#3693b8',
-              'white-color': '#ffffff',
-              'disabled-color': '#fff3',
-            },
-          }
-        }
-      }
-    </script>
-    <!-- Styles personnalisés -->
-    <style>
-        /* Couleurs personnalisées */
-        .primary-bg {
-            background-color: #1f242d;
-        }
-        .secondary-bg {
-            background-color: #323946;
-        }
-        .primary-text {
-            color: #3693b8;
-        }
-        .secondary-text {
-            color: #ffffff;
-        }
-        /* Hero section background image */
-        .hero-background {
-            background-image: url('images/w.jpg'); /* URL de l'image du coffre-fort */
-            background-image: url('images/w.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;
-        }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(31, 36, 45, 0.7); /* Overlay pour meilleur contraste */
-            z-index: 1;
-        }
-         /* Styles pour agrandir et centrer les images */
-        .livrable-img {
-            width: 100%;
-            height: auto; /* Garde les proportions */
-            max-height: 250px; /* Limite la hauteur maximale */
-            object-fit: cover; /* Assure le recadrage si nécessaire */
-            margin: 0 auto; /* Centre horizontalement */
-            display: block;
-            border-radius: 6px; /* Ajoute un léger arrondi */
-        }
-
-        .card {
-            border-radius: 6px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center; /* Centre le contenu de la carte */
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(54, 147, 184, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        /* Animation de flottement */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-    </style>
+    <meta name="description" content="Prototype de Station Météo - Projet de système embarqué - Portfolio de Léo Martin">
+    <title>Prototype Station Météo | Léo Martin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/pp.png">
+    
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/projet.css">
 </head>
-<body class="bg-bg-color text-white-color font-poppins">
-    <!-- Navbar -->
-    <nav class="primary-bg text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl md:text-2xl font-bold">Projet Station Météo</div>
-            <div class="space-x-4">
-                <a href="index.html" class="hover:text-gray-300 transition">Accueil</a>
-                <a href="#about" class="hover:text-gray-300 transition">Projet</a>
-                <a href="#livrables" class="hover:text-gray-300 transition">Livrables</a>
-            </div>
-        </div>
-    </nav>
-    <!-- Hero Section avec image en arrière-plan -->
-    <section class="hero-background primary-bg text-white py-24">
-        <div class="overlay"></div> <!-- Overlay pour contraste -->
-        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 floating">Prototype de Station Météo</h1>
-            <p class="text-xl md:text-2xl mb-10">Projet de système embarqué pour la collecte de données météorologiques.</p>
+
+<body>
+    <!-- Header -->
+    <header class="projet-header">
+        <a href="index.html" class="projet-logo">
+            <i class='bx bx-cloud-lightning'></i>Station Météo
+        </a>
+        
+        <i class='bx bx-menu menu-icon' id="menu-icon"></i>
+        
+        <nav class="projet-nav">
+            <a href="index.html">Accueil</a>
+            <a href="#about">À propos</a>
+            <a href="#features">Fonctionnalités</a>
+            <a href="#process">Développement</a>
+            <a href="#tech">Technologies</a>
+            <a href="#gallery">Galerie</a>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg" style="background-image: url('images/w.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title floating">Prototype de Station Météo</h1>
+            <p class="hero-subtitle">Système embarqué pour la collecte et l'analyse de données météorologiques</p>
+            <a href="#about" class="projet-btn">Découvrir le projet</a>
         </div>
     </section>
+    
     <!-- About Section -->
-    <section id="about" class="container mx-auto py-16 px-6 animate__animated animate__fadeInUp">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold primary-text">Présentation du Projet</h2>
-        </div>
-        <div class="md:flex md:justify-center">
-            <div class="md:w-3/4 text-center">
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                    Le projet consiste à concevoir un prototype de station météo embarquée destinée à équiper des navires. Ce dispositif permet de mesurer différentes données météorologiques grâce à des capteurs. Les données collectées sont utilisées pour des prévisions instantanées et sont sauvegardées sur une carte SD. À long terme, ce système pourrait aider à prévoir des catastrophes naturelles en partageant ces données.
-                </p>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    La station météo utilise un microcontrôleur AVR ATmega328 intégré à une carte Arduino pour collecter des données telles que la pression atmosphérique, la température, l'hygrométrie, et la luminosité.
-                </p>
+    <section id="about" class="projet-section fade-in">
+        <h2 class="section-title">À propos du <span>Projet</span></h2>
+        <p class="section-description">
+            Le projet consiste à concevoir un prototype de station météo embarquée destinée à équiper des navires, 
+            permettant de mesurer différentes données météorologiques grâce à des capteurs spécialisés.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Le Contexte</h3>
+                    <p class="card-text">
+                        Dans un contexte de changement climatique et de besoin croissant de données météorologiques précises,
+                        ce projet vise à équiper des navires avec des stations météo autonomes. Les données collectées sont 
+                        utilisées pour des prévisions instantanées et sont sauvegardées sur une carte SD pour analyse ultérieure.
+                    </p>
+                </div>
             </div>
-        </div>
-    </section>
-    <!-- Livrables Section -->
-    <section id="livrables" class="primary-bg text-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12">Livrables du Projet</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Livrable 1 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
-                    <img src="images/P2_1.png" alt="Livrable 1" class="livrable-img">
-                    <h3 class="text-xl font-bold mb-2">Livrable 1 : Analyse du système</h3>
-                    <p class="text-gray-400 leading-relaxed mb-2">Présentation des fonctionnalités de la station météo sous forme de diagrammes UML/SysML.</p>
-                    <a href="documents/Projet2livrable1.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
-                </div>
-                <!-- Livrable 2 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
-                    <img src="images/P2_2.jpg" alt="Livrable 2" class="livrable-img">
-                    <h3 class="text-xl font-bold mb-2">Livrable 2 : Architecture du programme</h3>
-                    <p class="text-gray-400 leading-relaxed mb-2">Description de la structure du programme, incluant les fonctions et variables principales.</p>
-                    <a href="https://hdoc.romainmahieu.fr/ZV-1S7ySTam_5-mFdpDr4Q" target="_blank" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2">Consulter</a>
-                </div>
-                <!-- Livrable 3 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
-                    <img src="images/P2_3.jpg" alt="Livrable 3" class="livrable-img">
-                    <h3 class="text-xl font-bold mb-2">Livrable 3 : Maquette</h3>
-                    <p class="text-gray-400 leading-relaxed mb-2">Démonstration des fonctionnalités complètes du système avec montage matériel.</p>
-                </div>
-                <!-- Livrable 4 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-4">
-                    <img src="images/P2_4.jpg" alt="Livrable 4" class="livrable-img">
-                    <h3 class="text-xl font-bold mb-2">Livrable 4 : Documentation</h3>
-                    <p class="text-gray-400 leading-relaxed mb-2">Documentation technique et utilisateur pour comprendre et utiliser le système.</p>
-                    <a href="documents/Projet2livrable4.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Les Objectifs</h3>
+                    <p class="card-text">
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; color: var(--text-color);">
+                            <li>Développer un système de collecte de données météorologiques fiable</li>
+                            <li>Créer une interface utilisateur intuitive pour la consultation des données</li>
+                            <li>Assurer le stockage sécurisé des données sur carte SD</li>
+                            <li>Concevoir un système autonome et résistant aux conditions maritimes</li>
+                            <li>Contribuer à la prévision des phénomènes météorologiques extrêmes</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Fonctionnalités <span>Principales</span></h2>
+        <p class="section-description">
+            La station météo intègre plusieurs fonctionnalités clés pour assurer une collecte de données précise et fiable.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-line-chart' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Mesure de Pression</h3>
+                    <p class="card-text">
+                        Capteur barométrique de haute précision permettant de mesurer les variations de pression atmosphérique,
+                        essentiel pour la prévision des changements météorologiques.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-water' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Mesure d'Humidité</h3>
+                    <p class="card-text">
+                        Capteur d'hygrométrie permettant de mesurer le taux d'humidité dans l'air,
+                        un paramètre crucial pour comprendre les conditions atmosphériques.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-sun' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Mesure de Luminosité</h3>
+                    <p class="card-text">
+                        Capteur photosensible mesurant l'intensité lumineuse, permettant d'évaluer
+                        l'ensoleillement et de compléter les données météorologiques.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-thermometer' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Mesure de Température</h3>
+                    <p class="card-text">
+                        Capteur de température précis permettant de mesurer les variations thermiques
+                        de l'environnement avec une grande fiabilité.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-memory-card' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Stockage sur Carte SD</h3>
+                    <p class="card-text">
+                        Système de sauvegarde des données sur carte SD, permettant de conserver
+                        un historique complet des mesures pour analyse ultérieure.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-desktop' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Interface Utilisateur</h3>
+                    <p class="card-text">
+                        Interface simple et intuitive permettant de consulter les données en temps réel
+                        et d'accéder aux historiques de mesures.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section id="process" class="projet-section fade-in">
+        <h2 class="section-title">Processus de <span>Développement</span></h2>
+        <p class="section-description">
+            Le développement de la station météo a suivi une méthodologie rigoureuse, divisée en plusieurs livrables clés.
+        </p>
+        
+        <div class="timeline">
+            <!-- Livrable 1 -->
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 1</div>
+                <h3 class="timeline-title">Analyse du Système</h3>
+                <p class="timeline-text">
+                    Présentation des fonctionnalités de la station météo sous forme de diagrammes UML/SysML.
+                    Cette phase a permis de définir l'architecture globale du système et ses composants.
+                </p>
+                <a href="documents/Projet2livrable1.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+            
+            <!-- Livrable 2 -->
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase 2</div>
+                <h3 class="timeline-title">Architecture du Programme</h3>
+                <p class="timeline-text">
+                    Description de la structure du programme, incluant les fonctions et variables principales.
+                    Cette étape a défini l'organisation logicielle du système et ses interactions.
+                </p>
+                <a href="https://hdoc.romainmahieu.fr/ZV-1S7ySTam_5-mFdpDr4Q" class="projet-btn outline" style="margin-top: 2rem;" target="_blank">
+                    Consulter en ligne
+                </a>
+            </div>
+            
+            <!-- Livrable 3 -->
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 3</div>
+                <h3 class="timeline-title">Maquette</h3>
+                <p class="timeline-text">
+                    Démonstration des fonctionnalités complètes du système avec montage matériel.
+                    Cette phase a permis de valider le concept avec un prototype fonctionnel.
+                </p>
+            </div>
+            
+            <!-- Livrable 4 -->
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase Finale</div>
+                <h3 class="timeline-title">Documentation</h3>
+                <p class="timeline-text">
+                    Documentation technique et utilisateur pour comprendre et utiliser le système.
+                    Cette documentation complète assure la pérennité du projet et facilite sa maintenance.
+                </p>
+                <a href="documents/Projet2livrable4.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technologies Section -->
+    <section id="tech" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Technologies <span>Utilisées</span></h2>
+        <p class="section-description">
+            Le développement de la station météo a nécessité l'utilisation de diverses technologies et compétences.
+        </p>
+        
+        <div class="tech-container">
+            <div class="tech-item">
+                <i class='bx bxl-c-plus-plus tech-icon'></i>
+                <span class="tech-name">C/C++</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-microchip tech-icon'></i>
+                <span class="tech-name">ATmega328</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-chip tech-icon'></i>
+                <span class="tech-name">Arduino</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-code-alt tech-icon'></i>
+                <span class="tech-name">Programmation Embarquée</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-file tech-icon'></i>
+                <span class="tech-name">UML/SysML</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-data tech-icon'></i>
+                <span class="tech-name">Stockage de Données</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="projet-section fade-in">
+        <h2 class="section-title">Galerie du <span>Projet</span></h2>
+        <p class="section-description">
+            Découvrez les différentes étapes de conception et de réalisation du prototype de station météo.
+        </p>
+        
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="images/P2_1.png" alt="Diagramme UML" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Diagramme UML du système</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P2_2.jpg" alt="Architecture logicielle" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Architecture logicielle</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P2_3.jpg" alt="Prototype" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Prototype de la station météo</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P2_4.jpg" alt="Documentation" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Documentation technique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Conclusion Section -->
+    <section class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Conclusion et <span>Perspectives</span></h2>
+        <p class="section-description">
+            Le prototype de station météo répond aux objectifs fixés et ouvre la voie à de nombreuses applications.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Compétences Acquises</h3>
+                    <p class="card-text">
+                        Ce projet m'a permis de développer des compétences en programmation embarquée, en électronique, 
+                        en modélisation UML/SysML et en gestion de données. J'ai également appris à concevoir un système 
+                        complet, de l'analyse des besoins à la réalisation d'un prototype fonctionnel.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Évolutions Futures</h3>
+                    <p class="card-text">
+                        Les améliorations futures pourraient inclure l'ajout de capteurs supplémentaires (vitesse du vent, 
+                        pluviométrie), une connectivité sans fil pour la transmission des données en temps réel, et le 
+                        développement d'une application mobile pour consulter les données à distance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Footer -->
-    <footer class="primary-bg text-white py-4">
-        <div class="container mx-auto text-center">
-            <p class="text-sm">© 2024 Léo Martin - <a href="index.html" class="text-main-color hover:underline">Retour au Portfolio</a></p>
-            <p>Contact : <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
+    <footer class="projet-footer">
+        <p class="footer-text">Merci de votre intérêt pour ce projet !</p>
+        
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Retour au Portfolio</a>
+            <a href="#" class="footer-link">Haut de page</a>
         </div>
+        
+        <div class="footer-social">
+            <a href="https://github.com/lmrt0572" class="social-link" target="_blank">
+                <i class='bx bxl-github'></i>
+            </a>
+            <a href="https://www.linkedin.com/in/l%C3%A9o-martin-1a939b338/" class="social-link" target="_blank">
+                <i class='bx bxl-linkedin'></i>
+            </a>
+        </div>
+        
+        <p class="copyright">© 2024 Léo Martin | Tous droits réservés</p>
     </footer>
-    <!-- Lien vers Animate.css pour les animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Custom JS -->
+    <script>
+        // Menu toggle
+        const menuIcon = document.querySelector('#menu-icon');
+        const nav = document.querySelector('.projet-nav');
+        
+        menuIcon.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Scroll animation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Initialize sections with opacity 0 and translateY
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            // Trigger scroll event to check initial visible sections
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

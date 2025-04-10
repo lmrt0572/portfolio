@@ -1,178 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StrongBox 3000 Project - Portfolio de Martin Léo">
-    <title>Projet StrongBox 3000</title>
-    <a href="index.html" class="text-sm md:text-base text-white-color px-3 py-1 rounded hover:bg-main-color hover:text-bg-color transition duration-300">Retour au Portfolio</a>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="images/p1.jpg" />
-    <style>
-        /* Couleurs personnalisées */
-        .primary-bg {
-            background-color: #111827;
-        }
-
-        .secondary-bg {
-            background-color: #1E40AF;
-        }
-
-        .primary-text {
-            color: #1E40AF;
-        }
-
-        .secondary-text {
-            color: #E5E5E5;
-        }
-
-        /* Hero section background image */
-        
-        .hero-background {
-            background-image: url('images/cfort.jpg'); /* URL de l'image du coffre-fort */
-            background-image: url('images/cfort.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Overlay for better contrast */
-            background: rgba(0, 0, 0, 0.6); 
-            z-index: 1;
-        }
-
-        /* Card image for livrables */
-        
-        .livrable-img {
-            max-width: 100%;
-            height: 200px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Animation de flottement */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-    </style>
+    <meta name="description" content="StrongBox 3000 - Projet de système embarqué sécurisé - Portfolio de Léo Martin">
+    <title>StrongBox 3000 | Léo Martin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/pp.png">
+    
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/projet.css">
 </head>
 
-<body class="bg-gray-900 text-gray-200">
-
-    <!-- Navbar -->
-    <nav class="primary-bg text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold">Martin Léo - StrongBox 3000</div>
-            <div class="space-x-4">
-                <a href="index.html" class="hover:text-gray-300 transition">Accueil</a>
-                <a href="#about" class="hover:text-gray-300 transition">Projet</a>
-                <a href="#process" class="hover:text-gray-300 transition">Étapes</a>
-                <a href="#contact" class="hover:text-gray-300 transition">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section avec image en arrière-plan -->
-    <section class="hero-background primary-bg text-white py-24">
-        <div class="overlay"></div> <!-- Overlay pour contraste -->
-        <div class="overlay"></div> 
-        <div class="container mx-auto text-center hero-content animate__animated animate__fadeIn">
-            <h1 class="text-5xl font-bold mb-6 floating">Projet StrongBox 3000</h1>
-            <p class="text-2xl mb-10">Coffre-fort sécurisé avec des systèmes d'authentification avancés.</p>
+<body>
+    <!-- Header -->
+    <header class="projet-header">
+        <a href="index.html" class="projet-logo">
+            <i class='bx bx-shield-quarter'></i>StrongBox 3000
+        </a>
+        
+        <i class='bx bx-menu menu-icon' id="menu-icon"></i>
+        
+        <nav class="projet-nav">
+            <a href="index.html">Accueil</a>
+            <a href="#about">À propos</a>
+            <a href="#process">Processus</a>
+            <a href="#tech">Technologies</a>
+            <a href="#gallery">Galerie</a>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg" style="background-image: url('images/cfort.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title floating">StrongBox 3000</h1>
+            <p class="hero-subtitle">Système de coffre-fort sécurisé avec authentification multi-niveaux</p>
+            <a href="#about" class="projet-btn">Découvrir le projet</a>
         </div>
     </section>
-
+    
     <!-- About Section -->
-    <section id="about" class="container mx-auto py-24 px-6 animate__animated animate__fadeInUp">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold primary-text">Présentation du Projet</h2>
-        </div>
-        <div class="md:flex md:justify-center">
-            <div class="md:w-2/3 text-center">
-                <p class="text-lg text-gray-300 leading-relaxed mb-6">
-                    Le projet **StrongBox 3000** a été développé pour l'agence d'espionnage MI7. Le coffre-fort utilise plusieurs niveaux d'authentification pour assurer la sécurité des agents, avec des mécanismes tels que l'insertion d'une carte électronique unique et des combinaisons d'interrupteurs spécifiques.
-                </p>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    La première phase du projet consistait à créer un système capable de reconnaître différentes cartes électroniques basées sur des combinaisons d'interrupteurs. Le prototype utilise une carte Arduino pour simuler le fonctionnement complet du coffre.
-                </p>
+    <section id="about" class="projet-section fade-in">
+        <h2 class="section-title">À propos du <span>Projet</span></h2>
+        <p class="section-description">
+            Le projet StrongBox 3000 a été développé pour l'agence d'espionnage MI7. Ce coffre-fort de haute sécurité 
+            utilise plusieurs niveaux d'authentification pour protéger les informations sensibles des agents.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Le Contexte</h3>
+                    <p class="card-text">
+                        Dans un monde où la sécurité des informations est primordiale, l'agence MI7 avait besoin d'un système 
+                        de stockage ultra-sécurisé pour ses documents confidentiels. La StrongBox 3000 répond à ce besoin 
+                        avec un système d'authentification multi-facteurs innovant.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Les Objectifs</h3>
+                    <p class="card-text">
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; color: var(--text-color);">
+                            <li>Développer un système de reconnaissance de cartes électroniques</li>
+                            <li>Implémenter une authentification par combinaison d'interrupteurs</li>
+                            <li>Créer un prototype fonctionnel basé sur Arduino</li>
+                            <li>Assurer un niveau de sécurité optimal contre les intrusions</li>
+                        </ul>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Process Section -->
-    <section id="process" class="primary-bg text-white py-24">
-        <div class="container mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-16">Étapes Clés du Projet</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <!-- Livrable 1 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-6">
-                    <img src="images/P1_1.jpg" alt="Livrable 1" class="livrable-img">
-                    <h3 class="text-2xl font-bold mb-3">Livrable 1 : Strong Circuit</h3>
-                    <p class="text-gray-400 leading-relaxed">Mise en place du premier niveau de sécurité avec le système de combinaison d'interrupteurs et carte.</p>
-                    <a href="documents/Projet1Livrable1.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+    <section id="process" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Processus de <span>Développement</span></h2>
+        <p class="section-description">
+            Le développement de la StrongBox 3000 a suivi un processus rigoureux, divisé en plusieurs livrables clés.
+        </p>
+        
+        <div class="timeline">
+            <!-- Livrable 1 -->
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 1</div>
+                <h3 class="timeline-title">Strong Circuit</h3>
+                <p class="timeline-text">
+                    Mise en place du premier niveau de sécurité avec le système de combinaison d'interrupteurs et carte.
+                    Cette phase a permis de définir l'architecture électronique de base du système.
+                </p>
+                <a href="documents/Projet1Livrable1.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+            
+            <!-- Livrable 2 -->
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase 2</div>
+                <h3 class="timeline-title">Card Box</h3>
+                <p class="timeline-text">
+                    Développement du prototype physique basé sur Arduino, avec LED et résistances pour gérer les sorties.
+                    Cette étape a permis de concrétiser le concept initial en un premier prototype fonctionnel.
+                </p>
+                <a href="documents/Projet1Livrable2.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+            
+            <!-- Livrable 3 -->
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 3</div>
+                <h3 class="timeline-title">Algo 3000</h3>
+                <p class="timeline-text">
+                    Conception de l'algorithme d'authentification avec différents niveaux de sécurité.
+                    Cette phase cruciale a permis de développer la logique de sécurité qui fait la force du système.
+                </p>
+                <a href="documents/Projet1Livrable3.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+            
+            <!-- Livrable 4 -->
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase Finale</div>
+                <h3 class="timeline-title">Full StrongBox</h3>
+                <p class="timeline-text">
+                    Prototype complet avec Arduino et présentation finale du projet au MI7.
+                    Le système final intègre tous les éléments développés précédemment dans un coffre-fort fonctionnel.
+                </p>
+                <a href="documents/Projet1Livrable4.pdf" class="projet-btn outline" style="margin-top: 2rem;" download>
+                    Télécharger le livrable
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technologies Section -->
+    <section id="tech" class="projet-section fade-in">
+        <h2 class="section-title">Technologies <span>Utilisées</span></h2>
+        <p class="section-description">
+            Le développement de la StrongBox 3000 a nécessité l'utilisation de diverses technologies et compétences.
+        </p>
+        
+        <div class="tech-container">
+            <div class="tech-item">
+                <i class='bx bxl-c-plus-plus tech-icon'></i>
+                <span class="tech-name">C++</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-microchip tech-icon'></i>
+                <span class="tech-name">Arduino</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-chip tech-icon'></i>
+                <span class="tech-name">Électronique</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-code-alt tech-icon'></i>
+                <span class="tech-name">Programmation Embarquée</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-lock-alt tech-icon'></i>
+                <span class="tech-name">Sécurité</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Galerie du <span>Projet</span></h2>
+        <p class="section-description">
+            Découvrez les différentes étapes de conception et de réalisation du projet StrongBox 3000.
+        </p>
+        
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="images/P1_1.jpg" alt="Conception initiale" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Schéma électronique initial</p>
                 </div>
-                <!-- Livrable 2 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-6">
-                    <img src="images/P1_2.jpg" alt="Livrable 2" class="livrable-img">
-                    <h3 class="text-2xl font-bold mb-3">Livrable 2 : Card Box</h3>
-                    <p class="text-gray-400 leading-relaxed">Développement du prototype physique basé sur Arduino, avec LED et résistances pour gérer les sorties.</p>
-                    <a href="documents/Projet1Livrable2.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P1_2.jpg" alt="Prototype" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Prototype sur breadboard</p>
                 </div>
-                <!-- Livrable 3 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-6">
-                    <img src="images/P1_3.jpg" alt="Livrable 3" class="livrable-img">
-                    <h3 class="text-2xl font-bold mb-3">Livrable 3 : Algo 3000</h3>
-                    <p class="text-gray-400 leading-relaxed">Conception de l'algorithme d'authentification avec différents niveaux de sécurité.</p>
-                    <a href="documents/Projet1Livrable3.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P1_3.jpg" alt="Algorithme" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Développement de l'algorithme</p>
                 </div>
-                <!-- Livrable 4 -->
-                <div class="card bg-gray-800 text-gray-200 shadow-lg p-6">
-                    <img src="images/P1_4.jpg" alt="Livrable 4" class="livrable-img">
-                    <h3 class="text-2xl font-bold mb-3">Livrable 4 : Full StrongBox</h3>
-                    <p class="text-gray-400 leading-relaxed">Prototype complet avec Arduino et présentation finale du projet au MI7 ( disponible sur mon Github : lmrt0572).</p>
-                    <a href="documents/Projet1Livrable4.pdf" class="bg-main-color text-bg-color px-3 py-1 rounded font-semibold hover:bg-white hover:text-bg-color transition duration-300 inline-block mt-2" download>Télécharger</a>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/P1_4.jpg" alt="Prototype final" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Prototype final assemblé</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="primary-bg text-white py-6">
-        <div class="container mx-auto text-center">
-            <p class="text-sm">© 2024 Léo Martin - <a href="index.html" class="text-main-color hover:underline">Retour au Portfolio</a></p>
-            <p>Contact: <a href="mailto:leo.martin1@viacesi.fr" class="underline">leo.martin1@viacesi.fr</a></p>
+    
+    <!-- Conclusion Section -->
+    <section class="projet-section fade-in">
+        <h2 class="section-title">Conclusion et <span>Perspectives</span></h2>
+        <p class="section-description">
+            Le projet StrongBox 3000 a été un succès, répondant aux exigences de sécurité de l'agence MI7.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Compétences Acquises</h3>
+                    <p class="card-text">
+                        Ce projet m'a permis de développer des compétences en programmation embarquée, en électronique 
+                        et en conception de systèmes sécurisés. J'ai également appris à gérer un projet de bout en bout, 
+                        de la conception à la réalisation d'un prototype fonctionnel.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Évolutions Futures</h3>
+                    <p class="card-text">
+                        Les améliorations futures pourraient inclure l'ajout de biométrie, une interface utilisateur 
+                        plus sophistiquée, et l'intégration de la technologie IoT pour une surveillance à distance. 
+                        Le code source est disponible sur mon GitHub pour consultation.
+                    </p>
+                    <a href="https://github.com/lmrt0572" class="projet-btn" style="margin-top: 2rem;" target="_blank">
+                        Voir sur GitHub
+                    </a>
+                </div>
+            </div>
         </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="projet-footer">
+        <p class="footer-text">Merci de votre intérêt pour ce projet !</p>
+        
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Retour au Portfolio</a>
+            <a href="#" class="footer-link">Haut de page</a>
+        </div>
+        
+        <div class="footer-social">
+            <a href="https://github.com/lmrt0572" class="social-link" target="_blank">
+                <i class='bx bxl-github'></i>
+            </a>
+            <a href="https://www.linkedin.com/in/l%C3%A9o-martin-1a939b338/" class="social-link" target="_blank">
+                <i class='bx bxl-linkedin'></i>
+            </a>
+        </div>
+        
+        <p class="copyright">© 2024 Léo Martin | Tous droits réservés</p>
     </footer>
-
+    
+    <!-- Custom JS -->
+    <script>
+        // Menu toggle
+        const menuIcon = document.querySelector('#menu-icon');
+        const nav = document.querySelector('.projet-nav');
+        
+        menuIcon.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Scroll animation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.75) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+                // Initialize sections with opacity 0 and translateY
+                document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in');
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            // Trigger scroll event to check initial visible sections
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
+
