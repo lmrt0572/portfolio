@@ -961,3 +961,27 @@ section {
     font-size: 1.8rem;
   }
   
+/* Bouton rectangulaire élargi */
+.portfolio-box .projet-btn {
+    display: inline-block;
+    width: 160px; /* Largeur fixe plus grande */
+    padding: 12px 0; /* Padding vertical pour la hauteur */
+    background: #0ef;
+    color: #1f242d;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 30px; /* Bords arrondis */
+    text-decoration: none;
+    transition: .3s ease;
+    border: 2px solid #0ef;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+}
+
+.portfolio-box .projet-btn:hover {
+    background: transparent;
+    color: #0ef;
+    box-shadow: 0 0 15px rgba(0, 238, 255, 0.7);
+}
