@@ -16,6 +16,7 @@
     --main-color: #3693b8;
     --white-color: #fff;
     --disabled-color: #fff3;
+    --a-color:  #88aafd;
 }
 
 html {
@@ -505,9 +506,11 @@ section.active {
 
 .resume-item .company {
     font-size: 1.8rem;
-    color: var(--disabled-color);
+    color: var(--a-color);
     margin-bottom: 1.5rem;
 }
+
+
 
 .resume-item p {
     font-size: 1.6rem;
@@ -985,3 +988,5 @@ section {
     color: #0ef;
     box-shadow: 0 0 15px rgba(0, 238, 255, 0.7);
 }
+
+
