@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StageLink - Plateforme de gestion des stages développée en PHP MVC - Portfolio de Léo Martin">
+    <title>StageLink | Léo Martin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/pp.png">
+    
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/projet.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="projet-header">
+        <a href="index.html" class="projet-logo">
+            <i class='bx bx-code-alt'></i>StageLink
+        </a>
+        
+        <i class='bx bx-menu menu-icon' id="menu-icon"></i>
+        
+        <nav class="projet-nav">
+            <a href="index.html">Accueil</a>
+            <a href="#about">À propos</a>
+            <a href="#process">Méthodologie</a>
+            <a href="#features">Fonctionnalités</a>
+            <a href="#tech">Architecture</a>
+            <a href="#demo">Démonstration</a>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg" style="background-image: url('images/st.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title floating">StageLink</h1>
+            <p class="hero-subtitle">Plateforme web complète de gestion des stages pour les étudiants du CESI</p>
+            <a href="#about" class="projet-btn">Découvrir le projet</a>
+        </div>
+    </section>
+    
+    <!-- À propos Section -->
+    <section id="about" class="projet-section fade-in">
+        <h2 class="section-title">À propos du <span>Projet</span></h2>
+        <p class="section-description">
+            StageLink est une application web conçue pour faciliter la recherche et la gestion des stages pour les étudiants du CESI, en centralisant les offres et en offrant des interfaces adaptées à chaque type d'utilisateur.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Le Contexte</h3>
+                    <p class="card-text">
+                        Les étudiants du CESI cherchent leurs stages en entreprise en activant leurs réseaux personnels et professionnels. Pour simplifier cette démarche cruciale, le projet StageLink vise à créer une plateforme centralisée où les offres de stage sont regroupées, les données des entreprises partenaires stockées, et où les candidatures peuvent être gérées efficacement.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Les Objectifs</h3>
+                    <p class="card-text">
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; color: var(--text-color);">
+                            <li>Créer une plateforme intuitive pour la recherche de stages</li>
+                            <li>Faciliter la gestion des offres selon les compétences recherchées</li>
+                            <li>Mettre en place un système multi-utilisateurs avec des rôles différenciés</li>
+                            <li>Permettre le suivi des candidatures et des évaluations d'entreprises</li>
+                            <li>Développer une application responsive et sécurisée</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Section -->
+    <section id="process" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Méthodologie <span>Adoptée</span></h2>
+        <p class="section-description">
+            Le développement de StageLink a suivi une approche méthodique, avec des cycles de développement itératifs et une organisation en équipe bien définie.
+        </p>
+        
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 1</div>
+                <h3 class="timeline-title">Organisation et planification</h3>
+                <p class="timeline-text">
+                    Composition de l'équipe de 4 personnes, définition des rôles, choix des méthodes de travail et planification générale du projet avec identification des tâches clés.
+                </p>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase 2</div>
+                <h3 class="timeline-title">Maquettage et Frontend</h3>
+                <p class="timeline-text">
+                    Création des wireframes, conception de l'interface utilisateur en HTML/CSS/JS, avec une attention particulière à l'ergonomie et au responsive design.
+                </p>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-date">Phase 3</div>
+                <h3 class="timeline-title">Modélisation et Base de données</h3>
+                <p class="timeline-text">
+                    Élaboration du modèle conceptuel de données (MCD), mise en place de la base de données MySQL avec relations et contraintes d'intégrité.
+                </p>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-date">Phase Finale</div>
+                <h3 class="timeline-title">Développement Backend et Intégration</h3>
+                <p class="timeline-text">
+                    Implémentation du backend en PHP avec architecture MVC, intégration des fonctionnalités, tests et corrections des bugs, optimisation et sécurisation de l'application.
+                </p>
+            </div>
+        </div>
+        
+        <div class="content-grid" style="margin-top: 4rem;">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Organisation de l'Équipe</h3>
+                    <p class="card-text">
+                        Notre équipe de 4 développeurs a travaillé en mode agile, avec des réunions hebdomadaires et des sprints de deux semaines. Chaque membre avait des responsabilités spécifiques, mais nous avons pratiqué la revue de code collaborative et maintenu une communication constante via Git et des outils de gestion de projet.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Outils de Collaboration</h3>
+                    <p class="card-text">
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; color: var(--text-color);">
+                            <li>Gestion de version : Git avec GitHub</li>
+                            <li>Suivi des tâches : Trello</li>
+                            <li>Communication : Discord</li>
+                            <li>Documentation : Notion</li>
+                            <li>Partage de maquettes : Figma</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="projet-section fade-in">
+        <h2 class="section-title">Fonctionnalités <span>Clés</span></h2>
+        <p class="section-description">
+            StageLink offre un large éventail de fonctionnalités adaptées aux besoins des différents utilisateurs de la plateforme.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-user-check' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Authentification et Gestion des Rôles</h3>
+                    <p class="card-text">
+                        Système de connexion sécurisé avec différents niveaux d'accès (étudiants, pilotes, administrateurs). Chaque profil dispose d'une interface adaptée à ses besoins et permissions spécifiques.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-building-house' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Gestion des Entreprises</h3>
+                    <p class="card-text">
+                        Création, modification et suppression des fiches entreprises. Système d'évaluation permettant aux étudiants ayant effectué un stage de partager leur expérience. Recherche multicritères des entreprises.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-list-ul' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Gestion des Offres de Stage</h3>
+                    <p class="card-text">
+                        Publication et gestion des offres avec filtrage par compétences, rémunération, localisation et durée. Système de wish-list pour enregistrer les offres favorites et suivi des candidatures.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <i class='bx bx-file' style="font-size: 5rem; color: var(--main-color); margin-bottom: 1.5rem;"></i>
+                    <h3 class="card-title">Candidatures et Suivis</h3>
+                    <p class="card-text">
+                        Interface permettant aux étudiants de postuler directement aux offres en téléchargeant leur CV et en rédigeant une lettre de motivation. Système de suivi des candidatures pour les pilotes et administrateurs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technical Section -->
+    <section id="tech" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Architecture <span>Technique</span></h2>
+        <p class="section-description">
+            StageLink repose sur une architecture MVC robuste, avec des composants techniques soigneusement sélectionnés pour garantir performance, sécurité et maintenabilité.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Architecture MVC</h3>
+                    <p class="card-text">
+                        L'application suit strictement le pattern MVC (Modèle-Vue-Contrôleur), avec une séparation claire des responsabilités :
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; margin-top: 1rem; color: var(--text-color);">
+                            <li>Les Modèles gèrent la logique métier et les interactions avec la base de données</li>
+                            <li>Les Vues s'occupent de l'affichage et de l'interface utilisateur</li>
+                            <li>Les Contrôleurs orchestrent les actions et font le lien entre modèles et vues</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Organisation du Code Backend</h3>
+                    <p class="card-text">
+                        <code style="display: block; background: #1a1e27; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 1.4rem; overflow-x: auto;">
+StageLinkV1/<br>
+├── src/<br>
+│   ├── config/           # Fichiers de configuration<br>
+│   ├── Controllers/      # Contrôleurs MVC<br>
+│   ├── Models/           # Modèles MVC<br>
+│   └── Utils/            # Fichiers URL<br>
+├── static/               # Fichiers statiques (CSS, JS, images)<br>
+├── templates/            # Templates Twig<br>
+├── uploads/              # Documents uploadés<br>
+├── vendor/               # Dépendances<br>
+├── .htaccess             # Configuration Apache<br>
+├── .env                  # Sécurité connexion BDD<br>
+├── index.php             # Point d'entrée<br>
+└── README.md
+                        </code>
+                        Cette structure permet une organisation claire du code, facilitant sa maintenance et son évolution.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Base de Données</h3>
+                    <p class="card-text">
+                        La base de données MySQL a été conçue avec soin pour optimiser les performances et maintenir l'intégrité des données :
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; margin-top: 1rem; color: var(--text-color);">
+                            <li>Utilisation systématique de clés étrangères pour assurer l'intégrité référentielle</li>
+                            <li>Conception normalisée pour éviter la redondance</li>
+                            <li>Indexation des champs fréquemment utilisés dans les recherches</li>
+                            <li>Requêtes préparées pour prévenir les injections SQL</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Sécurité</h3>
+                    <p class="card-text">
+                        La sécurité a été une préoccupation majeure tout au long du développement :
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; margin-top: 1rem; color: var(--text-color);">
+                            <li>Hachage des mots de passe avec bcrypt</li>
+                            <li>Protection contre les attaques XSS par échappement des sorties</li>
+                            <li>Validation des données côté client et serveur</li>
+                            <li>Gestion des sessions avec cookies sécurisés</li>
+                            <li>Utilisation de tokens CSRF pour les formulaires</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technologies Section -->
+    <section class="projet-section fade-in">
+        <h2 class="section-title">Technologies <span>Utilisées</span></h2>
+        <p class="section-description">
+            Le développement de StageLink a impliqué l'utilisation de nombreuses technologies modernes du développement web.
+        </p>
+        
+        <div class="tech-container">
+            <div class="tech-item">
+                <i class='bx bxl-html5 tech-icon'></i>
+                <span class="tech-name">HTML5</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bxl-css3 tech-icon'></i>
+                <span class="tech-name">CSS3</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bxl-javascript tech-icon'></i>
+                <span class="tech-name">JavaScript</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bxl-php tech-icon'></i>
+                <span class="tech-name">PHP</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-data tech-icon'></i>
+                <span class="tech-name">MySQL</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bxl-git tech-icon'></i>
+                <span class="tech-name">Git</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-code-block tech-icon'></i>
+                <span class="tech-name">MVC</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bxl-bootstrap tech-icon'></i>
+                <span class="tech-name">Bootstrap</span>
+            </div>
+            
+            <div class="tech-item">
+                <i class='bx bx-leaf tech-icon'></i>
+                <span class="tech-name">Twig</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section id="demo" class="projet-section fade-in" style="background-color: var(--second-bg-color);">
+        <h2 class="section-title">Démonstration du <span>Projet</span></h2>
+        <p class="section-description">
+            Voici un aperçu des principales interfaces de StageLink.
+        </p>
+        
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="images/stagelink-login.jpg" alt="Page de connexion StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Interface de connexion avec authentification sécurisée</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/stagelink-dashboard.jpg" alt="Tableau de bord StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Tableau de bord administrateur avec vue d'ensemble</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/create-offer.jpg" alt="Creation d'offre StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Creation d'offre à partir du dashboard</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/stagelink-offers.png" alt="Liste des offres StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Gestion et affichage des offres de stage avec filtres</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/stagelink-offers-details.jpg" alt="Détail des offres de StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Détail des offres de stage avec avec possibilité de postuler</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/stagelink-apply.jpg" alt="Candidature StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Interface de candidature à une offre de stage</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="images/stagelink-company.jpg" alt="Entreprises partenaires de StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Liste des entreprises avec évaluations</p>
+                </div>
+            </div>
+            
+            
+            <div class="gallery-item">
+                <img src="images/stagelink-responsive.jpg" alt="Version mobile StageLink" class="gallery-image">
+                <div class="gallery-overlay">
+                    <p class="gallery-text">Design responsive pour une utilisation mobile optimale</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-grid" style="margin-top: 4rem;">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Code Source du Projet</h3>
+                    <p class="card-text">
+                        Le code source de StageLink est disponible sur GitHub. Vous pouvez explorer le projet, consulter sa documentation et suivre son évolution en cliquant sur le lien ci-dessous.
+                    </p>
+                    <a href="https://github.com/Lucacist/StageLinkV1" class="projet-btn outline" style="margin-top: 2rem;" target="_blank">
+                        Voir sur GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Démo Interactive</h3>
+                    <p class="card-text">
+                        Une démonstration de l'application est disponible en ligne, permettant d'explorer les différentes fonctionnalités avec des comptes de test pour chaque rôle d'utilisateur.
+                    </p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/BPgaKir3CnQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Conclusion Section -->
+    <section class="projet-section fade-in">
+        <h2 class="section-title">Conclusion et <span>Perspectives</span></h2>
+        <p class="section-description">
+            StageLink représente une solution complète pour la gestion des stages, tout en offrant de nombreuses perspectives d'évolution.
+        </p>
+        
+        <div class="content-grid">
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Compétences Acquises</h3>
+                    <p class="card-text">
+                        Ce projet m'a permis de développer de nombreuses compétences en développement web :
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; margin-top: 1rem; color: var(--text-color);">
+                            <li>Maîtrise de l'architecture MVC en PHP</li>
+                            <li>Conception et optimisation de bases de données relationnelles</li>
+                            <li>Développement frontend responsive avec JavaScript moderne</li>
+                            <li>Implémentation de mesures de sécurité robustes</li>
+                            <li>Utilisation avancée de Git pour le travail collaboratif</li>
+                            <li>Gestion de projet agile en équipe</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="projet-card">
+                <div class="card-content">
+                    <h3 class="card-title">Évolutions Futures</h3>
+                    <p class="card-text">
+                        Plusieurs pistes d'amélioration sont envisagées pour les versions futures de StageLink :
+                        <ul style="list-style: inside; margin-left: 1rem; font-size: 1.6rem; margin-top: 1rem; color: var(--text-color);">
+                            <li>Transformation en Progressive Web App (PWA) pour l'utilisation mobile</li>
+                            <li>Intégration d'une API pour synchronisation avec les plateformes d'emploi</li>
+                            <li>Mise en place d'un système de recommandations basé sur les compétences</li>
+                            <li>Ajout d'un module de statistiques avancées et de reporting</li>
+                            <li>Implémentation de fonctionnalités de communication directe entre entreprises et étudiants</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="projet-footer">
+        <p class="footer-text">Merci de votre intérêt pour ce projet !</p>
+        
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Retour au Portfolio</a>
+            <a href="#" class="footer-link">Haut de page</a>
+        </div>
+        
+        <div class="footer-social">
+            <a href="https://github.com/lmrt0572" class="social-link" target="_blank">
+                <i class='bx bxl-github'></i>
+            </a>
+            <a href="https://www.linkedin.com/in/l%C3%A9o-martin-1a939b338/" class="social-link" target="_blank">
+                <i class='bx bxl-linkedin'></i>
+            </a>
+        </div>
+        
+        <p class="copyright">© 2025 Léo Martin | Tous droits réservés</p>
+    </footer>
+    
