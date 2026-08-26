@@ -40,7 +40,7 @@ export function LocaleSwitcher() {
             }
           >
             {t(code === "fr" ? "frShort" : "enShort")}
-            <span className="sr-only"> — {t(code)}</span>
+            <span className="sr-only">, {t(code)}</span>
           </button>
         );
       })}

@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+
+import { siteUrl } from "@/lib/site";
 
 /**
  * Formulaire de contact, repris de l'ancien site : il postait déjà vers
@@ -9,6 +11,12 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xbljzkzz";
 
 export async function ContactForm() {
   const t = await getTranslations("form");
+  const locale = await getLocale();
+
+  // Après un envoi réussi, Formspree redirige vers cette URL absolue plutôt que
+  // vers sa page de confirmation par défaut. Construite avec la locale courante
+  // pour rester dans la bonne langue.
+  const redirectUrl = `${siteUrl}/${locale}/merci`;
 
   const fields = [
     { name: "name", label: t("name"), type: "text", autoComplete: "name", required: true },
@@ -72,9 +80,10 @@ export async function ContactForm() {
         </div>
       </div>
 
-      {/* Sujet de l'e-mail reçu, et piège à robots (invisible, jamais rempli
-          par un humain — Formspree ignore l'envoi s'il l'est). */}
-      <input type="hidden" name="_subject" value="Portfolio — nouveau message" />
+      {/* Sujet de l'e-mail et piège à robots : Formspree ignore l'envoi si le
+          champ caché est rempli. */}
+      <input type="hidden" name="_subject" value="Portfolio : nouveau message" />
+      <input type="hidden" name="_next" value={redirectUrl} />
       <input
         type="text"
         name="_gotcha"

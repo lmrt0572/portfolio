@@ -72,9 +72,8 @@ export default async function ContactPage({
   ];
 
   return (
-    <div className="mx-auto max-w-[120rem] px-[9%] py-20 sm:py-24">
-      {/* Deux colonnes : coordonnées à gauche, formulaire à droite — la
-          disposition de l'ancien site, qui reste la plus lisible. */}
+    <div className="mx-auto max-w-[90rem] px-[9%] py-20 sm:py-24">
+      {/* Deux colonnes : coordonnées à gauche, formulaire à droite. */}
       <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
         <div className="enter lg:pt-6">
           <h1 className="text-[clamp(2.5rem,5vw,3.75rem)] font-extrabold leading-[1.08] tracking-tight text-balance">

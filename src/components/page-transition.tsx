@@ -8,11 +8,9 @@ const BAR_COUNT = 6;
 /**
  * Transition à barres entre les pages, reprise de l'ancien site.
  *
- * Six bandes verticales balaient l'écran à chaque changement de route, avec un
- * décalage entre elles. Le `key` dérive de la route : quand elle change, React
- * remonte l'élément et l'animation CSS se rejoue — aucun état ni minuteur à
- * synchroniser. En fin d'animation les barres restent hors écran (`both`), et
- * `pointer-events: none` les empêche d'intercepter le moindre clic.
+ * Six bandes verticales balaient l'écran à chaque changement de route. Le `key`
+ * dérive de la route : à son changement, React remonte l'élément et rejoue
+ * l'animation CSS. `pointer-events: none` évite d'intercepter les clics.
  */
 export function PageTransition() {
   const pathname = usePathname();

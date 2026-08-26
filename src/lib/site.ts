@@ -1,7 +1,6 @@
 /**
- * URL publique du site. Vercel fournit VERCEL_PROJECT_PRODUCTION_URL en
- * production ; en local on retombe sur le serveur de développement.
- * À remplacer par le domaine définitif le jour où il est branché.
+ * URL publique du site : `NEXT_PUBLIC_SITE_URL` ou l'URL Vercel en production,
+ * localhost en développement.
  */
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? process.env.NEXT_PUBLIC_SITE_URL

@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // Ne pas générer de fichiers de règles pour agents à la racine du dépôt.
+  agentRules: false,
 };
 
 export default withNextIntl(nextConfig);

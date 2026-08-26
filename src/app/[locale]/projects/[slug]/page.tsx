@@ -97,7 +97,7 @@ export default async function ProjectPage({
           s'empiler dessous : elle reste visible sans coûter un écran entier de
           défilement avant le premier paragraphe. */}
       <header>
-        <div className="mx-auto grid max-w-[120rem] items-center gap-10 px-[9%] pb-12 pt-12 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
+        <div className="mx-auto grid max-w-[90rem] items-center gap-10 px-[9%] pb-12 pt-12 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
           <div className="min-w-0">
           <Link
             href="/projects"
@@ -149,14 +149,7 @@ export default async function ProjectPage({
             {project.context[locale]}
           </p>
 
-          {/* Actions du projet : dépôt et documents, au même endroit et tout en
-              haut. Les documents vivaient auparavant dans la colonne de droite,
-              en petits liens gris sous les technologies — sur des pages aussi
-              longues, personne ne descendait jusque-là, et sur mobile ils se
-              retrouvaient tout en bas.
-              Au-delà de deux pièces, la rangée de boutons deviendrait plus
-              longue que le titre : ces projets-là gardent la liste en colonne,
-              et rien n'est dupliqué. */}
+          {/* Actions du projet (dépôt et documents), en haut sous le titre. */}
           {project.repo || headerDocuments.length ? (
             <div
               className="enter mt-8 flex flex-wrap gap-3"
@@ -190,14 +183,8 @@ export default async function ProjectPage({
           ) : null}
           </div>
 
-          {/* La couverture est une illustration, pas le sujet de la page. Elle
-              occupait auparavant toute la largeur dans un cadre 16/9 fixe, avec
-              deux conséquences : près de 700 px de haut qui repoussaient le
-              texte sous la ligne de flottaison, et un rognage sévère — les
-              couvertures vont du portrait (0,82) au panoramique (2,02), aucune
-              n'est en 16/9. Ici la hauteur est plafonnée, la largeur suit le
-              rapport réel du fichier, et rien n'est agrandi au-delà de sa
-              définition d'origine. */}
+          {/* Couverture d'illustration : hauteur plafonnée, largeur au rapport
+              réel du fichier, sans agrandissement au-delà de sa définition. */}
           {project.cover ? (
             <figure
               className="enter w-fit lg:max-w-[34rem]"
@@ -220,7 +207,7 @@ export default async function ProjectPage({
         </div>
       </header>
 
-      <div className="mx-auto max-w-[120rem] px-[9%] pb-24">
+      <div className="mx-auto max-w-[90rem] px-[9%] pb-24">
 
         {/* ---- Bandeau de métadonnées --------------------------------- */}
         {project.facts?.length ? (

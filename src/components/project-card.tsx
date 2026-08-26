@@ -6,9 +6,8 @@ import type { Locale } from "@/i18n/routing";
 import { ArrowRightIcon } from "./icons";
 
 /**
- * Repli quand le projet n'a pas encore de visuel : un fond graphique, sans
- * aucun texte — le calque de survol est semi-transparent, donc tout texte placé
- * ici transparaîtrait au travers. Surtout pas une fausse capture d'écran.
+ * Repli sans visuel : fond graphique sans texte (le calque de survol est
+ * semi-transparent et laisserait transparaître tout texte placé ici).
  */
 function CoverFallback() {
   return (

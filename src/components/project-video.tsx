@@ -11,18 +11,10 @@ import { PlayIcon } from "./icons";
 /**
  * Lecteur de démonstration.
  *
- * Le point important n'est pas le lecteur mais ce qu'il ne fait pas. Un
- * `<video>` posé dans la page déclenche, selon le navigateur, le téléchargement
- * de l'en-tête et souvent des premières secondes — pour une démo que la plupart
- * des visiteurs ne lanceront jamais. Ici l'élément `<video>` n'existe pas tant
- * qu'on n'a pas cliqué : avant, la page ne charge que l'affiche, une image.
- *
- * Une fois monté, le navigateur télécharge la vidéo par tranches au moyen des
- * requêtes de plage HTTP (`Range`), gérées aussi bien par Vercel que par
- * GitHub Pages. C'est ce qui permet de lire immédiatement, de sauter en avant
- * sans attendre la fin, et de ne jamais rapatrier ce qui n'est pas regardé —
- * à une condition : que l'index du MP4 soit en tête de fichier. Sinon le
- * navigateur doit tout parcourir avant la première image.
+ * L'élément `<video>` n'est monté qu'après un clic : avant, seule l'affiche
+ * (une image) est chargée. La vidéo est ensuite servie par requêtes de plage
+ * HTTP (`Range`), ce qui exige que l'index du MP4 soit en tête de fichier
+ * (`-movflags +faststart`).
  *
  * Encodage attendu :
  *   ffmpeg -i source.mkv -vf "scale=1280:-2" -c:v libx264 -crf 23 \

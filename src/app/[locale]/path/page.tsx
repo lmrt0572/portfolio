@@ -5,7 +5,7 @@ import { ResumeTabs, type ResumeTab } from "@/components/resume-tabs";
 import { SectionTitle } from "@/components/section-title";
 import { SkillsGrid } from "@/components/skills-grid";
 import { AboutPanel } from "@/components/about-panel";
-import { education, experience } from "@/content/profile";
+import { education, experience, otherExperience } from "@/content/profile";
 import { routing, type Locale } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -82,6 +82,48 @@ function TimelineItem({
   );
 }
 
+/**
+ * Jobs étudiants : liste secondaire, volontairement plus légère que les cartes
+ * (pas d'aplat ni de survol), pour rester sous le fil technique sans le
+ * concurrencer. Une simple liste datée à filets.
+ */
+function OtherExperience({
+  label,
+  items,
+}: {
+  label: string;
+  items: { period: string; role: string; org: string; detail: string }[];
+}) {
+  return (
+    <section className="mt-12">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-dim">
+        {label}
+      </h3>
+      <ul className="mt-4 border-t border-line-soft">
+        {items.map((item) => (
+          <li
+            key={item.org + item.period}
+            className="grid gap-1 border-b border-line-soft py-4 sm:grid-cols-[9rem_1fr] sm:gap-5"
+          >
+            <span className="text-sm font-semibold text-accent-text">
+              {item.period}
+            </span>
+            <div>
+              <p className="font-semibold">
+                {item.role}{" "}
+                <span className="font-normal text-muted-dim">· {item.org}</span>
+              </p>
+              <p className="mt-0.5 text-sm leading-relaxed text-muted">
+                {item.detail}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default async function PathPage({
   params,
 }: {
@@ -98,7 +140,7 @@ export default async function PathPage({
       heading: t("education"),
       intro: t("educationLead"),
       content: (
-        <ul className="grid gap-5">
+        <ul className="grid gap-5 md:grid-cols-2">
           {education.map((item) => (
             <TimelineItem
               key={item.org + item.period[locale]}
@@ -117,18 +159,29 @@ export default async function PathPage({
       heading: t("experience"),
       intro: t("experienceLead"),
       content: (
-        <ul className="grid gap-5">
-          {experience.map((item) => (
-            <TimelineItem
-              key={item.org + item.period[locale]}
-              period={item.period[locale]}
-              title={item.role[locale]}
-              org={`${item.org} · ${item.location}`}
-              bullets={item.bullets[locale]}
-              currentLabel={item.current ? t("current") : undefined}
-            />
-          ))}
-        </ul>
+        <>
+          <ul className="grid gap-5 md:grid-cols-2">
+            {experience.map((item) => (
+              <TimelineItem
+                key={item.org + item.period[locale]}
+                period={item.period[locale]}
+                title={item.role[locale]}
+                org={`${item.org} · ${item.location}`}
+                bullets={item.bullets[locale]}
+                currentLabel={item.current ? t("current") : undefined}
+              />
+            ))}
+          </ul>
+          <OtherExperience
+            label={t("otherExperience")}
+            items={otherExperience.map((item) => ({
+              period: item.period[locale],
+              role: item.role[locale],
+              org: item.org,
+              detail: item.detail[locale],
+            }))}
+          />
+        </>
       ),
     },
     {
@@ -148,7 +201,7 @@ export default async function PathPage({
   ];
 
   return (
-    <div className="mx-auto max-w-[120rem] px-[9%] py-20 sm:py-24">
+    <div className="mx-auto max-w-[90rem] px-[9%] py-20 sm:py-24">
       <div className="enter">
         <SectionTitle lead={t("pathLeadWord")} accent={t("pathAccent")} />
       </div>

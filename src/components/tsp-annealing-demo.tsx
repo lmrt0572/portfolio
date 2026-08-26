@@ -16,7 +16,7 @@ import { drawCostHistory, drawInstance } from "./tsp-canvas";
 import { Legend } from "./tsp-demo";
 
 /**
- * Démonstration 2 — recuit simulé : comment sortir d'un optimum local.
+ * Démonstration 2 (recuit simulé) : sortir d'un optimum local.
  *
  * La descente 2-opt de la démonstration précédente s'arrête dès qu'aucun
  * mouvement ne raccourcit la tournée. Le recuit, lui, **accepte parfois de
@@ -209,10 +209,8 @@ export function TspAnnealingDemo() {
 
       const instance = generateInstance(cityCount);
 
-      // Point de départ : la fin de la démonstration précédente. Partir de la
-      // tournée brute rendait la comparaison illisible — on ne savait plus si
-      // le recuit gagnait parce qu'il franchit des crêtes ou simplement parce
-      // qu'il avait encore les croisements évidents à défaire.
+      // Point de départ : la fin de la démonstration précédente, pour isoler
+      // l'effet du recuit (franchir des crêtes) des croisements évidents.
       const start = twoOptToLocalOptimum(instance, nearestNeighbour(instance));
       baselineRef.current = tourCost(instance, start);
 

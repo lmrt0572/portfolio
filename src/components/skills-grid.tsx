@@ -3,10 +3,8 @@ import { SkillIcon, skillMarkKind } from "./skill-icon";
 import type { Locale } from "@/i18n/routing";
 
 /**
- * Compétences présentées par logos, comme sur l'ancien site — mais avec le nom
- * toujours affiché sous l'icône plutôt que dans une infobulle au survol :
- * l'ancienne version cachait l'information derrière un survol indisponible au
- * doigt, et un logo seul n'est pas lisible par un lecteur d'écran.
+ * Compétences présentées par logos, avec le nom affiché sous chaque icône
+ * (accessible au doigt et au lecteur d'écran).
  */
 export function SkillsGrid({ locale }: { locale: Locale }) {
   return (

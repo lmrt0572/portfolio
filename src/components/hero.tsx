@@ -8,22 +8,14 @@ import { GithubIcon, LinkedinIcon } from "./icons";
 import type { Locale } from "@/i18n/routing";
 
 /**
- * Page d'accueil.
- *
- * Deux dispositions, comme sur l'ancien site :
- * — sous `lg`, tout est centré sous le portrait ;
- * — à partir de `lg`, texte à gauche et portrait à droite, gouttières à 9 %.
- *
- * Les proportions du régime deux colonnes sont calées sur l'ancienne page :
- * colonne de texte large (le paragraphe court jusqu'aux deux tiers de l'écran),
- * portrait à ~32vw, et bouton principal aligné avec les icônes sur une même
- * ligne.
+ * Page d'accueil. Sous `lg`, tout est centré sous le portrait ; à partir de
+ * `lg`, texte à gauche et portrait à droite.
  */
 export async function Hero({ locale }: { locale: Locale }) {
   const t = await getTranslations("hero");
 
   return (
-    <section className="mx-auto flex max-w-[120rem] flex-col-reverse items-center justify-center min-h-[calc(100svh-5.5rem)] gap-6 px-[9%] py-4 text-center sm:gap-10 sm:py-10 lg:flex-row lg:justify-between lg:gap-10 lg:py-0 lg:text-left">
+    <section className="mx-auto flex max-w-[90rem] flex-col-reverse items-center justify-center min-h-[calc(100svh-5.5rem)] gap-6 px-[9%] py-4 text-center sm:gap-10 sm:py-10 lg:flex-row lg:justify-between lg:gap-10 lg:py-0 lg:text-left">
       <div className="flex w-full min-w-0 max-w-[34rem] flex-col items-center lg:max-w-[46rem] lg:items-start">
         <h1
           className="enter text-[clamp(2.4rem,5.5vw,4.3rem)] font-extrabold leading-[1.06] tracking-[-0.03em]"
@@ -54,13 +46,8 @@ export async function Hero({ locale }: { locale: Locale }) {
           {profile.availability[locale]}
         </p>
 
-        {/*
-          Ordre du DOM : boutons puis icônes.
-          — sous `lg`, `flex-col-reverse` remonte les icônes au-dessus du
-            bouton, comme sur l'ancienne version mobile ;
-          — à partir de `lg`, tout revient sur une seule ligne, bouton d'abord,
-            ce qui est la disposition de l'ancienne page en grand format.
-        */}
+        {/* Ordre du DOM : bouton puis icônes. `flex-col-reverse` remonte les
+            icônes au-dessus du bouton sous `lg` ; ligne unique à partir de `lg`. */}
         <div
           className="enter mt-5 flex flex-col-reverse items-center gap-4 sm:mt-6 lg:flex-row lg:gap-6"
           style={{ "--i": 4 } as CSSProperties}

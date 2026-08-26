@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Léo Martin — Ingénieur IA & vision par ordinateur",
+    "title": "Léo Martin, Ingénieur IA & vision par ordinateur",
     "description": "Alternant ingénieur en IA et vision par ordinateur chez Thales. Détection et suivi d'objets en temps réel. À la recherche d'un stage international en 2027.",
     "projectsTitle": "Projets",
     "projectsDescription": "Projets en intelligence artificielle, vision par ordinateur, développement logiciel et web.",
@@ -54,6 +54,7 @@
     "educationLead": "Un cursus d'ingénieur en alternance, orienté informatique et pédagogie par projets.",
     "experience": "Mes expériences",
     "experienceLead": "Deux ans chez Thales LAS ACR, du traitement de données à l'IA embarquée.",
+    "otherExperience": "Autres expériences",
     "skills": "Mes compétences",
     "skillsLead": "Ce que j'utilise réellement, regroupé par domaine.",
     "about": "À propos",
@@ -62,7 +63,7 @@
     "current": "En poste",
     "languages": "Langues",
     "contact": "Travaillons ensemble",
-    "contactLead": "Une opportunité de stage, une question sur un projet, ou simplement envie d'échanger — écrivez-moi."
+    "contactLead": "Une opportunité de stage, une question sur un projet, ou simplement envie d'échanger, écrivez-moi."
   },
   "project": {
     "backToProjects": "Tous les projets",
@@ -71,8 +72,8 @@
     "stack": "Technologies",
     "highlights": "Points clés",
     "demoTitle": "Essayez vous-même",
-    "demoLead": "Chaque tournée part du dépôt et y revient. Les pointillés sont les routes interdites, les flèches les livraisons à effectuer dans l’ordre. On construit au plus proche voisin, puis on défait les croisements par mouvements 2-opt — en refusant ceux qui casseraient une contrainte, que le compteur « bloquées » comptabilise.",
-    "demoNote": "Démonstration écrite pour cette page, indépendante du livrable. Elle reprend le modèle du projet — coût = carburant × distance + péage, routes interdites, contraintes de précédence — sur des instances tirées au hasard, mais n’utilise que deux des huit algorithmes étudiés, à des tailles de l’ordre de la trentaine de villes. Le livrable, lui, est un notebook Python disponible sur le dépôt.",
+    "demoLead": "Chaque tournée part du dépôt et y revient. Les pointillés sont les routes interdites, les flèches les livraisons à effectuer dans l’ordre. On construit au plus proche voisin, puis on défait les croisements par mouvements 2-opt, en refusant ceux qui casseraient une contrainte, que le compteur « bloquées » comptabilise.",
+    "demoNote": "Démonstration écrite pour cette page, indépendante du livrable. Elle reprend le modèle du projet (coût = carburant × distance + péage, routes interdites, contraintes de précédence) sur des instances tirées au hasard, mais n’utilise que deux des huit algorithmes étudiés, à des tailles de l’ordre de la trentaine de villes. Le livrable, lui, est un notebook Python disponible sur le dépôt.",
     "demoEscapeTitle": "Sortir de l'optimum local",
     "demoEscapeLead": "Le recuit simulé démarre là où une descente 2-opt s'arrête, sur sa propre instance tirée au hasard. Il accepte parfois d'empirer, avec une probabilité qui s'effondre à mesure que la température baisse. Les pointillés marquent son point de départ : tout ce qui passe dessous a été gagné en franchissant une crête.",
     "pipeline": "Comment ça marche",
@@ -116,6 +117,14 @@
     "message": "Votre message",
     "submit": "Envoyer le message"
   },
+  "thanks": {
+    "title": "Message envoyé",
+    "heading": "Merci",
+    "headingAccent": "!",
+    "lead": "Votre message est bien parti. Je vous réponds dès que possible, généralement sous 48 heures.",
+    "backHome": "Retour à l'accueil",
+    "viewProjects": "Voir mes projets"
+  },
   "tsp": {
     "canvasLabel": "Carte des villes, contraintes et tournée courante",
     "chartLabel": "Évolution du coût au fil des itérations",
@@ -132,9 +141,9 @@
     "baseline": "Départ (2-opt)",
     "uphill": "Dégradations acceptées",
     "temperature": "Température",
-    "localOptimum": "Optimum local atteint : aucune inversion ne raccourcit plus la tournée. Pour aller plus loin, il faut accepter d'empirer — c'est l'objet de la démonstration suivante.",
+    "localOptimum": "Optimum local atteint : aucune inversion ne raccourcit plus la tournée. Pour aller plus loin, il faut accepter d'empirer, c'est l'objet de la démonstration suivante.",
     "beatBaseline": "Le recuit est passé sous l'optimum local du 2-opt : {percent} % de mieux.",
-    "tiedBaseline": "Le recuit n'a pas fait mieux que la descente sur ce tirage — cela arrive, et c'est pourquoi on mesure sur plusieurs instances.",
+    "tiedBaseline": "Le recuit n'a pas fait mieux que la descente sur ce tirage, cela arrive, et c'est pourquoi on mesure sur plusieurs instances.",
     "legendDepot": "Dépôt",
     "legendForbidden": "Route interdite",
     "legendPrecedence": "Doit être livrée avant",

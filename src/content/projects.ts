@@ -38,14 +38,16 @@ export const projects: Project[] = [
       width: 1024,
       height: 559,
       alt: {
-           },
+        fr: "Caméra PTZ de surveillance maritime",
+        en: "Maritime surveillance PTZ camera",
+      },
     },
     facts: [
       {
         label: { fr: "Rôle", en: "Role" },
         value: {
-          fr: "Alternant ingénieur — conception et mise en œuvre de la chaîne",
-          en: "Apprentice engineer — pipeline design and implementation",
+          fr: "Alternant ingénieur, conception et mise en œuvre de la chaîne",
+          en: "Apprentice engineer, pipeline design and implementation",
         },
       },
       {
@@ -89,32 +91,32 @@ export const projects: Project[] = [
         id: "capture",
         title: { fr: "Acquisition", en: "Capture" },
         body: {
-          fr: "La caméra diffuse sa vidéo en RTSP. Trois bibliothèques de décodage ont été essayées avant d'en retenir une qui accepte les flux aux en-têtes mal formés — fréquents sur le matériel de terrain — et qui donne un accès réel au transport et au tampon réseau, les deux réglages qui décident de la latence. Un décodeur unique alimente à la fois l'affichage et l'analyse.",
-          en: "The camera streams over RTSP. Three decoding libraries were tried before settling on one that accepts malformed stream headers — common on field hardware — and gives real access to transport and network buffering, the two settings that determine latency. A single decoder feeds both display and analysis.",
+          fr: "La caméra diffuse sa vidéo en RTSP. Trois bibliothèques de décodage ont été essayées avant d'en retenir une qui accepte les flux aux en-têtes mal formés, fréquents sur le matériel de terrain, et qui donne un accès réel au transport et au tampon réseau, les deux réglages qui décident de la latence. Un décodeur unique alimente à la fois l'affichage et l'analyse.",
+          en: "The camera streams over RTSP. Three decoding libraries were tried before settling on one that accepts malformed stream headers, common on field hardware, and gives real access to transport and network buffering, the two settings that determine latency. A single decoder feeds both display and analysis.",
         },
       },
       {
         id: "detect",
         title: { fr: "Détection", en: "Detection" },
         body: {
-          fr: "Un détecteur de la famille DETR localise les embarcations, du cargo au jet-ski. Trois architectures ont été comparées sur les images du site — et non sur un jeu public, où leurs scores trop proches ne les départageaient plus. Le seuil de confiance est un arbitrage : assez bas pour que les petites cibles ne disparaissent pas des trajectoires, assez haut pour que l'écran reste lisible.",
-          en: "A DETR-family detector locates vessels, from cargo ship to jet ski. Three architectures were compared on site imagery — not on a public set, where their scores sat too close to separate them. The confidence threshold is a trade-off: low enough that small targets do not drop out of tracks, high enough that the screen stays readable.",
+          fr: "Un détecteur de la famille DETR localise les embarcations, du cargo au jet-ski. Trois architectures ont été comparées sur les images du site, et non sur un jeu public, où leurs scores trop proches ne les départageaient plus. Le seuil de confiance est un arbitrage : assez bas pour que les petites cibles ne disparaissent pas des trajectoires, assez haut pour que l'écran reste lisible.",
+          en: "A DETR-family detector locates vessels, from cargo ship to jet ski. Three architectures were compared on site imagery, not on a public set, where their scores sat too close to separate them. The confidence threshold is a trade-off: low enough that small targets do not drop out of tracks, high enough that the screen stays readable.",
         },
       },
       {
         id: "track",
         title: { fr: "Suivi", en: "Tracking" },
         body: {
-          fr: "ByteTrack prédit où chaque cible devrait se trouver grâce à un filtre de Kalman, puis associe les nouvelles détections aux pistes existantes. Le filtre rend un second service, moins attendu : la boîte de détection tremble d'une image à l'autre même sur une cible immobile, et le lissage donne à l'asservissement une consigne stable au lieu d'une consigne qui vibre. Un filtre écarte les détections qui restent trop longtemps au même endroit — sans lui, le suivi s'accroche à une bouée, cible idéale du point de vue du détecteur, plutôt qu'au jet-ski visé.",
-          en: "ByteTrack predicts where each target should be using a Kalman filter, then matches new detections to existing tracks. The filter renders a second, less expected service: the detection box jitters between frames even on a stationary target, and smoothing gives the control loop a steady set-point instead of a vibrating one. A filter discards detections that stay too long in one place — without it, tracking latches onto a buoy, an ideal target from the detector's point of view, rather than the jet ski being followed.",
+          fr: "ByteTrack prédit où chaque cible devrait se trouver grâce à un filtre de Kalman, puis associe les nouvelles détections aux pistes existantes. Le filtre rend un second service, moins attendu : la boîte de détection tremble d'une image à l'autre même sur une cible immobile, et le lissage donne à l'asservissement une consigne stable au lieu d'une consigne qui vibre. Un filtre écarte les détections qui restent trop longtemps au même endroit, sans lui, le suivi s'accroche à une bouée, cible idéale du point de vue du détecteur, plutôt qu'au jet-ski visé.",
+          en: "ByteTrack predicts where each target should be using a Kalman filter, then matches new detections to existing tracks. The filter renders a second, less expected service: the detection box jitters between frames even on a stationary target, and smoothing gives the control loop a steady set-point instead of a vibrating one. A filter discards detections that stay too long in one place, without it, tracking latches onto a buoy, an ideal target from the detector's point of view, rather than the jet ski being followed.",
         },
       },
       {
         id: "servo",
         title: { fr: "Asservissement", en: "Camera control" },
         body: {
-          fr: "L'écart entre la cible et le centre de l'image devient une vitesse de rotation, envoyée en ONVIF — un standard, pour que le système fonctionne avec d'autres caméras que celle installée. Le terrain a imposé quatre ajouts au régulateur proportionnel de départ : deux régimes de gain, une zone morte pour ne pas réagir au tremblement de la détection, une hystérésis pour ne pas sautiller à sa frontière, et une compensation du zoom — un réglage valable au grand-angle rend le système instable au téléobjectif. Le rapport entre les gains n'a pas été réglé à l'œil mais par une procédure de calibration, pointée sur une zone bâtie car sur la mer elle aurait mesuré le mouvement des vagues.",
-          en: "The gap between target and frame centre becomes a rotation speed, sent over ONVIF — a standard, so the system works with cameras other than the one installed. The field imposed four additions to the initial proportional controller: two gain regimes, a dead band so it does not react to detection jitter, hysteresis so it does not stutter at that band's edge, and zoom compensation — a setting valid at wide angle makes the system unstable at full telephoto. The ratio between gains was not eyeballed but set by a calibration procedure, aimed at a built-up area because over the sea it would have measured the waves.",
+          fr: "L'écart entre la cible et le centre de l'image devient une vitesse de rotation, envoyée en ONVIF, un standard, pour que le système fonctionne avec d'autres caméras que celle installée. Le terrain a imposé quatre ajouts au régulateur proportionnel de départ : deux régimes de gain, une zone morte pour ne pas réagir au tremblement de la détection, une hystérésis pour ne pas sautiller à sa frontière, et une compensation du zoom, un réglage valable au grand-angle rend le système instable au téléobjectif. Le rapport entre les gains n'a pas été réglé à l'œil mais par une procédure de calibration, pointée sur une zone bâtie car sur la mer elle aurait mesuré le mouvement des vagues.",
+          en: "The gap between target and frame centre becomes a rotation speed, sent over ONVIF, a standard, so the system works with cameras other than the one installed. The field imposed four additions to the initial proportional controller: two gain regimes, a dead band so it does not react to detection jitter, hysteresis so it does not stutter at that band's edge, and zoom compensation, a setting valid at wide angle makes the system unstable at full telephoto. The ratio between gains was not eyeballed but set by a calibration procedure, aimed at a built-up area because over the sea it would have measured the waves.",
         },
       },
       {
@@ -177,14 +179,14 @@ export const projects: Project[] = [
         bullets: {
           fr: [
             "L'annotation reste sur un serveur local : les images du site ne sortent jamais de l'entreprise",
-            "Répartition par vidéo entière et non image par image — deux images consécutives se ressemblent trop, et les répartir au hasard revient à évaluer le modèle sur ce qu'il a déjà vu",
+            "Répartition par vidéo entière et non image par image, deux images consécutives se ressemblent trop, et les répartir au hasard revient à évaluer le modèle sur ce qu'il a déjà vu",
             "Le score obtenu est plus bas, mais c'est celui qui prédit le comportement sur une scène nouvelle",
             "Du flou de mouvement est ajouté à une partie des images : nos vidéos sont floues dès que la caméra pivote, le jeu public est filmé caméra fixe",
             "Les corrections faites par l'opérateur pendant l'exploitation reviennent dans le jeu d'entraînement",
           ],
           en: [
             "Annotation stays on a local server: site images never leave the company",
-            "Split by whole video rather than by frame — consecutive frames are far too similar, and splitting at random amounts to evaluating the model on what it has already seen",
+            "Split by whole video rather than by frame, consecutive frames are far too similar, and splitting at random amounts to evaluating the model on what it has already seen",
             "The resulting score is lower, but it is the one that predicts behaviour on a new scene",
             "Motion blur is added to part of the training images: our footage blurs as soon as the camera pans, the public set is shot on a fixed camera",
             "Corrections made by the operator during use flow back into the training set",
@@ -203,17 +205,17 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "Famille DETR plutôt que les détecteurs à ancres : elle produit d'emblée un nombre fixe de prédictions et supprime l'étape de filtrage des doublons — un filtre trop sévère fusionne une bouée et une embarcation alignées, trop permissif il laisse passer des doublons",
+            "Famille DETR plutôt que les détecteurs à ancres : elle produit d'emblée un nombre fixe de prédictions et supprime l'étape de filtrage des doublons, un filtre trop sévère fusionne une bouée et une embarcation alignées, trop permissif il laisse passer des doublons",
             "RF-DETR l'emporte sur RT-DETRv4 et D-FINE sur les images du site, surtout sur les petites cibles, grâce à un extracteur pré-entraîné sans annotations qui demande beaucoup moins d'exemples pour s'adapter",
             "Le classement obtenu sur les images du site est l'inverse de celui obtenu sur le jeu public : un modèle peut être meilleur sur des données publiques et moins bon sur le terrain",
-            "ByteTrack conserve les détections de faible score pour une seconde tentative d'association — quand une petite embarcation s'éloigne et que son score chute, sa trajectoire survit",
+            "ByteTrack conserve les détections de faible score pour une seconde tentative d'association, quand une petite embarcation s'éloigne et que son score chute, sa trajectoire survit",
             "La licence a tranché : BoT-SORT, plus performant sur le papier, est sous AGPL-3.0, ce qui obligerait à publier le code de tout produit l'intégrant. Même raisonnement pour les versions récentes de YOLO. Toutes les briques retenues sont sous Apache 2.0 ou équivalent",
           ],
           en: [
-            "The DETR family rather than anchor-based detectors: it emits a fixed number of predictions outright and removes the duplicate-filtering step — too strict a filter merges an aligned buoy and vessel, too permissive it lets duplicates through",
+            "The DETR family rather than anchor-based detectors: it emits a fixed number of predictions outright and removes the duplicate-filtering step, too strict a filter merges an aligned buoy and vessel, too permissive it lets duplicates through",
             "RF-DETR beats RT-DETRv4 and D-FINE on site images, especially on small targets, thanks to a backbone pre-trained without annotations that needs far fewer examples to adapt",
             "The ranking on site images is the reverse of the ranking on the public set: a model can be better on public data and worse in the field",
-            "ByteTrack keeps low-score detections for a second association attempt — when a small vessel moves away and its score drops, its track survives",
+            "ByteTrack keeps low-score detections for a second association attempt, when a small vessel moves away and its score drops, its track survives",
             "Licensing settled it: BoT-SORT, stronger on paper, is AGPL-3.0, which would force publishing the source of any product embedding it. Same reasoning for recent YOLO releases. Every brick retained is Apache 2.0 or equivalent",
           ],
         },
@@ -230,15 +232,15 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "Transport vidéo en UDP plutôt qu'en TCP : en TCP, un paquet perdu bloque tout le flux le temps d'être retransmis, et l'image gèle — systématiquement pendant les mouvements de tourelle, quand le débit augmente d'un coup. Pour une boucle d'asservissement, une image un peu abîmée vaut mieux qu'une image figée, car un gel fige aussi la commande",
+            "Transport vidéo en UDP plutôt qu'en TCP : en TCP, un paquet perdu bloque tout le flux le temps d'être retransmis, et l'image gèle, systématiquement pendant les mouvements de tourelle, quand le débit augmente d'un coup. Pour une boucle d'asservissement, une image un peu abîmée vaut mieux qu'une image figée, car un gel fige aussi la commande",
             "Un seul décodeur alimente l'affichage et l'analyse : avec deux, l'opérateur voit une image légèrement différente de celle que le système analyse, ce qui pose problème au moment de désigner une cible en cliquant dessus",
-            "Découpage de l'image en quadrants pour agrandir les petites cibles : le gain est réel, mais la cadence tombe de plus de moitié. Désactivé — une détection plus précise qui arrive trop tard dégrade le suivi au lieu de l'améliorer",
+            "Découpage de l'image en quadrants pour agrandir les petites cibles : le gain est réel, mais la cadence tombe de plus de moitié. Désactivé, une détection plus précise qui arrive trop tard dégrade le suivi au lieu de l'améliorer",
             "Accélération par TensorRT en calculant sur 16 bits au lieu de 32 : vérification faite, la précision est intégralement conservée, y compris sur les petites cibles déjà fragiles",
           ],
           en: [
-            "UDP rather than TCP for video transport: in TCP a lost packet stalls the whole stream until it is resent, and the picture freezes — systematically during turret movement, when bitrate spikes. For a control loop a slightly damaged frame beats a frozen one, because a freeze also freezes the command",
+            "UDP rather than TCP for video transport: in TCP a lost packet stalls the whole stream until it is resent, and the picture freezes, systematically during turret movement, when bitrate spikes. For a control loop a slightly damaged frame beats a frozen one, because a freeze also freezes the command",
             "One decoder feeds both display and analysis: with two, the operator sees a slightly different frame from the one the system analyses, which matters the moment you designate a target by clicking on it",
-            "Splitting the frame into quadrants to enlarge small targets: the gain is real, but the detection rate more than halves. Disabled — a more accurate detection arriving too late degrades tracking instead of improving it",
+            "Splitting the frame into quadrants to enlarge small targets: the gain is real, but the detection rate more than halves. Disabled, a more accurate detection arriving too late degrades tracking instead of improving it",
             "TensorRT acceleration computing in 16 bits instead of 32: verified, accuracy is fully preserved, including on the already fragile small targets",
           ],
         },
@@ -251,20 +253,20 @@ export const projects: Project[] = [
         },
         body: {
           fr: "Le système suit correctement une embarcation de taille normale mais décroche sur les cibles petites et rapides. Restait à savoir lequel des trois maillons en était responsable : la détection, le suivi ou la commande. Mon intuition désignait le régulateur, supposé trop lent pour un jet-ski. L'analyse des enregistrements a montré l'inverse : plus la détection a de trous, plus les poursuites sont courtes et hachées, mais ces trous n'expliquent en rien l'écart au centre de l'image. Quand la cible est détectée, la caméra vise juste. Le système ne perd pas la cible parce qu'il la vise mal ; il la vise mal par moments parce qu'il ne la voit pas assez souvent.",
-          en: "The system follows a normal-sized vessel correctly but loses small, fast targets. Which of the three links was responsible — detection, tracking or control? My instinct pointed at the controller, presumed too slow for a jet ski. Analysing the recordings showed the opposite: the more gaps in detection, the shorter and choppier the pursuits, yet those gaps explain nothing about the off-centre error. When the target is detected, the camera aims true. The system does not lose the target because it aims badly; it aims badly at times because it does not see it often enough.",
+          en: "The system follows a normal-sized vessel correctly but loses small, fast targets. Which of the three links was responsible, detection, tracking or control? My instinct pointed at the controller, presumed too slow for a jet ski. Analysing the recordings showed the opposite: the more gaps in detection, the shorter and choppier the pursuits, yet those gaps explain nothing about the off-centre error. When the target is detected, the camera aims true. The system does not lose the target because it aims badly; it aims badly at times because it does not see it often enough.",
         },
         bullets: {
           fr: [
             "L'effort est passé du réglage de la commande à la disponibilité de la détection",
             "Un projet non instrumenté aurait optimisé le régulateur, avec conviction et sans effet",
             "C'est le protocole de mesure reproductible qui a permis de désigner le facteur limitant, pas l'intuition",
-            "Deux outils ont rendu ce protocole possible : l'enregistrement des sessions, pour rejouer la même scène avec deux réglages — la mer et la lumière ne sont jamais deux fois les mêmes —, et un banc de réglage intégré pour changer un paramètre sans redémarrer",
+            "Deux outils ont rendu ce protocole possible : l'enregistrement des sessions, pour rejouer la même scène avec deux réglages, la mer et la lumière ne sont jamais deux fois les mêmes, , et un banc de réglage intégré pour changer un paramètre sans redémarrer",
           ],
           en: [
             "Effort moved from tuning the controller to detection availability",
             "An uninstrumented project would have optimised the controller, with conviction and no effect",
             "It was the reproducible measurement protocol that identified the limiting factor, not intuition",
-            "Two tools made that protocol possible: session recording, to replay the same scene with two settings — sea and light are never the same twice — and an in-app tuning bench to change a parameter without restarting",
+            "Two tools made that protocol possible: session recording, to replay the same scene with two settings, sea and light are never the same twice, and an in-app tuning bench to change a parameter without restarting",
           ],
         },
       },
@@ -281,13 +283,13 @@ export const projects: Project[] = [
         bullets: {
           fr: [
             "Quatre autres pistes étudiées, contre trois critères fixés à l'avance : rester fiable dans le temps, ne dépendre d'aucun autre logiciel, n'ouvrir aucun nouvel accès sur le réseau du site",
-            "Aucune ne remplissait les trois — la fonction a été retirée du périmètre livré plutôt que fournie avec une fiabilité douteuse",
+            "Aucune ne remplissait les trois, la fonction a été retirée du périmètre livré plutôt que fournie avec une fiabilité douteuse",
             "L'interface n'affiche donc aucune direction : elle ne montre que ce que le système sait garantir",
             "Le coût est réel, puisqu'on ne peut pas encore remonter de position géographique vers la supervision, mais il est documenté plutôt que caché derrière un chiffre faux",
           ],
           en: [
             "Four other routes studied, against three criteria set in advance: stay reliable over time, depend on no other software, open no new access on the site network",
-            "None met all three — the function was removed from the delivered scope rather than shipped with doubtful reliability",
+            "None met all three, the function was removed from the delivered scope rather than shipped with doubtful reliability",
             "The interface therefore displays no bearing: it shows only what the system can guarantee",
             "The cost is real, since no geographic position can yet be pushed to the supervision system, but it is documented rather than hidden behind a false number",
           ],
@@ -300,8 +302,8 @@ export const projects: Project[] = [
           en: "Deploying on a machine with no network",
         },
         body: {
-          fr: "Le système tourne sur un serveur isolé du réseau. Cette contrainte, banale à énoncer, change beaucoup de choses en pratique : plus de `pip install` au moment du déploiement, plus de poids de modèle téléchargés à la volée, plus de correctif de dernière minute. Tout doit être figé, transporté et rejouable à l'identique — ce qui oblige à une rigueur sur les versions et les dépendances qu'un environnement connecté pardonne facilement.",
-          en: "The system runs on an air-gapped server. That constraint is trivial to state and changes a great deal in practice: no `pip install` at deployment time, no model weights fetched on the fly, no last-minute patch. Everything has to be frozen, carried over and reproducible exactly — which forces a discipline about versions and dependencies that a connected environment forgives easily.",
+          fr: "Le système tourne sur un serveur isolé du réseau. Cette contrainte, banale à énoncer, change beaucoup de choses en pratique : plus de `pip install` au moment du déploiement, plus de poids de modèle téléchargés à la volée, plus de correctif de dernière minute. Tout doit être figé, transporté et rejouable à l'identique, ce qui oblige à une rigueur sur les versions et les dépendances qu'un environnement connecté pardonne facilement.",
+          en: "The system runs on an air-gapped server. That constraint is trivial to state and changes a great deal in practice: no `pip install` at deployment time, no model weights fetched on the fly, no last-minute patch. Everything has to be frozen, carried over and reproducible exactly, which forces a discipline about versions and dependencies that a connected environment forgives easily.",
         },
       },
       {
@@ -309,15 +311,15 @@ export const projects: Project[] = [
         title: { fr: "Ce que j'en retire", en: "What I took away" },
         bullets: {
           fr: [
-            "Mesurer avant de décider : mon réflexe était de modifier le code puis de juger à l'œil. Une boucle fermée ne se juge pas ainsi — sans protocole reproductible, on optimise ce qu'on sait mesurer plutôt que ce qui limite",
-            "Des bases d'automatique acquises sur le terrain : gain, zone morte, hystérésis, retard de boucle — des notions que je n'avais jamais manipulées concrètement",
+            "Mesurer avant de décider : mon réflexe était de modifier le code puis de juger à l'œil. Une boucle fermée ne se juge pas ainsi, sans protocole reproductible, on optimise ce qu'on sait mesurer plutôt que ce qui limite",
+            "Des bases d'automatique acquises sur le terrain : gain, zone morte, hystérésis, retard de boucle, des notions que je n'avais jamais manipulées concrètement",
             "La chaîne de vision complète, de la constitution du jeu de données au moteur d'inférence optimisé",
             "Un critère que je n'avais jamais considéré : la licence. Qu'une bibliothèque performante soit inutilisable en contexte industriel à cause de sa licence a été un vrai apprentissage",
             "Assumer une limite plutôt que la masquer, quitte à réduire le périmètre livré",
           ],
           en: [
-            "Measure before deciding: my instinct was to change the code then judge by eye. A closed loop cannot be judged that way — without a reproducible protocol you optimise what you can measure rather than what limits you",
-            "Control-theory basics learned in the field: gain, dead band, hysteresis, loop delay — notions I had never handled concretely",
+            "Measure before deciding: my instinct was to change the code then judge by eye. A closed loop cannot be judged that way, without a reproducible protocol you optimise what you can measure rather than what limits you",
+            "Control-theory basics learned in the field: gain, dead band, hysteresis, loop delay, notions I had never handled concretely",
             "The full vision pipeline, from building the dataset to the optimised inference engine",
             "A criterion I had never considered: licensing. That a high-performing library can be unusable in an industrial context because of its licence was a real lesson",
             "Owning a limit rather than hiding it, even at the cost of a narrower delivered scope",
@@ -403,13 +405,11 @@ export const projects: Project[] = [
       ],
     },
     video: {
-      // Version réencodée : l'original faisait 144 Mo avec son index en fin de
-      // fichier, ce qui obligeait le navigateur à tout parcourir avant la
-      // première image.
+      // Version réencodée avec l'index en tête : démarrage sans télécharger
+      // tout le fichier.
       mp4: "/videos/breezy-demo.mp4",
       poster: "/images/breezy-poster.jpg",
-      // Rapport exact de l'enregistrement (capture de fenêtre) : annoncer 16/9
-      // ajouterait des bandes noires en haut et en bas.
+      // Rapport exact de l'enregistrement, pour éviter les bandes noires.
       aspect: "1280 / 750",
       caption: {
         fr: "Démonstration : publication d'un post, notification reçue en temps réel par un autre compte, messagerie privée.",
@@ -421,24 +421,24 @@ export const projects: Project[] = [
         id: "gateway",
         title: { fr: "Une seule porte d'entrée", en: "A single front door" },
         body: {
-          fr: "Tout passe par une passerelle Nginx sur le port 80 : l'interface comme les API. Elle porte ce qui n'a pas à être réécrit dans six services — la politique CORS, avec une liste d'origines autorisées, et la limitation de débit, réglée à 30 requêtes par seconde en général mais à 2 sur la connexion et l'inscription, là où on tente les mots de passe.",
-          en: "Everything goes through an Nginx gateway on port 80: the interface as well as the APIs. It carries what should not be rewritten in six services — the CORS policy, with an allowlist of origins, and rate limiting, set to 30 requests per second in general but 2 on login and registration, where passwords get guessed.",
+          fr: "Tout passe par une passerelle Nginx sur le port 80 : l'interface comme les API. Elle porte ce qui n'a pas à être réécrit dans six services, la politique CORS, avec une liste d'origines autorisées, et la limitation de débit, réglée à 30 requêtes par seconde en général mais à 2 sur la connexion et l'inscription, là où on tente les mots de passe.",
+          en: "Everything goes through an Nginx gateway on port 80: the interface as well as the APIs. It carries what should not be rewritten in six services, the CORS policy, with an allowlist of origins, and rate limiting, set to 30 requests per second in general but 2 on login and registration, where passwords get guessed.",
         },
       },
       {
         id: "auth",
         title: { fr: "Prouver qui l'on est", en: "Proving who you are" },
         body: {
-          fr: "Le service Auth vérifie le mot de passe, haché avec bcrypt, et signe un JWT. Pour les pages protégées, la passerelle ne devine rien : elle sous-traite la validation au service Auth avant de servir la page. Chaque service métier revérifie ensuite le jeton de son côté — aucun ne fait confiance à son appelant.",
-          en: "The Auth service checks the password, hashed with bcrypt, and signs a JWT. For protected pages the gateway guesses nothing: it delegates validation to the Auth service before serving the page. Each business service then re-checks the token on its own — none of them trusts its caller.",
+          fr: "Le service Auth vérifie le mot de passe, haché avec bcrypt, et signe un JWT. Pour les pages protégées, la passerelle ne devine rien : elle sous-traite la validation au service Auth avant de servir la page. Chaque service métier revérifie ensuite le jeton de son côté, aucun ne fait confiance à son appelant.",
+          en: "The Auth service checks the password, hashed with bcrypt, and signs a JWT. For protected pages the gateway guesses nothing: it delegates validation to the Auth service before serving the page. Each business service then re-checks the token on its own, none of them trusts its caller.",
         },
       },
       {
         id: "domain",
         title: { fr: "Le service concerné répond", en: "The relevant service answers" },
         body: {
-          fr: "Six domaines, six services, six bases : Auth et User sur PostgreSQL, Post, Message, Media et Notification sur MongoDB. Un domaine qui tombe n'emporte pas les autres — un service Média indisponible empêche d'ajouter une image, pas de lire le flux.",
-          en: "Six domains, six services, six databases: Auth and User on PostgreSQL, Post, Message, Media and Notification on MongoDB. A domain going down does not take the others with it — an unavailable Media service stops image uploads, not feed reading.",
+          fr: "Six domaines, six services, six bases : Auth et User sur PostgreSQL, Post, Message, Media et Notification sur MongoDB. Un domaine qui tombe n'emporte pas les autres, un service Média indisponible empêche d'ajouter une image, pas de lire le flux.",
+          en: "Six domains, six services, six databases: Auth and User on PostgreSQL, Post, Message, Media and Notification on MongoDB. A domain going down does not take the others with it, an unavailable Media service stops image uploads, not feed reading.",
         },
       },
       {
@@ -453,8 +453,8 @@ export const projects: Project[] = [
         id: "realtime",
         title: { fr: "L'écran se met à jour", en: "The screen updates" },
         body: {
-          fr: "Notification et Message tiennent chacun une connexion WebSocket ouverte vers le navigateur. La notification apparaît sans rechargement, le message privé arrive pendant qu'on écrit — sans que l'interface ait à interroger le serveur en boucle.",
-          en: "Notification and Message each hold an open WebSocket to the browser. The notification shows up with no reload, the direct message arrives while you type — without the interface polling the server in a loop.",
+          fr: "Notification et Message tiennent chacun une connexion WebSocket ouverte vers le navigateur. La notification apparaît sans rechargement, le message privé arrive pendant qu'on écrit, sans que l'interface ait à interroger le serveur en boucle.",
+          en: "Notification and Message each hold an open WebSocket to the browser. The notification shows up with no reload, the direct message arrives while you type, without the interface polling the server in a loop.",
         },
       },
     ],
@@ -463,16 +463,16 @@ export const projects: Project[] = [
         id: "product",
         title: { fr: "Ce que fait l'application", en: "What the application does" },
         body: {
-          fr: "Breezy fait ce qu'on attend d'un réseau social court : publier des posts et y répondre, aimer, suivre des comptes, chercher par contenu ou par tag, joindre images et vidéos, s'écrire en privé, recevoir des notifications. Les droits sont portés par quatre rôles — visiteur, utilisateur, modérateur, administrateur — et une vingtaine de permissions nommées, ce qui permet d'activer ou de couper une fonctionnalité sans toucher au code.",
-          en: "Breezy does what a short-form social network is expected to do: publish posts and reply to them, like, follow accounts, search by content or tag, attach images and video, message privately, receive notifications. Rights are carried by four roles — visitor, user, moderator, administrator — and around twenty named permissions, which makes it possible to switch a feature on or off without touching the code.",
+          fr: "Breezy fait ce qu'on attend d'un réseau social court : publier des posts et y répondre, aimer, suivre des comptes, chercher par contenu ou par tag, joindre images et vidéos, s'écrire en privé, recevoir des notifications. Les droits sont portés par quatre rôles, visiteur, utilisateur, modérateur, administrateur, et une vingtaine de permissions nommées, ce qui permet d'activer ou de couper une fonctionnalité sans toucher au code.",
+          en: "Breezy does what a short-form social network is expected to do: publish posts and reply to them, like, follow accounts, search by content or tag, attach images and video, message privately, receive notifications. Rights are carried by four roles, visitor, user, moderator, administrator, and around twenty named permissions, which makes it possible to switch a feature on or off without touching the code.",
         },
       },
       {
         id: "context",
         title: { fr: "La contrainte du module", en: "The module's constraint" },
         body: {
-          fr: "Le sujet imposait une architecture réellement distribuée, pas un monolithe déguisé en services. La difficulté n'est pas d'écrire six serveurs Express : c'est de choisir où passent les frontières, puis d'assumer ce que ce découpage coûte — une requête qui traverse trois processus, un état qui n'est plus partagé, des services qui démarrent dans le désordre.",
-          en: "The brief called for a genuinely distributed architecture, not a monolith dressed up as services. The hard part is not writing six Express servers: it is choosing where the boundaries fall, then living with what that split costs — a request crossing three processes, state that is no longer shared, services starting in any order.",
+          fr: "Le sujet imposait une architecture réellement distribuée, pas un monolithe déguisé en services. La difficulté n'est pas d'écrire six serveurs Express : c'est de choisir où passent les frontières, puis d'assumer ce que ce découpage coûte, une requête qui traverse trois processus, un état qui n'est plus partagé, des services qui démarrent dans le désordre.",
+          en: "The brief called for a genuinely distributed architecture, not a monolith dressed up as services. The hard part is not writing six Express servers: it is choosing where the boundaries fall, then living with what that split costs, a request crossing three processes, state that is no longer shared, services starting in any order.",
         },
       },
       {
@@ -487,13 +487,13 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "PostgreSQL pour Auth et User : des comptes, des rôles, des permissions et des relations de suivi — des tables, des clés étrangères et des contraintes d'unicité, exactement ce qu'un moteur relationnel garantit mieux que du code applicatif",
-            "MongoDB pour Post, Message, Media et Notification : des documents qui varient d'un cas à l'autre — un post avec ou sans média, avec ou sans réponses — et qu'on lit presque toujours en entier",
+            "PostgreSQL pour Auth et User : des comptes, des rôles, des permissions et des relations de suivi, des tables, des clés étrangères et des contraintes d'unicité, exactement ce qu'un moteur relationnel garantit mieux que du code applicatif",
+            "MongoDB pour Post, Message, Media et Notification : des documents qui varient d'un cas à l'autre, un post avec ou sans média, avec ou sans réponses, et qu'on lit presque toujours en entier",
             "Chaque service possède sa base et personne d'autre n'y touche : c'est cette règle, plus que le découpage du code, qui rend les services réellement indépendants",
           ],
           en: [
-            "PostgreSQL for Auth and User: accounts, roles, permissions and follow relations — tables, foreign keys and uniqueness constraints, exactly what a relational engine guarantees better than application code",
-            "MongoDB for Post, Message, Media and Notification: documents that vary case by case — a post with or without media, with or without replies — and that are almost always read whole",
+            "PostgreSQL for Auth and User: accounts, roles, permissions and follow relations, tables, foreign keys and uniqueness constraints, exactly what a relational engine guarantees better than application code",
+            "MongoDB for Post, Message, Media and Notification: documents that vary case by case, a post with or without media, with or without replies, and that are almost always read whole",
             "Each service owns its database and nobody else touches it: that rule, more than the code split, is what makes the services genuinely independent",
           ],
         },
@@ -507,13 +507,13 @@ export const projects: Project[] = [
         bullets: {
           fr: [
             "Elle résout les noms des services à chaque requête plutôt qu'au démarrage : sans ça, un service encore en train de démarrer reste introuvable jusqu'au redémarrage de la passerelle",
-            "Elle applique un débit maximal différent selon la route — une limite globale, et une limite bien plus basse sur connexion et inscription",
+            "Elle applique un débit maximal différent selon la route, une limite globale, et une limite bien plus basse sur connexion et inscription",
             "Elle centralise la politique CORS : une origine non autorisée ne reçoit aucun en-tête et se fait bloquer par le navigateur",
             "Elle délègue la validation des jetons au service Auth pour les pages protégées, au lieu de reproduire une logique de sécurité dans la configuration",
           ],
           en: [
             "It resolves service names on every request rather than at startup: without that, a service still booting stays unreachable until the gateway restarts",
-            "It applies a different rate cap per route — a global limit, and a far lower one on login and registration",
+            "It applies a different rate cap per route, a global limit, and a far lower one on login and registration",
             "It centralises the CORS policy: an unauthorised origin gets no headers at all and is blocked by the browser",
             "It delegates token validation to the Auth service for protected pages, instead of duplicating security logic in configuration",
           ],
@@ -525,13 +525,13 @@ export const projects: Project[] = [
         bullets: {
           fr: [
             "Découper un domaine en services : où placer les frontières, et le coût de se tromper",
-            "L'asynchrone n'est pas un détail d'implémentation — passer par un bus change qui dépend de qui",
+            "L'asynchrone n'est pas un détail d'implémentation, passer par un bus change qui dépend de qui",
             "Un environnement complet reproductible en une commande, base de données et bus compris",
             "Travail à quatre sur un dépôt commun, avec revue de code et branches de fonctionnalité",
           ],
           en: [
             "Splitting a domain into services: where to draw boundaries, and the cost of getting it wrong",
-            "Asynchrony is not an implementation detail — going through a bus changes who depends on whom",
+            "Asynchrony is not an implementation detail, going through a bus changes who depends on whom",
             "A complete environment reproducible with one command, databases and message bus included",
             "Working as a team of four on a shared repository, with code review and feature branches",
           ],
@@ -558,9 +558,7 @@ export const projects: Project[] = [
     domain: "software",
     stack: ["C#", ".NET 10", "WPF", "MVVM", "Tâches parallèles", "Docker", "JSON / XML"],
     repo: "https://github.com/lmrt0572/EasySave",
-    // Illustration générée, pas une capture : les libellés sont des barres
-    // grises et non du texte, pour qu'on ne puisse pas la prendre pour une
-    // vraie fenêtre de l'application.
+    // Illustration générée (barres grises, pas de texte), pas une capture réelle.
     cover: {
       src: "/images/easysave.jfif",
       width: 1376,
@@ -631,16 +629,16 @@ export const projects: Project[] = [
         id: "configure",
         title: { fr: "Définir un travail", en: "Define a job" },
         body: {
-          fr: "Un travail de sauvegarde tient en trois informations : un dossier source, un dossier cible, et un type — complet, ou différentiel. La liste des travaux est enregistrée dans un fichier de configuration, avec les extensions à chiffrer, celles déclarées prioritaires, le seuil de taille au-delà duquel un fichier est considéré comme volumineux, et le nom du logiciel métier à surveiller.",
-          en: "A backup job is three pieces of information: a source folder, a target folder, and a type — full or differential. The job list lives in a configuration file, along with the extensions to encrypt, those declared as priority, the size threshold above which a file counts as large, and the name of the business software to watch for.",
+          fr: "Un travail de sauvegarde tient en trois informations : un dossier source, un dossier cible, et un type, complet, ou différentiel. La liste des travaux est enregistrée dans un fichier de configuration, avec les extensions à chiffrer, celles déclarées prioritaires, le seuil de taille au-delà duquel un fichier est considéré comme volumineux, et le nom du logiciel métier à surveiller.",
+          en: "A backup job is three pieces of information: a source folder, a target folder, and a type, full or differential. The job list lives in a configuration file, along with the extensions to encrypt, those declared as priority, the size threshold above which a file counts as large, and the name of the business software to watch for.",
         },
       },
       {
         id: "scan",
         title: { fr: "Parcourir et comparer", en: "Scan and compare" },
         body: {
-          fr: "L'arborescence source est parcourue en entier. En sauvegarde complète, tout est retenu ; en différentielle, chaque fichier est comparé à son équivalent dans la cible et n'est retenu que s'il a changé. Les deux comportements sont deux stratégies interchangeables derrière la même interface — c'est ce qui permet d'ajouter un mode sans toucher au moteur.",
-          en: "The whole source tree is walked. In a full backup everything is kept; in a differential one, each file is compared with its counterpart in the target and kept only if it changed. The two behaviours are interchangeable strategies behind one interface — which is what makes adding a mode possible without touching the engine.",
+          fr: "L'arborescence source est parcourue en entier. En sauvegarde complète, tout est retenu ; en différentielle, chaque fichier est comparé à son équivalent dans la cible et n'est retenu que s'il a changé. Les deux comportements sont deux stratégies interchangeables derrière la même interface, c'est ce qui permet d'ajouter un mode sans toucher au moteur.",
+          en: "The whole source tree is walked. In a full backup everything is kept; in a differential one, each file is compared with its counterpart in the target and kept only if it changed. The two behaviours are interchangeable strategies behind one interface, which is what makes adding a mode possible without touching the engine.",
         },
       },
       {
@@ -655,8 +653,8 @@ export const projects: Project[] = [
         id: "encrypt",
         title: { fr: "Chiffrer", en: "Encrypt" },
         body: {
-          fr: "Les fichiers dont l'extension figure dans la configuration sont passés à CryptoSoft, un exécutable séparé qui applique un chiffrement par XOR. Il ne peut s'exécuter qu'en un seul exemplaire à la fois sur la machine — contrainte du cahier des charges, obtenue par un verrou nommé au niveau du système et non du processus.",
-          en: "Files whose extension appears in the configuration are handed to CryptoSoft, a separate executable applying XOR encryption. Only one instance may run at a time on the machine — a requirement of the brief, enforced by a named lock at system level rather than process level.",
+          fr: "Les fichiers dont l'extension figure dans la configuration sont passés à CryptoSoft, un exécutable séparé qui applique un chiffrement par XOR. Il ne peut s'exécuter qu'en un seul exemplaire à la fois sur la machine, contrainte du cahier des charges, obtenue par un verrou nommé au niveau du système et non du processus.",
+          en: "Files whose extension appears in the configuration are handed to CryptoSoft, a separate executable applying XOR encryption. Only one instance may run at a time on the machine, a requirement of the brief, enforced by a named lock at system level rather than process level.",
         },
       },
       {
@@ -673,16 +671,16 @@ export const projects: Project[] = [
         id: "product",
         title: { fr: "Ce que fait le logiciel", en: "What the software does" },
         body: {
-          fr: "EasySave sauvegarde des dossiers, sur demande ou avant une opération risquée. L'utilisateur déclare des travaux, les lance depuis un tableau de bord, et suit leur avancement fichier par fichier. Certaines extensions sont chiffrées au passage, tout est journalisé, et le logiciel s'interrompt de lui-même si l'application métier de l'entreprise démarre — parce qu'une sauvegarde n'a pas à ralentir le travail de quelqu'un.",
-          en: "EasySave backs up folders, on demand or before a risky operation. The user declares jobs, launches them from a dashboard, and follows their progress file by file. Some extensions get encrypted along the way, everything is logged, and the software pauses itself if the company's business application starts — because a backup has no business slowing someone down.",
+          fr: "EasySave sauvegarde des dossiers, sur demande ou avant une opération risquée. L'utilisateur déclare des travaux, les lance depuis un tableau de bord, et suit leur avancement fichier par fichier. Certaines extensions sont chiffrées au passage, tout est journalisé, et le logiciel s'interrompt de lui-même si l'application métier de l'entreprise démarre, parce qu'une sauvegarde n'a pas à ralentir le travail de quelqu'un.",
+          en: "EasySave backs up folders, on demand or before a risky operation. The user declares jobs, launches them from a dashboard, and follows their progress file by file. Some extensions get encrypted along the way, everything is logged, and the software pauses itself if the company's business application starts, because a backup has no business slowing someone down.",
         },
       },
       {
         id: "context",
         title: { fr: "La contrainte du module", en: "The module's constraint" },
         body: {
-          fr: "Le sujet imposait une contrainte plus intéressante que le produit : livrer trois versions successives pour un éditeur fictif, ProSoft, en faisant évoluer l'architecture à chaque itération sans réécrire depuis zéro. Chaque version arrivait avec son propre cahier des charges, découvert seulement une fois la précédente livrée — donc impossible d'anticiper en concevant tout d'avance.",
-          en: "The brief imposed a constraint more interesting than the product: deliver three successive versions for a fictional client, ProSoft, evolving the architecture at each iteration without rewriting from scratch. Each version came with its own requirements, revealed only once the previous one had shipped — so designing everything upfront was not an option.",
+          fr: "Le sujet imposait une contrainte plus intéressante que le produit : livrer trois versions successives pour un éditeur fictif, ProSoft, en faisant évoluer l'architecture à chaque itération sans réécrire depuis zéro. Chaque version arrivait avec son propre cahier des charges, découvert seulement une fois la précédente livrée, donc impossible d'anticiper en concevant tout d'avance.",
+          en: "The brief imposed a constraint more interesting than the product: deliver three successive versions for a fictional client, ProSoft, evolving the architecture at each iteration without rewriting from scratch. Each version came with its own requirements, revealed only once the previous one had shipped, so designing everything upfront was not an option.",
         },
       },
       {
@@ -694,14 +692,14 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "v1, console — le moteur : parcours des dossiers, sauvegarde complète ou différentielle, chiffrement par extension, journal quotidien, fichier d'état, interface en français et en anglais. Cinq travaux maximum, exécutés à la suite.",
-            "v2, interface graphique — le moteur est extrait dans une bibliothèque partagée par la console et la nouvelle fenêtre WPF, construite en MVVM. La vue ne connaît plus la logique, la journalisation devient un composant à part avec JSON et XML au choix, et le nombre de travaux n'est plus limité.",
-            "v3, tableau de bord — tous les travaux s'exécutent en même temps, chacun pilotable individuellement ou tous ensemble, avec les règles qui deviennent nécessaires dès qu'on ne s'exécute plus à la file. Les journaux peuvent partir vers un service conteneurisé.",
+            "v1, console, le moteur : parcours des dossiers, sauvegarde complète ou différentielle, chiffrement par extension, journal quotidien, fichier d'état, interface en français et en anglais. Cinq travaux maximum, exécutés à la suite.",
+            "v2, interface graphique, le moteur est extrait dans une bibliothèque partagée par la console et la nouvelle fenêtre WPF, construite en MVVM. La vue ne connaît plus la logique, la journalisation devient un composant à part avec JSON et XML au choix, et le nombre de travaux n'est plus limité.",
+            "v3, tableau de bord, tous les travaux s'exécutent en même temps, chacun pilotable individuellement ou tous ensemble, avec les règles qui deviennent nécessaires dès qu'on ne s'exécute plus à la file. Les journaux peuvent partir vers un service conteneurisé.",
           ],
           en: [
-            "v1, console — the engine: folder walking, full or differential backup, per-extension encryption, daily log, state file, French and English interface. Five jobs maximum, run one after another.",
-            "v2, graphical interface — the engine is extracted into a library shared by the console and the new WPF window, built in MVVM. The view no longer knows the logic, logging becomes a separate component with JSON or XML, and the job limit disappears.",
-            "v3, dashboard — every job runs at once, each controllable individually or all together, with the rules that become necessary as soon as things stop running in single file. Logs can be sent to a containerised service.",
+            "v1, console, the engine: folder walking, full or differential backup, per-extension encryption, daily log, state file, French and English interface. Five jobs maximum, run one after another.",
+            "v2, graphical interface, the engine is extracted into a library shared by the console and the new WPF window, built in MVVM. The view no longer knows the logic, logging becomes a separate component with JSON or XML, and the job limit disappears.",
+            "v3, dashboard, every job runs at once, each controllable individually or all together, with the rules that become necessary as soon as things stop running in single file. Logs can be sent to a containerised service.",
           ],
         },
       },
@@ -714,20 +712,20 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "Core — modèles, services, stratégies de sauvegarde et ViewModels : tout ce qui ne dépend d'aucune interface",
-            "Console et WPF — deux interfaces sur le même moteur, la seconde ajoutée sans modifier la première",
-            "EasyLog — journalisation isolée, avec une stratégie par format d'écriture",
-            "CryptoSoft — exécutable de chiffrement séparé, appelé comme un outil externe",
-            "LogServer — petite API conteneurisée qui reçoit les journaux de plusieurs postes",
-            "Tests — unitaires et d'intégration sur le moteur",
+            "Core, modèles, services, stratégies de sauvegarde et ViewModels : tout ce qui ne dépend d'aucune interface",
+            "Console et WPF, deux interfaces sur le même moteur, la seconde ajoutée sans modifier la première",
+            "EasyLog, journalisation isolée, avec une stratégie par format d'écriture",
+            "CryptoSoft, exécutable de chiffrement séparé, appelé comme un outil externe",
+            "LogServer, petite API conteneurisée qui reçoit les journaux de plusieurs postes",
+            "Tests, unitaires et d'intégration sur le moteur",
           ],
           en: [
-            "Core — models, services, backup strategies and ViewModels: everything that depends on no interface",
-            "Console and WPF — two front ends on the same engine, the second added without touching the first",
-            "EasyLog — logging kept separate, with one strategy per output format",
-            "CryptoSoft — standalone encryption executable, called as an external tool",
-            "LogServer — a small containerised API collecting logs from several machines",
-            "Tests — unit and integration tests on the engine",
+            "Core, models, services, backup strategies and ViewModels: everything that depends on no interface",
+            "Console and WPF, two front ends on the same engine, the second added without touching the first",
+            "EasyLog, logging kept separate, with one strategy per output format",
+            "CryptoSoft, standalone encryption executable, called as an external tool",
+            "LogServer, a small containerised API collecting logs from several machines",
+            "Tests, unit and integration tests on the engine",
           ],
         },
       },
@@ -743,14 +741,14 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "Chaque travail tourne dans sa propre tâche, avec son jeton d'annulation pour l'arrêt et son signal d'attente pour la pause — qui ne prend effet qu'à la fin du fichier en cours, sinon on laisse une copie à moitié écrite",
+            "Chaque travail tourne dans sa propre tâche, avec son jeton d'annulation pour l'arrêt et son signal d'attente pour la pause, qui ne prend effet qu'à la fin du fichier en cours, sinon on laisse une copie à moitié écrite",
             "Les fichiers prioritaires sont arbitrés par un coordinateur partagé entre tous les travaux : aucun fichier ordinaire ne démarre tant qu'une extension prioritaire reste en attente, quel que soit le travail qui la détient",
             "La bande passante est protégée par un sémaphore global : au-delà d'un seuil paramétrable, un seul fichier volumineux circule à la fois",
             "L'outil de chiffrement est verrouillé par un mutex système nommé, donc unique à l'échelle de la machine et pas seulement du processus",
             "Une pause automatique se déclenche si le logiciel métier du client est détecté, avec reprise à sa fermeture",
           ],
           en: [
-            "Each job runs in its own task, with a cancellation token for stop and a wait handle for pause — which only takes effect once the current file is done, otherwise you leave a half-written copy behind",
+            "Each job runs in its own task, with a cancellation token for stop and a wait handle for pause, which only takes effect once the current file is done, otherwise you leave a half-written copy behind",
             "Priority files are arbitrated by a coordinator shared across every job: no ordinary file starts while a priority extension is still queued, whichever job holds it",
             "Bandwidth is protected by a global semaphore: past a configurable threshold, only one large file moves at a time",
             "The encryption tool is guarded by a named system mutex, making it unique machine-wide rather than merely process-wide",
@@ -862,8 +860,8 @@ export const projects: Project[] = [
         id: "model",
         title: { fr: "Modéliser le terrain", en: "Model the ground truth" },
         body: {
-          fr: "Le réseau devient un graphe complet dont chaque arête porte un coût réel : péage plus prix du carburant au kilomètre. Deux contraintes viennent du métier — certaines routes sont interdites, et certaines villes doivent être livrées avant d'autres.",
-          en: "The network becomes a complete graph where every edge carries a real cost: toll plus fuel price per kilometre. Two constraints come from the field — some roads are closed, and some cities must be delivered before others.",
+          fr: "Le réseau devient un graphe complet dont chaque arête porte un coût réel : péage plus prix du carburant au kilomètre. Deux contraintes viennent du métier, certaines routes sont interdites, et certaines villes doivent être livrées avant d'autres.",
+          en: "The network becomes a complete graph where every edge carries a real cost: toll plus fuel price per kilometre. Two constraints come from the field, some roads are closed, and some cities must be delivered before others.",
         },
       },
       {
@@ -889,16 +887,16 @@ export const projects: Project[] = [
         id: "calibrate",
         title: { fr: "Calibrer avant de comparer", en: "Tune before comparing" },
         body: {
-          fr: "Chaque algorithme a d'abord son propre plan d'expérience pour fixer ses paramètres — taux d'évaporation des phéromones, schéma de refroidissement, longueur de la liste tabou. Comparer des méthodes mal réglées ne dit rien sur les méthodes, seulement sur les réglages.",
-          en: "Each algorithm first gets its own experimental plan to fix its parameters — pheromone evaporation rate, cooling schedule, tabu list length. Comparing badly tuned methods says nothing about the methods, only about the tuning.",
+          fr: "Chaque algorithme a d'abord son propre plan d'expérience pour fixer ses paramètres, taux d'évaporation des phéromones, schéma de refroidissement, longueur de la liste tabou. Comparer des méthodes mal réglées ne dit rien sur les méthodes, seulement sur les réglages.",
+          en: "Each algorithm first gets its own experimental plan to fix its parameters, pheromone evaporation rate, cooling schedule, tabu list length. Comparing badly tuned methods says nothing about the methods, only about the tuning.",
         },
       },
       {
         id: "measure",
         title: { fr: "Mesurer sur les mêmes graphes", en: "Measure on the same graphs" },
         body: {
-          fr: "Un générateur unique à graine fixée produit toutes les instances. Les huit algorithmes affrontent exactement les mêmes graphes, de 5 à 3 000 sommets, à raison de cinq instances par taille — ce qui élimine le biais d'une méthode chanceuse sur des cas faciles.",
-          en: "A single seeded generator produces every instance. All eight algorithms face exactly the same graphs, from 5 to 3,000 nodes, with five instances per size — which removes the bias of a method that got lucky on easy cases.",
+          fr: "Un générateur unique à graine fixée produit toutes les instances. Les huit algorithmes affrontent exactement les mêmes graphes, de 5 à 3 000 sommets, à raison de cinq instances par taille, ce qui élimine le biais d'une méthode chanceuse sur des cas faciles.",
+          en: "A single seeded generator produces every instance. All eight algorithms face exactly the same graphs, from 5 to 3,000 nodes, with five instances per size, which removes the bias of a method that got lucky on easy cases.",
         },
       },
     ],
@@ -907,8 +905,8 @@ export const projects: Project[] = [
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Commande fictive de l'ADEME à CesiCDP : optimiser des tournées de livraison pour réduire la consommation de carburant et les émissions associées. L'instance servant de fil rouge est volontairement concrète — une boucherie qui doit livrer ses commandes de Noël depuis un dépôt à Paris vers Rennes, Rouen, Bordeaux, Toulouse et Lyon.",
-          en: "A simulated brief from ADEME to CesiCDP: optimise delivery rounds to cut fuel consumption and the emissions that go with it. The running example is deliberately concrete — a butcher's shop delivering Christmas orders from a Paris depot to Rennes, Rouen, Bordeaux, Toulouse and Lyon.",
+          fr: "Commande fictive de l'ADEME à CesiCDP : optimiser des tournées de livraison pour réduire la consommation de carburant et les émissions associées. L'instance servant de fil rouge est volontairement concrète, une boucherie qui doit livrer ses commandes de Noël depuis un dépôt à Paris vers Rennes, Rouen, Bordeaux, Toulouse et Lyon.",
+          en: "A simulated brief from ADEME to CesiCDP: optimise delivery rounds to cut fuel consumption and the emissions that go with it. The running example is deliberately concrete, a butcher's shop delivering Christmas orders from a Paris depot to Rennes, Rouen, Bordeaux, Toulouse and Lyon.",
         },
       },
       {
@@ -943,8 +941,8 @@ export const projects: Project[] = [
           en: "Establish the hardness before choosing the approach",
         },
         body: {
-          fr: "L'appartenance à NP se vérifie sur un certificat — une tournée ordonnée — en temps linéaire : chaque sommet apparaît une fois, aucune arête empruntée n'est interdite, le coût tient sous le seuil, les précédences sont respectées. La difficulté se démontre ensuite par réduction depuis le TSP classique, en posant simplement aucune précédence et aucune route bloquée : le TSP est un cas particulier du nôtre.",
-          en: "Membership in NP is checked on a certificate — an ordered tour — in linear time: each node appears once, no edge used is forbidden, the cost stays under the threshold, precedences hold. Hardness then follows by reduction from the classic TSP, simply by setting no precedence and no blocked road: the TSP is a special case of ours.",
+          fr: "L'appartenance à NP se vérifie sur un certificat, une tournée ordonnée, en temps linéaire : chaque sommet apparaît une fois, aucune arête empruntée n'est interdite, le coût tient sous le seuil, les précédences sont respectées. La difficulté se démontre ensuite par réduction depuis le TSP classique, en posant simplement aucune précédence et aucune route bloquée : le TSP est un cas particulier du nôtre.",
+          en: "Membership in NP is checked on a certificate, an ordered tour, in linear time: each node appears once, no edge used is forbidden, the cost stays under the threshold, precedences hold. Hardness then follows by reduction from the classic TSP, simply by setting no precedence and no blocked road: the TSP is a special case of ours.",
         },
         bullets: {
           fr: [
@@ -970,16 +968,16 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "Constructif — Plus Proche Voisin, en variante multi-start",
-            "Recherche locale — Hill Climbing multi-start",
-            "Solution unique — Recuit simulé, recuit simulé multi-start, recherche tabou, recherche tabou 2-opt",
-            "Population — algorithme génétique, colonie de fourmis",
+            "Constructif, Plus Proche Voisin, en variante multi-start",
+            "Recherche locale, Hill Climbing multi-start",
+            "Solution unique, Recuit simulé, recuit simulé multi-start, recherche tabou, recherche tabou 2-opt",
+            "Population, algorithme génétique, colonie de fourmis",
           ],
           en: [
-            "Construction — Nearest Neighbour, in a multi-start variant",
-            "Local search — multi-start Hill Climbing",
-            "Single solution — simulated annealing, multi-start annealing, tabu search, tabu search with 2-opt",
-            "Population — genetic algorithm, ant colony optimisation",
+            "Construction, Nearest Neighbour, in a multi-start variant",
+            "Local search, multi-start Hill Climbing",
+            "Single solution, simulated annealing, multi-start annealing, tabu search, tabu search with 2-opt",
+            "Population, genetic algorithm, ant colony optimisation",
           ],
         },
       },
@@ -1014,21 +1012,21 @@ export const projects: Project[] = [
           en: "What the experiment does not say",
         },
         body: {
-          fr: "C'est la partie du livrable dont je suis le plus satisfait. Les écarts mesurés sont exprimés par rapport à une borne inférieure volontairement simple — la demi-somme des minima sortants — qui sous-estime largement le coût optimal. Les pourcentages d'écart paraissent donc énormes et ne reflètent pas la qualité réelle des solutions : ils servent à classer les algorithmes entre eux, pas à mesurer une distance à l'optimum.",
-          en: "This is the part of the report I am happiest with. The measured gaps are expressed against a deliberately simple lower bound — half the sum of outgoing minima — which badly underestimates the optimal cost. The gap percentages therefore look enormous and do not reflect the true quality of the solutions: they rank the algorithms against each other, they do not measure a distance to the optimum.",
+          fr: "C'est la partie du livrable dont je suis le plus satisfait. Les écarts mesurés sont exprimés par rapport à une borne inférieure volontairement simple, la demi-somme des minima sortants, qui sous-estime largement le coût optimal. Les pourcentages d'écart paraissent donc énormes et ne reflètent pas la qualité réelle des solutions : ils servent à classer les algorithmes entre eux, pas à mesurer une distance à l'optimum.",
+          en: "This is the part of the report I am happiest with. The measured gaps are expressed against a deliberately simple lower bound, half the sum of outgoing minima, which badly underestimates the optimal cost. The gap percentages therefore look enormous and do not reflect the true quality of the solutions: they rank the algorithms against each other, they do not measure a distance to the optimum.",
         },
         bullets: {
           fr: [
             "Une borne plus serrée (Held-Karp, relaxation linéaire) donnerait une image bien plus juste",
             "Cinq graines par taille : trop peu pour conclure sous N = 30, où les écarts restent dans le bruit",
             "Paramètres calibrés sur N ≤ 30 : leur transfert aux grandes instances est approximatif, et un pic d'écart vers N ≈ 50 le trahit",
-            "Ce pic n'est pas une propriété des algorithmes mais un artefact de notre calibration — le distinguer était l'enjeu de l'analyse",
+            "Ce pic n'est pas une propriété des algorithmes mais un artefact de notre calibration, le distinguer était l'enjeu de l'analyse",
           ],
           en: [
             "A tighter bound (Held-Karp, linear relaxation) would give a far more accurate picture",
             "Five seeds per size: too few to conclude below N = 30, where differences stay within noise",
             "Parameters tuned on N ≤ 30: transferring them to large instances is approximate, and a gap spike around N ≈ 50 gives it away",
-            "That spike is not a property of the algorithms but an artefact of our own tuning — telling the two apart was the point of the analysis",
+            "That spike is not a property of the algorithms but an artefact of our own tuning, telling the two apart was the point of the analysis",
           ],
         },
       },
@@ -1039,14 +1037,14 @@ export const projects: Project[] = [
           fr: [
             "Prouver la difficulté d'un problème avant de choisir comment l'attaquer, plutôt que l'inverse",
             "Calibrer chaque méthode avant de la comparer : sinon on compare des réglages, pas des méthodes",
-            "Une mesure ne vaut que ce que vaut sa référence — ici, une borne lâche rendait les écarts spectaculaires et peu informatifs",
+            "Une mesure ne vaut que ce que vaut sa référence, ici, une borne lâche rendait les écarts spectaculaires et peu informatifs",
             "Savoir distinguer un résultat d'un artefact de protocole",
             "Le même réflexe me sert chez Thales : arbitrer précision contre latence sur des mesures dont je connais les limites",
           ],
           en: [
             "Proving a problem's hardness before choosing how to attack it, rather than the other way round",
             "Tuning each method before comparing: otherwise you compare settings, not methods",
-            "A measurement is only as good as its reference — here a loose bound made the gaps spectacular and uninformative",
+            "A measurement is only as good as its reference, here a loose bound made the gaps spectacular and uninformative",
             "Telling a result apart from an artefact of the protocol",
             "The same reflex serves me at Thales: trading accuracy against latency on measurements whose limits I know",
           ],
@@ -1074,7 +1072,7 @@ export const projects: Project[] = [
     stack: ["PHP", "MVC", "MySQL", "Twig", "JavaScript", "Apache", "Composer"],
     repo: "https://github.com/Lucacist/StageLinkV1",
     cover: {
-      src: "/images/st.png",
+      src: "/images/stagelink.jpg",
       width: 1024,
       height: 1024,
       alt: { fr: "Page d'accueil de StageLink", en: "StageLink home page" },
@@ -1172,8 +1170,8 @@ export const projects: Project[] = [
         id: "route",
         title: { fr: "L'URL est décodée", en: "The URL is decoded" },
         body: {
-          fr: "Toutes les requêtes entrent par un fichier unique. Il reconstruit la route depuis l'URL — la forme lisible `/StageLinkV1/offres` comme la forme historique avec un paramètre — puis vérifie qu'une session existe. Sans session et hors des quelques routes publiques, la requête repart vers la page de connexion avant qu'aucun code métier ne s'exécute.",
-          en: "Every request enters through a single file. It rebuilds the route from the URL — both the readable `/StageLinkV1/offers` form and the legacy query-parameter form — then checks that a session exists. Without one, and outside a few public routes, the request is sent back to the login page before any business code runs.",
+          fr: "Toutes les requêtes entrent par un fichier unique. Il reconstruit la route depuis l'URL, la forme lisible `/StageLinkV1/offres` comme la forme historique avec un paramètre, puis vérifie qu'une session existe. Sans session et hors des quelques routes publiques, la requête repart vers la page de connexion avant qu'aucun code métier ne s'exécute.",
+          en: "Every request enters through a single file. It rebuilds the route from the URL, both the readable `/StageLinkV1/offers` form and the legacy query-parameter form, then checks that a session exists. Without one, and outside a few public routes, the request is sent back to the login page before any business code runs.",
         },
       },
       {
@@ -1188,8 +1186,8 @@ export const projects: Project[] = [
         id: "model",
         title: { fr: "Le modèle interroge la base", en: "The model queries the database" },
         body: {
-          fr: "Les modèles portent l'accès aux données et la logique métier. Toutes les requêtes passent par des requêtes préparées — plus de quatre-vingts dans le projet — ce qui écarte les injections SQL par construction plutôt que par vigilance.",
-          en: "Models carry data access and business logic. Every query goes through prepared statements — more than eighty across the project — which rules out SQL injection by construction rather than by vigilance.",
+          fr: "Les modèles portent l'accès aux données et la logique métier. Toutes les requêtes passent par des requêtes préparées, plus de quatre-vingts dans le projet, ce qui écarte les injections SQL par construction plutôt que par vigilance.",
+          en: "Models carry data access and business logic. Every query goes through prepared statements, more than eighty across the project, which rules out SQL injection by construction rather than by vigilance.",
         },
       },
       {
@@ -1214,8 +1212,8 @@ export const projects: Project[] = [
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Les étudiants du CESI cherchent leurs stages en activant leurs réseaux personnels, sans point d'entrée commun. Le sujet demandait une application web complète construite sans framework : ni Symfony, ni Laravel, seulement PHP, un moteur de gabarits et une base MySQL. La contrainte est l'intérêt du projet — elle oblige à écrire soi-même le routage, la séparation des responsabilités et l'accès aux données.",
-          en: "CESI students look for internships through personal networks, with no shared entry point. The brief asked for a complete web application built without a framework: no Symfony, no Laravel, only PHP, a template engine and a MySQL database. That constraint is the point of the project — it forces you to write the routing, the separation of concerns and the data access yourself.",
+          fr: "Les étudiants du CESI cherchent leurs stages en activant leurs réseaux personnels, sans point d'entrée commun. Le sujet demandait une application web complète construite sans framework : ni Symfony, ni Laravel, seulement PHP, un moteur de gabarits et une base MySQL. La contrainte est l'intérêt du projet, elle oblige à écrire soi-même le routage, la séparation des responsabilités et l'accès aux données.",
+          en: "CESI students look for internships through personal networks, with no shared entry point. The brief asked for a complete web application built without a framework: no Symfony, no Laravel, only PHP, a template engine and a MySQL database. That constraint is the point of the project, it forces you to write the routing, the separation of concerns and the data access yourself.",
         },
       },
       {
@@ -1230,18 +1228,18 @@ export const projects: Project[] = [
         },
         bullets: {
           fr: [
-            "En place — mots de passe hachés par `password_hash`, qui applique bcrypt",
-            "En place — requêtes préparées sur l'ensemble des accès à la base",
-            "En place — échappement automatique des variables par Twig, avec deux exceptions explicites sur la pagination",
-            "Manquant — aucun jeton anti-CSRF sur les formulaires",
-            "Manquant — pas de régénération d'identifiant de session après connexion, donc pas de protection contre la fixation de session",
+            "En place, mots de passe hachés par `password_hash`, qui applique bcrypt",
+            "En place, requêtes préparées sur l'ensemble des accès à la base",
+            "En place, échappement automatique des variables par Twig, avec deux exceptions explicites sur la pagination",
+            "Manquant, aucun jeton anti-CSRF sur les formulaires",
+            "Manquant, pas de régénération d'identifiant de session après connexion, donc pas de protection contre la fixation de session",
           ],
           en: [
-            "In place — passwords hashed with `password_hash`, which applies bcrypt",
-            "In place — prepared statements across every database access",
-            "In place — automatic variable escaping by Twig, with two explicit exceptions on pagination",
-            "Missing — no anti-CSRF token on forms",
-            "Missing — no session ID regeneration after login, so no protection against session fixation",
+            "In place, passwords hashed with `password_hash`, which applies bcrypt",
+            "In place, prepared statements across every database access",
+            "In place, automatic variable escaping by Twig, with two explicit exceptions on pagination",
+            "Missing, no anti-CSRF token on forms",
+            "Missing, no session ID regeneration after login, so no protection against session fixation",
           ],
         },
       },
@@ -1252,13 +1250,13 @@ export const projects: Project[] = [
           fr: [
             "Le motif MVC compris de l'intérieur, sans magie de framework",
             "Conception d'un schéma relationnel et d'un modèle de droits par profil",
-            "Ce qu'un framework apporte vraiment — relire ce code deux ans après le montre mieux que n'importe quel cours",
+            "Ce qu'un framework apporte vraiment, relire ce code deux ans après le montre mieux que n'importe quel cours",
             "Gestion de version et travail d'équipe sur une base de code partagée",
           ],
           en: [
             "The MVC pattern understood from the inside, without framework magic",
             "Designing a relational schema and a per-profile rights model",
-            "What a framework actually buys you — rereading this code two years on shows it better than any lecture",
+            "What a framework actually buys you, rereading this code two years on shows it better than any lecture",
             "Version control and teamwork on a shared codebase",
           ],
         },
@@ -1323,8 +1321,8 @@ export const projects: Project[] = [
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Commande fictive du ministère de l'écologie : concevoir la base de données d'un système national de suivi de la qualité de l'air — agences, personnel, capteurs déployés, relevés et rapports.",
-          en: "A simulated request from the French Ministry of Ecology: design the database for a national air quality monitoring system — agencies, staff, deployed sensors, readings and reports.",
+          fr: "Commande fictive du ministère de l'écologie : concevoir la base de données d'un système national de suivi de la qualité de l'air, agences, personnel, capteurs déployés, relevés et rapports.",
+          en: "A simulated request from the French Ministry of Ecology: design the database for a national air quality monitoring system, agencies, staff, deployed sensors, readings and reports.",
         },
       },
       {
@@ -1339,15 +1337,15 @@ export const projects: Project[] = [
         id: "optimisation",
         title: { fr: "Optimisation des requêtes", en: "Query optimisation" },
         body: {
-          fr: "Les requêtes ont été analysées sous forme d'arbres algébriques — jointures, projections, sélections — pour montrer l'effet de l'ordre des opérations sur le volume de données manipulé. Descendre les sélections au plus près des feuilles réduit le coût avant même de toucher aux index.",
-          en: "Queries were analysed as algebraic trees — joins, projections, selections — to show how operation order affects the volume of data handled. Pushing selections down towards the leaves cuts cost before indexes even come into play.",
+          fr: "Les requêtes ont été analysées sous forme d'arbres algébriques, jointures, projections, sélections, pour montrer l'effet de l'ordre des opérations sur le volume de données manipulé. Descendre les sélections au plus près des feuilles réduit le coût avant même de toucher aux index.",
+          en: "Queries were analysed as algebraic trees, joins, projections, selections, to show how operation order affects the volume of data handled. Pushing selections down towards the leaves cuts cost before indexes even come into play.",
         },
       },
     ],
     documents: [
       {
         href: "/documents/P4_L0.pdf",
-        label: { fr: "Livrable 0 — Organisation", en: "Deliverable 0 — Organisation" },
+        label: { fr: "Livrable 0, Organisation", en: "Deliverable 0, Organisation" },
       },
       {
         href: "/documents/P4_soutenance.pdf",
@@ -1469,19 +1467,19 @@ export const projects: Project[] = [
     documents: [
       {
         href: "/documents/Projet1Livrable1.pdf",
-        label: { fr: "Livrable 1 — Analyse", en: "Deliverable 1 — Analysis" },
+        label: { fr: "Livrable 1, Analyse", en: "Deliverable 1, Analysis" },
       },
       {
         href: "/documents/Projet1Livrable2.pdf",
-        label: { fr: "Livrable 2 — Conception", en: "Deliverable 2 — Design" },
+        label: { fr: "Livrable 2, Conception", en: "Deliverable 2, Design" },
       },
       {
         href: "/documents/Projet1Livrable3.pdf",
-        label: { fr: "Livrable 3 — Réalisation", en: "Deliverable 3 — Build" },
+        label: { fr: "Livrable 3, Réalisation", en: "Deliverable 3, Build" },
       },
       {
         href: "/documents/Projet1Livrable4.pdf",
-        label: { fr: "Livrable 4 — Bilan", en: "Deliverable 4 — Review" },
+        label: { fr: "Livrable 4, Bilan", en: "Deliverable 4, Review" },
       },
     ],
     highlights: {
@@ -1502,7 +1500,7 @@ export const projects: Project[] = [
         title: { fr: "Le contexte", en: "Context" },
         body: {
           fr: "Premier projet de systèmes embarqués : concevoir un coffre-fort dont l'ouverture demande deux facteurs indépendants, une carte reconnue et une combinaison physique, afin qu'aucun des deux ne suffise seul.",
-          en: "First embedded systems project: build a safe whose opening requires two independent factors — a recognised card and a physical combination — so that neither alone is enough.",
+          en: "First embedded systems project: build a safe whose opening requires two independent factors, a recognised card and a physical combination, so that neither alone is enough.",
         },
       },
     ],
@@ -1552,8 +1550,8 @@ export const projects: Project[] = [
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Concevoir une solution de communication robuste dans un environnement où les canaux habituels sont indisponibles — situations d'urgence, milieux confinés. Le projet couvre l'étude de la réponse fréquentielle, le filtrage, la modulation FSK et la validation par modélisation numérique.",
-          en: "Design a robust communication solution for environments where usual channels are unavailable — emergency situations, confined spaces. The project covers frequency response analysis, filtering, FSK modulation and validation through numerical modelling.",
+          fr: "Concevoir une solution de communication robuste dans un environnement où les canaux habituels sont indisponibles, situations d'urgence, milieux confinés. Le projet couvre l'étude de la réponse fréquentielle, le filtrage, la modulation FSK et la validation par modélisation numérique.",
+          en: "Design a robust communication solution for environments where usual channels are unavailable, emergency situations, confined spaces. The project covers frequency response analysis, filtering, FSK modulation and validation through numerical modelling.",
         },
       },
     ],
@@ -1562,13 +1560,8 @@ export const projects: Project[] = [
 
 /**
  * Ordre d'affichage de la grille, du plus représentatif au plus ancien.
- *
- * La page ne sépare plus « projets phares » et « autres projets » : c'est cet
- * ordre seul qui porte la hiérarchie. Il est écrit à la main plutôt que déduit
- * d'une date ou du drapeau `featured`, parce que la pertinence d'un projet ne
- * se déduit d'aucun champ : l'alternance chez Thales passe avant tout, le
- * TSP-PC-ER suit parce qu'il est le plus argumenté et le seul démontrable
- * directement dans la page.
+ * Écrit à la main : la pertinence ne se déduit ni d'une date ni du drapeau
+ * `featured`.
  */
 const displayOrder = [
   "tourelle-ia",

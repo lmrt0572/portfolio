@@ -14,10 +14,7 @@ export function pickList(value: LocalizedList, locale: Locale): string[] {
   return value[locale];
 }
 
-/**
- * Un titre est soit un nom propre (« Breezy »), identique dans les deux
- * langues, soit un intitulé descriptif à traduire.
- */
+/** Nom propre identique dans les deux langues, ou intitulé descriptif traduit. */
 export type Title = string | Localized;
 
 export function pickTitle(value: Title, locale: Locale): string {
@@ -26,7 +23,7 @@ export function pickTitle(value: Title, locale: Locale): string {
 
 export type ProjectStatus = "shipped" | "ongoing";
 
-/** Domaine du projet — sert de « classe détectée » dans l'UI. */
+/** Domaine du projet. */
 export type ProjectDomain =
   | "computer-vision"
   | "web"
@@ -58,23 +55,16 @@ export type ProjectFact = {
 export type ProjectImage = {
   src: string;
   alt: Localized;
-  /**
-   * Dimensions réelles du fichier. Renseignées pour les captures présentées en
-   * galerie : c'est ce qui permet de les afficher à leur rapport d'origine au
-   * lieu de les rogner dans un cadre commun — une capture d'écran large perd
-   * l'essentiel de son contenu dans un carré.
-   */
+  /** Dimensions réelles du fichier, pour afficher les captures à leur rapport
+   *  d'origine. */
   width?: number;
   height?: number;
 };
 
 /**
- * Vidéo de démonstration d'un projet.
- *
- * Rien n'est téléchargé tant que le visiteur n'a pas cliqué : seule l'affiche
- * est chargée. Le fichier lui-même est ensuite servi par tranches, via les
- * requêtes de plage HTTP que tout hébergeur statique gère — à condition que
- * l'index du MP4 soit placé en tête (voir `-movflags +faststart`).
+ * Vidéo de démonstration. Rien n'est téléchargé avant un clic (seule l'affiche
+ * l'est). Servie ensuite par requêtes de plage HTTP ; index du MP4 en tête
+ * requis (`-movflags +faststart`).
  */
 export type ProjectVideo = {
   /** Source principale : H.264/AAC en MP4, index en tête. */
@@ -95,7 +85,7 @@ export type Project = {
   /** Les trois projets phares ouvrent la page d'accueil. */
   featured: boolean;
   status: ProjectStatus;
-  /** Affiché tel quel, ex. « 2025 — en cours ». */
+  /** Affiché tel quel, ex. « 2025, en cours ». */
   period: Localized;
   /** Nom propre (chaîne unique) ou intitulé descriptif traduit. */
   title: Title;
@@ -113,11 +103,8 @@ export type Project = {
   facts?: ProjectFact[];
   /** Chaîne de traitement, présentée en étapes numérotées. */
   pipeline?: PipelineStep[];
-  /**
-   * Démonstration interactive à insérer dans la page. Petit registre plutôt
-   * qu'un composant passé directement : le contenu reste sérialisable et la
-   * page projet garde la main sur le rendu.
-   */
+  /** Démonstration interactive à insérer. Registre sérialisable, rendu géré
+   *  par la page projet. */
   demo?: "tsp";
   /** Vidéo de démonstration, insérée avant les sections rédigées. */
   video?: ProjectVideo;

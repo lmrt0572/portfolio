@@ -1,10 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Design system — reprise de la direction artistique d'origine.
-   Couleurs conservées : #1f242d (fond), #323946 (surface), #3693b8 (accent).
-   Ajusté : accent éclairci pour le texte (contraste AA), Poppins remplacée
-   par Plus Jakarta Sans.
+   Design system : #1f242d (fond), #323946 (surface), #3693b8 (accent).
    ========================================================================== */
 
 @theme {
@@ -20,21 +17,17 @@
   --color-muted: #a3b3c2;
   --color-muted-dim: #7c8b99;
 
-  /* Accent — l'aplat est la teinte d'origine, la variante claire sert au
-     texte et aux icônes (4.5:1 minimum sur le fond). */
+  /* Accent. Variante claire pour texte et icônes (contraste AA). */
   --color-accent: #3693b8;
   --color-accent-text: #5cbde0;
   --color-accent-soft: #1c3c49;
 
-  /* Second accent, repris du `--a-color` de l'ancien site : il distingue les
-     noms d'organisation des libellés courants. */
+  /* Second accent : noms d'organisation. */
   --color-accent-alt: #88aafd;
 
-  /* Encre pour les aplats blancs qui ne changent pas avec le thème — la pastille
-     d'action des vignettes projet, posée sur un calque sombre dans les deux
-     modes. Utiliser `--color-ink` ou `--color-bg` ici serait un piège : l'un
-     s'éclaircit en sombre, l'autre s'éclaircit en clair, et dans les deux cas
-     le texte finit blanc sur blanc. Cette valeur, elle, ne bouge jamais. */
+  /* Encre pour aplats blancs constants entre thèmes (pastille d'action des
+     vignettes). Ne pas remplacer par --color-ink/--color-bg : ils s'inversent
+     selon le thème et donnent du blanc sur blanc. */
   --color-ink-on-white: #141c25;
 
   /* Typographie */
@@ -43,21 +36,13 @@
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Hauteur de l'en-tête collant. Source unique : la barre elle-même s'y cale,
-     et la transition entre pages s'arrête juste en dessous. */
+  /* Hauteur de l'en-tête collant (référence unique). */
   --header-h: 5.5rem;
 }
 
 /* ==========================================================================
-   Mode clair
-   Le sombre reste la valeur par défaut : c'est l'identité du site, et aucune
-   préférence système ne le renverse. Le mode clair ne s'active que sur choix
-   explicite, mémorisé dans le navigateur.
-
-   Ce n'est pas une inversion des couleurs sombres — ça donnerait des gris
-   boueux. C'est une palette construite : fond à bias froid pour rester dans la
-   famille bleu nuit, et surtout un accent **assombri**, parce que le cyan
-   #3693b8 sur blanc ne plafonne qu'à 3,3:1 et échoue au seuil de lisibilité.
+   Mode clair : activé uniquement sur choix explicite, mémorisé. Sombre par
+   défaut. Accent assombri pour tenir le contraste sur fond clair.
    ========================================================================== */
 
 :root[data-theme="light"] {
@@ -71,7 +56,7 @@
   --color-muted: #4a5765;
   --color-muted-dim: #67737f;
 
-  /* Accent assombri : aplat à 4,6:1 avec du blanc, texte à ~6:1 sur le fond. */
+  /* Accent assombri pour le contraste sur fond clair. */
   --color-accent: #2a7d9b;
   --color-accent-text: #1d6480;
   --color-accent-soft: #dcebf2;
@@ -79,7 +64,7 @@
   --color-accent-alt: #3a5fd0;
 }
 
-/* Le halo des boutons vient du fond sombre : sur clair il fait sale. */
+/* Halo de bouton retiré sur fond clair. */
 :root[data-theme="light"] .btn {
   box-shadow: none;
 }
@@ -92,7 +77,7 @@
   box-shadow: none;
 }
 
-/* Ombres portées : plus légères sur fond clair, sinon elles écrasent. */
+/* Ombres portées allégées sur fond clair. */
 :root[data-theme="light"] .card,
 :root[data-theme="light"] .skill,
 :root[data-theme="light"] .pcard {
@@ -110,21 +95,10 @@
     border-color: var(--color-line);
   }
 
-  /*
-    Échelle générale. L'ancien site travaillait en rem sur une base de 10px
-    avec des tailles explicites généreuses (nav à 20px, logo à 30px). On
-    retrouve cette présence en relevant la base : toutes les unités rem de
-    Tailwind suivent, textes comme espacements.
-  */
+  /* Base rem à 16px : toutes les unités rem de Tailwind en découlent. */
   html {
-    font-size: 17.5px;
+    font-size: 16px;
     scroll-behavior: smooth;
-  }
-
-  @media (max-width: 480px) {
-    html {
-      font-size: 16px;
-    }
   }
 
   body {
@@ -163,22 +137,17 @@
 }
 
 /* ==========================================================================
-   Transition à barres entre les pages
-   Six bandes verticales balaient l'écran à chaque changement de route.
+   Transition entre pages : six bandes verticales balaient l'écran.
    ========================================================================== */
 
-/* Le rideau démarre sous l'en-tête : celui-ci est le seul élément commun à
-   toutes les pages, le voir disparaître à chaque navigation donnait
-   l'impression que le site entier se rechargeait. */
+/* Rideau ancré sous l'en-tête. */
 .bars {
   position: fixed;
   inset: var(--header-h) 0 0 0;
   z-index: 90;
   display: flex;
-  /* Indispensable depuis que le rideau ne part plus du haut de la fenêtre :
-     en fin d'animation les barres sont garées à -101 %, donc au-dessus de leur
-     conteneur — sans découpe elles restaient posées sur l'en-tête, opaques et
-     de la couleur du fond, qui disparaissait purement et simplement. */
+  /* Requis : en fin d'animation les barres sont garées à -101 %, au-dessus du
+     conteneur ; sans découpe elles recouvriraient l'en-tête. */
   overflow: hidden;
   pointer-events: none;
 }
@@ -192,12 +161,7 @@
   animation-delay: calc(var(--i) * 95ms);
 }
 
-/*
-  Le rideau monte depuis le bas, marque un temps à couvert, puis continue vers
-  le haut. Les deux moitiés ont leur propre courbe — décélération à la montée,
-  accélération au dégagement — ce qui donne un mouvement bien plus posé qu'une
-  course unique.
-*/
+/* Montée depuis le bas, temps à couvert, puis dégagement vers le haut. */
 @keyframes bar-sweep {
   0% {
     transform: translateY(101%);
@@ -217,7 +181,7 @@
 }
 
 /* ==========================================================================
-   Portrait — cadre circulaire à bordure en dégradé conique rotatif
+   Portrait : cadre circulaire, bordure en dégradé conique rotatif.
    ========================================================================== */
 
 .portrait {
@@ -254,11 +218,7 @@
   }
 }
 
-/*
-  Trois couches concentriques : l'anneau lumineux (5px), un espace de respiration
-  au fond de la page (14px), puis la photo. Sans cet intervalle l'anneau colle
-  au visage et l'effet se lit mal.
-*/
+/* Trois couches : anneau lumineux (5px), espace (14px), puis la photo. */
 .portrait__inner {
   position: relative;
   z-index: 1;
@@ -278,39 +238,24 @@
 }
 
 /* ==========================================================================
-   Machine à écrire — la phrase qui se réécrit sur la page d'accueil
-   Chaque <span> s'affiche à son tour ; un curseur balaie le texte.
+   Machine à écrire : chaque segment s'affiche à son tour sous un curseur.
    ========================================================================== */
 
-/*
-  L'ancienne version basculait les segments avec `display`, qui ne s'anime pas :
-  d'où le à-coup entre deux phrases. Ici les segments sont superposés en
-  absolu, et seule la largeur du masque bouge — la phrase se tape, se tient,
-  s'efface, puis la suivante se tape. Plus rien ne saute.
-
-  Un segment invisible réserve la largeur de la plus longue phrase pour que la
-  ligne ne se recompose jamais.
-*/
+/* Segments superposés en absolu ; seule la largeur du masque s'anime. */
 .typer {
   position: relative;
   display: inline-block;
   vertical-align: bottom;
 }
 
-/* Réserve la largeur de la phrase la plus longue : la ligne ne se recompose
-   jamais quand on passe d'un segment à l'autre. */
+/* Réserve la largeur de la phrase la plus longue. */
 .typer__sizer {
   visibility: hidden;
   white-space: nowrap;
 }
 
-/* Chaque segment est un bloc positionné, dimensionné par son propre texte
-   (le contour ci-dessous). C'est indispensable pour que le masque animé aille
-   de 0 à la largeur *du texte* — sinon le curseur se détache et flotte à
-   droite, à la largeur de la phrase la plus longue.
-
-   L'opacité du segment n'est levée que pendant son créneau, sinon les quatre
-   phrases se superposeraient en permanence. */
+/* Chaque segment est dimensionné par son propre texte, pour que le masque aille
+   de 0 à la largeur du texte. Opacité levée seulement pendant son créneau. */
 .typer__item {
   position: absolute;
   top: 0;
@@ -323,18 +268,14 @@
   animation-fill-mode: both;
 }
 
-/*
-  Couche du dessous : le texte en lettres creuses, dessiné au trait. Le masque
-  plein passe par-dessus et le remplit de gauche à droite, puis se retire.
-  C'est le rendu de l'ancien site.
-*/
+/* Texte en lettres creuses ; le masque plein le remplit de gauche à droite. */
 .typer__ghost {
   white-space: nowrap;
   color: transparent;
   -webkit-text-stroke: 1px var(--color-accent-text);
 }
 
-/* Repli là où le contour de texte n'existe pas : un aplat très atténué. */
+/* Repli sans support du contour de texte : aplat atténué. */
 @supports not (-webkit-text-stroke: 1px currentcolor) {
   .typer__ghost {
     color: color-mix(in srgb, var(--color-accent-text) 32%, transparent);
@@ -384,11 +325,7 @@
   }
 }
 
-/*
-  Le contenu entre pendant que le rideau couvre encore l'écran : quand les
-  barres se retirent, la page est déjà en place. D'où un délai de base court —
-  650ms auparavant, ce qui faisait attendre pour rien.
-*/
+/* Le contenu entre pendant que le rideau couvre encore l'écran. */
 .enter {
   animation: enter-up 0.6s var(--ease-out-soft) both;
   animation-delay: calc(150ms + var(--i, 0) * 70ms);
@@ -400,11 +337,8 @@
 }
 
 /* ==========================================================================
-   Révélation au défilement — entièrement en CSS, sans JavaScript
-   Les pages longues (projets, fiche projet) déroulent beaucoup de blocs : les
-   faire apparaître à l'approche guide la lecture au lieu de tout livrer d'un
-   coup. Sans support de `animation-timeline`, le contenu s'affiche simplement,
-   ce qui est le bon repli.
+   Révélation au défilement (CSS pur). Repli sans support d'animation-timeline :
+   affichage direct.
    ========================================================================== */
 
 @keyframes reveal-rise {
@@ -423,17 +357,15 @@
     .reveal {
       animation: reveal-rise linear both;
       animation-timeline: view();
-      /* La plage se termine à l'intérieur d'`entry` : le dernier bloc d'une
-         page ne peut jamais atteindre une plage `cover` complète. */
+      /* Plage terminée dans entry : le dernier bloc n'atteint jamais une plage
+         cover complète. */
       animation-range: entry 2% entry 46%;
     }
   }
 }
 
 /* ==========================================================================
-   Barre de progression de lecture (fiches projet)
-   Elle dit où l'on en est dans un article long : c'est une information, pas
-   une décoration.
+   Barre de progression de lecture (fiches projet).
    ========================================================================== */
 
 .read-progress {
@@ -460,8 +392,7 @@
   }
 }
 
-/* Bascule d'onglet : fondu enchaîné court, pour que le remplacement de
-   contenu dans un même cadre se lise comme un changement, pas comme un saut. */
+/* Bascule d'onglet : fondu court. */
 @keyframes panel-in {
   from {
     opacity: 0;
@@ -477,7 +408,7 @@
   animation: panel-in 0.28s var(--ease-out-soft) both;
 }
 
-/* Retour tactile : léger enfoncement au clic, sans déplacer les voisins. */
+/* Retour tactile : léger enfoncement au clic. */
 .btn:active,
 .btn-ghost:active,
 .btn-round:active {
@@ -504,14 +435,11 @@
 }
 
 /* ==========================================================================
-   Vocabulaire d'interaction repris de l'ancien site
-   Le halo dans la teinte d'accent, l'inversion au survol et la carte qui se
-   soulève : c'est ce qui donnait sa vie à l'ancienne interface.
+   Boutons, cartes et tuiles : halo d'accent, inversion et soulèvement au survol.
    ========================================================================== */
 
-/* Bouton principal : plein + halo, s'inverse au survol en perdant son halo.
-   Rembourrage réduit sous 640px pour que deux boutons tiennent côte à côte
-   plutôt que d'occuper deux rangées. */
+/* Bouton principal : plein + halo, s'inverse au survol. Rembourrage réduit
+   sous 640px pour tenir deux boutons côte à côte. */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -536,7 +464,7 @@
   box-shadow: none;
 }
 
-/* Bouton secondaire : contour discret, s'allume au survol. */
+/* Bouton secondaire : contour discret. */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
@@ -566,7 +494,7 @@
   }
 }
 
-/* Icône ronde (réseaux sociaux) : accent, contour, halo. */
+/* Icône ronde (réseaux sociaux). */
 .btn-round {
   display: inline-flex;
   align-items: center;
@@ -589,10 +517,7 @@
   box-shadow: 0 0 1.2rem var(--color-accent);
 }
 
-/*
-  Carte de contenu : se soulève au survol et bascule en aplat d'accent, texte
-  sombre. C'était l'interaction la plus marquante de l'ancienne section CV.
-*/
+/* Carte de contenu : se soulève et bascule en aplat d'accent au survol. */
 .card {
   background: var(--color-surface-2);
   border-radius: 0.8rem;
@@ -610,8 +535,8 @@
   box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.55);
 }
 
-/* Au survol, tout le texte de la carte passe en couleur de fond pour rester
-   lisible sur l'aplat d'accent. */
+/* Texte de la carte en couleur de fond au survol, pour rester lisible sur
+   l'accent. */
 .card:hover,
 .card:hover :is(h3, h4, p, span, li, dt, dd) {
   color: var(--color-bg);
@@ -632,7 +557,7 @@
 }
 
 /* ==========================================================================
-   Tuiles de compétences — logo au-dessus, nom en dessous
+   Tuiles de compétences : logo au-dessus, nom en dessous.
    ========================================================================== */
 
 .skill {
@@ -663,8 +588,8 @@
   transition: color 0.35s var(--ease-out-soft);
 }
 
-/* Au survol, le logo reprend sa couleur de marque (ou reste clair si celle-ci
-   serait illisible sur fond sombre — voir `isTooDark` côté composant). */
+/* Au survol, le logo reprend sa couleur de marque (ou reste clair si trop
+   sombre, voir isTooDark côté composant). */
 .skill:hover .skill__mark {
   color: var(--brand, var(--color-accent-text));
 }
@@ -687,11 +612,8 @@
 }
 
 /* ==========================================================================
-   Galerie en carrousel
-   Le défilement reste natif — molette, pavé tactile, glissement, tabulation
-   fonctionnent sans code —, seule la barre est masquée : sur une piste dont
-   les diapositives ont des largeurs différentes, elle donne une fausse idée
-   de la progression. Les boutons et le compteur la remplacent.
+   Galerie en carrousel : défilement natif conservé, barre masquée (largeurs de
+   diapositives inégales). Boutons et compteur indiquent la progression.
    ========================================================================== */
 
 .hide-scrollbar {
@@ -703,13 +625,10 @@
 }
 
 /* ==========================================================================
-   Cartes projet — visuel, calque au survol, lien vers la page du projet
+   Cartes projet : visuel, calque au survol, lien vers la fiche projet.
    ========================================================================== */
 
-/*
-  Vignette pleine image, sans bandeau ni contour : c'est la grille de l'ancien
-  site. Toute l'information secondaire vit dans le calque qui monte au survol.
-*/
+/* Vignette pleine image ; l'information secondaire vit dans le calque au survol. */
 .pcard {
   position: relative;
   display: block;
@@ -746,7 +665,7 @@
   transform: scale(1.1);
 }
 
-/* Le calque monte depuis le bas, du transparent vers l'accent. */
+/* Calque montant depuis le bas, transparent vers accent. */
 .pcard__layer {
   position: absolute;
   inset: 0;
@@ -757,8 +676,7 @@
   gap: 0.7rem;
   padding: 1.5rem 2rem;
   text-align: center;
-  /* Voile assombri en haut : depuis que la carte n'a plus de pied, ce calque
-     porte seul le titre, et une photo claire passait au travers du blanc. */
+  /* Voile assombri en haut : le calque porte seul le titre. */
   background: linear-gradient(rgba(12, 20, 27, 0.62), var(--color-accent) 72%);
   transform: translateY(100%);
   transition: transform 0.5s var(--ease-out-soft);
@@ -770,18 +688,11 @@
   transform: translateY(0);
 }
 
-/*
-  Sur écran tactile il n'y a pas de survol, et la carte n'a plus de pied :
-  le calque contient désormais la seule mention du titre. Le masquer laisserait
-  une grille de vignettes muettes. Il repasse donc dans le flux, sous l'image,
-  en bandeau permanent — même contenu, même couleurs, simplement toujours là.
-*/
+/* Sans survol (tactile), le calque reste affiché en bandeau permanent en bas. */
 @media (hover: none) {
   .pcard__layer {
-    /* Le calque vit à l'intérieur de la vignette, qui a un ratio fixe et
-       `overflow: hidden` : le remettre dans le flux le ferait simplement
-       disparaître. Il reste donc en absolu, mais ancré en bas et de hauteur
-       libre — un bandeau posé sur l'image plutôt qu'un rideau. */
+    /* Maintenu en absolu ancré en bas : la vignette a overflow: hidden, le
+       remettre dans le flux le masquerait. */
     top: auto;
     transform: none;
     justify-content: flex-end;
@@ -796,8 +707,7 @@
     );
   }
 
-  /* Sans survol, la carte entière est la cible : le rappel d'action n'apporte
-     rien et coûte deux lignes sur un écran étroit. */
+  /* Sans survol, la carte entière est cliquable : le rappel d'action est masqué. */
   .pcard__cta {
     display: none;
   }
@@ -820,7 +730,7 @@
     scroll-behavior: auto !important;
   }
 
-  /* La machine à écrire se fige sur la première phrase, entièrement lisible. */
+  /* Machine à écrire figée sur la première phrase. */
   .typer__item {
     animation: none;
     opacity: 1;
@@ -838,15 +748,14 @@
     display: none;
   }
 
-  /* Le contenu révélé au défilement reste visible et fixe. */
+  /* Contenu révélé maintenu visible. */
   .reveal {
     animation: none !important;
     opacity: 1;
     transform: none;
   }
 
-  /* La barre de progression garde son rôle d'information : elle reste, mais
-     ne s'anime plus image par image. */
+  /* Barre de progression conservée mais non animée. */
   .read-progress {
     display: none;
   }

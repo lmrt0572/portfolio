@@ -13,16 +13,15 @@ import {
 import { drawInstance } from "./tsp-canvas";
 
 /**
- * Démonstration 1 — descente 2-opt sur une instance TSP-PC-ER.
+ * Démonstration 1 (descente 2-opt) sur une instance TSP-PC-ER.
  *
  * On construit une tournée au plus proche voisin, puis on défait les
  * croisements un à un. L'intérêt n'est pas seulement de montrer la méthode :
  * c'est de finir sur un **optimum local**, ce qui prépare la seconde
  * démonstration.
  *
- * Chaque inversion doit être vérifiée avant d'être appliquée — elle peut créer
- * une arête interdite, ou retourner l'ordre d'un segment et casser une
- * précédence. C'est tout l'écart entre le 2-opt des manuels et le problème réel.
+ * Chaque inversion est vérifiée avant application : elle peut créer une arête
+ * interdite ou casser une précédence.
  */
 
 const DEFAULT_CITIES = 26;

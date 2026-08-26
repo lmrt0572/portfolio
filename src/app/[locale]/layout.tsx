@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 
 import { routing, type Locale } from "@/i18n/routing";
 import { profile } from "@/content/profile";
@@ -12,6 +13,7 @@ import { SiteHeader } from "@/components/site-header";
 import { themeInitScript } from "@/components/theme-toggle";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
+import { StructuredData } from "@/components/structured-data";
 import "../globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -36,7 +38,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     title: {
       default: t("title"),
-      template: `%s — ${profile.name}`,
+      template: `%s · ${profile.name}`,
     },
     description: t("description"),
     authors: [{ name: profile.name, url: profile.github }],
@@ -57,7 +59,6 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
     },
-    icons: { icon: "/images/pp.png" },
   };
 }
 
@@ -82,10 +83,18 @@ export default async function LocaleLayout({
     >
       <head>
         {/* Pose le thème enregistré avant le premier pixel peint : sans ça, la
-            page s'afficherait en sombre puis basculerait, ce qui clignote. */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+            page s'afficherait en sombre puis basculerait, ce qui clignote.
+            `next/script` en `beforeInteractive` injecte le script inline dans le
+            `<head>` du HTML serveur ; un `<script>` brut en JSX serait, lui,
+            rejeté par React 19 (jamais ré-exécuté côté client). */}
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
       </head>
       <body className="min-h-screen antialiased">
+        <StructuredData locale={locale as Locale} />
         <NextIntlClientProvider>
           <a
             href="#main"

@@ -2,9 +2,8 @@ import Image from "next/image";
 import { profile } from "@/content/profile";
 
 /**
- * Portrait circulaire cerclé d'un dégradé conique rotatif — l'élément le plus
- * reconnaissable de l'ancienne page d'accueil. La rotation vit dans `.portrait`
- * (globals.css) et s'arrête si l'utilisateur a demandé moins d'animations.
+ * Portrait circulaire cerclé d'un dégradé conique rotatif. La rotation est
+ * définie dans `.portrait` (globals.css) et respecte prefers-reduced-motion.
  *
  * Trois régimes de taille : sur téléphone le portrait occupe près de la moitié
  * de la largeur, comme sur l'ancien site ; dès la tablette il se calme, sinon

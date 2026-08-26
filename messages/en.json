@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Léo Martin — AI & computer vision engineer",
+    "title": "Léo Martin, AI & computer vision engineer",
     "description": "Apprentice engineer in AI and computer vision at Thales. Real-time object detection and tracking. Seeking an international internship in 2027.",
     "projectsTitle": "Projects",
     "projectsDescription": "Projects in artificial intelligence, computer vision, software and web development.",
@@ -54,6 +54,7 @@
     "educationLead": "An apprenticeship engineering degree in computer science, taught through projects.",
     "experience": "Experience",
     "experienceLead": "Two years at Thales LAS ACR, from data handling to embedded AI.",
+    "otherExperience": "Other experience",
     "skills": "Skills",
     "skillsLead": "What I actually use, grouped by area.",
     "about": "About",
@@ -62,7 +63,7 @@
     "current": "Current",
     "languages": "Languages",
     "contact": "Let's work together",
-    "contactLead": "An internship opportunity, a question about a project, or just to talk — get in touch."
+    "contactLead": "An internship opportunity, a question about a project, or just to talk, get in touch."
   },
   "project": {
     "backToProjects": "All projects",
@@ -71,8 +72,8 @@
     "stack": "Stack",
     "highlights": "Key points",
     "demoTitle": "Try it yourself",
-    "demoLead": "Every tour starts and ends at the depot. Dashed lines are forbidden roads, arrows are deliveries that must happen in order. The tour is built with nearest neighbour, then crossings are undone by 2-opt moves — rejecting any that would break a constraint, which the “blocked” counter tallies.",
-    "demoNote": "This demo was written for this page and is independent from the deliverable. It uses the project’s model — cost = fuel × distance + toll, forbidden roads, precedence constraints — on randomly drawn instances, but only two of the eight algorithms studied, at sizes of around thirty cities. The deliverable itself is a Python notebook available on the repository.",
+    "demoLead": "Every tour starts and ends at the depot. Dashed lines are forbidden roads, arrows are deliveries that must happen in order. The tour is built with nearest neighbour, then crossings are undone by 2-opt moves, rejecting any that would break a constraint, which the “blocked” counter tallies.",
+    "demoNote": "This demo was written for this page and is independent from the deliverable. It uses the project’s model (cost = fuel × distance + toll, forbidden roads, precedence constraints) on randomly drawn instances, but only two of the eight algorithms studied, at sizes of around thirty cities. The deliverable itself is a Python notebook available on the repository.",
     "demoEscapeTitle": "Escaping the local optimum",
     "demoEscapeLead": "Simulated annealing starts where a 2-opt descent stops, on its own randomly drawn instance. It accepts a worse solution now and then, with a probability that collapses as the temperature drops. The dashed line marks its starting point: anything below it was won by crossing a ridge.",
     "pipeline": "How it works",
@@ -116,6 +117,14 @@
     "message": "Your message",
     "submit": "Send message"
   },
+  "thanks": {
+    "title": "Message sent",
+    "heading": "Thank you",
+    "headingAccent": "!",
+    "lead": "Your message is on its way. I'll get back to you as soon as I can, usually within 48 hours.",
+    "backHome": "Back to home",
+    "viewProjects": "View my projects"
+  },
   "tsp": {
     "canvasLabel": "Map of cities, constraints and the current tour",
     "chartLabel": "Cost over iterations",
@@ -132,9 +141,9 @@
     "baseline": "2-opt start",
     "uphill": "Worse moves accepted",
     "temperature": "Temperature",
-    "localOptimum": "Local optimum reached: no reversal shortens the tour any further. Going beyond means accepting a worse solution — which is what the next demo shows.",
+    "localOptimum": "Local optimum reached: no reversal shortens the tour any further. Going beyond means accepting a worse solution, which is what the next demo shows.",
     "beatBaseline": "Annealing went below the 2-opt local optimum: {percent}% better.",
-    "tiedBaseline": "Annealing did not beat the descent on this draw — it happens, which is exactly why you measure across several instances.",
+    "tiedBaseline": "Annealing did not beat the descent on this draw, it happens, which is exactly why you measure across several instances.",
     "legendDepot": "Depot",
     "legendForbidden": "Closed road",
     "legendPrecedence": "Must be delivered before",

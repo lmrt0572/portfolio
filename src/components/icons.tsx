@@ -1,4 +1,4 @@
-/** Icônes SVG en ligne — remplace la dépendance boxicons de l'ancien site. */
+/** Icônes SVG en ligne. */
 
 type IconProps = { className?: string };
 

@@ -9,11 +9,8 @@ const STORAGE_KEY = "theme";
 const EVENT = "themechange";
 
 /**
- * Script exécuté avant le premier rendu, injecté dans le `<head>`.
- *
- * Sans lui la page s'afficherait en sombre puis basculerait en clair une fois
- * React monté — un clignotement très visible. Il lit la préférence enregistrée
- * et pose l'attribut avant que le navigateur ne peigne quoi que ce soit.
+ * Script injecté dans le `<head>`, exécuté avant le premier rendu. Applique le
+ * thème enregistré pour éviter un clignotement sombre vers clair à l'hydratation.
  */
 export const themeInitScript = `(function(){try{var t=localStorage.getItem(${JSON.stringify(
   STORAGE_KEY,

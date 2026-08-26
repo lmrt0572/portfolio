@@ -3,8 +3,8 @@ import type { Locale } from "@/i18n/routing";
 
 /**
  * Chaîne de traitement en étapes numérotées, reliées par un filet vertical.
- * La numérotation encode ici une vraie séquence — chaque étape consomme la
- * sortie de la précédente — et n'est donc pas décorative.
+ * La numérotation encode une séquence : chaque étape consomme la sortie de la
+ * précédente.
  */
 export function ProjectPipeline({
   steps,

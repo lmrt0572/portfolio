@@ -11,12 +11,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from "./icons";
 /**
  * Galerie en carrousel.
  *
- * La version précédente enfermait chaque capture dans un cadre 4/3 avec
- * `object-cover` : sur des copies d'écran de 1918 × 967, cela rognait plus d'un
- * tiers de l'image, et justement les bords — barres latérales, en-têtes, tout
- * ce qui situe la page. Ici, la hauteur est commune et c'est la largeur qui
- * s'adapte au rapport de chaque fichier : une capture large occupe deux fois la
- * place d'une capture carrée, et aucune n'est coupée.
+ * Hauteur commune, largeur adaptée au rapport de chaque fichier (pas de
+ * recadrage 4/3 qui couperait les bords des captures larges).
  *
  * Le défilement reste un défilement natif avec accrochage : la molette, le
  * pavé tactile, le glissement du doigt et la tabulation continuent de
@@ -138,7 +134,7 @@ export function ProjectGallery({
           <span className="tabular-nums">
             {index + 1}/{images.length}
           </span>
-          {" — "}
+          {" · "}
           {images[index]?.alt[locale]}
         </p>
       </div>
@@ -148,8 +144,7 @@ export function ProjectGallery({
 
 /**
  * `useSyncExternalStore` plutôt qu'un effet : la valeur vient du navigateur,
- * pas d'un état React, et la lire ainsi évite un rendu supplémentaire au
- * montage — et la règle de lint qui l'interdit.
+ * pas d'un état React, et évite un rendu supplémentaire au montage.
  */
 function usePrefersReducedMotion(): boolean {
   return useSyncExternalStore(

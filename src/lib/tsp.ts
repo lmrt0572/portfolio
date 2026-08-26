@@ -1,16 +1,10 @@
 /**
  * Modèle du problème TSP-PC-ER utilisé par les démonstrations de la page projet.
  *
- * Reprend les trois éléments qui distinguent le problème réel du voyageur de
- * commerce des manuels :
- *   — un coût d'arête = péage + carburant × distance, et non une simple distance ;
- *   — des arêtes interdites (Edge Restrictions), qu'aucune tournée ne peut emprunter ;
- *   — des contraintes de précédence (Precedence Constraints) entre villes.
- *
- * La génération garantit qu'au moins une tournée réalisable existe : les
- * précédences sont tirées d'un ordre de référence, et aucune arête de cet ordre
- * n'est jamais interdite. Sans cette précaution, une instance peut n'avoir
- * aucune solution — et une démonstration qui échoue au hasard n'apprend rien.
+ * Génère une instance TSP avec coût d'arête (péage + carburant × distance),
+ * arêtes interdites et contraintes de précédence. Au moins une tournée
+ * réalisable est garantie : les précédences suivent un ordre de référence dont
+ * aucune arête n'est interdite.
  */
 
 export type Point = { x: number; y: number };
@@ -140,9 +134,9 @@ export function isFeasible(instance: Instance, tour: number[]): boolean {
 }
 
 /**
- * Plus proche voisin contraint : à chaque étape on ne considère que les villes
- * dont tous les prédécesseurs sont déjà livrés et joignables. En cas d'impasse,
- * on retombe sur l'ordre de référence — toujours réalisable.
+ * Plus proche voisin contraint : ne considère que les villes dont les
+ * prédécesseurs sont livrés et joignables. Repli sur l'ordre de référence en
+ * cas d'impasse.
  */
 export function nearestNeighbour(instance: Instance): number[] {
   const n = instance.cities.length;
@@ -203,9 +197,8 @@ export function tryTwoOpt(
   const c = tour[j];
   const d = tour[(j + 1) % n];
 
-  // On évalue le gain d'abord : cela permet de distinguer un mouvement sans
-  // intérêt d'un mouvement intéressant mais interdit — c'est le second qui
-  // mesure l'effet réel des contraintes.
+  // Gain évalué d'abord, pour distinguer un mouvement sans intérêt d'un
+  // mouvement intéressant mais interdit.
   const before = edgeCost(instance, a, b) + edgeCost(instance, c, d);
   const after = edgeCost(instance, a, c) + edgeCost(instance, b, d);
   const gain = before - after;

@@ -22,8 +22,8 @@ export const profile = {
     en: "/documents/CV_MARTIN_Leo_EN.pdf",
   },
   role: {
-    fr: "Alternant ingénieur — IA & vision par ordinateur",
-    en: "Apprentice engineer — AI & computer vision",
+    fr: "Alternant ingénieur en IA & vision par ordinateur",
+    en: "Apprentice engineer in AI & computer vision",
   } satisfies Localized,
   company: "Thales LAS",
   availability: {
@@ -37,23 +37,13 @@ export const profile = {
   portrait: "/images/portrait.png",
 } as const;
 
-/** Amorce fixe de la phrase d'accueil, avant la partie qui se réécrit. */
+/** Début fixe de la phrase d'accueil. */
 export const typerLead: Localized = {
   fr: "Élève ingénieur, je travaille sur",
   en: "Engineering student, I work on",
 };
 
-/**
- * Segments qui défilent en machine à écrire sous le nom.
- *
- * L'amorce reste neutre à dessein : avec « Alternant chez Thales », la phrase
- * attribuerait à l'alternance le web et l'optimisation, qui viennent des
- * projets d'école. Thales est mentionné dans le paragraphe juste en dessous.
- *
- * L'ordre n'est pas indifférent — le deuxième segment est celui qu'on voit le
- * plus souvent en arrivant sur la page, d'où l'IA en tête et le web en fin,
- * dans l'ordre des postes visés.
- */
+/** Segments affichés en machine à écrire sous le nom. */
 export const typerPhrases: LocalizedList = {
   fr: [
     "des modèles d'intelligence artificielle",
@@ -69,21 +59,21 @@ export const typerPhrases: LocalizedList = {
   ],
 };
 
-/** Texte de présentation, à la première personne. Un paragraphe par entrée. */
+/** Paragraphes de présentation. */
 export const bio: LocalizedList = {
   fr: [
-    "Je suis en cycle ingénieur informatique à CESI Rouen, en alternance chez Thales LAS  depuis octobre 2025. J'y travaille sur la détection et le suivi automatique de cibles en temps réel pour des systèmes de surveillance maritime — de la constitution du jeu de données jusqu'au déploiement sur un serveur isolé du réseau.",
-    "À côté de l'alternance, mes projets d'école m'emmènent ailleurs : optimisation de tournées de livraison sous contraintes, réseau social en microservices, logiciel de sauvegarde en C#. Changer de domaine chaque semestre m'a appris à devenir utile vite sur un sujet que je ne connais pas encore.",
-    "En dehors du code : football, musculation et basketball, un peu de piano, et des voyages — États-Unis, Martinique, Italie, Espagne — qui m'ont donné envie de faire mon prochain stage à l'étranger.",
+    "Ce qui me motive, c'est de transformer un problème que je ne sais pas encore résoudre en quelque chose qui fonctionne vraiment. En alternance chez Thales, je le vis sur des sujets de vision par ordinateur ; mais l'essentiel pour moi, c'est cette façon de travailler, plus que le domaine lui-même : comprendre vite, tester, itérer.",
+    "Mon cursus me fait changer de terrain chaque semestre : IA, optimisation, développement web, systèmes distribués. Loin de m'éparpiller, ça m'a appris à devenir utile rapidement sur un sujet inconnu, et à y prendre goût. Ce que je cherche maintenant, c'est aller plus loin : un environnement exigeant, à l'international, où je progresse au contact d'équipes qui en savent plus que moi.",
+    "En dehors du code : football, musculation et basketball, un peu de piano, et des voyages (États-Unis, Martinique, Italie, Espagne) qui m'ont donné envie de faire mon prochain stage à l'étranger.",
   ],
   en: [
-    "I'm a computer science engineering student at CESI Rouen, working at Thales LAS  as an apprentice engineer since October 2025. I work there on real-time detection and tracking of maritime targets — from building the dataset through to deployment on an air-gapped server.",
-    "Alongside the apprenticeship, my school projects take me elsewhere: constrained delivery-route optimisation, a microservices social network, a backup tool written in C#. Switching field every semester has taught me to become useful quickly on a subject I don't know yet.",
-    "Outside code: football, weight training and basketball, some piano, and travel — the USA, Martinique, Italy, Spain — which is what makes me want my next internship to be abroad.",
+    "What drives me is turning a problem I don't yet know how to solve into something that actually works. I get to live that in my apprenticeship at Thales, on computer vision projects; but what matters most to me is the way of working, more than the field itself: understand fast, test, iterate.",
+    "My programme moves me to a new area every semester: AI, optimisation, web development, distributed systems. Far from spreading me thin, it has taught me to become useful quickly on an unfamiliar subject, and to enjoy it. What I'm looking for now is to go further: a demanding, international environment where I keep growing alongside people who know more than I do.",
+    "Outside code: football, weight training and basketball, some piano, and travel (the USA, Martinique, Italy, Spain) that makes me want my next internship to be abroad.",
   ],
 };
 
-/** Qualités de travail, reprises des soft skills du CV. */
+/** Qualités de travail. */
 export const softSkills: LocalizedList = {
   fr: [
     "Autonomie en environnement R&D",
@@ -99,7 +89,7 @@ export const softSkills: LocalizedList = {
   ],
 };
 
-/** Fiche « À propos », reprise de l'ancien site et actualisée. */
+/** Données de la fiche « À propos ». */
 export const aboutFacts: { label: Localized; value: Localized }[] = [
   {
     label: { fr: "Localisation", en: "Location" },
@@ -130,8 +120,8 @@ export const aboutFacts: { label: Localized; value: Localized }[] = [
   {
     label: { fr: "Mobilité", en: "Mobility" },
     value: {
-      fr: "Permis B, véhiculé — mobile à l'international",
-      en: "Full driving licence — open to relocation",
+      fr: "Permis B, véhiculé, mobile à l'international",
+      en: "Full driving licence, open to relocation",
     },
   },
   {
@@ -165,26 +155,26 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "web",
     label: { fr: "Web & Frameworks", en: "Web & Frameworks" },
-    items: ["React", "Next.js", "Node.js", "Express", "Angular", ".NET"],
+    items: ["React", "Next.js", "Express", ".NET"],
   },
   {
     id: "data",
     label: { fr: "Données", en: "Data" },
-    items: ["PostgreSQL", "MongoDB", "SQL", "MySQL"],
+    items: ["PostgreSQL", "MongoDB", "MySQL"],
   },
   {
     id: "ops",
     label: { fr: "DevOps & Outils", en: "DevOps & Tools" },
-    items: ["Docker", "Linux", "Git", "GitHub", "GitLab", "CI/CD"],
+    items: ["Docker", "Linux", "Git", "GitHub"],
   },
 ];
 
 export const experience: ExperienceItem[] = [
   {
-    period: { fr: "Oct. 2025 — Sept. 2028", en: "Oct. 2025 — Sept. 2028" },
+    period: { fr: "Oct. 2025 – Sept. 2028", en: "Oct. 2025 – Sept. 2028" },
     role: {
-      fr: "Alternant ingénieur — Développement IA & analyse de données",
-      en: "Apprentice engineer — AI development & data analysis",
+      fr: "Alternant ingénieur en développement IA & analyse de données",
+      en: "Apprentice engineer in AI development & data analysis",
     },
     org: "Thales LAS",
     location: "Ymare, France",
@@ -205,7 +195,7 @@ export const experience: ExperienceItem[] = [
     },
   },
   {
-    period: { fr: "Avril — Juillet 2025", en: "April — July 2025" },
+    period: { fr: "Avril – Juillet 2025", en: "April – July 2025" },
     role: { fr: "Stagiaire Data Analyst", en: "Data Analyst intern" },
     org: "Thales LAS",
     location: "Ymare, France",
@@ -224,9 +214,54 @@ export const experience: ExperienceItem[] = [
   },
 ];
 
+/** Jobs étudiants et expériences non techniques, affichés en liste secondaire. */
+export const otherExperience: {
+  period: Localized;
+  role: Localized;
+  org: string;
+  detail: Localized;
+}[] = [
+  {
+    period: { fr: "Août 2024", en: "Aug. 2024" },
+    role: { fr: "Emploi saisonnier", en: "Seasonal worker" },
+    org: "Déchèterie de Bolbec",
+    detail: {
+      fr: "Gestion des déchets et accueil des usagers, dans le respect des normes environnementales.",
+      en: "Waste management and user assistance, in line with environmental standards.",
+    },
+  },
+  {
+    period: { fr: "Juillet 2024", en: "July 2024" },
+    role: { fr: "Manutentionnaire (intérim)", en: "Warehouse operative (temp)" },
+    org: "Récré-Action, Pont-Audemer",
+    detail: {
+      fr: "Aménagement d'aires de jeux pour enfants, travail en équipe et coordination.",
+      en: "Assembling children's playgrounds, teamwork and coordination.",
+    },
+  },
+  {
+    period: { fr: "2023", en: "2023" },
+    role: { fr: "Emploi saisonnier", en: "Seasonal worker" },
+    org: "Mairie de Port-Jérôme-sur-Seine",
+    detail: {
+      fr: "Surveillance et maintenance des infrastructures locales.",
+      en: "Monitoring and upkeep of local facilities.",
+    },
+  },
+  {
+    period: { fr: "2019", en: "2019" },
+    role: { fr: "Stage d'observation", en: "Observation placement" },
+    org: "Cabinet de kinésithérapie",
+    detail: {
+      fr: "Première découverte d'un environnement médical, sens de l'observation.",
+      en: "First exposure to a medical environment, observation skills.",
+    },
+  },
+];
+
 export const education: EducationItem[] = [
   {
-    period: { fr: "2025 — 2028", en: "2025 — 2028" },
+    period: { fr: "2025 – 2028", en: "2025 – 2028" },
     degree: {
       fr: "Cycle ingénieur informatique (FISA, alternance)",
       en: "Engineering degree, Computer Science (apprenticeship)",
@@ -238,7 +273,7 @@ export const education: EducationItem[] = [
     },
   },
   {
-    period: { fr: "2023 — 2025", en: "2023 — 2025" },
+    period: { fr: "2023 – 2025", en: "2023 – 2025" },
     degree: {
       fr: "Cycle préparatoire intégré",
       en: "Integrated preparatory cycle",
@@ -263,7 +298,7 @@ export const education: EducationItem[] = [
   },
 ];
 
-/** `score` positionne le niveau sur l'échelle CECRL (A1 → C2, soit 6 crans). */
+/** `score` : niveau CECRL, de 1 (A1) à 6 (C2). */
 export const languages: {
   label: Localized;
   level: Localized;
@@ -276,12 +311,12 @@ export const languages: {
   },
   {
     label: { fr: "Anglais", en: "English" },
-    level: { fr: "B2 — courant", en: "B2 — fluent" },
+    level: { fr: "B2, courant", en: "B2, fluent" },
     score: 4,
   },
   {
     label: { fr: "Espagnol", en: "Spanish" },
-    level: { fr: "B1 — intermédiaire", en: "B1 — intermediate" },
+    level: { fr: "B1, intermédiaire", en: "B1, intermediate" },
     score: 3,
   },
 ];

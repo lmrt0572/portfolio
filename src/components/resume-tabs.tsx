@@ -60,9 +60,7 @@ export function ResumeTabs({ tabs }: { tabs: ResumeTab[] }) {
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(i)}
               onKeyDown={onKeyDown}
-              /* Boutons pleins et empilés, comme sur l'ancien site : l'onglet
-                 actif se signale par un contour et un texte d'accent, pas par
-                 un aplat — c'est plus lisible dans une colonne. */
+              /* Onglet actif signalé par un contour et un texte d'accent. */
               className={`cursor-pointer rounded-lg border-2 px-4 py-3.5 text-center font-semibold transition-colors sm:px-6 lg:w-full ${
                 selected
                   ? "border-accent bg-surface-2 text-accent-text"
