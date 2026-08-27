@@ -141,9 +141,10 @@ export const skillGroups: SkillGroup[] = [
       "PyTorch",
       "TensorRT",
       "OpenCV",
-      "Détection d'objets",
+      "RF-DETR",
+      "ByteTrack",
+      "CVAT",
       "Suivi multi-cibles",
-      "Annotation de données",
     ],
   },
   {
@@ -181,13 +182,13 @@ export const experience: ExperienceItem[] = [
     bullets: {
       fr: [
         "Détection et suivi automatique de cibles maritimes en temps réel, avec asservissement d'une caméra PTZ pour maintenir la cible dans le champ.",
-        "Constitution et annotation d'un jeu de données maritime, puis entraînement et comparaison de plusieurs détecteurs récents.",
+        "Constitution et annotation d'un jeu de données maritime sous CVAT, puis entraînement et comparaison de plusieurs détecteurs de la famille DETR.",
         "Optimisation de l'inférence pour le temps réel et déploiement sur serveur isolé.",
         "Boucle d'apprentissage actif : les corrections de l'opérateur en direct alimentent le ré-entraînement.",
       ],
       en: [
         "Real-time detection and tracking of maritime targets, with closed-loop PTZ camera control to keep the target in frame.",
-        "Built and annotated a maritime dataset, then trained and benchmarked several recent detectors.",
+        "Built and annotated a maritime dataset in CVAT, then trained and benchmarked several DETR-family detectors.",
         "Optimised inference for real-time operation and deployed on an air-gapped server.",
         "Built an active learning loop: live operator corrections feed model retraining.",
       ],

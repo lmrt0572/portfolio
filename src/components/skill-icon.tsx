@@ -29,9 +29,10 @@ type Icon = { path: string; hex: string; title: string };
 /**
  * Logos officiels des technologies (paquet simple-icons).
  *
- * Tout n'a pas de logo : les notions (SQL, détection d'objets, suivi
- * multi-cibles) et C#, dont le logo a été retiré de la bibliothèque.
- * Ceux-là reçoivent un monogramme.
+ * Tout n'a pas de logo : les modèles et bibliothèques sans marque déposée
+ * (RF-DETR, ByteTrack, CVAT), les notions (SQL, suivi multi-cibles) et C#,
+ * dont le logo a été retiré de la bibliothèque. Ceux-là reçoivent un
+ * monogramme.
  */
 const ICONS: Record<string, Icon> = {
   Python: siPython,
@@ -71,10 +72,10 @@ function isTooDark(hex: string): boolean {
 /**
  * Repli pour les entrées sans logo officiel.
  *
- * Les noms courts (C#, SQL) se suffisent à eux-mêmes et sont affichés tels
- * quels. Les libellés plus longs recevraient un sigle tronqué illisible
- * (« Suivi multi-cibles » donnerait « SMC ») : ils prennent une marque neutre,
- * et c'est le nom sous la tuile qui porte le sens.
+ * Les noms courts (C#, SQL, CVAT) se suffisent à eux-mêmes et sont affichés
+ * tels quels. Les libellés plus longs recevraient un sigle tronqué illisible
+ * (« RF-DETR » donnerait « RFD ») : ils prennent une marque neutre, et c'est
+ * le nom sous la tuile qui porte le sens.
  */
 function Fallback({ label }: { label: string }) {
   if (label.length <= 5) {

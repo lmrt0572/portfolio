@@ -25,8 +25,11 @@ export const projects: Project[] = [
     stack: [
       "Python",
       "PyTorch",
+      "RF-DETR",
+      "ByteTrack",
       "TensorRT",
       "OpenCV",
+      "ONVIF",
       "Qt / QML",
       "Docker",
       "Linux",
@@ -73,14 +76,14 @@ export const projects: Project[] = [
     highlights: {
       fr: [
         "Chaîne complète en boucle fermée : acquisition, détection, suivi, commande de la caméra",
-        "Fonctionne en temps réel sur le matériel déjà installé",
-        "L'image présentée à l'opérateur n'est pas dégradée",
+        "Détecteur de la famille DETR entraîné sur un jeu d'images du site",
+        "Suivi multi-cibles par ByteTrack associé à un filtre de Kalman",
         "Domaine d'emploi établi par la mesure, limites comprises",
       ],
       en: [
         "Full closed-loop pipeline: capture, detection, tracking, camera control",
-        "Runs in real time on the hardware already installed",
-        "The image shown to the operator is not degraded",
+        "A DETR-family detector trained on an image set from the site itself",
+        "Multi-target tracking with ByteTrack and a Kalman filter",
         "Operating envelope established by measurement, limits included",
       ],
     },
@@ -89,32 +92,32 @@ export const projects: Project[] = [
         id: "capture",
         title: { fr: "Acquisition", en: "Capture" },
         body: {
-          fr: "Le flux vidéo de la caméra est décodé en continu et préparé pour l'analyse. Cette étape consomme déjà une part du temps disponible, avant même que le modèle ne travaille.",
-          en: "The camera's video stream is decoded continuously and prepared for analysis. This stage already consumes part of the available time, before the model does any work.",
+          fr: "La caméra diffuse sa vidéo en RTSP. Le flux est décodé en continu, puis préparé pour l'inférence. Un décodeur unique alimente à la fois l'affichage et l'analyse : avec deux, l'opérateur verrait une image légèrement différente de celle que le système traite, ce qui pose problème au moment de désigner une cible en cliquant dessus.",
+          en: "The camera streams over RTSP. The stream is decoded continuously, then prepared for inference. A single decoder feeds both the display and the analysis: with two, the operator would see a slightly different frame from the one the system processes, which matters when designating a target by clicking on it.",
         },
       },
       {
         id: "detect",
         title: { fr: "Détection", en: "Detection" },
         body: {
-          fr: "Un réseau de neurones localise les embarcations présentes dans l'image, du cargo au jet-ski. Le modèle est entraîné sur des images du site lui-même. En effet, un jeu public filmé sous d'autres latitudes ne prépare pas aux conditions que l'on rencontre réellement.",
-          en: "A neural network locates the vessels in the frame, from cargo ship to jet ski. The model is trained on imagery from the site itself. A public dataset filmed under other skies does not prepare it for the conditions actually encountered.",
+          fr: "Un détecteur RF-DETR localise les embarcations, du cargo au jet-ski. Cette famille produit d'emblée un nombre fixe de prédictions, ce qui supprime l'étape de suppression des doublons dont dépendent les détecteurs à ancres. Le modèle est entraîné sur des images du site, annotées sous CVAT installé en local, et l'inférence est ensuite compilée avec TensorRT pour tenir le temps réel.",
+          en: "An RF-DETR detector locates the vessels, from cargo ship to jet ski. This family emits a fixed number of predictions outright, removing the duplicate-suppression step that anchor-based detectors depend on. The model is trained on imagery from the site, annotated in a locally hosted CVAT, and inference is then compiled with TensorRT to hold real time.",
         },
       },
       {
         id: "track",
         title: { fr: "Suivi", en: "Tracking" },
         body: {
-          fr: "Les détections isolées de chaque image sont reliées entre elles pour former des trajectoires et donner à chaque cible un identifiant stable. C'est cette étape qui permet à l'opérateur de désigner une embarcation et de la garder.",
-          en: "The isolated detections from each frame are linked together into trajectories, giving every target a stable identity. This is the stage that lets the operator designate a vessel and keep hold of it.",
+          fr: "ByteTrack prédit où chaque cible devrait se trouver grâce à un filtre de Kalman, puis associe les nouvelles détections aux pistes existantes. Le filtre rend un second service : la boîte de détection tremble d'une image à l'autre même sur une cible immobile, et le lissage donne à l'asservissement une consigne stable plutôt qu'une consigne qui vibre.",
+          en: "ByteTrack predicts where each target should be using a Kalman filter, then matches new detections to existing tracks. The filter renders a second service: the detection box jitters between frames even on a stationary target, and smoothing gives the control loop a steady set-point rather than a vibrating one.",
         },
       },
       {
         id: "servo",
         title: { fr: "Asservissement", en: "Camera control" },
         body: {
-          fr: "L'écart entre la cible désignée et le centre de l'image est converti en commandes de rotation et de zoom. La boucle se referme alors : le mouvement de la caméra modifie l'image suivante, donc la détection suivante.",
-          en: "The offset between the designated target and the frame centre is converted into pan, tilt and zoom commands. The loop then closes: moving the camera changes the next frame, and therefore the next detection.",
+          fr: "L'écart entre la cible et le centre de l'image devient une vitesse de rotation, envoyée à la caméra via ONVIF en mode continu. Deux difficultés s'ajoutent au régulateur proportionnel de départ : le gain dépend du zoom, un réglage valable au grand-angle rendant le système instable au téléobjectif ; et la boucle comporte un retard, puisque le régulateur agit toujours sur une information déjà périmée.",
+          en: "The offset between target and frame centre becomes a rotation speed, sent to the camera over ONVIF in continuous mode. Two difficulties compound the initial proportional controller: gain depends on zoom, a setting valid at wide angle making the system unstable at full telephoto; and the loop carries a delay, since the controller always acts on information that is already out of date.",
         },
       },
     ],
@@ -155,6 +158,30 @@ export const projects: Project[] = [
         },
       },
       {
+        id: "choices",
+        title: { fr: "Les choix techniques", en: "Technical choices" },
+        body: {
+          fr: "Trois critères ont guidé la sélection de chaque brique, fixés avant toute comparaison : voir des cibles minuscules, tenir le temps réel sur le matériel disponible, et pouvoir être intégré dans un produit. Le troisième s'est révélé le plus discriminant.",
+          en: "Three criteria guided the choice of every building block, set before any comparison: see tiny targets, hold real time on the available hardware, and be integrable into a product. The third proved the most discriminating.",
+        },
+        bullets: {
+          fr: [
+            "La famille DETR plutôt que les détecteurs à ancres : elle évite le filtrage des doublons, dont un réglage trop sévère fusionne une bouée et une embarcation alignées, et trop permissif laisse passer des redondances",
+            "RF-DETR s'appuie sur un extracteur pré-entraîné sans annotations, ce qui lui demande beaucoup moins d'exemples pour s'adapter à un jeu d'images constitué en quelques semaines",
+            "ByteTrack conserve les détections de faible score pour une seconde tentative d'association : quand une petite embarcation s'éloigne et que son score chute, sa trajectoire survit au lieu d'être coupée",
+            "La licence a pesé autant que la performance. Certaines briques plus efficaces sur le papier obligeraient à publier le code de tout produit les intégrant, ce qui est rédhibitoire pour une preuve de concept destinée à devenir un produit. Toutes celles retenues sont sous licence permissive",
+            "ONVIF pour la commande, parce que c'est un standard : le système fonctionnera avec d'autres caméras que celle installée",
+          ],
+          en: [
+            "The DETR family rather than anchor-based detectors: it avoids duplicate filtering, where too strict a setting merges an aligned buoy and vessel, and too permissive a one lets redundancies through",
+            "RF-DETR builds on a backbone pre-trained without annotations, which means it needs far fewer examples to adapt to an image set assembled in a few weeks",
+            "ByteTrack keeps low-score detections for a second association attempt: when a small vessel moves away and its score drops, its track survives instead of being cut",
+            "Licensing weighed as much as performance. Some blocks that are stronger on paper would force publishing the source of any product embedding them, which is disqualifying for a proof of concept meant to become a product. Every block retained carries a permissive licence",
+            "ONVIF for camera control, because it is a standard: the system will work with cameras other than the one installed",
+          ],
+        },
+      },
+      {
         id: "results",
         title: {
           fr: "Ce que le système fait, et où il s'arrête",
@@ -172,8 +199,20 @@ export const projects: Project[] = [
           en: "Identifying the real limiting factor",
         },
         body: {
-          fr: "Le principal enseignement de ce travail tient à cette identification. Mon intuition désignait la commande de la caméra, supposée trop lente pour une cible rapide. L'analyse des enregistrements a montré l'inverse : quand la cible est détectée, la caméra vise juste. C'est donc la disponibilité de la détection qui limite le système, et non l'asservissement. Ce constat a réorienté les priorités du projet. En effet, un travail non instrumenté aurait optimisé le régulateur, avec conviction et sans effet.",
-          en: "The main lesson of this work lies in that identification. My instinct pointed at the camera control, presumed too slow for a fast target. Analysing the recordings showed the opposite: when the target is detected, the camera aims true. It is therefore detection availability that limits the system, not the control loop. That finding redirected the project's priorities. An uninstrumented effort would have optimised the controller, with conviction and no effect.",
+          fr: "Le principal enseignement de ce travail tient à cette identification. Mon intuition désignait la commande de la caméra, supposée trop lente pour une cible rapide. L'analyse des enregistrements a montré l'inverse : plus la détection a de trous, plus les poursuites sont courtes et hachées, alors que ces trous n'expliquent en rien l'écart au centre de l'image. Autrement dit, quand la cible est détectée, la caméra vise juste. C'est donc la disponibilité de la détection qui limite le système, et non l'asservissement. En effet, un travail non instrumenté aurait optimisé le régulateur, avec conviction et sans effet.",
+          en: "The main lesson of this work lies in that identification. My instinct pointed at the camera control, presumed too slow for a fast target. Analysing the recordings showed the opposite: the more gaps in detection, the shorter and choppier the pursuits, while those gaps explain nothing about the off-centre error. In other words, when the target is detected the camera aims true. It is therefore detection availability that limits the system, not the control loop. An uninstrumented effort would have optimised the controller, with conviction and no effect.",
+        },
+        bullets: {
+          fr: [
+            "L'effort est passé du réglage de la commande à la disponibilité de la détection",
+            "Deux outils ont rendu ce constat possible : l'enregistrement des sessions, pour rejouer la même scène avec deux réglages, et un banc de réglage intégré pour changer un paramètre sans redémarrer",
+            "La mer et la lumière n'étant jamais deux fois les mêmes, une comparaison faite en direct n'aurait rien prouvé",
+          ],
+          en: [
+            "Effort moved from tuning the controller to detection availability",
+            "Two tools made that finding possible: session recording, to replay the same scene with two settings, and an in-app tuning bench to change a parameter without restarting",
+            "Since sea and light are never the same twice, a comparison made live would have proved nothing",
+          ],
         },
       },
       {
@@ -184,15 +223,15 @@ export const projects: Project[] = [
             "Mesurer avant de décider : sans protocole d'essai reproductible, on optimise ce que l'on sait mesurer plutôt que ce qui limite réellement",
             "La chaîne de vision complète, de la constitution du jeu d'images au déploiement d'un moteur d'inférence optimisé",
             "Des bases d'automatique acquises sur le terrain, en concevant une boucle qui doit rester stable malgré son retard",
+            "Un critère que je n'avais jamais considéré : la licence, qui peut rendre inutilisable une bibliothèque performante",
             "Le conditionnement d'une application pour un poste isolé, où rien ne peut être téléchargé à l'installation",
-            "Assumer une limite et la documenter plutôt que la masquer",
           ],
           en: [
             "Measure before deciding: without a reproducible test protocol you optimise what you can measure rather than what actually limits you",
             "The full vision pipeline, from building the image set to deploying an optimised inference engine",
             "Control-theory basics learned in the field, designing a loop that must stay stable despite its own delay",
+            "A criterion I had never considered: licensing, which can make a high-performing library unusable",
             "Packaging an application for an isolated machine, where nothing can be downloaded at install time",
-            "Owning a limit and documenting it rather than hiding it",
           ],
         },
       },
