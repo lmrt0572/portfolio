@@ -39,7 +39,7 @@ export default async function ProjectsPage({
   const t = await getTranslations("sections");
 
   return (
-    <div className="mx-auto max-w-[90rem] px-[9%] py-20 sm:py-24">
+    <div className="mx-auto max-w-[1920px] px-[9%] py-20 sm:py-24">
       <div className="enter">
         <SectionTitle lead={t("projectsLeadWord")} accent={t("projectsAccent")}>
           {t("projectsLead")}

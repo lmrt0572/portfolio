@@ -15,6 +15,11 @@ import { TspDemo } from "@/components/tsp-demo";
 import { TspAnnealingDemo } from "@/components/tsp-annealing-demo";
 import { ProjectVideoPlayer } from "@/components/project-video";
 import { ProjectGallery } from "@/components/project-gallery";
+import { AlgebraDemo } from "@/components/algebra-demo";
+import { SchemaDiagram } from "@/components/schema-diagram";
+import { StrongboxDemo } from "@/components/strongbox-demo";
+import { WeatherDemo } from "@/components/weather-demo";
+import { SignalDemo } from "@/components/signal-demo";
 import { ArrowLeftIcon, DownloadIcon, GithubIcon } from "@/components/icons";
 
 type Params = { locale: Locale; slug: string };
@@ -97,7 +102,7 @@ export default async function ProjectPage({
           s'empiler dessous : elle reste visible sans coûter un écran entier de
           défilement avant le premier paragraphe. */}
       <header>
-        <div className="mx-auto grid max-w-[90rem] items-center gap-10 px-[9%] pb-12 pt-12 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
+        <div className="mx-auto grid max-w-[1920px] items-center gap-10 px-[9%] pb-12 pt-12 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
           <div className="min-w-0">
           <Link
             href="/projects"
@@ -207,7 +212,7 @@ export default async function ProjectPage({
         </div>
       </header>
 
-      <div className="mx-auto max-w-[90rem] px-[9%] pb-24">
+      <div className="mx-auto max-w-[1920px] px-[9%] pb-24">
 
         {/* ---- Bandeau de métadonnées --------------------------------- */}
         {project.facts?.length ? (
@@ -294,6 +299,86 @@ export default async function ProjectPage({
                   {t("pipeline")}
                 </h2>
                 <ProjectPipeline steps={project.pipeline} locale={locale} />
+              </section>
+            ) : null}
+
+            {/* ---- Démonstration : la chaîne FSK ------------------------- */}
+            {project.demo === "signal" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("demoTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("signalLead")}
+                </p>
+                <div className="mt-7">
+                  <SignalDemo />
+                </div>
+              </section>
+            ) : null}
+
+            {/* ---- Démonstration : la boucle de la station --------------- */}
+            {project.demo === "weather" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("demoTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("weatherLead")}
+                </p>
+                <div className="mt-7">
+                  <WeatherDemo />
+                </div>
+              </section>
+            ) : null}
+
+            {/* ---- Démonstration : les deux facteurs du coffre ----------- */}
+            {project.demo === "strongbox" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("demoTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("strongboxLead")}
+                </p>
+                <div className="mt-7">
+                  <StrongboxDemo />
+                </div>
+              </section>
+            ) : null}
+
+            {/* ---- Schéma de données ------------------------------------
+                Placé entre la chaîne Merise, qui explique comment on y arrive,
+                et la démonstration sur les requêtes, qui s'en sert. */}
+            {project.demo === "algebra" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("schemaTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("schemaLead")}
+                </p>
+                <div className="mt-7">
+                  <SchemaDiagram locale={locale} />
+                </div>
+              </section>
+            ) : null}
+
+            {/* ---- Démonstration : arbres algébriques --------------------
+                Placée après la chaîne Merise, dont la dernière étape y
+                renvoie : la démonstration porte sur les requêtes, donc sur
+                ce qui vient une fois le schéma en place. */}
+            {project.demo === "algebra" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("demoTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("algebraLead")}
+                </p>
+                <div className="mt-7">
+                  <AlgebraDemo />
+                </div>
               </section>
             ) : null}
 

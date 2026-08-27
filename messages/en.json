@@ -73,7 +73,7 @@
     "highlights": "Key points",
     "demoTitle": "Try it yourself",
     "demoLead": "Every tour starts and ends at the depot. Dashed lines are forbidden roads, arrows are deliveries that must happen in order. The tour is built with nearest neighbour, then crossings are undone by 2-opt moves, rejecting any that would break a constraint, which the “blocked” counter tallies.",
-    "demoNote": "This demo was written for this page and is independent from the deliverable. It uses the project’s model (cost = fuel × distance + toll, forbidden roads, precedence constraints) on randomly drawn instances, but only two of the eight algorithms studied, at sizes of around thirty cities. The deliverable itself is a Python notebook available on the repository.",
+    "demoNote": "This demo was written for this page and is independent from the deliverable. It uses the project's model (cost = fuel × distance + toll, forbidden roads, precedence constraints) on randomly drawn instances, but only two of the eight algorithms studied, at sizes of around thirty cities. The deliverable itself is a Python notebook available on the repository.",
     "demoEscapeTitle": "Escaping the local optimum",
     "demoEscapeLead": "Simulated annealing starts where a 2-opt descent stops, on its own randomly drawn instance. It accepts a worse solution now and then, with a probability that collapses as the temperature drops. The dashed line marks its starting point: anything below it was won by crossing a ridge.",
     "pipeline": "How it works",
@@ -95,7 +95,13 @@
     "videoTitle": "The walkthrough",
     "playDemo": "Play the demo",
     "previousImage": "Previous image",
-    "nextImage": "Next image"
+    "nextImage": "Next image",
+    "algebraLead": "The same query, written two ways. The result is identical; the number of rows traversed to get there is not.",
+    "strongboxLead": "Present a card, set the four switches. Neither is enough on its own: that is the whole point of the build.",
+    "weatherLead": "The station's loop as it runs on the microcontroller. Unplug a sensor to see what happens.",
+    "signalLead": "The full chain, top to bottom. Raise the noise until bits get lost, then switch the filter off.",
+    "schemaLead": "The delivered logical model: twelve tables, three of them born from many-to-many associations.",
+    "schemaTitle": "The data schema"
   },
   "contact": {
     "email": "Email",
@@ -158,5 +164,76 @@
     "title": "Page not found",
     "description": "This page does not exist or has been moved.",
     "back": "Back to home"
+  },
+  "algebra": {
+    "naive": "Filter after joining",
+    "pushed": "Filter first",
+    "run": "Play both trees",
+    "processed": "Rows traversed:",
+    "verdict": "Same result, {ratio} times fewer rows handled.",
+    "note": "Volumes come from a test dataset declared in the component, not from a measurement on the real database: the point is the gap between the two orderings, not its exact value. The bar scale is logarithmic, otherwise the small nodes would be invisible.",
+    "treeNaiveLabel": "Join tree: the four tables are joined, then the result is filtered at the very top",
+    "treePushedLabel": "Join tree: the selection is applied to the Region table before any join",
+    "reading": "Each tree reads bottom to top: tables sit at the leaves, every node transforms what arrives from below, and the answer comes out at the summit. Both have exactly the same shape; only the selection, in blue, moves: at the very top on the left, once the four tables are assembled; attached to Region on the right, before any join begins.",
+    "sym": {
+      "join": "⋈",
+      "select": "σ",
+      "group": "γ"
+    },
+    "def": {
+      "join": "joins two tables on their shared key",
+      "select": "filters rows, the WHERE",
+      "group": "groups and computes, the GROUP BY"
+    }
+  },
+  "strongbox": {
+    "factorOne": "Factor 1: the card presented",
+    "factorTwo": "Factor 2: the combination",
+    "cardAgent": "Agent card",
+    "cardChief": "Station chief card",
+    "cardUnknown": "Unknown card",
+    "cardNone": "No card",
+    "switch": "Switch {n}",
+    "try": "Attempt to open",
+    "idle": "Present a card, set the switches.",
+    "granted": "Open, access level {level}.",
+    "denied": "Denied.",
+    "note": "The safe never says which of the two factors is wrong: saying so would let an attacker search for them separately, turning two locks back into one. The expected combination is deliberately short here, four switches."
+  },
+  "weather": {
+    "pressure": "Pressure",
+    "humidity": "Humidity",
+    "light": "Light",
+    "temperature": "Temperature",
+    "start": "Start the loop",
+    "pause": "Pause",
+    "reads": "Readings:",
+    "writes": "SD card writes:",
+    "unplug": "Unplug this sensor",
+    "reconnect": "Plug back in",
+    "note": "Values are simulated: the prototype left no publishable dataset. What the demo shows is the rhythm of the loop: sensors are read every cycle, the SD card is written only every tenth cycle because it is far slower, and unplugging one sensor does not freeze the others."
+  },
+  "signal": {
+    "canvasLabel": "Transmission chain: bits, modulated signal, noisy and filtered signal, decision",
+    "rowBits": "1 · Bits to send",
+    "rowModulated": "2 · FSK modulated",
+    "rowChannel": "3 · After the channel, then filtered",
+    "rowDecided": "4 · Decided bits",
+    "noise": "Noise level:",
+    "filter": "Band-pass filter on",
+    "clean": "Message received without error.",
+    "errors": "{count} wrong bits out of {total}.",
+    "note": "The detector used here is the simplest possible: it counts zero crossings to estimate frequency. That is exactly what makes the filter essential: a more elaborate detector correlating the signal against both tones would already reject out-of-band noise and gain far less from filtering. Raise the noise until transmission breaks, then untick the filter at the same level."
+  },
+  "schema": {
+    "notation": "Merise notation",
+    "diagram": "Delivered diagram",
+    "diagramLabel": "Logical data model: twelve tables linked by their foreign keys",
+    "diagramCaption": "The logical model as it appears in the deliverable.",
+    "openFull": "Open full size",
+    "joinTable": "join table",
+    "pk": "Primary key",
+    "fk": "Foreign key",
+    "note": "Names taken verbatim from the deliverable, abbreviations included. Three tables carry only two foreign keys and no identifier of their own: these are the many-to-many associations turned into tables: a region emits several gases and a gas is emitted by several regions, a reading feeds several reports and a report aggregates several readings."
   }
 }

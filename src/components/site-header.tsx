@@ -40,7 +40,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-bg">
-      <div className="mx-auto flex h-[var(--header-h)] max-w-[90rem] items-center justify-between gap-8 px-[9%]">
+      <div className="mx-auto flex h-[var(--header-h)] max-w-[1920px] items-center justify-between gap-8 px-[9%]">
         <Link
           href="/"
           onClick={() => setOpen(false)}
@@ -104,7 +104,7 @@ export function SiteHeader() {
         hidden={!open}
         className="border-t border-line-soft bg-bg lg:hidden"
       >
-        <ul className="mx-auto max-w-[90rem] px-[9%] py-2">
+        <ul className="mx-auto max-w-[1920px] px-[9%] py-2">
           {links.map((link) => (
             <li key={link.href} className="border-b border-line-soft last:border-0">
               <Link

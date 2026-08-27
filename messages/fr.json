@@ -72,8 +72,8 @@
     "stack": "Technologies",
     "highlights": "Points clés",
     "demoTitle": "Essayez vous-même",
-    "demoLead": "Chaque tournée part du dépôt et y revient. Les pointillés sont les routes interdites, les flèches les livraisons à effectuer dans l’ordre. On construit au plus proche voisin, puis on défait les croisements par mouvements 2-opt, en refusant ceux qui casseraient une contrainte, que le compteur « bloquées » comptabilise.",
-    "demoNote": "Démonstration écrite pour cette page, indépendante du livrable. Elle reprend le modèle du projet (coût = carburant × distance + péage, routes interdites, contraintes de précédence) sur des instances tirées au hasard, mais n’utilise que deux des huit algorithmes étudiés, à des tailles de l’ordre de la trentaine de villes. Le livrable, lui, est un notebook Python disponible sur le dépôt.",
+    "demoLead": "Chaque tournée part du dépôt et y revient. Les pointillés sont les routes interdites, les flèches les livraisons à effectuer dans l'ordre. On construit au plus proche voisin, puis on défait les croisements par mouvements 2-opt, en refusant ceux qui casseraient une contrainte, que le compteur « bloquées » comptabilise.",
+    "demoNote": "Démonstration écrite pour cette page, indépendante du livrable. Elle reprend le modèle du projet (coût = carburant × distance + péage, routes interdites, contraintes de précédence) sur des instances tirées au hasard, mais n'utilise que deux des huit algorithmes étudiés, à des tailles de l'ordre de la trentaine de villes. Le livrable, lui, est un notebook Python disponible sur le dépôt.",
     "demoEscapeTitle": "Sortir de l'optimum local",
     "demoEscapeLead": "Le recuit simulé démarre là où une descente 2-opt s'arrête, sur sa propre instance tirée au hasard. Il accepte parfois d'empirer, avec une probabilité qui s'effondre à mesure que la température baisse. Les pointillés marquent son point de départ : tout ce qui passe dessous a été gagné en franchissant une crête.",
     "pipeline": "Comment ça marche",
@@ -95,7 +95,13 @@
     "videoTitle": "La démonstration",
     "playDemo": "Lancer la démonstration",
     "previousImage": "Image précédente",
-    "nextImage": "Image suivante"
+    "nextImage": "Image suivante",
+    "algebraLead": "La même requête, écrite de deux façons. Le résultat est identique ; le nombre de lignes traversées pour y arriver, non.",
+    "strongboxLead": "Présentez une carte, réglez les quatre interrupteurs. Ni l'une ni l'autre ne suffit : c'est tout l'intérêt du montage.",
+    "weatherLead": "La boucle de la station, telle qu'elle tourne sur le microcontrôleur. Débranchez un capteur pour voir ce qui se passe.",
+    "signalLead": "La chaîne complète, de haut en bas. Montez le bruit jusqu'à ce que des bits se perdent, puis coupez le filtre.",
+    "schemaLead": "Le modèle logique livré : douze tables, dont trois nées d'associations plusieurs-à-plusieurs.",
+    "schemaTitle": "Le schéma de données"
   },
   "contact": {
     "email": "Email",
@@ -158,5 +164,76 @@
     "title": "Page introuvable",
     "description": "Cette page n'existe pas ou a été déplacée.",
     "back": "Retour à l'accueil"
+  },
+  "algebra": {
+    "naive": "Filtrer après avoir joint",
+    "pushed": "Filtrer d'abord",
+    "run": "Dérouler les deux arbres",
+    "processed": "Lignes traversées :",
+    "verdict": "Même résultat, {ratio} fois moins de lignes manipulées.",
+    "note": "Volumes issus d'un jeu de test déclaré dans le composant, pas d'une mesure sur la base réelle : l'objet de la démonstration est l'écart entre les deux ordres, pas sa valeur exacte. L'échelle des barres est logarithmique, sinon les petits nœuds seraient invisibles.",
+    "treeNaiveLabel": "Arbre de jointure : les quatre tables sont jointes, puis le résultat est filtré tout en haut",
+    "treePushedLabel": "Arbre de jointure : la sélection est appliquée à la table Region avant toute jointure",
+    "reading": "Chaque arbre se lit de bas en haut : les tables sont aux feuilles, chaque nœud transforme ce qui arrive d'en dessous, et la réponse sort au sommet. Les deux ont exactement la même forme ; seule la sélection, en bleu, change de place : tout en haut à gauche, une fois les quatre tables assemblées ; collée à Region à droite, avant que la moindre jointure ne commence.",
+    "sym": {
+      "join": "⋈",
+      "select": "σ",
+      "group": "γ"
+    },
+    "def": {
+      "join": "joint deux tables par leur clé commune",
+      "select": "filtre les lignes, le WHERE",
+      "group": "regroupe et calcule, le GROUP BY"
+    }
+  },
+  "strongbox": {
+    "factorOne": "Facteur 1 : la carte présentée",
+    "factorTwo": "Facteur 2 : la combinaison",
+    "cardAgent": "Carte agent",
+    "cardChief": "Carte chef de poste",
+    "cardUnknown": "Carte inconnue",
+    "cardNone": "Aucune carte",
+    "switch": "Interrupteur {n}",
+    "try": "Tenter l'ouverture",
+    "idle": "Présentez une carte, réglez les interrupteurs.",
+    "granted": "Ouvert, niveau d'accès {level}.",
+    "denied": "Refusé.",
+    "note": "Le coffre ne dit jamais lequel des deux facteurs est faux : le préciser reviendrait à laisser un attaquant les chercher séparément, donc à ramener deux serrures à une seule. La combinaison attendue est ici volontairement courte, quatre interrupteurs."
+  },
+  "weather": {
+    "pressure": "Pression",
+    "humidity": "Humidité",
+    "light": "Luminosité",
+    "temperature": "Température",
+    "start": "Démarrer la boucle",
+    "pause": "Mettre en pause",
+    "reads": "Relevés :",
+    "writes": "Écritures carte SD :",
+    "unplug": "Débrancher ce capteur",
+    "reconnect": "Rebrancher",
+    "note": "Les valeurs sont simulées : le prototype n'a pas laissé de jeu de données publiable. Ce que la démonstration montre est le rythme de la boucle : les capteurs sont lus à chaque tour, l'écriture sur carte SD n'a lieu qu'un tour sur dix parce qu'elle est bien plus lente, et débrancher un capteur ne fige pas les autres."
+  },
+  "signal": {
+    "canvasLabel": "Chaîne de transmission : bits, signal modulé, signal bruité et filtré, décision",
+    "rowBits": "1 · Bits à transmettre",
+    "rowModulated": "2 · Modulé en FSK",
+    "rowChannel": "3 · Après le canal, puis filtré",
+    "rowDecided": "4 · Bits décidés",
+    "noise": "Niveau de bruit :",
+    "filter": "Filtre passe-bande activé",
+    "clean": "Message reçu sans erreur.",
+    "errors": "{count} bits faux sur {total}.",
+    "note": "Le détecteur employé ici est le plus simple qui soit : il compte les passages à zéro pour estimer la fréquence. C'est précisément ce qui rend le filtre indispensable : un détecteur plus élaboré, qui corrèle le signal avec les deux tons, rejetterait déjà le bruit hors bande et gagnerait beaucoup moins au filtrage. Montez le bruit jusqu'à faire décrocher la transmission, puis décochez le filtre au même niveau."
+  },
+  "schema": {
+    "notation": "Notation Merise",
+    "diagram": "Diagramme livré",
+    "diagramLabel": "Modèle logique des données : douze tables reliées par leurs clés étrangères",
+    "diagramCaption": "Le MLD tel qu'il figure dans le livrable.",
+    "openFull": "Ouvrir en grand",
+    "joinTable": "table d'association",
+    "pk": "Clé primaire",
+    "fk": "Clé étrangère",
+    "note": "Noms repris tels quels du livrable, abréviations comprises. Trois tables ne portent que deux clés étrangères et aucun identifiant propre : ce sont les associations plusieurs-à-plusieurs devenues des tables : une région émet plusieurs gaz et un gaz est émis par plusieurs régions, un relevé alimente plusieurs rapports et un rapport en agrège plusieurs."
   }
 }

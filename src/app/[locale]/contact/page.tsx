@@ -72,7 +72,7 @@ export default async function ContactPage({
   ];
 
   return (
-    <div className="mx-auto max-w-[90rem] px-[9%] py-20 sm:py-24">
+    <div className="mx-auto max-w-[1920px] px-[9%] py-20 sm:py-24">
       {/* Deux colonnes : coordonnées à gauche, formulaire à droite. */}
       <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
         <div className="enter lg:pt-6">

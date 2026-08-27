@@ -15,7 +15,7 @@ export async function Hero({ locale }: { locale: Locale }) {
   const t = await getTranslations("hero");
 
   return (
-    <section className="mx-auto flex max-w-[90rem] flex-col-reverse items-center justify-center min-h-[calc(100svh-5.5rem)] gap-6 px-[9%] py-4 text-center sm:gap-10 sm:py-10 lg:flex-row lg:justify-between lg:gap-10 lg:py-0 lg:text-left">
+    <section className="mx-auto flex max-w-[1920px] flex-col-reverse items-center justify-center min-h-[calc(100svh-5.5rem)] gap-6 px-[9%] py-4 text-center sm:gap-10 sm:py-10 lg:flex-row lg:justify-between lg:gap-10 lg:py-0 lg:text-left">
       <div className="flex w-full min-w-0 max-w-[34rem] flex-col items-center lg:max-w-[46rem] lg:items-start">
         <h1
           className="enter text-[clamp(2.4rem,5.5vw,4.3rem)] font-extrabold leading-[1.06] tracking-[-0.03em]"

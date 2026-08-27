@@ -95,9 +95,19 @@
     border-color: var(--color-line);
   }
 
-  /* Base rem à 16px : toutes les unités rem de Tailwind en découlent. */
+  /*
+    Base rem fluide : toutes les unités rem de Tailwind en découlent.
+
+    Une valeur fixe oblige à choisir un écran de référence, et le site paraît
+    alors trop grand ou trop petit partout ailleurs. Ici l'échelle suit la
+    largeur de la fenêtre : 16px jusqu'à 1280px de large, puis une croissance
+    linéaire jusqu'à 17,5px vers 1920px, plafonnée à 18px.
+
+    Le plancher à 16px n'est pas décoratif : en dessous, iOS zoome
+    automatiquement sur les champs de formulaire.
+  */
   html {
-    font-size: 16px;
+    font-size: clamp(16px, 0.234vw + 13px, 18px);
     scroll-behavior: smooth;
   }
 

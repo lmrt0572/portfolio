@@ -105,7 +105,7 @@ export type Project = {
   pipeline?: PipelineStep[];
   /** Démonstration interactive à insérer. Registre sérialisable, rendu géré
    *  par la page projet. */
-  demo?: "tsp";
+  demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal";
   /** Vidéo de démonstration, insérée avant les sections rédigées. */
   video?: ProjectVideo;
   sections: ProjectSection[];

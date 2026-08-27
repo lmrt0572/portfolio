@@ -1283,70 +1283,173 @@ export const projects: Project[] = [
       en: "CESI · Databases · Team project",
     },
     domain: "data",
-    stack: ["SQL", "MCD / MLD / MPD", "Algèbre relationnelle", "Merise"],
+    stack: ["SQL", "Merise", "MCD / MLD / MPD", "Algèbre relationnelle", "Jeux de test"],
+    demo: "algebra",
     cover: {
       src: "/images/bddBackground.png",
       width: 1024,
       height: 771,
       alt: { fr: "Schéma de base de données", en: "Database schema" },
     },
-    gallery: [
+    facts: [
       {
-        src: "/images/requete_sql.png",
-        alt: { fr: "Requête SQL optimisée", en: "Optimised SQL query" },
+        label: { fr: "Commanditaire", en: "Client" },
+        value: {
+          fr: "Ministère de l'écologie, mise en situation",
+          en: "Ministry of Ecology, simulated brief",
+        },
       },
       {
-        src: "/images/arbre_algebrique.png",
-        alt: { fr: "Arbre algébrique d'une requête", en: "Algebraic query tree" },
+        label: { fr: "Équipe", en: "Team" },
+        value: {
+          fr: "4 rôles : chef de projet, analyste, développeur, testeur",
+          en: "4 roles: project lead, analyst, developer, tester",
+        },
       },
       {
-        src: "/images/arbre_algebrique1.png",
-        alt: { fr: "Arbre algébrique optimisé", en: "Optimised algebraic tree" },
+        label: { fr: "Méthode", en: "Method" },
+        value: { fr: "Merise, du dictionnaire au SQL", en: "Merise, from dictionary to SQL" },
+      },
+      {
+        label: { fr: "Durée", en: "Duration" },
+        value: { fr: "Deux mois, quatre jalons", en: "Two months, four milestones" },
       },
     ],
     highlights: {
       fr: [
-        "Chaîne de modélisation complète : dictionnaire, MCD, MLD, MPD",
-        "Optimisation de requêtes par arbres algébriques",
-        "Gestion des agences, du personnel et des capteurs environnementaux",
+        "Chaîne Merise complète : dictionnaire, MCD, MLD, MPD, puis SQL",
+        "Neuf familles de données recensées avant d'écrire la moindre table",
+        "Requêtes analysées en arbres algébriques pour situer le coût",
+        "Base peuplée de données de test, puis interrogée et validée",
       ],
       en: [
-        "Complete modelling chain: data dictionary, conceptual, logical and physical models",
-        "Query optimisation through algebraic trees",
-        "Management of agencies, staff and environmental sensors",
+        "Full Merise chain: dictionary, conceptual, logical and physical models, then SQL",
+        "Nine data families catalogued before a single table was written",
+        "Queries analysed as algebraic trees to locate their cost",
+        "Database populated with test data, then queried and validated",
       ],
     },
+    pipeline: [
+      {
+        id: "dictionary",
+        title: { fr: "Le dictionnaire de données", en: "The data dictionary" },
+        body: {
+          fr: "Avant toute table, on recense chaque information à conserver : son nom, son type, sa taille, sa portée et ce qu'elle signifie. Neuf grandes familles ont été identifiées. C'est l'étape la plus ingrate et celle qui évite le plus d'erreurs : deux personnes qui appellent « région » deux choses différentes s'en aperçoivent ici, pas au moment des jointures.",
+          en: "Before any table, you catalogue every piece of information to keep: its name, type, size, scope and meaning. Nine broad families were identified. It is the most thankless stage and the one that prevents the most mistakes: two people calling \"region\" two different things find out here, not when writing joins.",
+        },
+      },
+      {
+        id: "mcd",
+        title: { fr: "Le modèle conceptuel", en: "The conceptual model" },
+        body: {
+          fr: "Les données se regroupent en neuf entités (Région, Ville, Agence, Personnel, Capteur, Gaz, Secteur d'activité, Relevé, Rapport), chacune dotée d'un identifiant unique. Les associations qui les relient portent un verbe à l'infinitif, et surtout des cardinalités : un capteur appartient à une agence, une agence en compte plusieurs ; une région émet plusieurs gaz, et un même gaz est émis par plusieurs régions. C'est ici qu'on tranche, et ces décisions ne se rattrapent pas plus tard sans tout casser.",
+          en: "Data groups into nine entities (Region, City, Agency, Staff, Sensor, Gas, Business sector, Reading, Report), each with a unique identifier. The associations linking them carry an infinitive verb and, above all, cardinalities: a sensor belongs to one agency, an agency has several; a region emits several gases, and the same gas is emitted by several regions. This is where you decide, and those decisions cannot be walked back later without breaking everything.",
+        },
+      },
+      {
+        id: "mld",
+        title: { fr: "Le modèle logique", en: "The logical model" },
+        body: {
+          fr: "Le passage au relationnel suit des règles mécaniques : chaque entité devient une table, chaque identifiant une clé primaire, chaque association 1:N une clé étrangère du côté « plusieurs ». Les associations N:N, elles, deviennent une table à part entière. Cette mécanique est ce qui rend le modèle vérifiable plutôt qu'affaire de goût.",
+          en: "Moving to the relational world follows mechanical rules: each entity becomes a table, each identifier a primary key, each 1:N association a foreign key on the \"many\" side. N:N associations become tables in their own right. That mechanical quality is what makes the model checkable rather than a matter of taste.",
+        },
+      },
+      {
+        id: "mpd",
+        title: { fr: "Le modèle physique", en: "The physical model" },
+        body: {
+          fr: "Le schéma devient exécutable : types concrets, longueurs, contraintes de clé primaire et étrangère, valeurs obligatoires. C'est le moment où l'on décide qu'un relevé porte une valeur en ppm et un horodatage, et où le SGBD se met à refuser les données incohérentes à notre place.",
+          en: "The schema becomes executable: concrete types, lengths, primary and foreign key constraints, mandatory values. This is when you decide a reading carries a ppm value and a timestamp, and when the database engine starts rejecting inconsistent data on your behalf.",
+        },
+      },
+      {
+        id: "sql",
+        title: { fr: "Les requêtes", en: "The queries" },
+        body: {
+          fr: "La base est peuplée de données de test, puis interrogée. Chaque requête utile a été doublée d'un arbre algébrique (jointures, projections, sélections) pour voir où passe le coût. La démonstration ci-dessous porte sur celle qui cherche le secteur le plus polluant d'une région.",
+          en: "The database is populated with test data, then queried. Each useful query was paired with an algebraic tree (joins, projections, selections) to see where the cost goes. The demo below covers the one finding the most polluting sector in a region.",
+        },
+      },
+    ],
     sections: [
       {
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Commande fictive du ministère de l'écologie : concevoir la base de données d'un système national de suivi de la qualité de l'air, agences, personnel, capteurs déployés, relevés et rapports.",
-          en: "A simulated request from the French Ministry of Ecology: design the database for a national air quality monitoring system, agencies, staff, deployed sensors, readings and reports.",
+          fr: "Mise en situation : à la suite d'un rapport du GIEC, le ministère de l'écologie confie à notre équipe la conception d'un système national de suivi de la qualité de l'air. Il doit centraliser les mesures remontées par plusieurs agences météorologiques et permettre de les exploiter, donc gérer les agences et leur personnel, les capteurs déployés sur le territoire, les relevés qu'ils produisent, et les rapports que l'on en tire.",
+          en: "A simulated brief: following an IPCC report, the Ministry of Ecology asks our team to design a national air quality monitoring system. It must centralise measurements sent in by several weather agencies and make them usable, so it has to handle the agencies and their staff, the sensors deployed across the country, the readings they produce, and the reports drawn from them.",
         },
       },
       {
-        id: "modelling",
-        title: { fr: "La modélisation", en: "Modelling" },
+        id: "why",
+        title: {
+          fr: "Pourquoi ne pas commencer par écrire des tables",
+          en: "Why not start by writing tables",
+        },
         body: {
-          fr: "Le projet suit la chaîne Merise complète : dictionnaire de données, modèle conceptuel, modèle logique, modèle physique. Chaque étape contraint la suivante, ce qui oblige à trancher tôt sur les cardinalités plutôt qu'à bricoler le schéma une fois les requêtes écrites.",
-          en: "The project follows the full Merise chain: data dictionary, conceptual model, logical model, physical model. Each stage constrains the next, forcing early decisions on cardinalities rather than patching the schema once queries are written.",
+          fr: "L'intérêt de ce projet n'est pas le SQL, qui s'apprend en quelques heures, mais ce qui vient avant. Une base de données est la seule partie d'un système qu'on ne peut pas refactoriser tranquillement : le jour où des données réelles y vivent, changer une cardinalité veut dire migrer. La méthode Merise force donc à trancher les questions structurantes pendant qu'elles ne coûtent encore rien.",
+          en: "The point of this project is not the SQL, which takes a few hours to learn, but everything before it. A database is the one part of a system you cannot refactor quietly: once real data lives in it, changing a cardinality means migrating. Merise therefore forces the structural questions to be settled while they still cost nothing.",
+        },
+        bullets: {
+          fr: [
+            "Une agence est rattachée à une ville, et la ville à une région, plutôt que l'agence directement à la région. Un niveau de plus, mais c'est ce qui permet plus tard de compter par ville sans avoir à redécouper",
+            "Une région émet plusieurs gaz et un gaz vient de plusieurs régions : cette réciprocité ne se range dans aucune des deux tables, elle devient une table à part entière",
+            "Un relevé porte quatre clés étrangères : le gaz mesuré, le capteur, l'opérateur et la région. Chacune répond à une question qu'on aurait sinon dû reconstituer après coup",
+            "Ces décisions se prennent sur le papier. Une fois des données réelles en base, changer une cardinalité veut dire migrer",
+          ],
+          en: [
+            "An agency attaches to a city, and the city to a region, rather than the agency straight to the region. One level more, but it is what later allows counting by city without re-cutting anything",
+            "A region emits several gases and a gas comes from several regions: that reciprocity fits in neither table, so it becomes a table of its own",
+            "A reading carries four foreign keys: the gas measured, the sensor, the operator and the region. Each answers a question you would otherwise have to reconstruct afterwards",
+            "These decisions are made on paper. Once real data lives in the database, changing a cardinality means migrating",
+          ],
         },
       },
       {
         id: "optimisation",
-        title: { fr: "Optimisation des requêtes", en: "Query optimisation" },
+        title: {
+          fr: "L'arbre algébrique, ou pourquoi l'ordre compte",
+          en: "The algebraic tree, or why order matters",
+        },
         body: {
-          fr: "Les requêtes ont été analysées sous forme d'arbres algébriques, jointures, projections, sélections, pour montrer l'effet de l'ordre des opérations sur le volume de données manipulé. Descendre les sélections au plus près des feuilles réduit le coût avant même de toucher aux index.",
-          en: "Queries were analysed as algebraic trees, joins, projections, selections, to show how operation order affects the volume of data handled. Pushing selections down towards the leaves cuts cost before indexes even come into play.",
+          fr: "Une requête SQL dit ce qu'on veut, pas comment l'obtenir. L'arbre algébrique, lui, montre le comment : les tables sont les feuilles, et chaque nœud est une opération : une jointure qui combine, une sélection qui filtre les lignes, une projection qui ne garde que certaines colonnes. Le résultat est identique quel que soit l'ordre, mais le volume manipulé au passage ne l'est pas du tout.",
+          en: "A SQL query says what you want, not how to get it. The algebraic tree shows the how: tables are the leaves, and each node is an operation: a join that combines, a selection that filters rows, a projection that keeps only some columns. The result is the same whatever the order, but the volume handled along the way is not.",
+        },
+        bullets: {
+          fr: [
+            "Filtrer après avoir joint oblige à construire un résultat intermédiaire énorme pour n'en garder qu'une fraction",
+            "Descendre la sélection au plus près des feuilles réduit ce que chaque jointure doit traiter",
+            "C'est un raisonnement sur le volume, indépendant du moteur : il vaut avant même de parler d'index",
+            "Les moteurs modernes savent souvent réordonner seuls ; savoir lire l'arbre reste ce qui permet de comprendre leur plan d'exécution",
+          ],
+          en: [
+            "Filtering after joining forces you to build a huge intermediate result and keep a fraction of it",
+            "Pushing the selection down towards the leaves shrinks what each join has to process",
+            "It is reasoning about volume, independent of the engine: it holds before indexes even come up",
+            "Modern engines often reorder on their own; reading the tree is what lets you understand their execution plan",
+          ],
+        },
+      },
+      {
+        id: "learned",
+        title: { fr: "Ce que j'en retire", en: "What I took away" },
+        bullets: {
+          fr: [
+            "Un schéma se conçoit avant d'être écrit, parce qu'il se corrige mal une fois peuplé",
+            "Les cardinalités sont des décisions métier déguisées en notation",
+            "Lire un arbre algébrique donne l'intuition du coût d'une requête avant de la mesurer",
+            "Le travail en équipe avec des rôles séparés, et la traçabilité que ça impose",
+          ],
+          en: [
+            "A schema is designed before it is written, because it corrects badly once populated",
+            "Cardinalities are business decisions dressed up as notation",
+            "Reading an algebraic tree gives an intuition of a query's cost before measuring it",
+            "Team work with separate roles, and the traceability that imposes",
+          ],
         },
       },
     ],
     documents: [
-      {
-        href: "/documents/P4_L0.pdf",
-        label: { fr: "Livrable 0, Organisation", en: "Deliverable 0, Organisation" },
-      },
       {
         href: "/documents/P4_soutenance.pdf",
         label: { fr: "Support de soutenance", en: "Defence presentation" },
@@ -1370,18 +1473,14 @@ export const projects: Project[] = [
       en: "CESI · Embedded systems · Team project",
     },
     domain: "embedded",
-    stack: ["C", "Arduino", "Capteurs I2C", "Carte SD"],
+    stack: ["C / C++", "ATmega328", "Arduino", "UML / SysML", "Carte SD"],
+    demo: "weather",
     cover: {
-      src: "/images/P2_1.png",
+      src: "/images/meteo.jpg",
       width: 1024,
       height: 1024,
       alt: { fr: "Prototype de station météo", en: "Weather station prototype" },
     },
-    gallery: [
-      { src: "/images/P2_2.jpg", alt: { fr: "Montage électronique", en: "Electronics assembly" } },
-      { src: "/images/P2_3.jpg", alt: { fr: "Câblage des capteurs", en: "Sensor wiring" } },
-      { src: "/images/P2_4.jpg", alt: { fr: "Interface de consultation", en: "Readout interface" } },
-    ],
     documents: [
       {
         href: "/documents/Projet2livrable1.pdf",
@@ -1406,13 +1505,104 @@ export const projects: Project[] = [
         "User documentation written",
       ],
     },
+    facts: [
+      {
+        label: { fr: "Destination", en: "Intended use" },
+        value: { fr: "Équiper des navires", en: "Fitted to ships" },
+      },
+      {
+        label: { fr: "Cible", en: "Target" },
+        value: { fr: "ATmega328, 2 Ko de RAM", en: "ATmega328, 2 KB of RAM" },
+      },
+      {
+        label: { fr: "Grandeurs", en: "Quantities" },
+        value: {
+          fr: "Pression, humidité, luminosité, température",
+          en: "Pressure, humidity, light, temperature",
+        },
+      },
+      {
+        label: { fr: "Livraisons", en: "Deliveries" },
+        value: {
+          fr: "Analyse, architecture, maquette, documentation",
+          en: "Analysis, architecture, mock-up, documentation",
+        },
+      },
+    ],
+    pipeline: [
+      {
+        id: "analysis",
+        title: { fr: "Analyser avant de câbler", en: "Analyse before wiring" },
+        body: {
+          fr: "Le système a d'abord été décrit en UML et SysML : ce qu'il doit faire, quels acteurs interviennent, comment les blocs s'articulent. Sur un projet embarqué, ce détour n'est pas un exercice scolaire : une fois la carte câblée et le boîtier fermé, changer d'avis coûte un démontage.",
+          en: "The system was first described in UML and SysML: what it must do, which actors are involved, how the blocks fit together. On an embedded project this detour is not a school exercise: once the board is wired and the case closed, changing your mind costs a teardown.",
+        },
+      },
+      {
+        id: "architecture",
+        title: { fr: "L'architecture du programme", en: "The program architecture" },
+        body: {
+          fr: "Fonctions, variables, découpage des responsabilités : la structure logicielle a été posée sur le papier avant d'être écrite. Sur un microcontrôleur, chaque variable globale consomme une mémoire qui se compte en kilooctets, et le compilateur ne prévient pas quand il n'en reste plus assez pour la pile.",
+          en: "Functions, variables, division of responsibilities: the software structure was laid out on paper before being written. On a microcontroller each global variable eats memory measured in kilobytes, and the compiler gives no warning when there is no longer enough left for the stack.",
+        },
+      },
+      {
+        id: "sensors",
+        title: { fr: "Les quatre capteurs", en: "The four sensors" },
+        body: {
+          fr: "Un baromètre pour la pression, un hygromètre pour l'humidité, une photorésistance pour la luminosité et une sonde de température. Chacun a sa propre façon de répondre : certains rendent une valeur numérique directement lisible, d'autres une tension qu'il faut convertir et étalonner.",
+          en: "A barometer for pressure, a hygrometer for humidity, a photoresistor for light and a temperature probe. Each answers in its own way: some return a digital value ready to read, others a voltage that must be converted and calibrated.",
+        },
+      },
+      {
+        id: "storage",
+        title: { fr: "L'enregistrement", en: "Logging" },
+        body: {
+          fr: "Chaque relevé est écrit sur carte SD avec son horodatage, afin qu'on puisse rejouer une période après coup et pas seulement lire l'instant présent. C'est ce qui sépare un afficheur d'une station de mesure : la première ne sert qu'à celui qui regarde, la seconde produit une donnée exploitable plus tard.",
+          en: "Each reading is written to the SD card with its timestamp, so a period can be replayed afterwards rather than only read live. That is what separates a display from a measuring station: the first serves only whoever is looking, the second produces data usable later.",
+        },
+      },
+      {
+        id: "ui",
+        title: { fr: "La consultation sur place", en: "On-site readout" },
+        body: {
+          fr: "Une interface embarquée permet de lire les valeurs courantes et l'historique sans brancher d'ordinateur. Sur un navire, c'est une contrainte d'usage plus qu'un confort : personne ne va chercher un portable pour savoir si la pression baisse.",
+          en: "An on-board interface shows current values and history without plugging in a computer. On a ship this is a usage constraint rather than a convenience: nobody fetches a laptop to find out whether the pressure is dropping.",
+        },
+      },
+    ],
     sections: [
       {
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Concevoir une station autonome capable de relever et d'enregistrer des paramètres météorologiques en environnement exposé, avec une consultation possible sans matériel externe.",
-          en: "Design an autonomous station able to read and log weather parameters in an exposed environment, with readings accessible without external equipment.",
+          fr: "Concevoir une station météo embarquée destinée à équiper des navires. Les mesures servent à deux choses : une lecture immédiate pour l'équipage, et un historique conservé sur carte SD pour analyse ultérieure. L'intérêt du sujet tient à sa destination : un système exposé aux embruns, alimenté sans garantie, et que personne ne viendra redémarrer.",
+          en: "Design an embedded weather station to equip ships. The measurements serve two purposes: an immediate readout for the crew, and a history kept on an SD card for later analysis. What makes the brief interesting is where it ends up: a system exposed to sea spray, powered without guarantees, and that nobody will come to reboot.",
+        },
+      },
+      {
+        id: "constraints",
+        title: {
+          fr: "Ce que change un microcontrôleur",
+          en: "What a microcontroller changes",
+        },
+        body: {
+          fr: "Écrire pour un ATmega328 n'a pas grand-chose à voir avec écrire pour un ordinateur. Deux kilooctets de mémoire vive, pas de système d'exploitation, pas d'allocation dynamique raisonnable, et un programme qui doit tourner des semaines sans fuite ni remise à zéro.",
+          en: "Writing for an ATmega328 has little in common with writing for a computer. Two kilobytes of RAM, no operating system, no sensible dynamic allocation, and a program that has to run for weeks without a leak or a reset.",
+        },
+        bullets: {
+          fr: [
+            "Pas de mémoire allouée à la volée : tout est dimensionné à la compilation, sinon la pile finit par mordre sur les données",
+            "Les chaînes de caractères coûtent cher : un simple message d'erreur occupe une part notable de la mémoire disponible",
+            "L'écriture sur carte SD est lente et doit être espacée, sinon elle bloque la lecture des capteurs",
+            "Un capteur qui ne répond pas ne doit pas figer la station : la boucle continue avec les autres grandeurs",
+          ],
+          en: [
+            "No allocation on the fly: everything is sized at compile time, or the stack eventually eats into the data",
+            "Strings are expensive: a single error message takes a noticeable share of available memory",
+            "Writing to the SD card is slow and must be spaced out, or it stalls sensor reading",
+            "A sensor that stops answering must not freeze the station: the loop carries on with the other quantities",
+          ],
         },
       },
       {
@@ -1420,16 +1610,18 @@ export const projects: Project[] = [
         title: { fr: "Ce que j'en retire", en: "What I took away" },
         bullets: {
           fr: [
-            "Programmation de microcontrôleur sous contrainte mémoire",
-            "Lecture de capteurs et gestion des bus de communication",
-            "Persistance fiable des données sur support amovible",
-            "Rédaction de documentation destinée à un utilisateur non technique",
+            "Programmer sous contrainte mémoire, où chaque variable se justifie",
+            "Modéliser en UML et SysML avant de câbler, parce qu'un montage ne se refactorise pas",
+            "Lire des capteurs de natures différentes et convertir des tensions en grandeurs physiques",
+            "Rendre une donnée persistante et horodatée, donc exploitable après coup",
+            "Rédiger une documentation destinée à quelqu'un qui n'a pas écrit le code",
           ],
           en: [
-            "Microcontroller programming under memory constraints",
-            "Sensor reading and communication bus handling",
-            "Reliable data persistence on removable media",
-            "Writing documentation for a non-technical user",
+            "Programming under memory constraints, where every variable has to justify itself",
+            "Modelling in UML and SysML before wiring, because a build does not refactor",
+            "Reading sensors of different natures and converting voltages into physical quantities",
+            "Making data persistent and timestamped, therefore usable afterwards",
+            "Writing documentation for someone who did not write the code",
           ],
         },
       },
@@ -1452,18 +1644,14 @@ export const projects: Project[] = [
       en: "CESI · Embedded systems · Team project",
     },
     domain: "embedded",
-    stack: ["C", "Arduino", "RFID", "Électronique"],
+    stack: ["C++", "Arduino", "Électronique", "Programmation embarquée", "Algorithmique"],
+    demo: "strongbox",
     cover: {
-      src: "/images/P1_1.jpg",
+      src: "/images/strongbox.jpg",
       width: 372,
       height: 452,
       alt: { fr: "Prototype du coffre-fort", en: "Safe prototype" },
     },
-    gallery: [
-      { src: "/images/P1_2.jpg", alt: { fr: "Circuit électronique", en: "Electronic circuit" } },
-      { src: "/images/P1_3.jpg", alt: { fr: "Lecteur de carte", en: "Card reader" } },
-      { src: "/images/P1_4.jpg", alt: { fr: "Prototype assemblé", en: "Assembled prototype" } },
-    ],
     documents: [
       {
         href: "/documents/Projet1Livrable1.pdf",
@@ -1482,25 +1670,126 @@ export const projects: Project[] = [
         label: { fr: "Livrable 4, Bilan", en: "Deliverable 4, Review" },
       },
     ],
+    facts: [
+      {
+        label: { fr: "Commanditaire", en: "Client" },
+        value: { fr: "Agence MI7, mise en situation", en: "MI7 agency, simulated brief" },
+      },
+      {
+        label: { fr: "Cible", en: "Target" },
+        value: { fr: "Arduino, microcontrôleur 8 bits", en: "Arduino, 8-bit microcontroller" },
+      },
+      {
+        label: { fr: "Livraisons", en: "Deliveries" },
+        value: {
+          fr: "4 jalons, du circuit au prototype complet",
+          en: "4 milestones, from circuit to full prototype",
+        },
+      },
+      {
+        label: { fr: "Facteurs", en: "Factors" },
+        value: {
+          fr: "Carte reconnue + combinaison physique",
+          en: "Recognised card + physical combination",
+        },
+      },
+    ],
     highlights: {
       fr: [
-        "Reconnaissance de cartes électroniques",
-        "Second facteur par combinaison d'interrupteurs",
-        "Prototype fonctionnel sur Arduino",
+        "Deux facteurs indépendants : ni la carte ni la combinaison ne suffit seule",
+        "Circuit conçu avant le code : le schéma électronique fixe ce que le programme peut lire",
+        "Algorithme d'authentification à plusieurs niveaux de droits",
+        "Quatre livrables, du premier circuit au coffre assemblé",
       ],
       en: [
-        "Electronic card recognition",
-        "Second factor through a switch combination",
-        "Working Arduino-based prototype",
+        "Two independent factors: neither the card nor the combination is enough alone",
+        "Circuit designed before the code: the wiring decides what the program can read",
+        "Multi-level authentication algorithm with distinct access rights",
+        "Four deliverables, from first circuit to assembled safe",
       ],
     },
+    pipeline: [
+      {
+        id: "circuit",
+        title: { fr: "Le circuit d'abord", en: "The circuit first" },
+        body: {
+          fr: "Avant toute ligne de code, le schéma électronique : les interrupteurs qui forment la combinaison, les contacts de lecture de la carte, les LED de retour, et les résistances qui vont avec. En embarqué, cet ordre n'est pas un choix : le nombre de broches disponibles décide de ce que le programme pourra lire, et pas l'inverse.",
+          en: "Before any code, the wiring: the switches forming the combination, the card-reading contacts, the feedback LEDs, and the resistors that go with them. In embedded work this order is not a preference: the number of available pins decides what the program can read, not the other way round.",
+        },
+      },
+      {
+        id: "prototype",
+        title: { fr: "Le montage sur plaque", en: "The breadboard build" },
+        body: {
+          fr: "Le schéma devient un montage réel sur plaque d'essai, câblé autour de l'Arduino. C'est l'étape où le papier rencontre la réalité : une résistance mal calculée et la LED grille, un fil mal placé et l'entrée flotte au lieu de valoir zéro.",
+          en: "The schematic becomes a real breadboard build wired around the Arduino. This is where paper meets reality: one miscalculated resistor and the LED burns out, one misplaced wire and the input floats instead of reading zero.",
+        },
+      },
+      {
+        id: "algo",
+        title: { fr: "L'algorithme d'authentification", en: "The authentication algorithm" },
+        body: {
+          fr: "La logique de sécurité proprement dite : reconnaître la carte présentée, lire la combinaison d'interrupteurs, et n'ouvrir que si les deux concordent. Plusieurs niveaux de droits ont été définis, tous les agents n'ouvrant pas les mêmes compartiments.",
+          en: "The security logic proper: recognise the presented card, read the switch combination, and open only if both agree. Several levels of rights were defined, since not every agent opens the same compartments.",
+        },
+      },
+      {
+        id: "assembly",
+        title: { fr: "Le coffre assemblé", en: "The assembled safe" },
+        body: {
+          fr: "Les briques précédentes réunies dans un prototype complet, présenté au commanditaire. Un système qui marche sur la paillasse et un système qui marche une fois refermé dans sa boîte ne sont pas tout à fait le même objet.",
+          en: "The previous pieces brought together into a complete prototype, presented to the client. A system that works on the bench and one that works once closed inside its box are not quite the same object.",
+        },
+      },
+    ],
     sections: [
       {
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Premier projet de systèmes embarqués : concevoir un coffre-fort dont l'ouverture demande deux facteurs indépendants, une carte reconnue et une combinaison physique, afin qu'aucun des deux ne suffise seul.",
-          en: "First embedded systems project: build a safe whose opening requires two independent factors, a recognised card and a physical combination, so that neither alone is enough.",
+          fr: "Mise en situation : l'agence MI7 a besoin d'un coffre pour ses documents sensibles. Premier projet de systèmes embarqués du cursus, et première fois où le programme que j'écris commande quelque chose de physique plutôt que d'afficher un résultat à l'écran.",
+          en: "A simulated brief: the MI7 agency needs a safe for its sensitive documents. The first embedded systems project of the course, and the first time a program I wrote drove something physical rather than printing a result to a screen.",
+        },
+      },
+      {
+        id: "twofactor",
+        title: {
+          fr: "Pourquoi deux facteurs, et pourquoi indépendants",
+          en: "Why two factors, and why independent",
+        },
+        body: {
+          fr: "Une carte seule se vole. Une combinaison seule s'observe par-dessus l'épaule. L'intérêt de les exiger ensemble n'est pas d'additionner deux protections mais d'obliger un attaquant à réussir deux attaques de natures différentes : dérober un objet, et surprendre un geste. C'est le raisonnement qui fonde l'authentification à deux facteurs, et le voir sur un montage de vingt composants le rend plus concret que n'importe quel schéma de cours.",
+          en: "A card alone gets stolen. A combination alone gets watched over a shoulder. Requiring both is not about stacking two protections but about forcing an attacker to succeed at two attacks of different kinds: steal an object, and observe a gesture. That is the reasoning behind two-factor authentication, and seeing it on a twenty-component build makes it far more concrete than any lecture diagram.",
+        },
+        bullets: {
+          fr: [
+            "Les deux facteurs sont lus par des entrées distinctes : compromettre l'une ne donne rien sur l'autre",
+            "Le coffre ne dit pas lequel des deux est faux, sinon il aide l'attaquant à chercher séparément",
+            "Les niveaux de droits ouvrent des compartiments différents plutôt que de tout donner à quiconque entre",
+          ],
+          en: [
+            "The two factors are read on separate inputs: compromising one reveals nothing about the other",
+            "The safe does not say which of the two is wrong, otherwise it helps the attacker search separately",
+            "Rights levels open different compartments rather than giving everything to whoever gets in",
+          ],
+        },
+      },
+      {
+        id: "learned",
+        title: { fr: "Ce que j'en retire", en: "What I took away" },
+        bullets: {
+          fr: [
+            "Un programme embarqué se conçoit avec le circuit, pas après lui",
+            "Le raisonnement derrière l'authentification à deux facteurs, vu de l'intérieur",
+            "Mener un projet de bout en bout, de l'analyse du besoin au prototype présenté",
+            "Ce qu'un message d'erreur trop bavard peut donner à un attaquant",
+          ],
+          en: [
+            "An embedded program is designed with the circuit, not after it",
+            "The reasoning behind two-factor authentication, seen from the inside",
+            "Running a project end to end, from requirements to a presented prototype",
+            "What an over-talkative error message hands to an attacker",
+          ],
         },
       },
     ],
@@ -1522,36 +1811,158 @@ export const projects: Project[] = [
       en: "CESI · Signal processing",
     },
     domain: "embedded",
-    stack: ["Modulation FSK", "Filtrage fréquentiel", "Analyse spectrale", "Modélisation numérique"],
+    stack: ["Python", "NumPy", "SciPy", "Matplotlib", "Jupyter", "Modulation FSK"],
+    demo: "signal",
     cover: {
       src: "/images/signal.jpg",
       width: 780,
       height: 530,
       alt: { fr: "Analyse spectrale d'un signal", en: "Spectral analysis of a signal" },
     },
-    gallery: [
-      { src: "/images/L2_signal.jpg", alt: { fr: "Réponse fréquentielle", en: "Frequency response" } },
-      { src: "/images/L3_signal.jpg", alt: { fr: "Chaîne de transmission", en: "Transmission chain" } },
+    facts: [
+      {
+        label: { fr: "Contrainte", en: "Constraint" },
+        value: {
+          fr: "Un micro pour seul émetteur",
+          en: "A microphone as the only transmitter",
+        },
+      },
+      {
+        label: { fr: "Modulation", en: "Modulation" },
+        value: { fr: "FSK, deux fréquences", en: "FSK, two frequencies" },
+      },
+      {
+        label: { fr: "Validation", en: "Validation" },
+        value: {
+          fr: "Modélisation numérique sous Python",
+          en: "Numerical modelling in Python",
+        },
+      },
+      {
+        label: { fr: "Livraisons", en: "Deliveries" },
+        value: {
+          fr: "4 jalons, de la théorie au prototype",
+          en: "4 milestones, from theory to prototype",
+        },
+      },
     ],
     highlights: {
       fr: [
-        "Chaîne de transmission complète, de l'émission à la démodulation",
-        "Modulation FSK et filtrage fréquentiel",
-        "Modélisation numérique pour valider la faisabilité",
+        "Chaîne complète : codage, modulation, canal bruité, filtrage, décision",
+        "Modulation par déplacement de fréquence, choisie pour sa robustesse au bruit",
+        "Filtrage passe-bande pour isoler la bande utile du bruit ambiant",
+        "Validation par modélisation numérique avant toute réalisation matérielle",
       ],
       en: [
-        "Complete transmission chain, from emission to demodulation",
-        "FSK modulation and frequency filtering",
-        "Numerical modelling to validate feasibility",
+        "Full chain: coding, modulation, noisy channel, filtering, decision",
+        "Frequency-shift keying, chosen for its robustness to noise",
+        "Band-pass filtering to isolate the useful band from ambient noise",
+        "Validated by numerical modelling before any hardware build",
       ],
     },
+    pipeline: [
+      {
+        id: "wave",
+        title: { fr: "Ce qu'est une onde", en: "What a wave is" },
+        body: {
+          fr: "Point de départ : amplitude, fréquence, phase. Trois grandeurs, et donc trois façons de transporter de l'information dans un son. Choisir laquelle est la première décision du projet, et elle dépend entièrement de ce que le canal va abîmer.",
+          en: "Starting point: amplitude, frequency, phase. Three quantities, and therefore three ways of carrying information inside a sound. Choosing which one is the project's first decision, and it depends entirely on what the channel will damage.",
+        },
+      },
+      {
+        id: "modulate",
+        title: { fr: "Coder les bits en fréquences", en: "Coding bits as frequencies" },
+        body: {
+          fr: "La modulation FSK associe une fréquence à chaque état binaire : un ton grave pour le 0, un ton aigu pour le 1. Ce choix n'est pas arbitraire. Un bruit ambiant fait varier l'amplitude en permanence, et une modulation d'amplitude y perdrait ses bits, alors qu'il déplace beaucoup plus rarement une fréquence.",
+          en: "FSK modulation assigns a frequency to each binary state: a low tone for 0, a high tone for 1. That choice is not arbitrary. Ambient noise varies amplitude constantly, and amplitude modulation would lose its bits to it, whereas it far more rarely shifts a frequency.",
+        },
+      },
+      {
+        id: "channel",
+        title: { fr: "Traverser le canal", en: "Crossing the channel" },
+        body: {
+          fr: "Entre le micro et l'oreille, le signal ramasse tout ce qui traîne : bruit de fond, réverbération, atténuation. C'est ce que la modélisation permet d'ajouter volontairement, en quantité choisie, pour voir à partir de quel niveau la transmission cesse de fonctionner.",
+          en: "Between microphone and ear, the signal picks up everything lying around: background noise, reverberation, attenuation. That is what the model lets you add deliberately, in chosen amounts, to see at what level transmission stops working.",
+        },
+      },
+      {
+        id: "filter",
+        title: { fr: "Filtrer avant de décider", en: "Filter before deciding" },
+        body: {
+          fr: "Un filtre passe-bande ne garde que la portion du spectre où vivent nos deux tons et écarte le reste. L'étude de la réponse fréquentielle sert exactement à ça : savoir ce qu'un filtre laisse passer et ce qu'il coupe, avant de s'en servir.",
+          en: "A band-pass filter keeps only the slice of spectrum where our two tones live and discards the rest. Studying the frequency response is exactly for that: knowing what a filter passes and what it cuts, before relying on it.",
+        },
+      },
+      {
+        id: "decide",
+        title: { fr: "Décider bit par bit", en: "Deciding bit by bit" },
+        body: {
+          fr: "Sur chaque intervalle, on compare l'énergie présente autour des deux fréquences et on tranche : celle qui domine donne le bit. Une décision simple, mais qui n'est fiable que parce que tout ce qui précède a fait son travail.",
+          en: "On each interval, the energy present around the two frequencies is compared and a call is made: whichever dominates gives the bit. A simple decision, reliable only because everything before it did its job.",
+        },
+      },
+    ],
     sections: [
       {
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Concevoir une solution de communication robuste dans un environnement où les canaux habituels sont indisponibles, situations d'urgence, milieux confinés. Le projet couvre l'étude de la réponse fréquentielle, le filtrage, la modulation FSK et la validation par modélisation numérique.",
-          en: "Design a robust communication solution for environments where usual channels are unavailable, emergency situations, confined spaces. The project covers frequency response analysis, filtering, FSK modulation and validation through numerical modelling.",
+          fr: "Mise en situation : un agent est enfermé dans une pièce et ne dispose que d'un micro pour transmettre un message. Il faut concevoir la chaîne de transmission complète qui rend ça possible, puis la modéliser numériquement pour démontrer qu'elle tient. Le sujet est fictif ; les questions qu'il pose ne le sont pas : c'est exactement ce qu'on résout pour faire passer des données sur un canal qu'on ne maîtrise pas.",
+          en: "A scenario: an agent is locked in a room with only a microphone to send a message. The task is to design the full transmission chain that makes it possible, then model it numerically to show it holds up. The premise is fictional; the questions it raises are not: this is exactly what you solve to push data through a channel you do not control.",
+        },
+      },
+      {
+        id: "why-fsk",
+        title: {
+          fr: "Pourquoi la fréquence plutôt que l'amplitude",
+          en: "Why frequency rather than amplitude",
+        },
+        body: {
+          fr: "C'est la décision structurante du projet, et elle se déduit du canal. Le son transporte de l'information par trois grandeurs, mais un canal bruité ne les abîme pas de la même façon.",
+          en: "This is the project's structural decision, and it follows from the channel. Sound carries information through three quantities, but a noisy channel does not damage them equally.",
+        },
+        bullets: {
+          fr: [
+            "L'amplitude est ce que le bruit perturbe le plus : un bruit de fond s'additionne directement au niveau du signal",
+            "La phase est précise mais fragile : la moindre réverbération la décale, et une pièce fermée en produit beaucoup",
+            "La fréquence, elle, survit : un écho arrive plus tard et moins fort, mais il arrive à la même fréquence",
+            "D'où la FSK : deux tons bien séparés, dont on cherche lequel domine plutôt que de mesurer un niveau",
+          ],
+          en: [
+            "Amplitude is what noise disturbs most: background noise adds directly to the signal level",
+            "Phase is precise but fragile: the slightest reverberation shifts it, and a closed room produces plenty",
+            "Frequency survives: an echo arrives later and quieter, but it arrives at the same frequency",
+            "Hence FSK: two well-separated tones, where you look for which dominates rather than measuring a level",
+          ],
+        },
+      },
+      {
+        id: "modelling",
+        title: {
+          fr: "Modéliser plutôt que bricoler",
+          en: "Modelling rather than tinkering",
+        },
+        body: {
+          fr: "Toute la chaîne a été écrite en Python avant d'exister sous forme de matériel. L'intérêt n'est pas la commodité : c'est de pouvoir faire varier une seule chose à la fois. On fixe le niveau de bruit, on change la largeur du filtre, on compte les bits perdus. Avec un montage réel, on n'aurait jamais su si l'amélioration venait du filtre ou d'un couloir plus silencieux ce jour-là.",
+          en: "The whole chain was written in Python before existing as hardware. The point is not convenience: it is being able to vary one thing at a time. Fix the noise level, change the filter width, count the lost bits. With a real build you would never know whether the improvement came from the filter or from a quieter corridor that day.",
+        },
+      },
+      {
+        id: "learned",
+        title: { fr: "Ce que j'en retire", en: "What I took away" },
+        bullets: {
+          fr: [
+            "Le choix d'une modulation se déduit du canal, pas du confort de calcul",
+            "Un filtre se conçoit à partir d'une réponse fréquentielle, pas à l'oreille",
+            "Modéliser permet d'isoler une variable, ce qu'une manip réelle interdit",
+            "Le même réflexe m'a resservi sur la tourelle : mesurer avant d'optimiser",
+          ],
+          en: [
+            "The choice of a modulation follows from the channel, not from what is easy to compute",
+            "A filter is designed from a frequency response, not by ear",
+            "Modelling lets you isolate one variable, which a real setup never allows",
+            "The same reflex served me again on the turret: measure before optimising",
+          ],
         },
       },
     ],

@@ -1,9 +1,9 @@
-# Portfolio — Léo Martin
+# Portfolio de Léo Martin
 
 Portfolio bilingue (FR/EN) d'un étudiant ingénieur en informatique, orienté
 intelligence artificielle et vision par ordinateur.
 
-**Stack** — Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · next-intl
+**Stack** : Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · next-intl
 
 ## Démarrer
 
@@ -35,7 +35,7 @@ src/
   components/        Composants d'interface
   content/
     profile.ts       Identité, compétences, expérience, formation
-    projects.ts      Tous les projets — source unique de vérité
+    projects.ts      Tous les projets, source unique de vérité
     types.ts         Types du contenu
   i18n/              Configuration next-intl (routing, navigation, requêtes)
 ```
@@ -43,7 +43,7 @@ src/
 ### Séparation contenu / interface
 
 Le contenu éditorial (projets, parcours, compétences) vit dans `src/content/`,
-en TypeScript, avec les deux langues côte à côte dans le même objet — ce qui
+en TypeScript, avec les deux langues côte à côte dans le même objet, ce qui
 rend une traduction manquante immédiatement visible. Les chaînes d'interface
 (libellés de boutons, titres de section) vivent dans `messages/`.
 
