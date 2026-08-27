@@ -7,29 +7,27 @@ import type { Project } from "./types";
 export const projects: Project[] = [
   /* ------------------------------------------------------------------ */
   {
-    slug: "tourelle-ia",
+    slug: "camera-ptz",
     featured: true,
     status: "ongoing",
     confidential: true,
     period: { fr: "Depuis 2025", en: "Since 2025" },
     title: {
-      fr: "Tourelle vidéo pilotée par IA",
-      en: "AI-driven video turret",
+      fr: "Poursuite automatique sur caméra PTZ",
+      en: "Automatic tracking on a PTZ camera",
     },
     tagline: {
-      fr: "Détection et suivi de cibles maritimes en temps réel, avec asservissement d'une caméra PTZ.",
-      en: "Real-time maritime target detection and tracking, with closed-loop PTZ camera control.",
+      fr: "Détecter, suivre et poursuivre automatiquement des embarcations à l'aide d'un système électro-optique existant.",
+      en: "Automatically detecting, tracking and following vessels using an existing electro-optical system.",
     },
-    context: { fr: "Thales LAS ACR · Alternance", en: "Thales LAS ACR · Apprenticeship" },
+    context: { fr: "Thales LAS · Alternance", en: "Thales LAS · Apprenticeship" },
     domain: "computer-vision",
     stack: [
       "Python",
       "PyTorch",
       "TensorRT",
       "OpenCV",
-      "RF-DETR",
-      "RT-DETR",
-      "CVAT",
+      "Qt / QML",
       "Docker",
       "Linux",
     ],
@@ -46,8 +44,8 @@ export const projects: Project[] = [
       {
         label: { fr: "Rôle", en: "Role" },
         value: {
-          fr: "Alternant ingénieur, conception et mise en œuvre de la chaîne",
-          en: "Apprentice engineer, pipeline design and implementation",
+          fr: "Alternant ingénieur, conception et réalisation de la chaîne",
+          en: "Apprentice engineer, design and build of the pipeline",
         },
       },
       {
@@ -58,32 +56,32 @@ export const projects: Project[] = [
         },
       },
       {
-        label: { fr: "Domaine", en: "Field" },
+        label: { fr: "Capteur", en: "Sensor" },
         value: {
-          fr: "Surveillance maritime, imagerie temps réel",
-          en: "Maritime surveillance, real-time imaging",
+          fr: "Caméra PTZ, système électro-optique (EOS)",
+          en: "PTZ camera, electro-optical system (EOS)",
         },
       },
       {
         label: { fr: "Environnement", en: "Environment" },
         value: {
-          fr: "Serveur Linux isolé du réseau",
-          en: "Air-gapped Linux server",
+          fr: "Poste Linux sans accès à Internet",
+          en: "Linux machine with no internet access",
         },
       },
     ],
     highlights: {
       fr: [
-        "Chaîne complète en boucle fermée : acquisition, détection, suivi, commande de la tourelle",
-        "Trois détecteurs transformer comparés sur les images du site, ByteTrack et filtre de Kalman pour le suivi",
-        "Inférence temps réel optimisée, déployée sur un poste sans accès à Internet",
-        "Le facteur limitant identifié par la mesure : la disponibilité de la détection, pas la commande",
+        "Chaîne complète en boucle fermée : acquisition, détection, suivi, commande de la caméra",
+        "Fonctionne en temps réel sur le matériel déjà installé",
+        "L'image présentée à l'opérateur n'est pas dégradée",
+        "Domaine d'emploi établi par la mesure, limites comprises",
       ],
       en: [
-        "Full closed-loop pipeline: capture, detection, tracking, turret control",
-        "Three transformer detectors compared on site imagery, ByteTrack and a Kalman filter for tracking",
-        "Optimised real-time inference, deployed on a machine with no internet access",
-        "The limiting factor identified by measurement: detection availability, not camera control",
+        "Full closed-loop pipeline: capture, detection, tracking, camera control",
+        "Runs in real time on the hardware already installed",
+        "The image shown to the operator is not degraded",
+        "Operating envelope established by measurement, limits included",
       ],
     },
     pipeline: [
@@ -91,40 +89,32 @@ export const projects: Project[] = [
         id: "capture",
         title: { fr: "Acquisition", en: "Capture" },
         body: {
-          fr: "La caméra diffuse sa vidéo en RTSP. Trois bibliothèques de décodage ont été essayées avant d'en retenir une qui accepte les flux aux en-têtes mal formés, fréquents sur le matériel de terrain, et qui donne un accès réel au transport et au tampon réseau, les deux réglages qui décident de la latence. Un décodeur unique alimente à la fois l'affichage et l'analyse.",
-          en: "The camera streams over RTSP. Three decoding libraries were tried before settling on one that accepts malformed stream headers, common on field hardware, and gives real access to transport and network buffering, the two settings that determine latency. A single decoder feeds both display and analysis.",
+          fr: "Le flux vidéo de la caméra est décodé en continu et préparé pour l'analyse. Cette étape consomme déjà une part du temps disponible, avant même que le modèle ne travaille.",
+          en: "The camera's video stream is decoded continuously and prepared for analysis. This stage already consumes part of the available time, before the model does any work.",
         },
       },
       {
         id: "detect",
         title: { fr: "Détection", en: "Detection" },
         body: {
-          fr: "Un détecteur de la famille DETR localise les embarcations, du cargo au jet-ski. Trois architectures ont été comparées sur les images du site, et non sur un jeu public, où leurs scores trop proches ne les départageaient plus. Le seuil de confiance est un arbitrage : assez bas pour que les petites cibles ne disparaissent pas des trajectoires, assez haut pour que l'écran reste lisible.",
-          en: "A DETR-family detector locates vessels, from cargo ship to jet ski. Three architectures were compared on site imagery, not on a public set, where their scores sat too close to separate them. The confidence threshold is a trade-off: low enough that small targets do not drop out of tracks, high enough that the screen stays readable.",
+          fr: "Un réseau de neurones localise les embarcations présentes dans l'image, du cargo au jet-ski. Le modèle est entraîné sur des images du site lui-même. En effet, un jeu public filmé sous d'autres latitudes ne prépare pas aux conditions que l'on rencontre réellement.",
+          en: "A neural network locates the vessels in the frame, from cargo ship to jet ski. The model is trained on imagery from the site itself. A public dataset filmed under other skies does not prepare it for the conditions actually encountered.",
         },
       },
       {
         id: "track",
         title: { fr: "Suivi", en: "Tracking" },
         body: {
-          fr: "ByteTrack prédit où chaque cible devrait se trouver grâce à un filtre de Kalman, puis associe les nouvelles détections aux pistes existantes. Le filtre rend un second service, moins attendu : la boîte de détection tremble d'une image à l'autre même sur une cible immobile, et le lissage donne à l'asservissement une consigne stable au lieu d'une consigne qui vibre. Un filtre écarte les détections qui restent trop longtemps au même endroit, sans lui, le suivi s'accroche à une bouée, cible idéale du point de vue du détecteur, plutôt qu'au jet-ski visé.",
-          en: "ByteTrack predicts where each target should be using a Kalman filter, then matches new detections to existing tracks. The filter renders a second, less expected service: the detection box jitters between frames even on a stationary target, and smoothing gives the control loop a steady set-point instead of a vibrating one. A filter discards detections that stay too long in one place, without it, tracking latches onto a buoy, an ideal target from the detector's point of view, rather than the jet ski being followed.",
+          fr: "Les détections isolées de chaque image sont reliées entre elles pour former des trajectoires et donner à chaque cible un identifiant stable. C'est cette étape qui permet à l'opérateur de désigner une embarcation et de la garder.",
+          en: "The isolated detections from each frame are linked together into trajectories, giving every target a stable identity. This is the stage that lets the operator designate a vessel and keep hold of it.",
         },
       },
       {
         id: "servo",
         title: { fr: "Asservissement", en: "Camera control" },
         body: {
-          fr: "L'écart entre la cible et le centre de l'image devient une vitesse de rotation, envoyée en ONVIF, un standard, pour que le système fonctionne avec d'autres caméras que celle installée. Le terrain a imposé quatre ajouts au régulateur proportionnel de départ : deux régimes de gain, une zone morte pour ne pas réagir au tremblement de la détection, une hystérésis pour ne pas sautiller à sa frontière, et une compensation du zoom, un réglage valable au grand-angle rend le système instable au téléobjectif. Le rapport entre les gains n'a pas été réglé à l'œil mais par une procédure de calibration, pointée sur une zone bâtie car sur la mer elle aurait mesuré le mouvement des vagues.",
-          en: "The gap between target and frame centre becomes a rotation speed, sent over ONVIF, a standard, so the system works with cameras other than the one installed. The field imposed four additions to the initial proportional controller: two gain regimes, a dead band so it does not react to detection jitter, hysteresis so it does not stutter at that band's edge, and zoom compensation, a setting valid at wide angle makes the system unstable at full telephoto. The ratio between gains was not eyeballed but set by a calibration procedure, aimed at a built-up area because over the sea it would have measured the waves.",
-        },
-      },
-      {
-        id: "learn",
-        title: { fr: "Apprentissage actif", en: "Active learning" },
-        body: {
-          fr: "Les corrections apportées par l'opérateur en cours d'utilisation sont capturées et réinjectées dans le jeu d'entraînement. Le système se spécialise sur les conditions réelles de son déploiement au lieu de rester figé sur la distribution du dataset initial.",
-          en: "Corrections made by the operator during use are captured and fed back into the training set. The system specialises on the real conditions of its deployment instead of staying frozen on the initial dataset distribution.",
+          fr: "L'écart entre la cible désignée et le centre de l'image est converti en commandes de rotation et de zoom. La boucle se referme alors : le mouvement de la caméra modifie l'image suivante, donc la détection suivante.",
+          en: "The offset between the designated target and the frame centre is converted into pan, tilt and zoom commands. The loop then closes: moving the camera changes the next frame, and therefore the next detection.",
         },
       },
     ],
@@ -133,8 +123,8 @@ export const projects: Project[] = [
         id: "context",
         title: { fr: "Le contexte", en: "Context" },
         body: {
-          fr: "Preuve de concept menée dans le cadre de mon alternance d'ingénieur chez Thales LAS ACR : démontrer qu'une tourelle vidéo peut détecter, classifier et suivre automatiquement des cibles en milieu maritime, sans qu'un opérateur ait à garder les yeux sur l'écran en permanence. L'enjeu n'est pas de remplacer l'opérateur mais de lui rendre son attention : la machine surveille en continu, l'humain arbitre.",
-          en: "A proof of concept built during my engineering apprenticeship at Thales LAS ACR: showing that a video turret can automatically detect, classify and track targets in a maritime environment, without an operator having to watch the screen continuously. The goal is not to replace the operator but to give their attention back: the machine watches continuously, the human decides.",
+          fr: "La surveillance côtière consiste à repérer les embarcations qui circulent dans une zone et à les garder à l'œil. Sur les sites équipés, cette veille s'appuie notamment sur des caméras motorisées longue portée, que l'opérateur pilote à la main depuis un poste de supervision. Cependant, cette conduite manuelle mobilise un opérateur par caméra, repose sur une vigilance que la fatigue érode, et ne laisse aucune trace exploitable de ce qui a été observé. Ma mission consiste à déterminer si cette veille peut être confiée à une chaîne de traitement automatique, sur le matériel déjà installé, sans dégrader la qualité d'observation attendue par l'opérateur.",
+          en: "Coastal surveillance means spotting the vessels moving through an area and keeping an eye on them. On equipped sites this watch relies on long-range motorised cameras, which an operator steers by hand from a supervision desk. That manual approach, however, ties up one operator per camera, depends on sustained attention that fatigue erodes, and leaves no usable record of what was observed. My assignment is to determine whether this watch can be handed to an automatic processing chain, on the hardware already installed, without degrading the quality of observation the operator expects.",
         },
       },
       {
@@ -144,166 +134,46 @@ export const projects: Project[] = [
           en: "Why the sea is a hard case",
         },
         body: {
-          fr: "La détection d'objets sur une scène maritime ne ressemble pas à de la détection sur route ou en intérieur. Le fond n'est jamais deux fois le même, et plusieurs difficultés se cumulent.",
-          en: "Object detection on a maritime scene is nothing like detection on roads or indoors. The background is never the same twice, and several difficulties compound.",
+          fr: "La détection sur une scène maritime ne ressemble pas à de la détection sur route ou en intérieur. Le fond n'est jamais deux fois le même, et plusieurs difficultés se cumulent.",
+          en: "Detection on a maritime scene is nothing like detection on roads or indoors. The background is never the same twice, and several difficulties compound.",
         },
         bullets: {
           fr: [
-            "Fond mouvant : la houle crée des motifs qui bougent et changent en permanence, sans jamais constituer un objet",
-            "Reflets spéculaires : le soleil sur l'eau produit des taches très lumineuses qui saturent le capteur et masquent les cibles",
-            "Écart d'échelle considérable : une même classe de bateau occupe quelques pixels à l'horizon et une bonne partie de l'image à courte distance",
-            "Horizon instable : la ligne d'horizon se déplace dans l'image dès que la caméra bouge ou que le porteur tangue",
-            "Sillages et écume : traînées mobiles, souvent confondues avec des objets par un modèle mal entraîné",
-            "Conditions de lumière très variables : contre-jour, brume, crépuscule, pluie",
+            "La houle crée des motifs qui bougent en permanence sans jamais constituer un objet",
+            "Une même classe d'embarcation occupe quelques pixels au loin et une bonne partie de l'image à courte distance",
+            "Les conditions de lumière varient fortement : contre-jour, brume, pluie, crépuscule",
+            "Le zoom modifie la perception du mouvement, ce qui interdit un réglage unique de la commande",
+            "La définition de la vidéo reste limitée au regard des distances observées",
           ],
           en: [
-            "Moving background: swell creates patterns that shift constantly without ever being an object",
-            "Specular reflections: sun on water produces very bright patches that saturate the sensor and hide targets",
-            "Huge scale range: the same boat class occupies a few pixels at the horizon and much of the frame up close",
-            "Unstable horizon: the horizon line moves within the frame as soon as the camera turns or the platform rolls",
-            "Wakes and foam: moving trails, easily mistaken for objects by an undertrained model",
-            "Highly variable light: backlight, haze, dusk, rain",
+            "Swell creates patterns that move constantly without ever forming an object",
+            "The same class of vessel takes a few pixels far off and much of the frame close in",
+            "Lighting varies widely: backlight, haze, rain, dusk",
+            "Zoom changes how motion is perceived, which rules out a single control setting",
+            "Video definition stays limited given the distances observed",
           ],
         },
       },
       {
-        id: "dataset",
+        id: "results",
         title: {
-          fr: "Le jeu de données, d'abord",
-          en: "The dataset comes first",
+          fr: "Ce que le système fait, et où il s'arrête",
+          en: "What the system does, and where it stops",
         },
         body: {
-          fr: "Deux sources alimentent le modèle. Un jeu public de scènes maritimes annotées apprend à quoi ressemble un bateau en général ; les enregistrements du site, annotés à la main sous CVAT, apprennent à quoi il ressemble ici. C'est la seconde qui compte : le jeu public a été filmé dans un port tropical, mer calme et ciel dégagé, quand nous observons la Manche avec de la houle, du brouillard, de la pluie et des contre-jours. Un modèle entraîné uniquement dessus reste excellent dans des conditions qu'il ne rencontrera jamais.",
-          en: "Two sources feed the model. A public set of annotated maritime scenes teaches what a boat looks like in general; recordings from the site, hand-annotated in CVAT, teach what one looks like here. The second is what counts: the public set was filmed in a tropical harbour, calm sea and clear sky, while we watch the Channel with swell, fog, rain and backlight. A model trained on it alone stays excellent in conditions it will never meet.",
-        },
-        bullets: {
-          fr: [
-            "L'annotation reste sur un serveur local : les images du site ne sortent jamais de l'entreprise",
-            "Répartition par vidéo entière et non image par image, deux images consécutives se ressemblent trop, et les répartir au hasard revient à évaluer le modèle sur ce qu'il a déjà vu",
-            "Le score obtenu est plus bas, mais c'est celui qui prédit le comportement sur une scène nouvelle",
-            "Du flou de mouvement est ajouté à une partie des images : nos vidéos sont floues dès que la caméra pivote, le jeu public est filmé caméra fixe",
-            "Les corrections faites par l'opérateur pendant l'exploitation reviennent dans le jeu d'entraînement",
-          ],
-          en: [
-            "Annotation stays on a local server: site images never leave the company",
-            "Split by whole video rather than by frame, consecutive frames are far too similar, and splitting at random amounts to evaluating the model on what it has already seen",
-            "The resulting score is lower, but it is the one that predicts behaviour on a new scene",
-            "Motion blur is added to part of the training images: our footage blurs as soon as the camera pans, the public set is shot on a fixed camera",
-            "Corrections made by the operator during use flow back into the training set",
-          ],
-        },
-      },
-      {
-        id: "models",
-        title: {
-          fr: "Pourquoi ce détecteur, et pourquoi ce tracker",
-          en: "Why this detector, and why this tracker",
-        },
-        body: {
-          fr: "Trois critères, fixés avant de comparer quoi que ce soit : voir des cibles minuscules, tenir le temps réel sur le matériel disponible, et pouvoir être intégré dans un produit. Le troisième s'est révélé le plus discriminant.",
-          en: "Three criteria, set before comparing anything: see tiny targets, hold real time on the available hardware, and be integrable into a product. The third turned out to be the most discriminating.",
-        },
-        bullets: {
-          fr: [
-            "Famille DETR plutôt que les détecteurs à ancres : elle produit d'emblée un nombre fixe de prédictions et supprime l'étape de filtrage des doublons, un filtre trop sévère fusionne une bouée et une embarcation alignées, trop permissif il laisse passer des doublons",
-            "RF-DETR l'emporte sur RT-DETRv4 et D-FINE sur les images du site, surtout sur les petites cibles, grâce à un extracteur pré-entraîné sans annotations qui demande beaucoup moins d'exemples pour s'adapter",
-            "Le classement obtenu sur les images du site est l'inverse de celui obtenu sur le jeu public : un modèle peut être meilleur sur des données publiques et moins bon sur le terrain",
-            "ByteTrack conserve les détections de faible score pour une seconde tentative d'association, quand une petite embarcation s'éloigne et que son score chute, sa trajectoire survit",
-            "La licence a tranché : BoT-SORT, plus performant sur le papier, est sous AGPL-3.0, ce qui obligerait à publier le code de tout produit l'intégrant. Même raisonnement pour les versions récentes de YOLO. Toutes les briques retenues sont sous Apache 2.0 ou équivalent",
-          ],
-          en: [
-            "The DETR family rather than anchor-based detectors: it emits a fixed number of predictions outright and removes the duplicate-filtering step, too strict a filter merges an aligned buoy and vessel, too permissive it lets duplicates through",
-            "RF-DETR beats RT-DETRv4 and D-FINE on site images, especially on small targets, thanks to a backbone pre-trained without annotations that needs far fewer examples to adapt",
-            "The ranking on site images is the reverse of the ranking on the public set: a model can be better on public data and worse in the field",
-            "ByteTrack keeps low-score detections for a second association attempt, when a small vessel moves away and its score drops, its track survives",
-            "Licensing settled it: BoT-SORT, stronger on paper, is AGPL-3.0, which would force publishing the source of any product embedding it. Same reasoning for recent YOLO releases. Every brick retained is Apache 2.0 or equivalent",
-          ],
-        },
-      },
-      {
-        id: "realtime",
-        title: {
-          fr: "Le terrain impose ses arbitrages",
-          en: "The field imposes its trade-offs",
-        },
-        body: {
-          fr: "Plusieurs décisions n'ont rien d'élégant sur le papier et se sont imposées à l'usage. Elles disent mieux que tout le reste ce que « temps réel » signifie dans une boucle fermée.",
-          en: "Several decisions look inelegant on paper and imposed themselves in use. They say better than anything else what \"real time\" means inside a closed loop.",
-        },
-        bullets: {
-          fr: [
-            "Transport vidéo en UDP plutôt qu'en TCP : en TCP, un paquet perdu bloque tout le flux le temps d'être retransmis, et l'image gèle, systématiquement pendant les mouvements de tourelle, quand le débit augmente d'un coup. Pour une boucle d'asservissement, une image un peu abîmée vaut mieux qu'une image figée, car un gel fige aussi la commande",
-            "Un seul décodeur alimente l'affichage et l'analyse : avec deux, l'opérateur voit une image légèrement différente de celle que le système analyse, ce qui pose problème au moment de désigner une cible en cliquant dessus",
-            "Découpage de l'image en quadrants pour agrandir les petites cibles : le gain est réel, mais la cadence tombe de plus de moitié. Désactivé, une détection plus précise qui arrive trop tard dégrade le suivi au lieu de l'améliorer",
-            "Accélération par TensorRT en calculant sur 16 bits au lieu de 32 : vérification faite, la précision est intégralement conservée, y compris sur les petites cibles déjà fragiles",
-          ],
-          en: [
-            "UDP rather than TCP for video transport: in TCP a lost packet stalls the whole stream until it is resent, and the picture freezes, systematically during turret movement, when bitrate spikes. For a control loop a slightly damaged frame beats a frozen one, because a freeze also freezes the command",
-            "One decoder feeds both display and analysis: with two, the operator sees a slightly different frame from the one the system analyses, which matters the moment you designate a target by clicking on it",
-            "Splitting the frame into quadrants to enlarge small targets: the gain is real, but the detection rate more than halves. Disabled, a more accurate detection arriving too late degrades tracking instead of improving it",
-            "TensorRT acceleration computing in 16 bits instead of 32: verified, accuracy is fully preserved, including on the already fragile small targets",
-          ],
+          fr: "Les essais menés en conditions réelles montrent que le système poursuit une embarcation de taille normale pendant plusieurs minutes, en temps réel, sans dégrader l'image présentée à l'opérateur. Cependant, il décroche sur les cibles les plus petites et les plus rapides. Le domaine d'emploi est donc connu, ce qui vaut mieux qu'un système dont on ignore à partir de quand il cesse de fonctionner.",
+          en: "Field trials show the system follows a normal-sized vessel for several minutes, in real time, without degrading the image shown to the operator. It does, however, lose the smallest and fastest targets. The operating envelope is therefore known, which is worth more than a system whose point of failure is a mystery.",
         },
       },
       {
         id: "finding",
         title: {
-          fr: "Identifier le vrai maillon faible",
-          en: "Identifying the real weak link",
+          fr: "Identifier le véritable facteur limitant",
+          en: "Identifying the real limiting factor",
         },
         body: {
-          fr: "Le système suit correctement une embarcation de taille normale mais décroche sur les cibles petites et rapides. Restait à savoir lequel des trois maillons en était responsable : la détection, le suivi ou la commande. Mon intuition désignait le régulateur, supposé trop lent pour un jet-ski. L'analyse des enregistrements a montré l'inverse : plus la détection a de trous, plus les poursuites sont courtes et hachées, mais ces trous n'expliquent en rien l'écart au centre de l'image. Quand la cible est détectée, la caméra vise juste. Le système ne perd pas la cible parce qu'il la vise mal ; il la vise mal par moments parce qu'il ne la voit pas assez souvent.",
-          en: "The system follows a normal-sized vessel correctly but loses small, fast targets. Which of the three links was responsible, detection, tracking or control? My instinct pointed at the controller, presumed too slow for a jet ski. Analysing the recordings showed the opposite: the more gaps in detection, the shorter and choppier the pursuits, yet those gaps explain nothing about the off-centre error. When the target is detected, the camera aims true. The system does not lose the target because it aims badly; it aims badly at times because it does not see it often enough.",
-        },
-        bullets: {
-          fr: [
-            "L'effort est passé du réglage de la commande à la disponibilité de la détection",
-            "Un projet non instrumenté aurait optimisé le régulateur, avec conviction et sans effet",
-            "C'est le protocole de mesure reproductible qui a permis de désigner le facteur limitant, pas l'intuition",
-            "Deux outils ont rendu ce protocole possible : l'enregistrement des sessions, pour rejouer la même scène avec deux réglages, la mer et la lumière ne sont jamais deux fois les mêmes, , et un banc de réglage intégré pour changer un paramètre sans redémarrer",
-          ],
-          en: [
-            "Effort moved from tuning the controller to detection availability",
-            "An uninstrumented project would have optimised the controller, with conviction and no effect",
-            "It was the reproducible measurement protocol that identified the limiting factor, not intuition",
-            "Two tools made that protocol possible: session recording, to replay the same scene with two settings, sea and light are never the same twice, and an in-app tuning bench to change a parameter without restarting",
-          ],
-        },
-      },
-      {
-        id: "limit",
-        title: {
-          fr: "Une limite assumée plutôt que masquée",
-          en: "A limit owned rather than hidden",
-        },
-        body: {
-          fr: "Pour qu'une détection serve au-delà de l'écran, il faut savoir dans quelle direction la caméra regarde. Le protocole ONVIF prévoit une requête qui renvoie la position de la tourelle, et la solution semblait immédiate. Mes essais ont montré que cette caméra renvoie toujours la même valeur, même en rotation : la fonction existe dans le standard, le constructeur ne l'alimente pas. La conformité à un standard garantit qu'une requête sera acceptée et qu'une réponse arrivera, pas que la valeur qu'elle contient soit réelle.",
-          en: "For a detection to be useful beyond the screen, you need to know where the camera is pointing. The ONVIF protocol provides a request returning the turret's position, so the solution looked immediate. My tests showed this camera always returns the same value, even while turning: the function exists in the standard, the manufacturer does not populate it. Conforming to a standard guarantees a request will be accepted and an answer will arrive, not that the value inside is real.",
-        },
-        bullets: {
-          fr: [
-            "Quatre autres pistes étudiées, contre trois critères fixés à l'avance : rester fiable dans le temps, ne dépendre d'aucun autre logiciel, n'ouvrir aucun nouvel accès sur le réseau du site",
-            "Aucune ne remplissait les trois, la fonction a été retirée du périmètre livré plutôt que fournie avec une fiabilité douteuse",
-            "L'interface n'affiche donc aucune direction : elle ne montre que ce que le système sait garantir",
-            "Le coût est réel, puisqu'on ne peut pas encore remonter de position géographique vers la supervision, mais il est documenté plutôt que caché derrière un chiffre faux",
-          ],
-          en: [
-            "Four other routes studied, against three criteria set in advance: stay reliable over time, depend on no other software, open no new access on the site network",
-            "None met all three, the function was removed from the delivered scope rather than shipped with doubtful reliability",
-            "The interface therefore displays no bearing: it shows only what the system can guarantee",
-            "The cost is real, since no geographic position can yet be pushed to the supervision system, but it is documented rather than hidden behind a false number",
-          ],
-        },
-      },
-      {
-        id: "deploy",
-        title: {
-          fr: "Déployer sur une machine coupée du réseau",
-          en: "Deploying on a machine with no network",
-        },
-        body: {
-          fr: "Le système tourne sur un serveur isolé du réseau. Cette contrainte, banale à énoncer, change beaucoup de choses en pratique : plus de `pip install` au moment du déploiement, plus de poids de modèle téléchargés à la volée, plus de correctif de dernière minute. Tout doit être figé, transporté et rejouable à l'identique, ce qui oblige à une rigueur sur les versions et les dépendances qu'un environnement connecté pardonne facilement.",
-          en: "The system runs on an air-gapped server. That constraint is trivial to state and changes a great deal in practice: no `pip install` at deployment time, no model weights fetched on the fly, no last-minute patch. Everything has to be frozen, carried over and reproducible exactly, which forces a discipline about versions and dependencies that a connected environment forgives easily.",
+          fr: "Le principal enseignement de ce travail tient à cette identification. Mon intuition désignait la commande de la caméra, supposée trop lente pour une cible rapide. L'analyse des enregistrements a montré l'inverse : quand la cible est détectée, la caméra vise juste. C'est donc la disponibilité de la détection qui limite le système, et non l'asservissement. Ce constat a réorienté les priorités du projet. En effet, un travail non instrumenté aurait optimisé le régulateur, avec conviction et sans effet.",
+          en: "The main lesson of this work lies in that identification. My instinct pointed at the camera control, presumed too slow for a fast target. Analysing the recordings showed the opposite: when the target is detected, the camera aims true. It is therefore detection availability that limits the system, not the control loop. That finding redirected the project's priorities. An uninstrumented effort would have optimised the controller, with conviction and no effect.",
         },
       },
       {
@@ -311,18 +181,18 @@ export const projects: Project[] = [
         title: { fr: "Ce que j'en retire", en: "What I took away" },
         bullets: {
           fr: [
-            "Mesurer avant de décider : mon réflexe était de modifier le code puis de juger à l'œil. Une boucle fermée ne se juge pas ainsi, sans protocole reproductible, on optimise ce qu'on sait mesurer plutôt que ce qui limite",
-            "Des bases d'automatique acquises sur le terrain : gain, zone morte, hystérésis, retard de boucle, des notions que je n'avais jamais manipulées concrètement",
-            "La chaîne de vision complète, de la constitution du jeu de données au moteur d'inférence optimisé",
-            "Un critère que je n'avais jamais considéré : la licence. Qu'une bibliothèque performante soit inutilisable en contexte industriel à cause de sa licence a été un vrai apprentissage",
-            "Assumer une limite plutôt que la masquer, quitte à réduire le périmètre livré",
+            "Mesurer avant de décider : sans protocole d'essai reproductible, on optimise ce que l'on sait mesurer plutôt que ce qui limite réellement",
+            "La chaîne de vision complète, de la constitution du jeu d'images au déploiement d'un moteur d'inférence optimisé",
+            "Des bases d'automatique acquises sur le terrain, en concevant une boucle qui doit rester stable malgré son retard",
+            "Le conditionnement d'une application pour un poste isolé, où rien ne peut être téléchargé à l'installation",
+            "Assumer une limite et la documenter plutôt que la masquer",
           ],
           en: [
-            "Measure before deciding: my instinct was to change the code then judge by eye. A closed loop cannot be judged that way, without a reproducible protocol you optimise what you can measure rather than what limits you",
-            "Control-theory basics learned in the field: gain, dead band, hysteresis, loop delay, notions I had never handled concretely",
-            "The full vision pipeline, from building the dataset to the optimised inference engine",
-            "A criterion I had never considered: licensing. That a high-performing library can be unusable in an industrial context because of its licence was a real lesson",
-            "Owning a limit rather than hiding it, even at the cost of a narrower delivered scope",
+            "Measure before deciding: without a reproducible test protocol you optimise what you can measure rather than what actually limits you",
+            "The full vision pipeline, from building the image set to deploying an optimised inference engine",
+            "Control-theory basics learned in the field, designing a loop that must stay stable despite its own delay",
+            "Packaging an application for an isolated machine, where nothing can be downloaded at install time",
+            "Owning a limit and documenting it rather than hiding it",
           ],
         },
       },
@@ -1955,13 +1825,13 @@ export const projects: Project[] = [
             "Le choix d'une modulation se déduit du canal, pas du confort de calcul",
             "Un filtre se conçoit à partir d'une réponse fréquentielle, pas à l'oreille",
             "Modéliser permet d'isoler une variable, ce qu'une manip réelle interdit",
-            "Le même réflexe m'a resservi sur la tourelle : mesurer avant d'optimiser",
+            "Le même réflexe m'a resservi sur la caméra PTZ : mesurer avant d'optimiser",
           ],
           en: [
             "The choice of a modulation follows from the channel, not from what is easy to compute",
             "A filter is designed from a frequency response, not by ear",
             "Modelling lets you isolate one variable, which a real setup never allows",
-            "The same reflex served me again on the turret: measure before optimising",
+            "The same reflex served me again on the PTZ camera: measure before optimising",
           ],
         },
       },
@@ -1975,7 +1845,7 @@ export const projects: Project[] = [
  * `featured`.
  */
 const displayOrder = [
-  "tourelle-ia",
+  "camera-ptz",
   "breezy",
   "easysave",
   "tsp-resolver",

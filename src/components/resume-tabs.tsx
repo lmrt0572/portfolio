@@ -45,7 +45,13 @@ export function ResumeTabs({ tabs }: { tabs: ResumeTab[] }) {
         role="tablist"
         aria-label={t("path")}
         aria-orientation="vertical"
-        className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:flex lg:flex-col lg:self-start"
+        /* La liste reste visible pendant la lecture du panneau : les contenus
+           sont longs, et il fallait sinon remonter en haut de page pour changer
+           d'onglet. Le décalage vertical dégage la hauteur de l'en-tête collant.
+           En colonne étroite, les onglets s'empilent au-dessus du panneau et
+           rester collés masquerait le contenu : la fixation n'intervient qu'à
+           partir de `lg`, là où ils occupent leur propre colonne. */
+        className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:flex lg:flex-col lg:self-start lg:sticky lg:top-[calc(var(--header-h)+1.5rem)]"
       >
         {tabs.map((tab, i) => {
           const selected = i === active;
