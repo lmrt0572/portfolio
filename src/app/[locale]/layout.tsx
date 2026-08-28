@@ -11,7 +11,6 @@ import { profile } from "@/content/profile";
 import { siteUrl } from "@/lib/site";
 import { SiteHeader } from "@/components/site-header";
 import { themeInitScript } from "@/components/theme-toggle";
-import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { StructuredData } from "@/components/structured-data";
 import "../globals.css";
@@ -102,7 +101,6 @@ export default async function LocaleLayout({
           >
             {t("skipToContent")}
           </a>
-          <PageTransition />
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />

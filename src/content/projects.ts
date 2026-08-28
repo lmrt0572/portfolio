@@ -1890,9 +1890,9 @@ const displayOrder = [
   "tsp-resolver",
   "stagelink",
   "qualite-air",
-  "strongbox",
   "station-meteo",
   "traitement-signal",
+  "strongbox",
 ];
 
 const rank = (slug: string) => {

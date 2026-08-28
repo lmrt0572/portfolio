@@ -147,50 +147,6 @@
 }
 
 /* ==========================================================================
-   Transition entre pages : six bandes verticales balaient l'écran.
-   ========================================================================== */
-
-/* Rideau ancré sous l'en-tête. */
-.bars {
-  position: fixed;
-  inset: var(--header-h) 0 0 0;
-  z-index: 90;
-  display: flex;
-  /* Requis : en fin d'animation les barres sont garées à -101 %, au-dessus du
-     conteneur ; sans découpe elles recouvriraient l'en-tête. */
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.bars__bar {
-  flex: 1;
-  background: var(--color-bg);
-  transform: translateY(101%);
-  will-change: transform;
-  animation: bar-sweep 1.5s both;
-  animation-delay: calc(var(--i) * 95ms);
-}
-
-/* Montée depuis le bas, temps à couvert, puis dégagement vers le haut. */
-@keyframes bar-sweep {
-  0% {
-    transform: translateY(101%);
-    animation-timing-function: cubic-bezier(0.33, 0, 0.15, 1);
-  }
-  40% {
-    transform: translateY(0);
-    animation-timing-function: linear;
-  }
-  56% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
-  }
-  100% {
-    transform: translateY(-101%);
-  }
-}
-
-/* ==========================================================================
    Portrait : cadre circulaire, bordure en dégradé conique rotatif.
    ========================================================================== */
 
@@ -751,10 +707,6 @@
     border-right-color: transparent;
   }
   .typer__item:not(:first-child) {
-    display: none;
-  }
-
-  .bars {
     display: none;
   }
 
