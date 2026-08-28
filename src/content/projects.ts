@@ -270,7 +270,7 @@ export const projects: Project[] = [
     repo: "https://github.com/DAD-groupe-6/Breezy",
     // Visuel d'illustration en attendant une capture de l'application.
     cover: {
-      src: "/images/breezyy.jfif",
+      src: "/images/breezy-cover.jpg",
       width: 1376,
       height: 768,
       alt: { fr: "Illustration : services en réseau", en: "Illustration: networked services" },
@@ -469,7 +469,7 @@ export const projects: Project[] = [
     repo: "https://github.com/lmrt0572/EasySave",
     // Illustration générée (barres grises, pas de texte), pas une capture réelle.
     cover: {
-      src: "/images/easysave.jfif",
+      src: "/images/easysave-cover.jpg",
       width: 1376,
       height: 768,
       alt: {
@@ -526,7 +526,7 @@ export const projects: Project[] = [
     ],
     video: {
       mp4: "/videos/easysave-demo.mp4",
-      poster: "/images/easysave.jfif",
+      poster: "/images/easysave-cover.jpg",
       aspect: "16 / 9",
       caption: {
         fr: "Démonstration : trois travaux lancés en parallèle, mise en pause de l'un d'eux, reprise et journal des opérations.",
