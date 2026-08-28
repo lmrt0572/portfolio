@@ -42,9 +42,9 @@ serveur.
 
 ## Déploiement
 
-Le projet n'utilise aucune fonctionnalité serveur : ni route API, ni server
-action, ni ISR. Il fonctionne donc aussi bien sur une plateforme Node que sur un
+Aucune fonctionnalité serveur n'est utilisée : ni route API, ni server action,
+ni ISR. Le site tourne donc aussi bien sur une plateforme Node que sur un
 hébergement statique.
 
-Définir `NEXT_PUBLIC_SITE_URL` sur l'URL publique pour que le sitemap, les URL
-canoniques et les images Open Graph soient absolus.
+Sur un domaine personnalisé ou hors Vercel, définir `NEXT_PUBLIC_SITE_URL` :
+sans elle, le sitemap et les URL canoniques pointent vers `localhost`.
