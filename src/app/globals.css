@@ -720,22 +720,26 @@
     display: none;
   }
 
-  /* Machine à écrire figée sur la première phrase. */
+  /* Les phrases continuent d'alterner, mais en simple fondu : plus de frappe
+     lettre à lettre ni de curseur. Une variation d'opacité ne déplace rien à
+     l'écran, elle ne provoque donc pas la gêne vestibulaire que ce réglage
+     cherche à éviter, contrairement au balayage du masque.
+
+     La règle universelle ci-dessus impose `animation-duration: .01ms`, d'où
+     les `!important` : une classe l'emporte sur `*` à poids égal. */
   .typer__item {
-    animation: none;
-    opacity: 1;
+    opacity: 0;
+    animation-name: var(--typer-fade) !important;
+    animation-duration: var(--cycle) !important;
+    animation-iteration-count: infinite !important;
+    animation-timing-function: linear !important;
   }
+
+  /* Masque grand ouvert : le texte est lisible d'emblée, sans balayage. */
   .typer__mask {
     animation: none;
     width: auto;
     border-right-color: transparent;
-  }
-  /* On ne garde que la première phrase. Sélection par frère précédent et non
-     par `:first-child` : les premiers enfants de `.typer` sont la balise
-     `<style>` et le gabarit de largeur, si bien qu'aucune phrase n'est jamais
-     `:first-child` et qu'elles disparaissaient toutes. */
-  .typer__item ~ .typer__item {
-    display: none;
   }
 
   /* Contenu révélé maintenu visible. */

@@ -26,6 +26,7 @@ export function Typer({ phrases }: { phrases: string[] }) {
   const at = (fraction: number) => +(slot * fraction).toFixed(3);
   const fillName = `typer-fill-${count}`;
   const showName = `typer-show-${count}`;
+  const fadeName = `typer-fade-${count}`;
 
   const keyframes = `
 /* Remplissage : le masque plein découvre le texte, le tient, puis se retire. */
@@ -45,6 +46,18 @@ export function Typer({ phrases }: { phrases: string[] }) {
   ${at(0.94)}%   { opacity: 1; }
   ${at(1)}%      { opacity: 0; }
   100%           { opacity: 0; }
+}
+
+/* Variante « animations réduites » : les phrases alternent en fondu, sans
+   frappe ni curseur. La disparition déborde d'un dixième de créneau sur le
+   suivant, dont l'entrée démarre pile à cet instant : les deux se croisent au
+   lieu de laisser un trou noir entre elles. */
+@keyframes ${fadeName} {
+  0%             { opacity: 0; }
+  ${at(0.1)}%    { opacity: 1; }
+  ${at(1)}%      { opacity: 1; }
+  ${at(1.1)}%    { opacity: 0; }
+  100%           { opacity: 0; }
 }`;
 
   return (
@@ -54,6 +67,10 @@ export function Typer({ phrases }: { phrases: string[] }) {
         {
           "--cycle": `${(SLOT_SECONDS * count).toFixed(2)}s`,
           "--slot": `${SLOT_SECONDS}s`,
+          // Le nom passe par une variable : la feuille de styles ne peut pas
+          // deviner le nombre de phrases, mais elle peut relire la variable
+          // pour basculer sur le fondu en « animations réduites ».
+          "--typer-fade": fadeName,
         } as CSSProperties
       }
     >
