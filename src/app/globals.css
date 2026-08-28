@@ -220,18 +220,32 @@
   white-space: nowrap;
 }
 
-/* Chaque segment est dimensionné par son propre texte, pour que le masque aille
-   de 0 à la largeur du texte. Opacité levée seulement pendant son créneau. */
+/* Le segment occupe toute la largeur réservée et laisse l'alignement du
+   paragraphe placer son contenu : centré tant que la mise en page l'est, collé
+   à gauche en deux colonnes. Sans ça, une phrase plus courte que la plus longue
+   restait cadrée à gauche de la largeur réservée, donc visiblement décentrée.
+   Opacité levée seulement pendant son créneau. */
 .typer__item {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  text-align: inherit;
   opacity: 0;
   animation-duration: var(--cycle);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-delay: calc(var(--i) * var(--slot) * -1);
   animation-fill-mode: both;
+}
+
+/* Boîte à la largeur du texte de cette phrase : référence du masque, et seul
+   élément que l'alignement hérité déplace. */
+.typer__slot {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: left;
 }
 
 /* Texte en lettres creuses ; le masque plein le remplit de gauche à droite. */
@@ -696,6 +710,16 @@
     scroll-behavior: auto !important;
   }
 
+  /* Anneau du portrait figé. Arrêté net, le dégradé conique ne laisse voir
+     qu'un quart d'arc, qu'on prend pour un défaut d'affichage : on lui
+     substitue un cercle plein, immobile mais assumé. */
+  .portrait::before {
+    background: var(--color-accent);
+  }
+  .portrait::after {
+    display: none;
+  }
+
   /* Machine à écrire figée sur la première phrase. */
   .typer__item {
     animation: none;
@@ -706,7 +730,11 @@
     width: auto;
     border-right-color: transparent;
   }
-  .typer__item:not(:first-child) {
+  /* On ne garde que la première phrase. Sélection par frère précédent et non
+     par `:first-child` : les premiers enfants de `.typer` sont la balise
+     `<style>` et le gabarit de largeur, si bien qu'aucune phrase n'est jamais
+     `:first-child` et qu'elles disparaissaient toutes. */
+  .typer__item ~ .typer__item {
     display: none;
   }
 

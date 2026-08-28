@@ -70,13 +70,16 @@ export function Typer({ phrases }: { phrases: string[] }) {
           className="typer__item"
           style={{ "--i": i, animationName: showName } as CSSProperties}
         >
-          {/* Lettres creuses : elles donnent aussi au segment la largeur de son
-              propre texte, pour que le masque s'arrête pile à la fin. */}
-          <span className="typer__ghost" aria-hidden="true">
-            {phrase}
-          </span>
-          <span className="typer__mask" style={{ animationName: fillName }}>
-            {phrase}
+          {/* Boîte à la largeur de cette phrase-ci, et non de la plus longue :
+              c'est elle que le masque remplit, et c'est elle que l'alignement
+              du paragraphe centre ou colle à gauche. */}
+          <span className="typer__slot">
+            <span className="typer__ghost" aria-hidden="true">
+              {phrase}
+            </span>
+            <span className="typer__mask" style={{ animationName: fillName }}>
+              {phrase}
+            </span>
           </span>
         </span>
       ))}
