@@ -44,7 +44,9 @@ export async function generateMetadata({
     creator: profile.name,
     alternates: {
       canonical: `/${locale}`,
-      languages: { fr: "/fr", en: "/en" },
+      // `x-default` désigne la version servie à un visiteur dont la langue ne
+      // correspond à aucune des deux. Sans elle, Google choisit lui-même.
+      languages: { fr: "/fr", en: "/en", "x-default": "/fr" },
     },
     openGraph: {
       type: "website",
