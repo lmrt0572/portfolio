@@ -188,30 +188,30 @@ export const projects: Project[] = [
           en: "What the system does, and where it stops",
         },
         body: {
-          fr: "Les essais menés en conditions réelles montrent que le système poursuit une embarcation de taille normale pendant plusieurs minutes, en temps réel, sans dégrader l'image présentée à l'opérateur. Cependant, il décroche sur les cibles les plus petites et les plus rapides. Le domaine d'emploi est donc connu, ce qui vaut mieux qu'un système dont on ignore à partir de quand il cesse de fonctionner.",
-          en: "Field trials show the system follows a normal-sized vessel for several minutes, in real time, without degrading the image shown to the operator. It does, however, lose the smallest and fastest targets. The operating envelope is therefore known, which is worth more than a system whose point of failure is a mystery.",
+          fr: "Les essais menés en conditions réelles montrent que le système peut faire de la détection multi-cible, poursuit une embarcation de taille normale pendant plusieurs minutes, en temps réel, sans dégrader l'image présentée à l'opérateur. Cependant, il décroche sur les cibles les plus petites et les plus rapides. Le domaine d'emploi est donc connu, ce qui vaut mieux qu'un système dont on ignore à partir de quand il cesse de fonctionner.",
+          en: "Field trials show the system can do multi-target detection,follows a normal-sized vessel for several minutes, in real time, without degrading the image shown to the operator. It does, however, lose the smallest and fastest targets. The operating envelope is therefore known, which is worth more than a system whose point of failure is a mystery.",
         },
       },
       {
         id: "finding",
         title: {
-          fr: "Identifier le véritable facteur limitant",
-          en: "Identifying the real limiting factor",
+          fr: "Trouver le maillon faible",
+          en: "Finding the weak link",
         },
         body: {
-          fr: "Le principal enseignement de ce travail tient à cette identification. Mon intuition désignait la commande de la caméra, supposée trop lente pour une cible rapide. L'analyse des enregistrements a montré l'inverse : plus la détection a de trous, plus les poursuites sont courtes et hachées, alors que ces trous n'expliquent en rien l'écart au centre de l'image. Autrement dit, quand la cible est détectée, la caméra vise juste. C'est donc la disponibilité de la détection qui limite le système, et non l'asservissement. En effet, un travail non instrumenté aurait optimisé le régulateur, avec conviction et sans effet.",
-          en: "The main lesson of this work lies in that identification. My instinct pointed at the camera control, presumed too slow for a fast target. Analysing the recordings showed the opposite: the more gaps in detection, the shorter and choppier the pursuits, while those gaps explain nothing about the off-centre error. In other words, when the target is detected the camera aims true. It is therefore detection availability that limits the system, not the control loop. An uninstrumented effort would have optimised the controller, with conviction and no effect.",
+          fr: "Le système décroche sur les cibles petites et rapides, mais lequel des trois maillons en est responsable : la détection, le suivi ou la commande ? La question décide de l'endroit où porter l'effort suivant. Pour la trancher, j'ai comparé les enregistrements des poursuites réussies et de celles qui ont échoué, sur deux mesures : le nombre d'images où la cible n'est pas détectée, et l'écart moyen entre la cible et le centre de l'image. Le lien apparaît sur la première, pas sur la seconde. Autrement dit, quand la cible est détectée, la caméra vise juste ; ce sont les instants où elle ne l'est pas qui hachent la poursuite. C'est donc la disponibilité de la détection qui limite le système, et l'effort est passé du réglage du régulateur à l'amélioration du détecteur.",
+          en: "The system loses small, fast targets, but which of the three links is responsible: detection, tracking or control? The answer decides where the next effort goes. To settle it, I compared recordings of successful pursuits with failed ones on two measures: the number of frames where the target goes undetected, and the average offset between target and frame centre. The correlation shows up on the first, not the second. In other words, when the target is detected the camera aims true; it is the moments when it is not that break up the pursuit. Detection availability is therefore what limits the system, and the effort moved from tuning the controller to improving the detector.",
         },
         bullets: {
           fr: [
-            "L'effort est passé du réglage de la commande à la disponibilité de la détection",
-            "Deux outils ont rendu ce constat possible : l'enregistrement des sessions, pour rejouer la même scène avec deux réglages, et un banc de réglage intégré pour changer un paramètre sans redémarrer",
-            "La mer et la lumière n'étant jamais deux fois les mêmes, une comparaison faite en direct n'aurait rien prouvé",
+            "L'enregistrement des sessions permet de rejouer la même scène avec deux réglages différents. La mer et la lumière n'étant jamais deux fois les mêmes, une comparaison faite en direct ne prouverait rien",
+            "Un banc de réglage intégré à l'application modifie un paramètre sans redémarrer.",
+            "Sans ces deux outils, le constat serait resté une impression",
           ],
           en: [
-            "Effort moved from tuning the controller to detection availability",
-            "Two tools made that finding possible: session recording, to replay the same scene with two settings, and an in-app tuning bench to change a parameter without restarting",
-            "Since sea and light are never the same twice, a comparison made live would have proved nothing",
+            "Session recording makes it possible to replay the same scene with two different settings. Since sea and light are never the same twice, a live comparison would prove nothing",
+            "A tuning bench built into the application changes a parameter without restarting.",
+            "Without those two tools the finding would have stayed an impression",
           ],
         },
       },
