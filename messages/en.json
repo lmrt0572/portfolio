@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "title": "Léo Martin, AI & computer vision engineer",
+    "description": "Apprentice engineer in AI and computer vision at Thales. Real-time object detection and tracking. Seeking an international internship in 2027.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "Projects in artificial intelligence, computer vision, software and web development.",
+    "pathTitle": "Background",
+    "pathDescription": "Education, professional experience and technical skills.",
+    "contactTitle": "Contact",
+    "contactDescription": "Get in touch about an internship opportunity or a question on a project."
+  },
+  "nav": {
+    "home": "Home",
+    "projectsLeadWord": "My",
+    "projectsAccent": "Projects",
+    "pathLeadWord": "My",
+    "pathAccent": "Background",
+    "contactLeadWord": "Let's work",
+    "contactAccent": "together",
+    "projects": "Projects",
+    "path": "Background",
+    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "locale": {
+    "switch": "Change language",
+    "fr": "Français",
+    "en": "English",
+    "frShort": "FR",
+    "enShort": "EN"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "hero": {
+    "cta": "View my projects",
+    "cv": "My CV",
+    "portraitAlt": "Portrait of {name}"
+  },
+  "sections": {
+    "projectsLeadWord": "My",
+    "projectsAccent": "Projects",
+    "pathLeadWord": "My",
+    "pathAccent": "Background",
+    "contactLeadWord": "Let's work",
+    "contactAccent": "together",
+    "projects": "My projects",
+    "projectsLead": "Hover a card for the description, click through for the full project.",
+    "path": "My background",
+    "education": "Education",
+    "educationLead": "An apprenticeship engineering degree in computer science, taught through projects.",
+    "experience": "Experience",
+    "experienceLead": "Two years at Thales LAS ACR, from data handling to embedded AI.",
+    "otherExperience": "Other experience",
+    "skills": "Skills",
+    "skillsLead": "What I actually use, grouped by area.",
+    "about": "About",
+    "aboutLead": "Who I am, beyond the list of technologies.",
+    "softSkills": "How I work",
+    "current": "Current",
+    "languages": "Languages",
+    "contact": "Let's work together",
+    "contactLead": "An internship opportunity, a question about a project, or just to talk, get in touch."
+  },
+  "project": {
+    "backToProjects": "All projects",
+    "viewProject": "View project",
+    "viewCode": "Source code",
+    "stack": "Stack",
+    "highlights": "Key points",
+    "demoTitle": "Try it yourself",
+    "demoLead": "Every tour starts and ends at the depot. Dashed lines are forbidden roads, arrows are deliveries that must happen in order. The tour is built with nearest neighbour, then crossings are undone by 2-opt moves, rejecting any that would break a constraint, which the “blocked” counter tallies.",
+    "demoNote": "This demo was written for this page and is independent from the deliverable. It uses the project's model (cost = fuel × distance + toll, forbidden roads, precedence constraints) on randomly drawn instances, but only two of the eight algorithms studied, at sizes of around thirty cities. The deliverable itself is a Python notebook available on the repository.",
+    "demoEscapeTitle": "Escaping the local optimum",
+    "demoEscapeLead": "Simulated annealing starts where a 2-opt descent stops, on its own randomly drawn instance. It accepts a worse solution now and then, with a probability that collapses as the temperature drops. The dashed line marks its starting point: anything below it was won by crossing a ridge.",
+    "pipeline": "How it works",
+    "gallery": "Gallery",
+    "documents": "Documents",
+    "confidentialNotice": "This project is carried out in an industrial setting. The description deliberately stays at the level of method and publicly available technologies: no data, no figures and no architecture details are published.",
+    "status": {
+      "ongoing": "Ongoing",
+      "shipped": "Completed"
+    },
+    "domain": {
+      "computer-vision": "Computer vision",
+      "web": "Web development",
+      "software": "Software engineering",
+      "data": "Data",
+      "embedded": "Embedded systems",
+      "algorithms": "Algorithms"
+    },
+    "videoTitle": "The walkthrough",
+    "playDemo": "Play the demo",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "algebraLead": "The same query, written two ways. The result is identical; the number of rows traversed to get there is not.",
+    "strongboxLead": "Present a card, set the four switches. Neither is enough on its own: that is the whole point of the build.",
+    "weatherLead": "The station's loop as it runs on the microcontroller. Unplug a sensor to see what happens.",
+    "signalLead": "The full chain, top to bottom. Raise the noise until bits get lost, then switch the filter off.",
+    "schemaLead": "The delivered logical model: twelve tables, three of them born from many-to-many associations.",
+    "schemaTitle": "The data schema"
+  },
+  "contact": {
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "cvFr": "CV in French",
+    "cvEn": "CV in English",
+    "downloadCv": "Download my CV"
+  },
+  "form": {
+    "heading": "Get in",
+    "headingAccent": "touch",
+    "name": "Your full name",
+    "email": "Your email address",
+    "phone": "Your phone number",
+    "subject": "Subject",
+    "message": "Your message",
+    "submit": "Send message"
+  },
+  "thanks": {
+    "title": "Message sent",
+    "heading": "Thank you",
+    "headingAccent": "!",
+    "lead": "Your message is on its way. I'll get back to you as soon as I can, usually within 48 hours.",
+    "backHome": "Back to home",
+    "viewProjects": "View my projects"
+  },
+  "tsp": {
+    "canvasLabel": "Map of cities, constraints and the current tour",
+    "chartLabel": "Cost over iterations",
+    "chartCaption": "Pale line: current cost. Solid line: best found. Dashed: the 2-opt local optimum, where annealing starts from.",
+    "run": "Run the 2-opt descent",
+    "runAnnealing": "Run simulated annealing",
+    "shuffle": "New instance",
+    "more": "60 cities",
+    "cost": "Cost",
+    "gain": "Gain",
+    "improvements": "Reversals",
+    "blocked": "Blocked",
+    "bestCost": "Best cost",
+    "baseline": "2-opt start",
+    "uphill": "Worse moves accepted",
+    "temperature": "Temperature",
+    "localOptimum": "Local optimum reached: no reversal shortens the tour any further. Going beyond means accepting a worse solution, which is what the next demo shows.",
+    "beatBaseline": "Annealing went below the 2-opt local optimum: {percent}% better.",
+    "tiedBaseline": "Annealing did not beat the descent on this draw, it happens, which is exactly why you measure across several instances.",
+    "legendDepot": "Depot",
+    "legendForbidden": "Closed road",
+    "legendPrecedence": "Must be delivered before",
+    "legendCost": "Cost = fuel × distance + toll"
+  },
+  "footer": {
+    "built": "Designed and built with Next.js and Tailwind CSS.",
+    "source": "Source of this site",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page does not exist or has been moved.",
+    "back": "Back to home"
+  },
+  "algebra": {
+    "naive": "Filter after joining",
+    "pushed": "Filter first",
+    "run": "Play both trees",
+    "processed": "Rows traversed:",
+    "verdict": "Same result, {ratio} times fewer rows handled.",
+    "note": "Volumes come from a test dataset declared in the component, not from a measurement on the real database: the point is the gap between the two orderings, not its exact value. The bar scale is logarithmic, otherwise the small nodes would be invisible.",
+    "treeNaiveLabel": "Join tree: the four tables are joined, then the result is filtered at the very top",
+    "treePushedLabel": "Join tree: the selection is applied to the Region table before any join",
+    "reading": "Each tree reads bottom to top: tables sit at the leaves, every node transforms what arrives from below, and the answer comes out at the summit. Both have exactly the same shape; only the selection, in blue, moves: at the very top on the left, once the four tables are assembled; attached to Region on the right, before any join begins.",
+    "sym": {
+      "join": "⋈",
+      "select": "σ",
+      "group": "γ"
+    },
+    "def": {
+      "join": "joins two tables on their shared key",
+      "select": "filters rows, the WHERE",
+      "group": "groups and computes, the GROUP BY"
+    }
+  },
+  "strongbox": {
+    "factorOne": "Factor 1: the card presented",
+    "factorTwo": "Factor 2: the combination",
+    "cardAgent": "Agent card",
+    "cardChief": "Station chief card",
+    "cardUnknown": "Unknown card",
+    "cardNone": "No card",
+    "switch": "Switch {n}",
+    "try": "Attempt to open",
+    "idle": "Present a card, set the switches.",
+    "granted": "Open, access level {level}.",
+    "denied": "Denied.",
+    "note": "The safe never says which of the two factors is wrong: saying so would let an attacker search for them separately, turning two locks back into one. The expected combination is deliberately short here, four switches."
+  },
+  "weather": {
+    "pressure": "Pressure",
+    "humidity": "Humidity",
+    "light": "Light",
+    "temperature": "Temperature",
+    "start": "Start the loop",
+    "pause": "Pause",
+    "reads": "Readings:",
+    "writes": "SD card writes:",
+    "unplug": "Unplug this sensor",
+    "reconnect": "Plug back in",
+    "note": "Values are simulated: the prototype left no publishable dataset. What the demo shows is the rhythm of the loop: sensors are read every cycle, the SD card is written only every tenth cycle because it is far slower, and unplugging one sensor does not freeze the others."
+  },
+  "signal": {
+    "canvasLabel": "Transmission chain: bits, modulated signal, noisy and filtered signal, decision",
+    "rowBits": "1 · Bits to send",
+    "rowModulated": "2 · FSK modulated",
+    "rowChannel": "3 · After the channel, then filtered",
+    "rowDecided": "4 · Decided bits",
+    "noise": "Noise level:",
+    "filter": "Band-pass filter on",
+    "clean": "Message received without error.",
+    "errors": "{count} wrong bits out of {total}.",
+    "note": "The detector used here is the simplest possible: it counts zero crossings to estimate frequency. That is exactly what makes the filter essential: a more elaborate detector correlating the signal against both tones would already reject out-of-band noise and gain far less from filtering. Raise the noise until transmission breaks, then untick the filter at the same level."
+  },
+  "schema": {
+    "notation": "Merise notation",
+    "diagram": "Delivered diagram",
+    "diagramLabel": "Logical data model: twelve tables linked by their foreign keys",
+    "diagramCaption": "The logical model as it appears in the deliverable.",
+    "openFull": "Open full size",
+    "joinTable": "join table",
+    "pk": "Primary key",
+    "fk": "Foreign key",
+    "note": "Names taken verbatim from the deliverable, abbreviations included. Three tables carry only two foreign keys and no identifier of their own: these are the many-to-many associations turned into tables: a region emits several gases and a gas is emitted by several regions, a reading feeds several reports and a report aggregates several readings."
+  }
+}

@@ -1,0 +1,724 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design system : #1f242d (fond), #323946 (surface), #3693b8 (accent).
+   ========================================================================== */
+
+@theme {
+  /* Fonds */
+  --color-bg: #1f242d;
+  --color-surface: #262d38;
+  --color-surface-2: #323946;
+  --color-line: #39424f;
+  --color-line-soft: #2e3641;
+
+  /* Texte */
+  --color-ink: #f0f3f6;
+  --color-muted: #a3b3c2;
+  --color-muted-dim: #7c8b99;
+
+  /* Accent. Variante claire pour texte et icônes (contraste AA). */
+  --color-accent: #3693b8;
+  --color-accent-text: #5cbde0;
+  --color-accent-soft: #1c3c49;
+
+  /* Second accent : noms d'organisation. */
+  --color-accent-alt: #88aafd;
+
+  /* Encre pour aplats blancs constants entre thèmes (pastille d'action des
+     vignettes). Ne pas remplacer par --color-ink/--color-bg : ils s'inversent
+     selon le thème et donnent du blanc sur blanc. */
+  --color-ink-on-white: #141c25;
+
+  /* Typographie */
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Hauteur de l'en-tête collant (référence unique). */
+  --header-h: 5.5rem;
+}
+
+/* ==========================================================================
+   Mode clair : activé uniquement sur choix explicite, mémorisé. Sombre par
+   défaut. Accent assombri pour tenir le contraste sur fond clair.
+   ========================================================================== */
+
+:root[data-theme="light"] {
+  --color-bg: #f2f5f8;
+  --color-surface: #ffffff;
+  --color-surface-2: #e6ecf2;
+  --color-line: #c7d3de;
+  --color-line-soft: #dae3ea;
+
+  --color-ink: #141c25;
+  --color-muted: #4a5765;
+  --color-muted-dim: #67737f;
+
+  /* Accent assombri pour le contraste sur fond clair. */
+  --color-accent: #2a7d9b;
+  --color-accent-text: #1d6480;
+  --color-accent-soft: #dcebf2;
+
+  --color-accent-alt: #3a5fd0;
+}
+
+/* Halo de bouton retiré sur fond clair. */
+:root[data-theme="light"] .btn {
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .btn-round {
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .btn-ghost:hover {
+  box-shadow: none;
+}
+
+/* Ombres portées allégées sur fond clair. */
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .skill,
+:root[data-theme="light"] .pcard {
+  box-shadow: 0 1px 3px rgba(20, 28, 37, 0.1);
+}
+
+:root[data-theme="light"] .card:hover,
+:root[data-theme="light"] .skill:hover,
+:root[data-theme="light"] .pcard:hover {
+  box-shadow: 0 8px 20px rgba(20, 28, 37, 0.16);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  /*
+    Base rem fluide : toutes les unités rem de Tailwind en découlent.
+
+    Une valeur fixe oblige à choisir un écran de référence, et le site paraît
+    alors trop grand ou trop petit partout ailleurs. Ici l'échelle suit la
+    largeur de la fenêtre : 16px jusqu'à 1280px de large, puis une croissance
+    linéaire jusqu'à 17,5px vers 1920px, plafonnée à 18px.
+
+    Le plancher à 16px n'est pas décoratif : en dessous, iOS zoome
+    automatiquement sur les champs de formulaire.
+  */
+  html {
+    font-size: clamp(16px, 0.234vw + 13px, 18px);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-text);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border: 2px solid var(--color-bg);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+}
+
+/* ==========================================================================
+   Portrait : cadre circulaire, bordure en dégradé conique rotatif.
+   ========================================================================== */
+
+.portrait {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.portrait::before,
+.portrait::after {
+  content: "";
+  position: absolute;
+  width: 160%;
+  height: 160%;
+  background: conic-gradient(
+    transparent,
+    transparent,
+    transparent,
+    var(--color-accent)
+  );
+  animation: portrait-spin 9s linear infinite;
+}
+
+.portrait::after {
+  animation-delay: -4.5s;
+}
+
+@keyframes portrait-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Trois couches : anneau lumineux (5px), espace (14px), puis la photo. */
+.portrait__inner {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  padding: 14px;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.portrait__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+/* ==========================================================================
+   Machine à écrire : chaque segment s'affiche à son tour sous un curseur.
+   ========================================================================== */
+
+/* Segments superposés en absolu ; seule la largeur du masque s'anime. */
+.typer {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/* Réserve la largeur de la phrase la plus longue. */
+.typer__sizer {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+/* Chaque segment est dimensionné par son propre texte, pour que le masque aille
+   de 0 à la largeur du texte. Opacité levée seulement pendant son créneau. */
+.typer__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  animation-duration: var(--cycle);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--i) * var(--slot) * -1);
+  animation-fill-mode: both;
+}
+
+/* Texte en lettres creuses ; le masque plein le remplit de gauche à droite. */
+.typer__ghost {
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-accent-text);
+}
+
+/* Repli sans support du contour de texte : aplat atténué. */
+@supports not (-webkit-text-stroke: 1px currentcolor) {
+  .typer__ghost {
+    color: color-mix(in srgb, var(--color-accent-text) 32%, transparent);
+    -webkit-text-stroke: 0;
+  }
+}
+
+.typer__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--color-accent-text);
+  border-right: 2px solid transparent;
+  animation-duration: var(--cycle);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--i) * var(--slot) * -1);
+  animation-fill-mode: both;
+}
+
+/* ==========================================================================
+   Entrées décalées au chargement d'une page
+   ========================================================================== */
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Le contenu entre pendant que le rideau couvre encore l'écran. */
+.enter {
+  animation: enter-up 0.6s var(--ease-out-soft) both;
+  animation-delay: calc(150ms + var(--i, 0) * 70ms);
+}
+
+.enter-right {
+  animation: enter-right 0.7s var(--ease-out-soft) both;
+  animation-delay: calc(200ms + var(--i, 0) * 70ms);
+}
+
+/* ==========================================================================
+   Révélation au défilement (CSS pur). Repli sans support d'animation-timeline :
+   affichage direct.
+   ========================================================================== */
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      /* Plage terminée dans entry : le dernier bloc n'atteint jamais une plage
+         cover complète. */
+      animation-range: entry 2% entry 46%;
+    }
+  }
+}
+
+/* ==========================================================================
+   Barre de progression de lecture (fiches projet).
+   ========================================================================== */
+
+.read-progress {
+  position: fixed;
+  inset: 5.5rem 0 auto 0;
+  height: 2px;
+  z-index: 40;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    animation: progress-grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes progress-grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Bascule d'onglet : fondu court. */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel-in {
+  animation: panel-in 0.28s var(--ease-out-soft) both;
+}
+
+/* Retour tactile : léger enfoncement au clic. */
+.btn:active,
+.btn-ghost:active,
+.btn-round:active {
+  transform: scale(0.96);
+}
+
+.pcard:active {
+  transform: translateY(-0.4rem) scale(0.985);
+}
+
+.card:active {
+  transform: translateY(-0.5rem) scale(0.99);
+}
+
+.btn,
+.btn-ghost,
+.btn-round {
+  transition:
+    background 0.3s var(--ease-out-soft),
+    color 0.3s var(--ease-out-soft),
+    border-color 0.3s var(--ease-out-soft),
+    box-shadow 0.3s var(--ease-out-soft),
+    transform 0.12s var(--ease-out-soft);
+}
+
+/* ==========================================================================
+   Boutons, cartes et tuiles : halo d'accent, inversion et soulèvement au survol.
+   ========================================================================== */
+
+/* Bouton principal : plein + halo, s'inverse au survol. Rembourrage réduit
+   sous 640px pour tenir deux boutons côte à côte. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 1rem var(--color-accent);
+  transition:
+    background 0.4s var(--ease-out-soft),
+    color 0.4s var(--ease-out-soft),
+    box-shadow 0.4s var(--ease-out-soft);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--color-accent-text);
+  box-shadow: none;
+}
+
+/* Bouton secondaire : contour discret. */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-line);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition:
+    border-color 0.4s var(--ease-out-soft),
+    color 0.4s var(--ease-out-soft),
+    box-shadow 0.4s var(--ease-out-soft);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
+  box-shadow: 0 0 0.8rem rgba(54, 147, 184, 0.45);
+}
+
+@media (min-width: 640px) {
+  .btn,
+  .btn-ghost {
+    padding: 0.85rem 2.4rem;
+  }
+}
+
+/* Icône ronde (réseaux sociaux). */
+.btn-round {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent-text);
+  box-shadow: 0 0 0.8rem rgba(54, 147, 184, 0.55);
+  transition:
+    background 0.4s var(--ease-out-soft),
+    color 0.4s var(--ease-out-soft),
+    box-shadow 0.4s var(--ease-out-soft);
+}
+
+.btn-round:hover {
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 0 1.2rem var(--color-accent);
+}
+
+/* Carte de contenu : se soulève et bascule en aplat d'accent au survol. */
+.card {
+  background: var(--color-surface-2);
+  border-radius: 0.8rem;
+  padding: 1.7rem 1.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.35s var(--ease-out-soft),
+    background 0.35s var(--ease-out-soft),
+    box-shadow 0.35s var(--ease-out-soft);
+}
+
+.card:hover {
+  transform: translateY(-0.5rem);
+  background: var(--color-accent);
+  box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.55);
+}
+
+/* Texte de la carte en couleur de fond au survol, pour rester lisible sur
+   l'accent. */
+.card:hover,
+.card:hover :is(h3, h4, p, span, li, dt, dd) {
+  color: var(--color-bg);
+}
+
+.card:hover .card-accent {
+  color: var(--color-bg);
+}
+
+.card-accent {
+  color: var(--color-accent-text);
+  transition: color 0.35s var(--ease-out-soft);
+}
+
+.card-alt {
+  color: var(--color-accent-alt);
+  transition: color 0.35s var(--ease-out-soft);
+}
+
+/* ==========================================================================
+   Tuiles de compétences : logo au-dessus, nom en dessous.
+   ========================================================================== */
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 1.3rem 0.75rem;
+  border-radius: 0.8rem;
+  background: var(--color-surface-2);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.35s var(--ease-out-soft),
+    box-shadow 0.35s var(--ease-out-soft);
+}
+
+.skill:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.55);
+}
+
+.skill__mark {
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  color: var(--color-muted);
+  transition: color 0.35s var(--ease-out-soft);
+}
+
+/* Au survol, le logo reprend sa couleur de marque (ou reste clair si trop
+   sombre, voir isTooDark côté composant). */
+.skill:hover .skill__mark {
+  color: var(--brand, var(--color-accent-text));
+}
+
+.skill:hover .skill__mark svg {
+  color: var(--brand, var(--color-accent-text));
+}
+
+.skill__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.25;
+  color: var(--color-muted);
+  transition: color 0.35s var(--ease-out-soft);
+}
+
+.skill:hover .skill__name {
+  color: var(--color-ink);
+}
+
+/* ==========================================================================
+   Galerie en carrousel : défilement natif conservé, barre masquée (largeurs de
+   diapositives inégales). Boutons et compteur indiquent la progression.
+   ========================================================================== */
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================================
+   Cartes projet : visuel, calque au survol, lien vers la fiche projet.
+   ========================================================================== */
+
+/* Vignette pleine image ; l'information secondaire vit dans le calque au survol. */
+.pcard {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.2rem;
+  background: var(--color-surface-2);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.4s var(--ease-out-soft),
+    box-shadow 0.4s var(--ease-out-soft);
+}
+
+.pcard:hover,
+.pcard:focus-visible {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 0.7rem 1.6rem rgba(0, 0, 0, 0.6);
+}
+
+.pcard__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.pcard__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-soft);
+}
+
+.pcard:hover .pcard__media img,
+.pcard:focus-visible .pcard__media img {
+  transform: scale(1.1);
+}
+
+/* Calque montant depuis le bas, transparent vers accent. */
+.pcard__layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  /* Voile assombri en haut : le calque porte seul le titre. */
+  background: linear-gradient(rgba(12, 20, 27, 0.62), var(--color-accent) 72%);
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-out-soft);
+}
+
+.pcard:hover .pcard__layer,
+.pcard:focus-visible .pcard__layer,
+.pcard:focus-within .pcard__layer {
+  transform: translateY(0);
+}
+
+/* Sans survol (tactile), le calque reste affiché en bandeau permanent en bas. */
+@media (hover: none) {
+  .pcard__layer {
+    /* Maintenu en absolu ancré en bas : la vignette a overflow: hidden, le
+       remettre dans le flux le masquerait. */
+    top: auto;
+    transform: none;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.35rem;
+    padding: 2.5rem 1.25rem 1.15rem;
+    background: linear-gradient(
+      rgba(12, 20, 27, 0),
+      rgba(12, 20, 27, 0.6) 35%,
+      rgba(12, 20, 27, 0.88)
+    );
+  }
+
+  /* Sans survol, la carte entière est cliquable : le rappel d'action est masqué. */
+  .pcard__cta {
+    display: none;
+  }
+
+  .pcard__layer p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Machine à écrire figée sur la première phrase. */
+  .typer__item {
+    animation: none;
+    opacity: 1;
+  }
+  .typer__mask {
+    animation: none;
+    width: auto;
+    border-right-color: transparent;
+  }
+  .typer__item:not(:first-child) {
+    display: none;
+  }
+
+  /* Contenu révélé maintenu visible. */
+  .reveal {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Barre de progression conservée mais non animée. */
+  .read-progress {
+    display: none;
+  }
+}
