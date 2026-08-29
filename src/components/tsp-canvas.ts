@@ -25,7 +25,7 @@ export function readPalette(): Palette {
     edge: get("--color-accent", "#3693b8"),
     city: get("--color-ink", "#f0f3f6"),
     depot: get("--color-accent-alt", "#88aafd"),
-    forbidden: get("--color-muted-dim", "#7c8b99"),
+    forbidden: get("--color-muted-dim", "#96a6b4"),
     precedence: get("--color-accent-text", "#5cbde0"),
   };
 }
