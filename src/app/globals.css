@@ -15,7 +15,7 @@
   /* Texte */
   --color-ink: #f0f3f6;
   --color-muted: #a3b3c2;
-  --color-muted-dim: #7c8b99;
+  --color-muted-dim: #96a6b4;
 
   /* Accent. Variante claire pour texte et icônes (contraste AA). */
   --color-accent: #3693b8;
@@ -54,7 +54,7 @@
 
   --color-ink: #141c25;
   --color-muted: #4a5765;
-  --color-muted-dim: #67737f;
+  --color-muted-dim: #5e6a76;
 
   /* Accent assombri pour le contraste sur fond clair. */
   --color-accent: #2a7d9b;

@@ -13,6 +13,8 @@ import { SiteHeader } from "@/components/site-header";
 import { themeInitScript } from "@/components/theme-toggle";
 import { SiteFooter } from "@/components/site-footer";
 import { StructuredData } from "@/components/structured-data";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -107,6 +109,8 @@ export default async function LocaleLayout({
           <main id="main">{children}</main>
           <SiteFooter />
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
