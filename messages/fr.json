@@ -80,6 +80,7 @@
     "gallery": "Galerie",
     "documents": "Documents",
     "confidentialNotice": "Ce projet est mené dans un cadre industriel. La description reste volontairement au niveau de la méthode et des technologies publiques : ni données, ni résultats chiffrés, ni détails d'architecture ne sont publiés.",
+    "confidentialLabel": "Confidentiel",
     "status": {
       "ongoing": "En cours",
       "shipped": "Terminé"

@@ -230,9 +230,14 @@ export default async function ProjectPage({
 
         {/* ---- Confidentialité ---------------------------------------- */}
         {project.confidential ? (
-          <p className="mb-14 rounded-xl border-l-4 border-accent bg-surface-2 p-6 leading-relaxed text-muted">
-            {t("confidentialNotice")}
-          </p>
+          <div className="mb-14 border-t border-line-soft pt-5">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent-text">
+              {t("confidentialLabel")}
+            </p>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+              {t("confidentialNotice")}
+            </p>
+          </div>
         ) : null}
 
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-20">
