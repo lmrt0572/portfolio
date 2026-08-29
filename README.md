@@ -39,12 +39,3 @@ compilation. Ajouter un projet consiste à ajouter une entrée au tableau
 
 Les routes sont préfixées (`/fr`, `/en`), sans middleware ni négociation côté
 serveur.
-
-## Déploiement
-
-Aucune fonctionnalité serveur n'est utilisée : ni route API, ni server action,
-ni ISR. Le site tourne donc aussi bien sur une plateforme Node que sur un
-hébergement statique.
-
-Sur un domaine personnalisé ou hors Vercel, définir `NEXT_PUBLIC_SITE_URL` :
-sans elle, le sitemap et les URL canoniques pointent vers `localhost`.
