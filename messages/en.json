@@ -80,6 +80,7 @@
     "gallery": "Gallery",
     "documents": "Documents",
     "confidentialNotice": "This project is carried out in an industrial setting. The description deliberately stays at the level of method and publicly available technologies: no data, no figures and no architecture details are published.",
+    "confidentialLabel": "Confidential",
     "status": {
       "ongoing": "Ongoing",
       "shipped": "Completed"
