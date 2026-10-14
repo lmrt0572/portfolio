@@ -4,7 +4,7 @@ import { useCallback, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import type { ProjectImage } from "@/content/types";
+import { pickSource, type ProjectImage } from "@/content/types";
 import type { Locale } from "@/i18n/routing";
 import { ArrowLeftIcon, ArrowRightIcon } from "./icons";
 
@@ -79,9 +79,10 @@ export function ProjectGallery({
           // Sans dimensions déclarées on retombe sur un rapport 16/10, qui est
           // celui d'une capture d'écran ordinaire.
           const ratio = image.width && image.height ? image.width / image.height : 1.6;
+          const src = pickSource(image.src, locale);
           return (
             <li
-              key={image.src}
+              key={src}
               className="shrink-0 snap-start overflow-hidden rounded-xl bg-surface-2"
               // La largeur vise la hauteur de référence, mais ne dépasse jamais
               // l'écran ; la hauteur suit ensuite le rapport de l'image. Fixer
@@ -93,7 +94,7 @@ export function ProjectGallery({
               }}
             >
               <Image
-                src={image.src}
+                src={src}
                 alt={image.alt[locale]}
                 width={image.width ?? 1600}
                 height={image.height ?? 1000}

@@ -20,7 +20,6 @@ import { SchemaDiagram } from "@/components/schema-diagram";
 import { StrongboxDemo } from "@/components/strongbox-demo";
 import { WeatherDemo } from "@/components/weather-demo";
 import { SignalDemo } from "@/components/signal-demo";
-import { PadelDemo } from "@/components/padel-demo";
 import { ArrowLeftIcon, DownloadIcon, GithubIcon } from "@/components/icons";
 
 type Params = { locale: Locale; slug: string };
@@ -67,7 +66,7 @@ export async function generateMetadata({
       type: "article",
       title,
       description: project.tagline[locale],
-      images: project.cover ? [{ url: project.cover.src }] : undefined,
+      images: project.cover ? [{ url: pickSource(project.cover.src, locale) }] : undefined,
     },
   };
 }
@@ -90,6 +89,10 @@ export default async function ProjectPage({
    *  au-delà, ils restent listés dans la colonne technique. */
   const documents = project.documents ?? [];
   const headerDocuments = documents.length <= 2 ? documents : [];
+
+  const videos = [project.video ?? []]
+    .flat()
+    .filter((video) => isPresent(pickSource(video.mp4, locale)));
 
   return (
     <article>
@@ -197,7 +200,7 @@ export default async function ProjectPage({
               style={{ "--i": 5 } as CSSProperties}
             >
               <Image
-                src={project.cover.src}
+                src={pickSource(project.cover.src, locale)}
                 alt={project.cover.alt[locale]}
                 width={project.cover.width ?? 1600}
                 height={project.cover.height ?? 900}
@@ -258,13 +261,19 @@ export default async function ProjectPage({
             </section>
 
             {/* ---- Vidéo de démonstration ------------------------------- */}
-            {project.video && isPresent(pickSource(project.video.mp4, locale)) ? (
+            {videos.length ? (
               <section className="reveal mt-16">
                 <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
                   {t("videoTitle")}
                 </h2>
-                <div className="mt-7">
-                  <ProjectVideoPlayer video={project.video} locale={locale} />
+                <div className="mt-7 grid gap-12">
+                  {videos.map((video) => (
+                    <ProjectVideoPlayer
+                      key={pickSource(video.mp4, locale)}
+                      video={video}
+                      locale={locale}
+                    />
+                  ))}
                 </div>
               </section>
             ) : null}
@@ -295,21 +304,6 @@ export default async function ProjectPage({
                 <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-dim">
                   {t("demoNote")}
                 </p>
-              </section>
-            ) : null}
-
-            {/* ---- Démonstration : un échange rejoué -------------------- */}
-            {project.demo === "padel" ? (
-              <section className="reveal mt-16">
-                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
-                  {t("demoTitle")}
-                </h2>
-                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
-                  {t("padelLead")}
-                </p>
-                <div className="mt-7">
-                  <PadelDemo />
-                </div>
               </section>
             ) : null}
 

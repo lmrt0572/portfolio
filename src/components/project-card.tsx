@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { pickTitle, type Project } from "@/content/types";
+import { pickSource, pickTitle, type Project } from "@/content/types";
 import type { Locale } from "@/i18n/routing";
 import { ArrowRightIcon } from "./icons";
 
@@ -34,7 +34,7 @@ export async function ProjectCard({
       <div className="pcard__media">
         {project.cover ? (
           <Image
-            src={project.cover.src}
+            src={pickSource(project.cover.src, locale)}
             alt=""
             fill
             sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 92vw"

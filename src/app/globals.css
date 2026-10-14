@@ -700,45 +700,6 @@
   }
 }
 
-/* ==========================================================================
-   Démonstration padel : couleurs des surfaces, et onde d'un contact.
-   ========================================================================== */
-
-.padel {
-  --padel-court: var(--color-accent-soft);
-  --padel-floor: #4cc38a;
-  --padel-glass: #f0b65a;
-  --padel-mesh: #e58bb6;
-  --padel-net: #b9a2ff;
-  --padel-ball: #e6dc58;
-}
-
-/* Teintes assombries pour tenir le contraste sur fond clair. */
-:root[data-theme="light"] .padel {
-  --padel-floor: #1d8a57;
-  --padel-glass: #b4741a;
-  --padel-mesh: #b3427a;
-  --padel-net: #6d4fc4;
-  --padel-ball: #a99a10;
-}
-
-@keyframes padel-ripple {
-  from {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(3);
-  }
-}
-
-.padel-ripple {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: padel-ripple 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

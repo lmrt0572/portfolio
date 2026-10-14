@@ -60,7 +60,8 @@ export type ProjectFact = {
 };
 
 export type ProjectImage = {
-  src: string;
+  /** Une version par langue quand l'image contient du texte. */
+  src: Source;
   alt: Localized;
   /** Dimensions réelles du fichier, pour afficher les captures à leur rapport
    *  d'origine. */
@@ -80,7 +81,7 @@ export type ProjectVideo = {
   /** Variante WebM (VP9 ou AV1), proposée en premier quand elle est comprise. */
   webm?: string;
   /** Affiche : la seule ressource chargée avant un clic. */
-  poster: string;
+  poster: Source;
   /** Rapport largeur/hauteur, pour réserver la place et éviter tout décalage. */
   aspect?: string;
   caption: Localized;
@@ -113,9 +114,10 @@ export type Project = {
   pipeline?: PipelineStep[];
   /** Démonstration interactive à insérer. Registre sérialisable, rendu géré
    *  par la page projet. */
-  demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal" | "padel";
-  /** Vidéo de démonstration, insérée avant les sections rédigées. */
-  video?: ProjectVideo;
+  demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal";
+  /** Vidéo de démonstration, insérée avant les sections rédigées. Plusieurs
+   *  vidéos se suivent dans la même section. */
+  video?: ProjectVideo | ProjectVideo[];
   sections: ProjectSection[];
   /** Documents téléchargeables (livrables, rapports). */
   documents?: { href: string; label: Localized }[];

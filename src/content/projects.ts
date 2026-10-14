@@ -264,12 +264,12 @@ export const projects: Project[] = [
     ],
     repo: "https://github.com/lmrt0572/padel-analysis",
     cover: {
-      src: "/images/padel-analysis.jpg",
-      width: 1360,
-      height: 1020,
+      src: { fr: "/images/padel-analysis-fr.jpg", en: "/images/padel-analysis-en.jpg" },
+      width: 1000,
+      height: 750,
       alt: {
-        fr: "Un échange de la finale féminine annoté par le projet : joueuses suivies, balle, vitre du fond éclairée au moment du contact. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
-        en: "A rally from the women's final annotated by the project: tracked players, the ball, the back glass lit at the moment of contact. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+        fr: "Le court reconstruit en 3D par le projet, au moment où la balle touche la vitre latérale : le rebond au sol, la vitre, puis la frappe, chaque contact nommé.",
+        en: "The court rebuilt in 3D by the project, as the ball hits the side glass: the floor bounce, the glass, then the stroke, each contact named.",
       },
     },
     facts: [
@@ -316,16 +316,33 @@ export const projects: Project[] = [
         "Player tracking constrained by the court: IDF1 of 0.82, against 0.28 for plain ByteTrack on the same frames",
       ],
     },
-    video: {
-      // Le film contient du texte : une version par langue.
-      mp4: { fr: "/videos/padel-analysis-fr-demo.mp4", en: "/videos/padel-analysis-en-demo.mp4" },
-      poster: "/images/padel-analysis-poster.jpg",
-      caption: {
-        fr: "Le projet en une minute, avec le son. L'échange, ses contacts et ses statistiques sont ceux que le projet a mesurés ; entre deux contacts, la trajectoire 3D de la balle est une illustration. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
-        en: "The project in one minute, with sound. The rally, its contacts and its statistics are the ones the project measured; between two contacts, the ball's 3D path is an illustration. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+    // Les deux vidéos contiennent du texte : une version par langue.
+    video: [
+      {
+        mp4: { fr: "/videos/padel-analysis-fr-demo.mp4", en: "/videos/padel-analysis-en-demo.mp4" },
+        poster: "/images/padel-analysis-poster.jpg",
+        caption: {
+          fr: "Le projet en une minute, avec le son. L'échange, ses contacts et ses statistiques sont ceux que le projet a mesurés ; entre deux contacts, la trajectoire 3D de la balle est une illustration. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
+          en: "The project in one minute, with sound. The rally, its contacts and its statistics are the ones the project measured; between two contacts, the ball's 3D path is an illustration. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+        },
       },
-    },
-    demo: "padel",
+      {
+        mp4: {
+          fr: "/videos/padel-analysis-rally-fr-demo.mp4",
+          en: "/videos/padel-analysis-rally-en-demo.mp4",
+        },
+        poster: {
+          fr: "/images/padel-analysis-rally-poster-fr.jpg",
+          en: "/images/padel-analysis-rally-poster-en.jpg",
+        },
+        // Rapport exact du rendu, panneau compris.
+        aspect: "1920 / 864",
+        caption: {
+          fr: "L'échange en entier, tel que le projet le rend : les joueuses suivies, la balle, la zone touchée à chaque contact et le panneau de statistiques. Sans le son. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
+          en: "The full rally, as the project renders it: the tracked players, the ball, the zone hit at each contact and the statistics panel. No sound. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+        },
+      },
+    ],
     pipeline: [
       {
         id: "court",
@@ -507,7 +524,7 @@ export const projects: Project[] = [
     ],
     gallery: [
       {
-        src: "/images/padel-judges.png",
+        src: { fr: "/images/padel-judges-fr.png", en: "/images/padel-judges-en.png" },
         width: 1170,
         height: 598,
         alt: {
@@ -516,7 +533,7 @@ export const projects: Project[] = [
         },
       },
       {
-        src: "/images/padel-pair-report.png",
+        src: { fr: "/images/padel-pair-report-fr.png", en: "/images/padel-pair-report-en.png" },
         width: 1365,
         height: 858,
         alt: {
@@ -525,7 +542,7 @@ export const projects: Project[] = [
         },
       },
       {
-        src: "/images/padel-points-by-length.png",
+        src: { fr: "/images/padel-points-by-length-fr.png", en: "/images/padel-points-by-length-en.png" },
         width: 1352,
         height: 494,
         alt: {
@@ -534,7 +551,7 @@ export const projects: Project[] = [
         },
       },
       {
-        src: "/images/padel-net-control.png",
+        src: { fr: "/images/padel-net-control-fr.png", en: "/images/padel-net-control-en.png" },
         width: 1430,
         height: 546,
         alt: {
@@ -2191,8 +2208,8 @@ export const projects: Project[] = [
  * `featured`.
  */
 const displayOrder = [
-  "camera-ptz",
   "padel-analysis",
+  "camera-ptz",
   "breezy",
   "easysave",
   "tsp-resolver",

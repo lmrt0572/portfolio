@@ -51,7 +51,7 @@ export function ProjectVideoPlayer({
             autoPlay
             playsInline
             preload="auto"
-            poster={video.poster}
+            poster={pickSource(video.poster, locale)}
             aria-label={video.caption[locale]}
           >
             {/* WebM en premier : à qualité égale le fichier est plus léger, et
@@ -76,7 +76,7 @@ export function ProjectVideoPlayer({
             aria-label={t("playDemo")}
           >
             <Image
-              src={video.poster}
+              src={pickSource(video.poster, locale)}
               alt=""
               fill
               sizes="(min-width: 1024px) 52rem, 92vw"
