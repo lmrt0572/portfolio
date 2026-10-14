@@ -264,12 +264,12 @@ export const projects: Project[] = [
     ],
     repo: "https://github.com/lmrt0572/padel-analysis",
     cover: {
-      src: { fr: "/images/padel-analysis-fr.jpg", en: "/images/padel-analysis-en.jpg" },
-      width: 1000,
-      height: 750,
+      src: "/images/padel-analysis-court.jpg",
+      width: 1120,
+      height: 840,
       alt: {
-        fr: "Le court reconstruit en 3D par le projet, au moment où la balle touche la vitre latérale : le rebond au sol, la vitre, puis la frappe, chaque contact nommé.",
-        en: "The court rebuilt in 3D by the project, as the ball hits the side glass: the floor bounce, the glass, then the stroke, each contact named.",
+        fr: "Le court reconstruit en 3D, avec les contacts d'un échange mesurés par le projet.",
+        en: "The court rebuilt in 3D, with the contacts of a rally measured by the project.",
       },
     },
     facts: [
