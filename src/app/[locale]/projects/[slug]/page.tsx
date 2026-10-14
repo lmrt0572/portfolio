@@ -9,7 +9,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getProject, projects } from "@/content/projects";
-import { pickTitle } from "@/content/types";
+import { pickSource, pickTitle } from "@/content/types";
 import { ProjectPipeline } from "@/components/project-pipeline";
 import { TspDemo } from "@/components/tsp-demo";
 import { TspAnnealingDemo } from "@/components/tsp-annealing-demo";
@@ -20,6 +20,7 @@ import { SchemaDiagram } from "@/components/schema-diagram";
 import { StrongboxDemo } from "@/components/strongbox-demo";
 import { WeatherDemo } from "@/components/weather-demo";
 import { SignalDemo } from "@/components/signal-demo";
+import { PadelDemo } from "@/components/padel-demo";
 import { ArrowLeftIcon, DownloadIcon, GithubIcon } from "@/components/icons";
 
 type Params = { locale: Locale; slug: string };
@@ -257,7 +258,7 @@ export default async function ProjectPage({
             </section>
 
             {/* ---- Vidéo de démonstration ------------------------------- */}
-            {project.video && isPresent(project.video.mp4) ? (
+            {project.video && isPresent(pickSource(project.video.mp4, locale)) ? (
               <section className="reveal mt-16">
                 <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
                   {t("videoTitle")}
@@ -294,6 +295,21 @@ export default async function ProjectPage({
                 <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-dim">
                   {t("demoNote")}
                 </p>
+              </section>
+            ) : null}
+
+            {/* ---- Démonstration : un échange rejoué -------------------- */}
+            {project.demo === "padel" ? (
+              <section className="reveal mt-16">
+                <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                  {t("demoTitle")}
+                </h2>
+                <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                  {t("padelLead")}
+                </p>
+                <div className="mt-7">
+                  <PadelDemo />
+                </div>
               </section>
             ) : null}
 

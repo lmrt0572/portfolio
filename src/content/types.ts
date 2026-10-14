@@ -21,6 +21,13 @@ export function pickTitle(value: Title, locale: Locale): string {
   return typeof value === "string" ? value : value[locale];
 }
 
+/** Fichier commun aux deux langues, ou une version par langue. */
+export type Source = string | Localized;
+
+export function pickSource(value: Source, locale: Locale): string {
+  return typeof value === "string" ? value : value[locale];
+}
+
 export type ProjectStatus = "shipped" | "ongoing";
 
 /** Domaine du projet. */
@@ -67,8 +74,9 @@ export type ProjectImage = {
  * requis (`-movflags +faststart`).
  */
 export type ProjectVideo = {
-  /** Source principale : H.264/AAC en MP4, index en tête. */
-  mp4: string;
+  /** Source principale : H.264/AAC en MP4, index en tête. Une version par
+   *  langue quand la vidéo contient du texte. */
+  mp4: Source;
   /** Variante WebM (VP9 ou AV1), proposée en premier quand elle est comprise. */
   webm?: string;
   /** Affiche : la seule ressource chargée avant un clic. */
@@ -105,7 +113,7 @@ export type Project = {
   pipeline?: PipelineStep[];
   /** Démonstration interactive à insérer. Registre sérialisable, rendu géré
    *  par la page projet. */
-  demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal";
+  demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal" | "padel";
   /** Vidéo de démonstration, insérée avant les sections rédigées. */
   video?: ProjectVideo;
   sections: ProjectSection[];

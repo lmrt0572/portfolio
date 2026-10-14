@@ -240,6 +240,313 @@ export const projects: Project[] = [
 
   /* ------------------------------------------------------------------ */
   {
+    slug: "padel-analysis",
+    featured: true,
+    status: "shipped",
+    period: { fr: "2026", en: "2026" },
+    title: "Padel Analysis",
+    tagline: {
+      fr: "Lire un match de padel filmé par une seule caméra de télévision : les joueurs, la balle, chaque contact et ce que la balle a touché, puis les statistiques du jeu.",
+      en: "Reading a padel match filmed by a single TV camera: the players, the ball, every contact and what the ball hit, then the statistics of the game.",
+    },
+    context: { fr: "Projet personnel · Code ouvert", en: "Personal project · Open source" },
+    domain: "computer-vision",
+    stack: [
+      "Python",
+      "PyTorch",
+      "Ultralytics YOLO",
+      "OpenCV",
+      "NumPy",
+      "SciPy",
+      "Matplotlib",
+      "pytest",
+      "GitHub Actions",
+    ],
+    repo: "https://github.com/lmrt0572/padel-analysis",
+    cover: {
+      src: "/images/padel-analysis.jpg",
+      width: 1360,
+      height: 1020,
+      alt: {
+        fr: "Un échange de la finale féminine annoté par le projet : joueuses suivies, balle, vitre du fond éclairée au moment du contact. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
+        en: "A rally from the women's final annotated by the project: tracked players, the ball, the back glass lit at the moment of contact. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+      },
+    },
+    facts: [
+      {
+        label: { fr: "Rôle", en: "Role" },
+        value: {
+          fr: "Seul, de la conception à la publication",
+          en: "Solo, from design to release",
+        },
+      },
+      {
+        label: { fr: "Données", en: "Data" },
+        value: {
+          fr: "Deux finales du World Padel Tour 2022, en 1920×1080 à 30 images/s",
+          en: "Two 2022 World Padel Tour finals, 1920×1080 at 30 fps",
+        },
+      },
+      {
+        label: { fr: "Vérité terrain", en: "Ground truth" },
+        value: {
+          fr: "Plus de 2 000 contacts pointés à la main",
+          en: "More than 2,000 contacts marked by hand",
+        },
+      },
+      {
+        label: { fr: "Matériel", en: "Hardware" },
+        value: {
+          fr: "Une GTX 1650, analyse après match",
+          en: "A GTX 1650, post-match analysis",
+        },
+      },
+    ],
+    highlights: {
+      fr: [
+        "82 à 83 % des contacts reconnus avec la bonne surface sur des minutes jamais vues, contre 62 % pour des règles réglées à la main",
+        "86 % sur un échange d'un autre tournoi, filmé dans une autre salle, sans rien réentraîner",
+        "Sur un match entier : points exacts, distance d'une paire à 1,3 % près, frappes à 1,2 % près",
+        "Un suivi des joueurs contraint par le court : IDF1 de 0,82, contre 0,28 pour ByteTrack seul sur les mêmes images",
+      ],
+      en: [
+        "82 to 83% of contacts recognised with the right surface on minutes never seen, against 62% for hand-tuned rules",
+        "86% on a rally from another tournament, filmed in another venue, without retraining anything",
+        "Over a whole match: points exact, a pair's distance within 1.3%, strokes within 1.2%",
+        "Player tracking constrained by the court: IDF1 of 0.82, against 0.28 for plain ByteTrack on the same frames",
+      ],
+    },
+    video: {
+      // Le film contient du texte : une version par langue.
+      mp4: { fr: "/videos/padel-analysis-fr-demo.mp4", en: "/videos/padel-analysis-en-demo.mp4" },
+      poster: "/images/padel-analysis-poster.jpg",
+      caption: {
+        fr: "Le projet en une minute, avec le son. L'échange, ses contacts et ses statistiques sont ceux que le projet a mesurés ; entre deux contacts, la trajectoire 3D de la balle est une illustration. Images : PadelTracker100 (CC BY 4.0), retransmission World Padel Tour.",
+        en: "The project in one minute, with sound. The rally, its contacts and its statistics are the ones the project measured; between two contacts, the ball's 3D path is an illustration. Footage: PadelTracker100 (CC BY 4.0), World Padel Tour broadcast.",
+      },
+    },
+    demo: "padel",
+    pipeline: [
+      {
+        id: "court",
+        title: { fr: "Le court en trois dimensions", en: "The court in three dimensions" },
+        body: {
+          fr: "Quelques points du court cliqués sur l'image suffisent à le calibrer : la position et l'orientation de la caméra en découlent. Une seule caméra ne voit pas la profondeur, mais au moment d'un contact la balle est posée sur une surface connue, le sol ou une vitre. Le rayon qui part de la caméra et traverse le pixel de la balle coupe cette surface en un seul point, qui place l'impact en trois dimensions.",
+          en: "A few court points clicked on the image are enough to calibrate it: the camera's position and orientation follow. A single camera cannot see depth, but at the moment of a contact the ball sits on a known surface, the floor or a glass panel. The ray from the camera through the ball's pixel meets that surface at a single point, which places the impact in three dimensions.",
+        },
+      },
+      {
+        id: "players",
+        title: { fr: "Les joueurs", en: "The players" },
+        body: {
+          fr: "YOLO pose détecte chaque personne et son squelette. Le point entre les chevilles, projeté sur le sol, donne la position en mètres. Le suivi tient exactement quatre places, deux de chaque côté du filet, et refuse toute position hors du court. Sans ces contraintes, ByteTrack dépasse quatre pistes sur plus d'une image sur deux : le détecteur voit bien plus de personnes que les quatre joueurs.",
+          en: "YOLO pose detects every person and their skeleton. The point between the ankles, projected onto the floor, gives the position in metres. Tracking holds exactly four slots, two on each side of the net, and refuses any position outside the court. Without these constraints, ByteTrack exceeds four tracks on more than one frame in two: the detector sees far more people than the four players.",
+        },
+      },
+      {
+        id: "ball",
+        title: { fr: "La balle", en: "The ball" },
+        body: {
+          fr: "La balle mesure quelques pixels et se noie parmi des dizaines de candidats. Plutôt que de la chercher image par image, le projet garde les meilleurs candidats de chaque image et choisit, par programmation dynamique, le chemin le plus plausible sur toute la séquence. Le rappel passe de 16 % à 72 %, puis à 80 % avec un réseau de détection entraîné pour l'occasion.",
+          en: "The ball is a few pixels wide and drowns among dozens of candidates. Rather than looking for it frame by frame, the project keeps the best candidates of every frame and chooses, by dynamic programming, the most plausible path over the whole sequence. Recall rises from 16% to 72%, then to 80% with a detection network trained for the purpose.",
+        },
+      },
+      {
+        id: "contacts",
+        title: { fr: "Les contacts et leur surface", en: "Contacts and their surface" },
+        body: {
+          fr: "Un petit réseau temporel, entraîné sur des minutes pointées à la main, décide de chaque contact et de sa surface à partir de la trajectoire, des gestes des joueurs et de la géométrie du court ; dix-huit réseaux votent ensemble. Les vitres que l'image ne montre pas se déduisent de la physique : une balle trop lente pour avoir rejoint le joueur directement après son rebond est passée par la vitre, ce qui se vérifie 13 fois sur 14.",
+          en: "A small temporal network, trained on minutes marked by hand, decides every contact and its surface from the trajectory, the players' gestures and the court geometry; eighteen networks vote together. Glass contacts the picture does not show are inferred from physics: a ball too slow to have reached the player directly after its bounce went via the glass, which holds 13 times out of 14.",
+        },
+      },
+      {
+        id: "stats",
+        title: { fr: "Les statistiques", en: "The statistics" },
+        body: {
+          fr: "Le jeu est découpé en échanges. Le tableau d'affichage, lu à l'image, donne les points, crédités au dernier frappeur, et dit quand les paires changent de côté. Viennent ensuite, par joueur sur un échange et par paire sur un match, la distance parcourue, la vitesse, le temps au filet, les frappes et les volées.",
+          en: "Play is cut into rallies. The scoreboard, read off the picture, gives the points, credited to the last striker, and says when the pairs change ends. Then come, per player over a rally and per pair over a match, distance covered, speed, time at the net, strokes and volleys.",
+        },
+      },
+    ],
+    sections: [
+      {
+        id: "context",
+        title: { fr: "Le point de départ", en: "Where it started" },
+        body: {
+          fr: "Les analyses de tennis par vision par ordinateur détectent les joueurs et la balle, puis en tirent des statistiques. Le padel ajoute une question que le tennis ne pose pas : la balle rebondit sur les vitres et les grillages, et un même échange enchaîne volées, rebonds et coups joués après la vitre. Savoir ce que la balle a touché, à chaque contact, devient le cœur du problème. J'ai mené ce projet seul, sur les images d'une retransmission télévisée et sans aucun autre capteur, avec une règle fixée dès le départ : ne publier un chiffre que s'il a été mesuré sur des minutes jamais regardées pendant les réglages.",
+          en: "Computer vision analyses of tennis detect the players and the ball, then derive statistics from them. Padel adds a question tennis never asks: the ball bounces off glass and mesh, and a single rally chains volleys, bounces and shots played after the glass. Knowing what the ball hit, at every contact, becomes the heart of the problem. I ran this project alone, on the pictures of a TV broadcast and with no other sensor, with one rule set from the start: only publish a figure if it was measured on minutes never looked at during tuning.",
+        },
+      },
+      {
+        id: "difficulty",
+        title: {
+          fr: "Pourquoi le padel est un cas difficile",
+          en: "Why padel is a hard case",
+        },
+        body: {
+          fr: "Une retransmission n'est pas filmée pour l'analyse : la caméra est loin et haute, et la balle traverse l'image en quelques instants.",
+          en: "A broadcast is not filmed for analysis: the camera is far away and high up, and the ball crosses the picture in moments.",
+        },
+        bullets: {
+          fr: [
+            "La balle ne mesure que quelques pixels, souvent floue, parfois cachée par un joueur",
+            "Au fond du court, un rebond sur la vitre ne déplace la balle que de quelques pixels à l'image",
+            "Une seule caméra ne voit pas la profondeur : une balle haute près du filet et une balle au sol au fond du court peuvent tomber sur le même pixel",
+            "Le public et les personnes autour du court sont aussi des silhouettes pour le détecteur",
+            "La retransmission coupe et raccorde les plans, et l'identité des joueurs doit survivre à ces raccords",
+          ],
+          en: [
+            "The ball is only a few pixels wide, often blurred, sometimes hidden by a player",
+            "At the back of the court, a bounce off the glass moves the ball by only a few pixels in the picture",
+            "A single camera cannot see depth: a high ball near the net and a ball on the floor at the back can land on the same pixel",
+            "The crowd and the people around the court are silhouettes to the detector too",
+            "The broadcast cuts and splices shots, and the players' identities have to survive those splices",
+          ],
+        },
+      },
+      {
+        id: "choices",
+        title: { fr: "Les choix techniques", en: "Technical choices" },
+        body: {
+          fr: "Chaque brique a été mesurée contre une méthode plus simple, gardée dans le code pour que la comparaison reste possible.",
+          en: "Every building block was measured against a simpler method, kept in the code so the comparison stays possible.",
+        },
+        bullets: {
+          fr: [
+            "Un suivi contraint plutôt que ByteTrack seul : quatre places fixes et un court à respecter font passer l'IDF1 de 0,28 à 0,82 sur les mêmes images",
+            "La balle choisie sur toute la séquence plutôt qu'image par image : une croissance gloutonne décide localement et sans retour, l'optimisation globale peut revenir sur un choix",
+            "Un modèle appris plutôt que des règles : sur 716 contacts pointés, 62 % de surfaces justes pour les règles réglées à la main, 78 % pour le réseau, 83 % avec la physique des vitres et l'ensemble de dix-huit réseaux",
+            "La licence AGPL-3.0, imposée par Ultralytics : le code est ouvert, mais il ne peut pas entrer dans un produit propriétaire",
+          ],
+          en: [
+            "Constrained tracking rather than plain ByteTrack: four fixed slots and a court to respect take IDF1 from 0.28 to 0.82 on the same frames",
+            "The ball chosen over the whole sequence rather than frame by frame: greedy growth decides locally and never goes back, global optimisation can revisit a choice",
+            "A learned model rather than rules: on 716 marked contacts, 62% right surfaces for hand-tuned rules, 78% for the network, 83% with the glass physics and the ensemble of eighteen networks",
+            "The AGPL-3.0 licence, imposed by Ultralytics: the code is open, but it cannot go into a proprietary product",
+          ],
+        },
+      },
+      {
+        id: "measure",
+        title: { fr: "Mesurer honnêtement", en: "Measuring honestly" },
+        body: {
+          fr: "Une bonne partie du travail a porté sur la mesure elle-même. Un chiffre n'est publié que s'il a été obtenu sur des minutes que rien, pendant les réglages, n'avait regardées.",
+          en: "A good share of the work went into measurement itself. A figure is only published if it was obtained on minutes that nothing had looked at during tuning.",
+        },
+        bullets: {
+          fr: [
+            "Des minutes de juge, pointées à la main et notées une seule fois. Quand la validation croisée a promis 87 % et qu'un juge neuf a répondu 82 %, c'est 82 % qui a été retenu",
+            "Une vérité terrain d'identité construite automatiquement annonçait zéro permutation de joueurs ; arbitrée à la main, elle en compte quatre. La référence reposait sur la même hypothèse que le suivi évalué, et l'IDF1 était surestimé de 0,137",
+            "Les statistiques d'un match vérifiées une à une : les déplacements contre les positions annotées du dataset, les frappes contre les minutes pointées, les points contre le tableau d'affichage",
+            "Un échange d'un autre tournoi, dans une autre salle, pour vérifier que le modèle n'avait pas appris une seule salle : 76 contacts justes sur 88",
+          ],
+          en: [
+            "Judge minutes, marked by hand and scored only once. When cross-validation promised 87% and a fresh judge answered 82%, 82% is the figure kept",
+            "An identity ground truth built automatically reported zero player swaps; arbitrated by hand, it counts four. The reference rested on the same assumption as the tracker under test, and IDF1 was overestimated by 0.137",
+            "Match statistics checked one by one: movement against the dataset's annotated positions, strokes against the marked minutes, points against the scoreboard",
+            "A rally from another tournament, in another venue, to check the model had not learned a single venue: 76 right contacts out of 88",
+          ],
+        },
+      },
+      {
+        id: "failures",
+        title: { fr: "Ce qui n'a pas marché", en: "What did not work" },
+        body: {
+          fr: "Deux essais ont échoué. Ils restent décrits en entier dans le rapport d'évaluation du dépôt, avec leurs mesures.",
+          en: "Two attempts failed. They are still described in full in the repository's evaluation report, with their measurements.",
+        },
+        bullets: {
+          fr: [
+            "Corriger les contacts avec les règles du padel : aucune n'a été gardée. La moitié des rebonds qu'elles déduisaient étaient de vraies volées, car la bandeja et la víbora se jouent en l'air, loin du filet",
+            "Retrouver au son les vitres que l'image ne montre pas : les vitres manquées sont silencieuses dans l'enregistrement, le micro de la retransmission ne capte pas ce que la caméra ne voit pas",
+          ],
+          en: [
+            "Correcting contacts with the rules of padel: none was kept. Half of the bounces they inferred were real volleys, since the bandeja and the víbora are played in the air, far from the net",
+            "Recovering by sound the glass contacts the picture does not show: the missed ones are silent in the recording, the broadcast microphone does not pick up what the camera does not see",
+          ],
+        },
+      },
+      {
+        id: "limits",
+        title: { fr: "Ce que le projet ne fait pas encore", en: "What the project does not do yet" },
+        bullets: {
+          fr: [
+            "Il analyse après le match, à quelques images par seconde sur une GTX 1650",
+            "Au fond du court, un tiers des rebonds sur la vitre restent manqués",
+            "Le transfert à un autre court n'est montré que sur un échange, pas sur un match entier",
+            "L'identité des joueurs se perd encore aux raccords de la retransmission",
+            "Grillage et filet sont trop rares dans les données pour être appris",
+          ],
+          en: [
+            "It analyses after the match, at a few frames per second on a GTX 1650",
+            "At the back of the court, a third of glass bounces are still missed",
+            "Transfer to another court is shown on one rally, not on a whole match",
+            "Player identity is still lost at broadcast splices",
+            "Mesh and net are too rare in the data to be learned",
+          ],
+        },
+      },
+      {
+        id: "learned",
+        title: { fr: "Ce que j'en retire", en: "What I took away" },
+        bullets: {
+          fr: [
+            "Une métrique ne vaut que sa référence : une vérité terrain construite avec la même hypothèse que le système évalué ne peut pas voir ses erreurs",
+            "Garder une méthode simple et mesurée à côté de chaque brique, pour savoir ce que la brique apporte vraiment",
+            "Annoncer le chiffre le moins flatteur quand deux mesures se contredisent, et expliquer pourquoi",
+            "Livrer de bout en bout : tests et intégration continue, documentation en deux langues, release avec les poids entraînés, licence pour les données annotées",
+          ],
+          en: [
+            "A metric is only as good as its reference: a ground truth built on the same assumption as the system under test cannot see its errors",
+            "Keep a simple, measured method next to every building block, to know what the block really adds",
+            "Report the less flattering figure when two measurements disagree, and explain why",
+            "Ship end to end: tests and continuous integration, documentation in two languages, a release with the trained weights, a licence for the annotated data",
+          ],
+        },
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/padel-judges.png",
+        width: 1170,
+        height: 598,
+        alt: {
+          fr: "Surfaces justes, règles réglées à la main contre modèle appris, sur la validation croisée et trois juges",
+          en: "Right surfaces, hand-tuned rules against the learned model, on cross-validation and three judges",
+        },
+      },
+      {
+        src: "/images/padel-pair-report.png",
+        width: 1365,
+        height: 858,
+        alt: {
+          fr: "Bilan par paire des deux finales : points, frappes, volées, frappes après une vitre, distance parcourue",
+          en: "Per-pair report of both finals: points, strokes, volleys, strokes after the glass, distance covered",
+        },
+      },
+      {
+        src: "/images/padel-points-by-length.png",
+        width: 1352,
+        height: 494,
+        alt: {
+          fr: "Points gagnés par chaque paire selon la longueur de l'échange",
+          en: "Points won by each pair by rally length",
+        },
+      },
+      {
+        src: "/images/padel-net-control.png",
+        width: 1430,
+        height: 546,
+        alt: {
+          fr: "Distance au filet sur tout le match, et part du temps où chaque paire tient le filet",
+          en: "Distance to the net over the whole match, and the share of time each pair holds the net",
+        },
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
     slug: "breezy",
     featured: true,
     status: "shipped",
@@ -1885,6 +2192,7 @@ export const projects: Project[] = [
  */
 const displayOrder = [
   "camera-ptz",
+  "padel-analysis",
   "breezy",
   "easysave",
   "tsp-resolver",

@@ -102,7 +102,8 @@
     "weatherLead": "La boucle de la station, telle qu'elle tourne sur le microcontrôleur. Débranchez un capteur pour voir ce qui se passe.",
     "signalLead": "La chaîne complète, de haut en bas. Montez le bruit jusqu'à ce que des bits se perdent, puis coupez le filtre.",
     "schemaLead": "Le modèle logique livré : douze tables, dont trois nées d'associations plusieurs-à-plusieurs.",
-    "schemaTitle": "Le schéma de données"
+    "schemaTitle": "Le schéma de données",
+    "padelLead": "Un échange réel de la finale féminine, rejoué à partir de ce que le projet a mesuré. Lancez-le, ou faites glisser le curseur pour aller d'un contact à l'autre."
   },
   "contact": {
     "email": "Email",
@@ -236,5 +237,29 @@
     "pk": "Clé primaire",
     "fk": "Clé étrangère",
     "note": "Noms repris tels quels du livrable, abréviations comprises. Trois tables ne portent que deux clés étrangères et aucun identifiant propre : ce sont les associations plusieurs-à-plusieurs devenues des tables : une région émet plusieurs gaz et un gaz est émis par plusieurs régions, un relevé alimente plusieurs rapports et un rapport en agrège plusieurs."
+  },
+  "padel": {
+    "courtLabel": "Le court vu de dessus, la caméra à gauche : les quatre joueuses, la balle et les contacts déjà joués de l'échange",
+    "courtLabelPortrait": "Le court vu de dessus, la caméra en bas : les quatre joueuses, la balle et les contacts déjà joués de l'échange",
+    "camera": "CAMÉRA",
+    "play": "Lancer l'échange",
+    "pause": "Mettre en pause",
+    "replay": "Rejouer l'échange",
+    "scrub": "Instant de l'échange",
+    "contacts": "Contacts",
+    "pairs": "Paires",
+    "surface": {
+      "stroke": "Frappes",
+      "floor": "Rebonds au sol",
+      "glass": "Vitres",
+      "mesh": "Grillage",
+      "net": "Filet"
+    },
+    "pair": {
+      "near": "Paire proche",
+      "far": "Paire du fond"
+    },
+    "pairLine": "{strokes, plural, =0 {aucune frappe} one {# frappe} other {# frappes}} · {distance} m parcourus",
+    "note": "Les positions des joueuses et les 27 contacts sont ceux que le projet a mesurés sur la vidéo, contacts décidés par son modèle. Seule la balle entre deux contacts est reconstituée : vue de dessus, elle va en ligne droite et à vitesse constante d'un point d'impact au suivant. Une frappe est placée sur la joueuse qui la donne. Distances : par paire, depuis le début de l'échange."
   }
 }

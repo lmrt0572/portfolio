@@ -102,7 +102,8 @@
     "weatherLead": "The station's loop as it runs on the microcontroller. Unplug a sensor to see what happens.",
     "signalLead": "The full chain, top to bottom. Raise the noise until bits get lost, then switch the filter off.",
     "schemaLead": "The delivered logical model: twelve tables, three of them born from many-to-many associations.",
-    "schemaTitle": "The data schema"
+    "schemaTitle": "The data schema",
+    "padelLead": "A real rally from the women's final, replayed from what the project measured. Play it, or drag the slider to move from one contact to the next."
   },
   "contact": {
     "email": "Email",
@@ -236,5 +237,29 @@
     "pk": "Primary key",
     "fk": "Foreign key",
     "note": "Names taken verbatim from the deliverable, abbreviations included. Three tables carry only two foreign keys and no identifier of their own: these are the many-to-many associations turned into tables: a region emits several gases and a gas is emitted by several regions, a reading feeds several reports and a report aggregates several readings."
+  },
+  "padel": {
+    "courtLabel": "The court seen from above, camera on the left: the four players, the ball and the contacts played so far",
+    "courtLabelPortrait": "The court seen from above, camera at the bottom: the four players, the ball and the contacts played so far",
+    "camera": "CAMERA",
+    "play": "Play the rally",
+    "pause": "Pause",
+    "replay": "Replay the rally",
+    "scrub": "Moment in the rally",
+    "contacts": "Contacts",
+    "pairs": "Pairs",
+    "surface": {
+      "stroke": "Strokes",
+      "floor": "Floor bounces",
+      "glass": "Glass",
+      "mesh": "Mesh",
+      "net": "Net"
+    },
+    "pair": {
+      "near": "Near pair",
+      "far": "Far pair"
+    },
+    "pairLine": "{strokes, plural, =0 {no strokes} one {# stroke} other {# strokes}} · {distance} m covered",
+    "note": "The players' positions and the 27 contacts are the ones the project measured on the video, with contacts decided by its model. Only the ball between two contacts is reconstructed: seen from above, it travels in a straight line at constant speed from one impact to the next. A stroke is placed on the player who plays it. Distances are per pair, since the start of the rally."
   }
 }
