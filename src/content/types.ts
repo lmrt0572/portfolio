@@ -21,6 +21,13 @@ export function pickTitle(value: Title, locale: Locale): string {
   return typeof value === "string" ? value : value[locale];
 }
 
+/** Fichier commun aux deux langues, ou une version par langue. */
+export type Source = string | Localized;
+
+export function pickSource(value: Source, locale: Locale): string {
+  return typeof value === "string" ? value : value[locale];
+}
+
 export type ProjectStatus = "shipped" | "ongoing";
 
 /** Domaine du projet. */
@@ -53,7 +60,8 @@ export type ProjectFact = {
 };
 
 export type ProjectImage = {
-  src: string;
+  /** Une version par langue quand l'image contient du texte. */
+  src: Source;
   alt: Localized;
   /** Dimensions réelles du fichier, pour afficher les captures à leur rapport
    *  d'origine. */
@@ -67,12 +75,13 @@ export type ProjectImage = {
  * requis (`-movflags +faststart`).
  */
 export type ProjectVideo = {
-  /** Source principale : H.264/AAC en MP4, index en tête. */
-  mp4: string;
+  /** Source principale : H.264/AAC en MP4, index en tête. Une version par
+   *  langue quand la vidéo contient du texte. */
+  mp4: Source;
   /** Variante WebM (VP9 ou AV1), proposée en premier quand elle est comprise. */
   webm?: string;
   /** Affiche : la seule ressource chargée avant un clic. */
-  poster: string;
+  poster: Source;
   /** Rapport largeur/hauteur, pour réserver la place et éviter tout décalage. */
   aspect?: string;
   caption: Localized;
@@ -106,8 +115,9 @@ export type Project = {
   /** Démonstration interactive à insérer. Registre sérialisable, rendu géré
    *  par la page projet. */
   demo?: "tsp" | "algebra" | "strongbox" | "weather" | "signal";
-  /** Vidéo de démonstration, insérée avant les sections rédigées. */
-  video?: ProjectVideo;
+  /** Vidéo de démonstration, insérée avant les sections rédigées. Plusieurs
+   *  vidéos se suivent dans la même section. */
+  video?: ProjectVideo | ProjectVideo[];
   sections: ProjectSection[];
   /** Documents téléchargeables (livrables, rapports). */
   documents?: { href: string; label: Localized }[];

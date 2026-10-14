@@ -9,7 +9,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getProject, projects } from "@/content/projects";
-import { pickTitle } from "@/content/types";
+import { pickSource, pickTitle } from "@/content/types";
 import { ProjectPipeline } from "@/components/project-pipeline";
 import { TspDemo } from "@/components/tsp-demo";
 import { TspAnnealingDemo } from "@/components/tsp-annealing-demo";
@@ -66,7 +66,7 @@ export async function generateMetadata({
       type: "article",
       title,
       description: project.tagline[locale],
-      images: project.cover ? [{ url: project.cover.src }] : undefined,
+      images: project.cover ? [{ url: pickSource(project.cover.src, locale) }] : undefined,
     },
   };
 }
@@ -89,6 +89,10 @@ export default async function ProjectPage({
    *  au-delà, ils restent listés dans la colonne technique. */
   const documents = project.documents ?? [];
   const headerDocuments = documents.length <= 2 ? documents : [];
+
+  const videos = [project.video ?? []]
+    .flat()
+    .filter((video) => isPresent(pickSource(video.mp4, locale)));
 
   return (
     <article>
@@ -196,7 +200,7 @@ export default async function ProjectPage({
               style={{ "--i": 5 } as CSSProperties}
             >
               <Image
-                src={project.cover.src}
+                src={pickSource(project.cover.src, locale)}
                 alt={project.cover.alt[locale]}
                 width={project.cover.width ?? 1600}
                 height={project.cover.height ?? 900}
@@ -257,13 +261,19 @@ export default async function ProjectPage({
             </section>
 
             {/* ---- Vidéo de démonstration ------------------------------- */}
-            {project.video && isPresent(project.video.mp4) ? (
+            {videos.length ? (
               <section className="reveal mt-16">
                 <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
                   {t("videoTitle")}
                 </h2>
-                <div className="mt-7">
-                  <ProjectVideoPlayer video={project.video} locale={locale} />
+                <div className="mt-7 grid gap-12">
+                  {videos.map((video) => (
+                    <ProjectVideoPlayer
+                      key={pickSource(video.mp4, locale)}
+                      video={video}
+                      locale={locale}
+                    />
+                  ))}
                 </div>
               </section>
             ) : null}

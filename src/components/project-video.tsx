@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import type { ProjectVideo } from "@/content/types";
+import { pickSource, type ProjectVideo } from "@/content/types";
 import type { Locale } from "@/i18n/routing";
 import { PlayIcon } from "./icons";
 
@@ -51,13 +51,13 @@ export function ProjectVideoPlayer({
             autoPlay
             playsInline
             preload="auto"
-            poster={video.poster}
+            poster={pickSource(video.poster, locale)}
             aria-label={video.caption[locale]}
           >
             {/* WebM en premier : à qualité égale le fichier est plus léger, et
                 les navigateurs qui ne le comprennent pas passent au MP4. */}
             {video.webm ? <source src={video.webm} type="video/webm" /> : null}
-            <source src={video.mp4} type="video/mp4" />
+            <source src={pickSource(video.mp4, locale)} type="video/mp4" />
             {video.captions ? (
               <track
                 kind="captions"
@@ -76,7 +76,7 @@ export function ProjectVideoPlayer({
             aria-label={t("playDemo")}
           >
             <Image
-              src={video.poster}
+              src={pickSource(video.poster, locale)}
               alt=""
               fill
               sizes="(min-width: 1024px) 52rem, 92vw"
