@@ -37,7 +37,7 @@
   },
   "hero": {
     "cta": "View my projects",
-    "cv": "My CV",
+    "cv": "Resume",
     "portraitAlt": "Portrait of {name}"
   },
   "sections": {
@@ -110,9 +110,9 @@
     "location": "Location",
     "github": "GitHub",
     "linkedin": "LinkedIn",
-    "cvFr": "CV in French",
-    "cvEn": "CV in English",
-    "downloadCv": "Download my CV"
+    "cvFr": "Resume in French",
+    "cvEn": "Resume in English",
+    "downloadCv": "Download my resume"
   },
   "form": {
     "heading": "Get in",
