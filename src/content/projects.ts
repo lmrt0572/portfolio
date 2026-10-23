@@ -1328,7 +1328,7 @@ export const projects: Project[] = [
       en: [
         "Router and MVC layer written by hand, without a framework",
         "Three user profiles with distinct rights",
-        "Wish list, application with CV and cover letter, response tracking",
+        "Wish list, application with resume and cover letter, response tracking",
         "Prepared statements throughout, view escaping handled by Twig",
       ],
     },
@@ -1372,7 +1372,7 @@ export const projects: Project[] = [
         title: { fr: "Ce que fait la plateforme", en: "What the platform does" },
         body: {
           fr: "StageLink réunit au même endroit ce qui est habituellement éparpillé : les offres de stage, les fiches des entreprises partenaires et le suivi des candidatures. Un étudiant cherche une offre par mots-clés, compétences ou durée, la met en wish-list, candidate avec son CV et sa lettre, puis suit l'état de ses réponses. Un pilote de promotion gère les offres, les entreprises et les comptes de sa promotion, et suit l'avancement de la recherche de stage. Un administrateur gère les pilotes eux-mêmes. Les entreprises peuvent être évaluées, et les offres agrégées en statistiques par compétence ou par durée.",
-          en: "StageLink brings together what is usually scattered: internship offers, partner company profiles and application tracking. A student searches offers by keyword, skill or duration, adds one to a wish list, applies with a CV and cover letter, then follows the state of each reply. A programme lead manages offers, companies and their cohort's accounts, and monitors how the search is going. An administrator manages the leads themselves. Companies can be rated, and offers aggregated into statistics by skill or duration.",
+          en: "StageLink brings together what is usually scattered: internship offers, partner company profiles and application tracking. A student searches offers by keyword, skill or duration, adds one to a wish list, applies with a resume and cover letter, then follows the state of each reply. A programme lead manages offers, companies and their cohort's accounts, and monitors how the search is going. An administrator manages the leads themselves. Companies can be rated, and offers aggregated into statistics by skill or duration.",
         },
       },
       {
