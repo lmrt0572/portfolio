@@ -436,14 +436,17 @@ export default async function ProjectPage({
               {t("stack")}
             </h2>
             <ul className="mt-4 flex flex-wrap gap-2">
-              {project.stack.map((tech) => (
-                <li
-                  key={tech}
-                  className="rounded-full bg-surface-2 px-3.5 py-1.5 text-sm"
-                >
-                  {tech}
-                </li>
-              ))}
+              {project.stack.map((item) => {
+                const tech = pickTitle(item, locale);
+                return (
+                  <li
+                    key={tech}
+                    className="rounded-full bg-surface-2 px-3.5 py-1.5 text-sm"
+                  >
+                    {tech}
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Les documents sont désormais en boutons dans l'en-tête ; ce

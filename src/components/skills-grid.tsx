@@ -1,4 +1,5 @@
 import { skillGroups } from "@/content/profile";
+import { pickTitle } from "@/content/types";
 import { SkillIcon, skillMarkKind } from "./skill-icon";
 import type { Locale } from "@/i18n/routing";
 
@@ -16,7 +17,8 @@ export function SkillsGrid({ locale }: { locale: Locale }) {
           </h3>
 
           <ul className="grid grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))] gap-3">
-            {group.items.map((item) => {
+            {group.items.map((entry) => {
+              const item = pickTitle(entry, locale);
               // Quand la marque est déjà le nom écrit en toutes lettres
               // (C#, CVAT…), on ne le répète pas sous la tuile.
               const showName = skillMarkKind(item) !== "text";

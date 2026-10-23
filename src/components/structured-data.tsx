@@ -1,4 +1,5 @@
 import { profile, skillGroups, languages } from "@/content/profile";
+import { pickTitle } from "@/content/types";
 import { siteUrl } from "@/lib/site";
 import type { Locale } from "@/i18n/routing";
 
@@ -24,7 +25,9 @@ function personSchema(locale: Locale) {
     },
     worksFor: { "@type": "Organization", name: profile.company },
     alumniOf: { "@type": "CollegeOrUniversity", name: "CESI Rouen" },
-    knowsAbout: skillGroups.flatMap((group) => group.items),
+    knowsAbout: skillGroups.flatMap((group) =>
+      group.items.map((item) => pickTitle(item, locale)),
+    ),
     knowsLanguage: languages.map((language) => ({
       "@type": "Language",
       name: language.label.en,

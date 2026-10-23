@@ -17,15 +17,15 @@ export const projects: Project[] = [
       en: "Automatic tracking on a PTZ camera",
     },
     tagline: {
-      fr: "Détecter, suivre et poursuivre automatiquement des embarcations à l'aide d'un système électro-optique existant.",
-      en: "Automatically detecting, tracking and following vessels using an existing electro-optical system.",
+      fr: "Détecter et suivre automatiquement des embarcations par vision, et piloter une caméra motorisée pour les garder dans le champ.",
+      en: "Automatically detecting and tracking vessels with computer vision, and steering a motorised camera to keep them in frame.",
     },
     context: { fr: "Thales LAS · Alternance", en: "Thales LAS · Apprenticeship" },
     domain: "computer-vision",
     stack: [
       "Python",
       "PyTorch",
-      "RF-DETR",
+      "DETR",
       "ByteTrack",
       "TensorRT",
       "OpenCV",
@@ -34,21 +34,22 @@ export const projects: Project[] = [
       "Docker",
       "Linux",
     ],
+    // Illustration générée, pas une capture du système.
     cover: {
-      src: "/images/pocptz.jpg",
+      src: "/images/ptz-cover.webp",
       width: 1024,
-      height: 559,
+      height: 572,
       alt: {
-        fr: "Caméra PTZ de surveillance maritime",
-        en: "Maritime surveillance PTZ camera",
+        fr: "Illustration : embarcation suivie en mer",
+        en: "Illustration: a vessel tracked at sea",
       },
     },
     facts: [
       {
         label: { fr: "Rôle", en: "Role" },
         value: {
-          fr: "Alternant ingénieur, conception et réalisation de la chaîne",
-          en: "Apprentice engineer, design and build of the pipeline",
+          fr: "Alternant ingénieur, conception et développement de la chaîne de traitement",
+          en: "Apprentice engineer, design and development of the processing pipeline",
         },
       },
       {
@@ -58,33 +59,19 @@ export const projects: Project[] = [
           en: "Proof of concept in an R&D environment",
         },
       },
-      {
-        label: { fr: "Capteur", en: "Sensor" },
-        value: {
-          fr: "Caméra PTZ, système électro-optique (EOS)",
-          en: "PTZ camera, electro-optical system (EOS)",
-        },
-      },
-      {
-        label: { fr: "Environnement", en: "Environment" },
-        value: {
-          fr: "Poste Linux sans accès à Internet",
-          en: "Linux machine with no internet access",
-        },
-      },
     ],
     highlights: {
       fr: [
-        "Chaîne complète en boucle fermée : acquisition, détection, suivi, commande de la caméra",
-        "Détecteur de la famille DETR entraîné sur un jeu d'images du site",
-        "Suivi multi-cibles par ByteTrack associé à un filtre de Kalman",
-        "Domaine d'emploi établi par la mesure, limites comprises",
+        "Chaîne complète en boucle fermée, de l'image à la commande de la caméra",
+        "Jeu de données constitué et annoté, détecteurs entraînés et comparés",
+        "Suivi multi-cibles et inférence optimisée pour le temps réel",
+        "Choix techniques fondés sur un état de l'art de chaque maillon",
       ],
       en: [
-        "Full closed-loop pipeline: capture, detection, tracking, camera control",
-        "A DETR-family detector trained on an image set from the site itself",
-        "Multi-target tracking with ByteTrack and a Kalman filter",
-        "Operating envelope established by measurement, limits included",
+        "Full closed-loop pipeline, from the image to camera control",
+        "Dataset built and annotated, detectors trained and benchmarked",
+        "Multi-target tracking and inference optimised for real time",
+        "Technical choices grounded in a state-of-the-art review of every link",
       ],
     },
     pipeline: [
@@ -92,126 +79,65 @@ export const projects: Project[] = [
         id: "capture",
         title: { fr: "Acquisition", en: "Capture" },
         body: {
-          fr: "La caméra diffuse sa vidéo en RTSP. Le flux est décodé en continu, puis préparé pour l'inférence. Un décodeur unique alimente à la fois l'affichage et l'analyse : avec deux, l'opérateur verrait une image légèrement différente de celle que le système traite, ce qui pose problème au moment de désigner une cible en cliquant dessus.",
-          en: "The camera streams over RTSP. The stream is decoded continuously, then prepared for inference. A single decoder feeds both the display and the analysis: with two, the operator would see a slightly different frame from the one the system processes, which matters when designating a target by clicking on it.",
+          fr: "Le flux vidéo est décodé en continu et préparé pour l'analyse, sans dégrader l'image présentée à l'opérateur.",
+          en: "The video stream is decoded continuously and prepared for analysis, without degrading the image shown to the operator.",
         },
       },
       {
         id: "detect",
         title: { fr: "Détection", en: "Detection" },
         body: {
-          fr: "Un détecteur RF-DETR localise les embarcations, du cargo au jet-ski. Cette famille produit d'emblée un nombre fixe de prédictions, ce qui supprime l'étape de suppression des doublons dont dépendent les détecteurs à ancres. Le modèle est entraîné sur des images du site, annotées sous CVAT installé en local, et l'inférence est ensuite compilée avec TensorRT pour tenir le temps réel.",
-          en: "An RF-DETR detector locates the vessels, from cargo ship to jet ski. This family emits a fixed number of predictions outright, removing the duplicate-suppression step that anchor-based detectors depend on. The model is trained on imagery from the site, annotated in a locally hosted CVAT, and inference is then compiled with TensorRT to hold real time.",
+          fr: "Un détecteur de la famille DETR, entraîné sur un jeu de données constitué pour le projet, localise les embarcations dans chaque image. L'inférence est optimisée pour tenir le temps réel.",
+          en: "A DETR-family detector, trained on a dataset built for the project, locates the vessels in every frame. Inference is optimised to hold real time.",
         },
       },
       {
         id: "track",
         title: { fr: "Suivi", en: "Tracking" },
         body: {
-          fr: "ByteTrack prédit où chaque cible devrait se trouver grâce à un filtre de Kalman, puis associe les nouvelles détections aux pistes existantes. Le filtre rend un second service : la boîte de détection tremble d'une image à l'autre même sur une cible immobile, et le lissage donne à l'asservissement une consigne stable plutôt qu'une consigne qui vibre.",
-          en: "ByteTrack predicts where each target should be using a Kalman filter, then matches new detections to existing tracks. The filter renders a second service: the detection box jitters between frames even on a stationary target, and smoothing gives the control loop a steady set-point rather than a vibrating one.",
+          fr: "Un algorithme de suivi multi-objets associe les détections d'une image à l'autre et lisse les trajectoires, ce qui donne une consigne stable à la commande.",
+          en: "A multi-object tracking algorithm matches detections from one frame to the next and smooths the trajectories, giving the controller a steady set-point.",
         },
       },
       {
         id: "servo",
         title: { fr: "Asservissement", en: "Camera control" },
         body: {
-          fr: "L'écart entre la cible et le centre de l'image devient une vitesse de rotation, envoyée à la caméra via ONVIF en mode continu. Deux difficultés s'ajoutent au régulateur proportionnel de départ : le gain dépend du zoom, un réglage valable au grand-angle rendant le système instable au téléobjectif ; et la boucle comporte un retard, puisque le régulateur agit toujours sur une information déjà périmée.",
-          en: "The offset between target and frame centre becomes a rotation speed, sent to the camera over ONVIF in continuous mode. Two difficulties compound the initial proportional controller: gain depends on zoom, a setting valid at wide angle making the system unstable at full telephoto; and the loop carries a delay, since the controller always acts on information that is already out of date.",
+          fr: "L'écart entre la cible et le centre de l'image devient une commande de la caméra, dans une boucle conçue pour rester stable quel que soit le zoom.",
+          en: "The offset between target and frame centre becomes a camera command, in a loop designed to stay stable at any zoom level.",
         },
       },
     ],
     sections: [
       {
         id: "context",
-        title: { fr: "Le contexte", en: "Context" },
+        title: { fr: "Le sujet", en: "The assignment" },
         body: {
-          fr: "La surveillance côtière consiste à repérer les embarcations qui circulent dans une zone et à les garder à l'œil. Sur les sites équipés, cette veille s'appuie notamment sur des caméras motorisées longue portée, que l'opérateur pilote à la main depuis un poste de supervision. Cependant, cette conduite manuelle mobilise un opérateur par caméra, repose sur une vigilance que la fatigue érode, et ne laisse aucune trace exploitable de ce qui a été observé. Ma mission consiste à déterminer si cette veille peut être confiée à une chaîne de traitement automatique, sur le matériel déjà installé, sans dégrader la qualité d'observation attendue par l'opérateur.",
-          en: "Coastal surveillance means spotting the vessels moving through an area and keeping an eye on them. On equipped sites this watch relies on long-range motorised cameras, which an operator steers by hand from a supervision desk. That manual approach, however, ties up one operator per camera, depends on sustained attention that fatigue erodes, and leaves no usable record of what was observed. My assignment is to determine whether this watch can be handed to an automatic processing chain, on the hardware already installed, without degrading the quality of observation the operator expects.",
-        },
-      },
-      {
-        id: "difficulty",
-        title: {
-          fr: "Pourquoi la mer est un cas difficile",
-          en: "Why the sea is a hard case",
-        },
-        body: {
-          fr: "La détection sur une scène maritime ne ressemble pas à de la détection sur route ou en intérieur. Le fond n'est jamais deux fois le même, et plusieurs difficultés se cumulent.",
-          en: "Detection on a maritime scene is nothing like detection on roads or indoors. The background is never the same twice, and several difficulties compound.",
-        },
-        bullets: {
-          fr: [
-            "La houle crée des motifs qui bougent en permanence sans jamais constituer un objet",
-            "Une même classe d'embarcation occupe quelques pixels au loin et une bonne partie de l'image à courte distance",
-            "Les conditions de lumière varient fortement : contre-jour, brume, pluie, crépuscule",
-            "Le zoom modifie la perception du mouvement, ce qui interdit un réglage unique de la commande",
-            "La définition de la vidéo reste limitée au regard des distances observées",
-          ],
-          en: [
-            "Swell creates patterns that move constantly without ever forming an object",
-            "The same class of vessel takes a few pixels far off and much of the frame close in",
-            "Lighting varies widely: backlight, haze, rain, dusk",
-            "Zoom changes how motion is perceived, which rules out a single control setting",
-            "Video definition stays limited given the distances observed",
-          ],
+          fr: "Dans le cadre de mon alternance, je conçois une preuve de concept qui détecte des embarcations dans un flux vidéo, les suit dans le temps et pilote une caméra motorisée pour les garder dans le champ. La scène maritime est un cas exigeant : le fond bouge en permanence, une cible peut occuper quelques pixels comme tout l'écran, et la lumière varie fortement.",
+          en: "As part of my apprenticeship, I am designing a proof of concept that detects vessels in a video stream, tracks them over time and steers a motorised camera to keep them in frame. A maritime scene is a demanding case: the background never stops moving, a target can take up a few pixels or the whole screen, and lighting varies widely.",
         },
       },
       {
         id: "choices",
         title: { fr: "Les choix techniques", en: "Technical choices" },
         body: {
-          fr: "Trois critères ont guidé la sélection de chaque brique, fixés avant toute comparaison : voir des cibles minuscules, tenir le temps réel sur le matériel disponible, et pouvoir être intégré dans un produit. Le troisième s'est révélé le plus discriminant.",
-          en: "Three criteria guided the choice of every building block, set before any comparison: see tiny targets, hold real time on the available hardware, and be integrable into a product. The third proved the most discriminating.",
+          fr: "Avant de retenir une technologie, j'ai fait l'état de l'art de chaque maillon : détecteurs d'objets, algorithmes de suivi multi-objets, optimisation de l'inférence et protocoles de commande de caméra. Trois critères, fixés avant toute comparaison, ont départagé les candidats : voir des cibles minuscules, tenir le temps réel et rester intégrable dans un logiciel industriel.",
+          en: "Before settling on any technology, I reviewed the state of the art for every link: object detectors, multi-object tracking algorithms, inference optimisation and camera control protocols. Three criteria, set before any comparison, decided between the candidates: see tiny targets, hold real time and remain integrable into industrial software.",
         },
         bullets: {
           fr: [
-            "La famille DETR plutôt que les détecteurs à ancres : elle évite le filtrage des doublons, dont un réglage trop sévère fusionne une bouée et une embarcation alignées, et trop permissif laisse passer des redondances",
-            "RF-DETR s'appuie sur un extracteur pré-entraîné sans annotations, ce qui lui demande beaucoup moins d'exemples pour s'adapter à un jeu d'images constitué en quelques semaines",
-            "ByteTrack conserve les détections de faible score pour une seconde tentative d'association : quand une petite embarcation s'éloigne et que son score chute, sa trajectoire survit au lieu d'être coupée",
-            "La licence a pesé autant que la performance. Certaines briques plus efficaces sur le papier obligeraient à publier le code de tout produit les intégrant, ce qui est rédhibitoire pour une preuve de concept destinée à devenir un produit. Toutes celles retenues sont sous licence permissive",
-            "ONVIF pour la commande, parce que c'est un standard : le système fonctionnera avec d'autres caméras que celle installée",
+            "La famille DETR plutôt que les détecteurs à ancres : elle n'a pas besoin de filtrer les doublons, une étape délicate à régler quand les cibles sont petites et proches",
+            "ByteTrack, qui garde les détections de faible score pour tenter une seconde association : une cible lointaine, difficile à voir, ne perd pas sa trajectoire",
+            "La licence a compté autant que la performance : toutes les briques retenues sont sous licence permissive",
+            "ONVIF pour la commande, parce que c'est un standard : le système n'est lié à aucun modèle de caméra",
+            "Un protocole d'essai reproductible, pour comparer deux réglages dans les mêmes conditions plutôt qu'à l'impression",
           ],
           en: [
-            "The DETR family rather than anchor-based detectors: it avoids duplicate filtering, where too strict a setting merges an aligned buoy and vessel, and too permissive a one lets redundancies through",
-            "RF-DETR builds on a backbone pre-trained without annotations, which means it needs far fewer examples to adapt to an image set assembled in a few weeks",
-            "ByteTrack keeps low-score detections for a second association attempt: when a small vessel moves away and its score drops, its track survives instead of being cut",
-            "Licensing weighed as much as performance. Some blocks that are stronger on paper would force publishing the source of any product embedding them, which is disqualifying for a proof of concept meant to become a product. Every block retained carries a permissive licence",
-            "ONVIF for camera control, because it is a standard: the system will work with cameras other than the one installed",
-          ],
-        },
-      },
-      {
-        id: "results",
-        title: {
-          fr: "Ce que le système fait, et où il s'arrête",
-          en: "What the system does, and where it stops",
-        },
-        body: {
-          fr: "Les essais menés en conditions réelles montrent que le système peut faire de la détection multi-cible, poursuit une embarcation de taille normale pendant plusieurs minutes, en temps réel, sans dégrader l'image présentée à l'opérateur. Cependant, il décroche sur les cibles les plus petites et les plus rapides. Le domaine d'emploi est donc connu, ce qui vaut mieux qu'un système dont on ignore à partir de quand il cesse de fonctionner.",
-          en: "Field trials show the system can do multi-target detection,follows a normal-sized vessel for several minutes, in real time, without degrading the image shown to the operator. It does, however, lose the smallest and fastest targets. The operating envelope is therefore known, which is worth more than a system whose point of failure is a mystery.",
-        },
-      },
-      {
-        id: "finding",
-        title: {
-          fr: "Trouver le maillon faible",
-          en: "Finding the weak link",
-        },
-        body: {
-          fr: "Le système décroche sur les cibles petites et rapides, mais lequel des trois maillons en est responsable : la détection, le suivi ou la commande ? La question décide de l'endroit où porter l'effort suivant. Pour la trancher, j'ai comparé les enregistrements des poursuites réussies et de celles qui ont échoué, sur deux mesures : le nombre d'images où la cible n'est pas détectée, et l'écart moyen entre la cible et le centre de l'image. Le lien apparaît sur la première, pas sur la seconde. Autrement dit, quand la cible est détectée, la caméra vise juste ; ce sont les instants où elle ne l'est pas qui hachent la poursuite. C'est donc la disponibilité de la détection qui limite le système, et l'effort est passé du réglage du régulateur à l'amélioration du détecteur.",
-          en: "The system loses small, fast targets, but which of the three links is responsible: detection, tracking or control? The answer decides where the next effort goes. To settle it, I compared recordings of successful pursuits with failed ones on two measures: the number of frames where the target goes undetected, and the average offset between target and frame centre. The correlation shows up on the first, not the second. In other words, when the target is detected the camera aims true; it is the moments when it is not that break up the pursuit. Detection availability is therefore what limits the system, and the effort moved from tuning the controller to improving the detector.",
-        },
-        bullets: {
-          fr: [
-            "L'enregistrement des sessions permet de rejouer la même scène avec deux réglages différents. La mer et la lumière n'étant jamais deux fois les mêmes, une comparaison faite en direct ne prouverait rien",
-            "Un banc de réglage intégré à l'application modifie un paramètre sans redémarrer.",
-            "Sans ces deux outils, le constat serait resté une impression",
-          ],
-          en: [
-            "Session recording makes it possible to replay the same scene with two different settings. Since sea and light are never the same twice, a live comparison would prove nothing",
-            "A tuning bench built into the application changes a parameter without restarting.",
-            "Without those two tools the finding would have stayed an impression",
+            "The DETR family rather than anchor-based detectors: it needs no duplicate filtering, a step that is hard to tune when targets are small and close together",
+            "ByteTrack, which keeps low-score detections for a second association attempt: a distant target that is hard to see keeps its track",
+            "Licensing counted as much as performance: every block retained carries a permissive licence",
+            "ONVIF for camera control, because it is a standard: the system is not tied to any camera model",
+            "A reproducible test protocol, to compare two settings under the same conditions rather than by impression",
           ],
         },
       },
@@ -221,17 +147,17 @@ export const projects: Project[] = [
         bullets: {
           fr: [
             "Mesurer avant de décider : sans protocole d'essai reproductible, on optimise ce que l'on sait mesurer plutôt que ce qui limite réellement",
-            "La chaîne de vision complète, de la constitution du jeu d'images au déploiement d'un moteur d'inférence optimisé",
+            "La chaîne de vision complète, de la constitution du jeu de données au déploiement d'un moteur d'inférence optimisé",
             "Des bases d'automatique acquises sur le terrain, en concevant une boucle qui doit rester stable malgré son retard",
-            "Un critère que je n'avais jamais considéré : la licence, qui peut rendre inutilisable une bibliothèque performante",
-            "Le conditionnement d'une application pour un poste isolé, où rien ne peut être téléchargé à l'installation",
+            "La licence comme critère de choix, au même titre que la performance",
+            "Le déploiement d'une application dans un environnement contraint",
           ],
           en: [
             "Measure before deciding: without a reproducible test protocol you optimise what you can measure rather than what actually limits you",
-            "The full vision pipeline, from building the image set to deploying an optimised inference engine",
+            "The full vision pipeline, from building the dataset to deploying an optimised inference engine",
             "Control-theory basics learned in the field, designing a loop that must stay stable despite its own delay",
-            "A criterion I had never considered: licensing, which can make a high-performing library unusable",
-            "Packaging an application for an isolated machine, where nothing can be downloaded at install time",
+            "Licensing as a selection criterion, on a par with performance",
+            "Deploying an application in a constrained environment",
           ],
         },
       },
@@ -789,7 +715,15 @@ export const projects: Project[] = [
       en: "CESI · Software engineering · Team project",
     },
     domain: "software",
-    stack: ["C#", ".NET 10", "WPF", "MVVM", "Tâches parallèles", "Docker", "JSON / XML"],
+    stack: [
+      "C#",
+      ".NET 10",
+      "WPF",
+      "MVVM",
+      { fr: "Tâches parallèles", en: "Parallel tasks" },
+      "Docker",
+      "JSON / XML",
+    ],
     repo: "https://github.com/lmrt0572/EasySave",
     // Illustration générée (barres grises, pas de texte), pas une capture réelle.
     cover: {
@@ -1030,10 +964,10 @@ export const projects: Project[] = [
       "Python",
       "NumPy",
       "Jupyter",
-      "Recuit simulé",
-      "Recherche tabou",
-      "Algorithme génétique",
-      "Colonie de fourmis",
+      { fr: "Recuit simulé", en: "Simulated annealing" },
+      { fr: "Recherche tabou", en: "Tabu search" },
+      { fr: "Algorithme génétique", en: "Genetic algorithm" },
+      { fr: "Colonie de fourmis", en: "Ant colony optimisation" },
       "2-opt",
     ],
     repo: "https://github.com/clementmns/tsp-resolver",
@@ -1516,7 +1450,13 @@ export const projects: Project[] = [
       en: "CESI · Databases · Team project",
     },
     domain: "data",
-    stack: ["SQL", "Merise", "MCD / MLD / MPD", "Algèbre relationnelle", "Jeux de test"],
+    stack: [
+      "SQL",
+      "Merise",
+      { fr: "MCD / MLD / MPD", en: "CDM / LDM / PDM" },
+      { fr: "Algèbre relationnelle", en: "Relational algebra" },
+      { fr: "Jeux de test", en: "Test datasets" },
+    ],
     demo: "algebra",
     cover: {
       src: "/images/bddBackground.png",
@@ -1706,7 +1646,13 @@ export const projects: Project[] = [
       en: "CESI · Embedded systems · Team project",
     },
     domain: "embedded",
-    stack: ["C / C++", "ATmega328", "Arduino", "UML / SysML", "Carte SD"],
+    stack: [
+      "C / C++",
+      "ATmega328",
+      "Arduino",
+      "UML / SysML",
+      { fr: "Carte SD", en: "SD card" },
+    ],
     demo: "weather",
     cover: {
       src: "/images/meteo.jpg",
@@ -1877,7 +1823,13 @@ export const projects: Project[] = [
       en: "CESI · Embedded systems · Team project",
     },
     domain: "embedded",
-    stack: ["C++", "Arduino", "Électronique", "Programmation embarquée", "Algorithmique"],
+    stack: [
+      "C++",
+      "Arduino",
+      { fr: "Électronique", en: "Electronics" },
+      { fr: "Programmation embarquée", en: "Embedded programming" },
+      { fr: "Algorithmique", en: "Algorithms" },
+    ],
     demo: "strongbox",
     cover: {
       src: "/images/strongbox.jpg",
@@ -2044,7 +1996,14 @@ export const projects: Project[] = [
       en: "CESI · Signal processing",
     },
     domain: "embedded",
-    stack: ["Python", "NumPy", "SciPy", "Matplotlib", "Jupyter", "Modulation FSK"],
+    stack: [
+      "Python",
+      "NumPy",
+      "SciPy",
+      "Matplotlib",
+      "Jupyter",
+      { fr: "Modulation FSK", en: "FSK modulation" },
+    ],
     demo: "signal",
     cover: {
       src: "/images/signal.jpg",
