@@ -4,6 +4,7 @@ import type {
   Localized,
   LocalizedList,
   SkillGroup,
+  Title,
 } from "./types";
 
 export const profile = {
@@ -40,7 +41,7 @@ export const profile = {
 /** Début fixe de la phrase d'accueil. */
 export const typerLead: Localized = {
   fr: "Élève ingénieur, je travaille sur",
-  en: "Engineering student, I work on",
+  en: "As an engineering student, I work on",
 };
 
 /** Segments affichés en machine à écrire sous le nom. */
@@ -69,7 +70,7 @@ export const bio: LocalizedList = {
   en: [
     "What drives me is turning a problem I don't yet know how to solve into something that actually works. I get to live that in my apprenticeship at Thales, on computer vision projects; but what matters most to me is the way of working, more than the field itself: understand fast, test, iterate.",
     "My programme moves me to a new area every semester: AI, optimisation, web development, distributed systems. Far from spreading me thin, it has taught me to become useful quickly on an unfamiliar subject, and to enjoy it. What I'm looking for now is to go further: a demanding, international environment where I keep growing alongside people who know more than I do.",
-    "Outside code: football, weight training and basketball, some piano, and travel (the USA, Martinique, Italy, Spain) that makes me want my next internship to be abroad.",
+    "Outside of code: football, weight training and basketball, some piano, and travel (the USA, Martinique, Italy, Spain), which made me want to do my next internship abroad.",
   ],
 };
 
@@ -121,7 +122,7 @@ export const aboutFacts: { label: Localized; value: Localized }[] = [
     label: { fr: "Mobilité", en: "Mobility" },
     value: {
       fr: "Permis B, véhiculé, mobile à l'international",
-      en: "Full driving licence, open to relocation",
+      en: "Full driving licence, own car, open to working abroad",
     },
   },
   {
@@ -144,7 +145,7 @@ export const skillGroups: SkillGroup[] = [
       "RF-DETR",
       "ByteTrack",
       "CVAT",
-      "Suivi multi-cibles",
+      { fr: "Suivi multi-cibles", en: "Multi-object tracking" },
     ],
   },
   {
@@ -181,16 +182,14 @@ export const experience: ExperienceItem[] = [
     current: true,
     bullets: {
       fr: [
-        "Détection et suivi automatique de cibles maritimes en temps réel, avec asservissement d'une caméra PTZ pour maintenir la cible dans le champ.",
-        "Constitution et annotation d'un jeu de données maritime sous CVAT, puis entraînement et comparaison de plusieurs détecteurs de la famille DETR.",
-        "Optimisation de l'inférence pour le temps réel et déploiement sur serveur isolé.",
-        "Boucle d'apprentissage actif : les corrections de l'opérateur en direct alimentent le ré-entraînement.",
+        "Conception d'une chaîne de vision temps réel : détection, suivi multi-cibles et pilotage d'une caméra motorisée.",
+        "Constitution et annotation d'un jeu de données, entraînement et comparaison de détecteurs de la famille DETR.",
+        "Optimisation de l'inférence pour le temps réel et déploiement en environnement contraint.",
       ],
       en: [
-        "Real-time detection and tracking of maritime targets, with closed-loop PTZ camera control to keep the target in frame.",
-        "Built and annotated a maritime dataset in CVAT, then trained and benchmarked several DETR-family detectors.",
-        "Optimised inference for real-time operation and deployed on an air-gapped server.",
-        "Built an active learning loop: live operator corrections feed model retraining.",
+        "Designed a real-time vision pipeline: detection, multi-target tracking and motorised camera control.",
+        "Built and annotated a dataset, then trained and benchmarked DETR-family detectors.",
+        "Optimised inference for real-time operation and deployed in a constrained environment.",
       ],
     },
   },
@@ -206,7 +205,7 @@ export const experience: ExperienceItem[] = [
         "Optimisation du processus de collecte et d'intégration des données provenant de différentes sources.",
       ],
       en: [
-        "Managed and restructured the surveillance radar database.",
+        "Managed and restructured an air surveillance radar database.",
         "Maintained Excel tracking tools and developed data validation tooling.",
         "Streamlined the collection and integration of data from multiple sources.",
       ],
@@ -218,13 +217,13 @@ export const experience: ExperienceItem[] = [
 export const otherExperience: {
   period: Localized;
   role: Localized;
-  org: string;
+  org: Title;
   detail: Localized;
 }[] = [
   {
     period: { fr: "Août 2024", en: "Aug. 2024" },
     role: { fr: "Emploi saisonnier", en: "Seasonal worker" },
-    org: "Déchèterie de Bolbec",
+    org: { fr: "Déchèterie de Bolbec", en: "Bolbec recycling centre" },
     detail: {
       fr: "Gestion des déchets et accueil des usagers, dans le respect des normes environnementales.",
       en: "Waste management and user assistance, in line with environmental standards.",
@@ -242,7 +241,7 @@ export const otherExperience: {
   {
     period: { fr: "2023", en: "2023" },
     role: { fr: "Emploi saisonnier", en: "Seasonal worker" },
-    org: "Mairie de Port-Jérôme-sur-Seine",
+    org: { fr: "Mairie de Port-Jérôme-sur-Seine", en: "Port-Jérôme-sur-Seine town hall" },
     detail: {
       fr: "Surveillance et maintenance des infrastructures locales.",
       en: "Monitoring and upkeep of local facilities.",
@@ -251,7 +250,7 @@ export const otherExperience: {
   {
     period: { fr: "2019", en: "2019" },
     role: { fr: "Stage d'observation", en: "Observation placement" },
-    org: "Cabinet de kinésithérapie",
+    org: { fr: "Cabinet de kinésithérapie", en: "Physiotherapy practice" },
     detail: {
       fr: "Première découverte d'un environnement médical, sens de l'observation.",
       en: "First exposure to a medical environment, observation skills.",
@@ -293,7 +292,7 @@ export const education: EducationItem[] = [
     org: "Lycée Guillaume Le Conquérant, Lillebonne",
     detail: {
       fr: "Spécialités mathématiques et sciences de la vie et de la Terre.",
-      en: "Majors in mathematics and life sciences.",
+      en: "Majors in mathematics and life & earth sciences.",
     },
   },
 ];

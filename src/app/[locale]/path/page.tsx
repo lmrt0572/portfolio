@@ -6,6 +6,7 @@ import { SectionTitle } from "@/components/section-title";
 import { SkillsGrid } from "@/components/skills-grid";
 import { AboutPanel } from "@/components/about-panel";
 import { education, experience, otherExperience } from "@/content/profile";
+import { pickTitle } from "@/content/types";
 import { routing, type Locale } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -177,7 +178,7 @@ export default async function PathPage({
             items={otherExperience.map((item) => ({
               period: item.period[locale],
               role: item.role[locale],
-              org: item.org,
+              org: pickTitle(item.org, locale),
               detail: item.detail[locale],
             }))}
           />

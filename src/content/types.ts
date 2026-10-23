@@ -102,7 +102,8 @@ export type Project = {
   /** Cadre du projet, ex. « Thales · Alternance ». */
   context: Localized;
   domain: ProjectDomain;
-  stack: string[];
+  /** Nom de technologie, ou notion traduite (ex. « Recuit simulé »). */
+  stack: Title[];
   repo?: string;
   cover?: ProjectImage;
   gallery?: ProjectImage[];
@@ -144,5 +145,5 @@ export type EducationItem = {
 export type SkillGroup = {
   id: string;
   label: Localized;
-  items: string[];
+  items: Title[];
 };
