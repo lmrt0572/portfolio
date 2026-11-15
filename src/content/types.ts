@@ -44,6 +44,8 @@ export type ProjectSection = {
   title: Localized;
   body?: Localized;
   bullets?: LocalizedList;
+  /** Figures de la section, empilées sous le texte (graphique, schéma). */
+  images?: ProjectImage[];
 };
 
 /** Étape d'une chaîne de traitement, rendue comme une suite numérotée. */
@@ -107,6 +109,11 @@ export type Project = {
   repo?: string;
   cover?: ProjectImage;
   gallery?: ProjectImage[];
+  /** Titre et chapeau de la galerie, quand elle est une section à part entière. */
+  galleryTitle?: Localized;
+  galleryLead?: Localized;
+  /** Place la galerie en pleine largeur avant le texte, au lieu du bas de page. */
+  galleryFirst?: boolean;
   /** Résultats clés, mis en avant en haut de la page projet. */
   highlights: LocalizedList;
   /** Bandeau de métadonnées : rôle tenu, taille d'équipe, environnement… */

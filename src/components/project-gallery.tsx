@@ -25,9 +25,13 @@ const TRACK_HEIGHT = 420;
 export function ProjectGallery({
   images,
   locale,
+  trackHeight = TRACK_HEIGHT,
 }: {
   images: ProjectImage[];
   locale: Locale;
+  /** Hauteur visée sur grand écran, pour les galeries qui montrent de grandes
+   *  captures et doivent rester lisibles. */
+  trackHeight?: number;
 }) {
   const t = useTranslations("project");
   const trackRef = useRef<HTMLUListElement>(null);
@@ -89,7 +93,7 @@ export function ProjectGallery({
               // la hauteur d'abord reviendrait à border de vide les captures
               // larges dès que la fenêtre devient étroite.
               style={{
-                width: `min(${Math.round(TRACK_HEIGHT * ratio)}px, 88vw)`,
+                width: `min(${Math.round(trackHeight * ratio)}px, 88vw)`,
                 aspectRatio: String(ratio),
               }}
             >
@@ -98,7 +102,7 @@ export function ProjectGallery({
                 alt={image.alt[locale]}
                 width={image.width ?? 1600}
                 height={image.height ?? 1000}
-                sizes="(min-width: 1024px) 52rem, 88vw"
+                sizes={`(min-width: 1024px) ${Math.round(trackHeight * ratio)}px, 88vw`}
                 className="size-full object-cover"
                 priority={i === 0}
               />

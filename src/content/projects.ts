@@ -946,6 +946,316 @@ export const projects: Project[] = [
 
   /* ------------------------------------------------------------------ */
   {
+    slug: "chu-big-data",
+    featured: false,
+    status: "shipped",
+    period: { fr: "2026", en: "2026" },
+    title: {
+      fr: "Entrepôt de données d'un CHU",
+      en: "Hospital data warehouse",
+    },
+    tagline: {
+      fr: "Rassembler les données dispersées d'un hôpital, les nettoyer, protéger l'identité des patients, puis les montrer dans un tableau de bord pour les médecins et la direction.",
+      en: "Gathering a hospital's scattered data, cleaning it, protecting patient identity, then showing it in a dashboard for doctors and management.",
+    },
+    context: {
+      fr: "CESI · Big Data · Projet d'équipe (3 personnes)",
+      en: "CESI · Big Data · Team project (3 people)",
+    },
+    domain: "data",
+    stack: [
+      "Talend",
+      "HDFS",
+      "Hive",
+      "Impala",
+      "Parquet",
+      "PostgreSQL",
+      "Power BI",
+      "DAX",
+      "HiveQL",
+      "Python",
+      "Cloudera",
+    ],
+    repo: "https://github.com/lmrt0572/chu-big-data",
+    // Illustration générée, pas une capture du projet.
+    cover: {
+      src: "/images/chu-cover.webp",
+      width: 1376,
+      height: 768,
+      alt: {
+        fr: "Illustration : trois couches de données, du brut au raffiné",
+        en: "Illustration: three layers of data, from raw to refined",
+      },
+    },
+    // Le tableau de bord s'ouvre la page, en pleine largeur : c'est la meilleure
+    // preuve du projet. Un identifiant de professionnel est flouté sur la
+    // deuxième capture.
+    galleryFirst: true,
+    galleryTitle: {
+      fr: "Le tableau de bord en images",
+      en: "The dashboard in pictures",
+    },
+    galleryLead: {
+      fr: "Quatre pages, pour deux publics : les praticiens et la direction. Des filtres (année, région, âge, sexe) permettent de ne regarder qu'une partie des données. Captures d'écran du rapport, en français, sur les données de formation, en partie fictives.",
+      en: "Four pages, for two audiences: practitioners and management. Filters (year, region, age, sex) make it possible to look at only part of the data. Screenshots of the report, which is in French, on the course data, partly fictional.",
+    },
+    gallery: [
+      {
+        src: "/images/chu-tdb-synthese.webp",
+        width: 1432,
+        height: 802,
+        alt: {
+          fr: "Synthèse : les huit indicateurs, ceux des praticiens en haut et ceux de la direction en bas",
+          en: "Summary: the eight indicators, practitioners' on top and management's below",
+        },
+      },
+      {
+        src: "/images/chu-tdb-activite.webp",
+        width: 1432,
+        height: 802,
+        alt: {
+          fr: "Activité médicale : consultations, séjours, taux d'hospitalisation par âge et par sexe, spécialités les plus consultées (identifiants des professionnels floutés)",
+          en: "Medical activity: consultations, stays, hospitalisation rate by age and sex, most consulted specialities (practitioner identifiers blurred)",
+        },
+      },
+      {
+        src: "/images/chu-tdb-etablissements.webp",
+        width: 1432,
+        height: 802,
+        alt: {
+          fr: "Établissements : activité et taux d'hospitalisation de chaque établissement, comparés à l'ensemble du groupe",
+          en: "Facilities: activity and hospitalisation rate of each facility, compared with the whole group",
+        },
+      },
+      {
+        src: "/images/chu-tdb-territoires.webp",
+        width: 1432,
+        height: 802,
+        alt: {
+          fr: "Territoires : décès pour 100 000 habitants et satisfaction des patients, région par région",
+          en: "Territories: deaths per 100,000 inhabitants and patient satisfaction, region by region",
+        },
+      },
+    ],
+    facts: [
+      {
+        label: { fr: "Rôle", en: "Role" },
+        value: {
+          fr: "Récupération des données avec Talend, mesures de performance, tableau de bord Power BI",
+          en: "Data extraction with Talend, performance measurements, Power BI dashboard",
+        },
+      },
+      {
+        label: { fr: "Équipe", en: "Team" },
+        value: { fr: "3 étudiants", en: "3 students" },
+      },
+      {
+        label: { fr: "Données", en: "Data" },
+        value: {
+          fr: "6 sources, dont 25 millions de lignes de décès. En partie fictives, non publiées",
+          en: "6 sources, including 25 million death records. Partly fictional, not published",
+        },
+      },
+      {
+        label: { fr: "Environnement", en: "Environment" },
+        value: {
+          fr: "Un seul ordinateur simulé (machine virtuelle) de 8 Go de mémoire",
+          en: "A single simulated computer (virtual machine) with 8 GB of memory",
+        },
+      },
+    ],
+    highlights: {
+      fr: [
+        "Six sources de formats différents rassemblées en un seul endroit, puis nettoyées et organisées",
+        "Les noms des patients sont retirés dès le départ, et un chiffre n'est jamais affiché s'il permettrait de reconnaître quelqu'un",
+        "Un tableau de bord pour deux publics, les médecins et la direction, qui répond à huit questions",
+        "Chaque choix technique a été mesuré : une même question passe de 185 secondes à moins d'une seconde",
+      ],
+      en: [
+        "Six sources in different formats brought together in one place, then cleaned and organised",
+        "Patient names are removed from the start, and a figure is never shown if it could let someone be recognised",
+        "A dashboard for two audiences, doctors and management, answering eight questions",
+        "Every technical choice was measured: the same question drops from 185 seconds to under a second",
+      ],
+    },
+    pipeline: [
+      {
+        id: "sources",
+        title: { fr: "Les sources", en: "The sources" },
+        body: {
+          fr: "Un hôpital range ses données de plusieurs façons : une base de données (patients, consultations, médecins) et des fichiers de type tableur (établissements, hospitalisations, enquête de satisfaction, décès). Les décès à eux seuls pèsent 25 millions de lignes. Ces sources ne se parlent pas entre elles.",
+          en: "A hospital keeps its data in several ways: a database (patients, consultations, doctors) and spreadsheet-style files (facilities, hospital stays, a satisfaction survey, deaths). Deaths alone weigh 25 million rows. These sources do not talk to each other.",
+        },
+      },
+      {
+        id: "bronze",
+        title: { fr: "Bronze, la copie brute", en: "Bronze, the raw copy" },
+        body: {
+          fr: "Un logiciel de transfert de données (Talend) copie chaque source telle quelle dans un grand espace de stockage réparti sur plusieurs machines, que l'on appelle un lac de données. Les noms sont retirés dès cette étape, et chaque patient reçoit un code à la place de son identifiant : sans la clé, gardée à part, on ne peut pas retrouver la personne. C'est la pseudonymisation.",
+          en: "A data transfer tool (Talend) copies each source as it is into a large storage space spread over several machines, called a data lake. Names are removed at this stage, and each patient gets a code in place of their identifier: without the key, kept apart, the person cannot be traced. This is pseudonymisation.",
+        },
+      },
+      {
+        id: "silver",
+        title: { fr: "Silver, le nettoyage", en: "Silver, the cleaning" },
+        body: {
+          fr: "Chaque colonne reçoit un type (nombre, date, texte), les doublons sont retirés et les lignes invalides sont mises de côté dans une table à part. Les sources sont ensuite reliées entre elles. À chaque étape, des compteurs vérifient que rien ne s'est perdu en route, et le traitement s'arrête si les chiffres ne tombent pas juste.",
+          en: "Every column gets a type (number, date, text), duplicates are removed and invalid rows are set aside in a separate table. The sources are then linked together. At every step, counters check that nothing was lost on the way, and processing stops if the figures do not add up.",
+        },
+      },
+      {
+        id: "gold",
+        title: { fr: "Gold, l'organisation pour répondre", en: "Gold, organised to answer" },
+        body: {
+          fr: "Les données sont rangées en étoile : au centre, les événements (consultations, hospitalisations, décès, réponses à l'enquête), et autour, les listes de référence (dates, patients, établissements, diagnostics). Une question n'a plus qu'une liaison à faire, ce qui la rend beaucoup plus rapide.",
+          en: "The data is arranged as a star: at the centre, the events (consultations, hospital stays, deaths, survey answers), and around them, the reference lists (dates, patients, facilities, diagnoses). A question only has one link to make, which makes it much faster.",
+        },
+      },
+      {
+        id: "serve",
+        title: { fr: "Le tableau de bord", en: "The dashboard" },
+        body: {
+          fr: "Un moteur de requêtes (Impala) répond en quelques secondes au plus. Power BI, le logiciel de tableaux de bord, lui pose ses questions à chaque affichage, sans copier les données. Le rapport compte quatre pages et huit indicateurs, pour les médecins et pour la direction.",
+          en: "A query engine (Impala) answers in a few seconds at most. Power BI, the dashboard software, puts its questions to it every time a page is shown, without copying the data. The report has four pages and eight indicators, for doctors and for management.",
+        },
+      },
+    ],
+    sections: [
+      {
+        id: "context",
+        title: { fr: "Le sujet", en: "The assignment" },
+        body: {
+          fr: "Un centre hospitalier universitaire (CHU) produit des données dans des formats très différents, et personne ne peut les consulter ensemble. Le projet les rassemble dans un entrepôt de données, c'est-à-dire un endroit unique où elles sont nettoyées et organisées, puis les montre dans un tableau de bord. Il s'adresse à deux publics. Les praticiens veulent savoir, par exemple, quels diagnostics et quelles spécialités reviennent le plus. La direction veut comparer les établissements et suivre les décès et la satisfaction des patients région par région. Huit indicateurs, nommés B1 à B8 dans les rapports, répondent à ces questions. Les données fournies pour la formation sont en partie fictives et ne sont pas publiées : le dépôt contient le code, les rapports et les mesures, pas les données.",
+          en: "A university hospital (CHU) produces data in very different formats, and nobody can look at them together. The project gathers them in a data warehouse, that is a single place where they are cleaned and organised, then shows them in a dashboard. It serves two audiences. Practitioners want to know, for example, which diagnoses and specialities come up most. Management wants to compare facilities and follow deaths and patient satisfaction region by region. Eight indicators, named B1 to B8 in the reports, answer these questions. The data supplied for the course is partly fictional and is not published: the repository holds the code, the reports and the measurements, not the data.",
+        },
+      },
+      {
+        id: "choices",
+        title: { fr: "Les choix de conception", en: "Design choices" },
+        body: {
+          fr: "Chaque choix repose sur une mesure ou sur une contrainte, jamais sur l'habitude.",
+          en: "Every choice rests on a measurement or a constraint, never on habit.",
+        },
+        bullets: {
+          fr: [
+            "Trois couches plutôt qu'une, nommées Bronze, Silver et Gold : la copie brute, le nettoyage, puis la mise en forme pour répondre aux questions. Si une règle de nettoyage change, on rejoue les couches suivantes sans retourner chercher les sources",
+            "Deux outils complémentaires : Hive pour les gros chargements, Impala pour répondre vite. Hive met environ 40 secondes à chaque étape, quelle que soit la quantité de données, ce qui convient à un chargement mais pas à un tableau de bord",
+            "Un rangement en étoile plutôt que les tables d'origine : une question qui demandait quatre liaisons entre tables n'en demande plus qu'une",
+            "Un tableau de bord qui interroge directement le stockage (le mode DirectQuery de Power BI), sans rien recopier : avec 100 millions de consultations, il aurait fallu tout importer dans Power BI",
+            "Nous avons aussi testé une base de données classique (PostgreSQL), où l'on aurait recopié les résultats. Elle répond vite à petite échelle, mais elle oblige à sortir les données du lac, et sur une seule machine elle ralentit nettement quand le volume et le nombre d'utilisateurs montent : avec 50 utilisateurs, l'ouverture du tableau de bord passait de 0,45 seconde pour 1 million de consultations à 70 secondes pour 50 millions. Nous l'avons donc écartée",
+          ],
+          en: [
+            "Three layers rather than one, named Bronze, Silver and Gold: the raw copy, the cleaning, then the shaping to answer questions. If a cleaning rule changes, the following layers are replayed without going back to the sources",
+            "Two complementary tools: Hive for big loads, Impala for fast answers. Hive takes about 40 seconds at every step whatever the amount of data, which suits a load but not a dashboard",
+            "A star arrangement rather than the original tables: a question that needed four links between tables now needs one",
+            "A dashboard that queries the storage directly (Power BI's DirectQuery mode), copying nothing: with 100 million consultations, everything would have had to be imported into Power BI",
+            "We also tested a classic database (PostgreSQL), where the results would have been copied. It answers fast at small scale, but it forces the data out of the lake, and on a single machine it slows down markedly as volume and number of users grow: with 50 users, opening the dashboard went from 0.45 seconds at 1 million consultations to 70 seconds at 50 million. We therefore set it aside",
+          ],
+        },
+      },
+      {
+        id: "measure",
+        title: { fr: "Mesurer avant de choisir", en: "Measuring before choosing" },
+        body: {
+          fr: "Pour chaque choix, le projet mesure ce qu'il rapporte en ne changeant qu'une chose à la fois. Le graphique suit une même question, « combien de consultations par région ? », posée de quatre façons : on passe de 185 secondes à moins d'une seconde.",
+          en: "For every choice, the project measures what it brings by changing only one thing at a time. The chart follows a single question, “how many consultations per region?”, asked four ways: it goes from 185 seconds to under a second.",
+        },
+        images: [
+          {
+            src: { fr: "/images/chu-escalier-fr.webp", en: "/images/chu-escalier-en.webp" },
+            width: 1120,
+            height: 644,
+            alt: {
+              fr: "Temps de réponse de la même question selon les tables, le format des fichiers et le moteur : 185 s, 52 s, 57 s puis 0,71 s",
+              en: "Response time of the same question depending on tables, file format and engine: 185 s, 52 s, 57 s then 0.71 s",
+            },
+          },
+        ],
+        bullets: {
+          fr: [
+            "Chaque test est lancé quatre fois, le premier à froid, et on garde la médiane des trois suivants",
+            "Toutes les variantes d'un même test doivent donner exactement le même résultat, vérifié par une empreinte de la réponse : une variante plus rapide qui donnerait un autre chiffre ne prouverait rien",
+            "Ce contrôle a servi : Impala affichait 71,59 au lieu de 71,60 pour la Martinique, car il tronquait une division, alors que Hive donnait 71,60. La requête a été corrigée",
+            "Les essais ratés restent dans le dépôt, avec leur journal",
+          ],
+          en: [
+            "Every test is run four times, the first one cold, and the median of the next three is kept",
+            "Every variant of a test must give exactly the same result, checked by a fingerprint of the answer: a faster variant giving a different figure proves nothing",
+            "That check paid off: Impala showed 71.59 instead of 71.60 for Martinique, because it truncated a division, while Hive gave 71.60. The query was corrected",
+            "Failed runs stay in the repository, with their log",
+          ],
+        },
+      },
+      {
+        id: "privacy",
+        title: { fr: "Protéger les patients", en: "Protecting patients" },
+        body: {
+          fr: "Des données de santé ne se montrent qu'à ceux qui en ont besoin, et seulement dans la mesure où ils en ont besoin.",
+          en: "Health data is only shown to those who need it, and only as far as they need it.",
+        },
+        bullets: {
+          fr: [
+            "Les noms et les autres identifiants directs sont supprimés dès l'extraction, et chaque patient est désigné par un code. Sans la clé, gardée hors du dépôt, on ne peut pas retrouver la personne",
+            "Le tableau de bord ne reçoit jamais ce code : il ne peut même pas le lire",
+            "Un taux calculé sur moins de dix patients n'est pas affiché. Avec plusieurs filtres, une case peut ne correspondre qu'à un ou deux patients, que l'on pourrait alors reconnaître : c'est le secret statistique",
+            "Chaque utilisateur ne voit que son périmètre : un rôle de démonstration limite par exemple tout le rapport à la Bretagne",
+          ],
+          en: [
+            "Names and other direct identifiers are removed at extraction, and each patient is referred to by a code. Without the key, kept outside the repository, nobody can trace the person",
+            "The dashboard never receives this code: it cannot even read it",
+            "A rate computed on fewer than ten patients is not shown. With several filters, a cell may match only one or two patients, who could then be recognised: this is statistical secrecy",
+            "Each user only sees their own scope: a demo role limits the whole report to Brittany, for example",
+          ],
+        },
+      },
+      {
+        id: "limits",
+        title: {
+          fr: "Ce qui n'a pas marché et ce qui reste à faire",
+          en: "What did not work and what is left to do",
+        },
+        bullets: {
+          fr: [
+            "Le format Parquet (un format de fichier organisé par colonnes) n'a rien changé sur la question testée : 57 secondes contre 52 en texte, car ses tables sont petites. Il sert sur les 25 millions de décès, où Hive lit 18 fois moins de données",
+            "Un essai avec un autre moteur de calcul (Spark) n'a pas pu démarrer, faute de mémoire sur la machine virtuelle. Il est noté comme tel plutôt que présenté comme un résultat",
+            "Notre petite machine de test cale quand beaucoup de personnes ouvrent le tableau de bord en même temps sur de très gros volumes : des requêtes échouent avec Impala, et PostgreSQL met 70 secondes. Seul un vrai groupe de machines permettrait de vérifier que l'approche choisie tient à cette échelle",
+            "Les décès sont rapportés à la population, mais sans tenir compte de l'âge : une région âgée compte plus de décès. Comparer à âge égal reste à faire",
+            "Les données sont en partie fictives : le diagnostic le plus fréquent ne pèse que 0,02 % des consultations, si bien que deux indicateurs ne font ressortir aucune maladie dominante",
+          ],
+          en: [
+            "The Parquet format (a column-oriented file format) changed nothing on the tested question: 57 seconds against 52 as text, because its tables are small. It pays off on the 25 million deaths, where Hive reads 18 times less data",
+            "A trial with another computing engine (Spark) could not start, for lack of memory on the virtual machine. It is recorded as such rather than presented as a result",
+            "Our small test machine stalls when many people open the dashboard at once on very large volumes: some queries fail with Impala, and PostgreSQL takes 70 seconds. Only a real group of machines could confirm that the chosen approach holds at that scale",
+            "Deaths are scaled to population, but without accounting for age: an older region has more deaths. Comparing at equal age is still to do",
+            "The data is partly fictional: the most frequent diagnosis weighs only 0.02% of consultations, so two indicators bring out no dominant illness",
+          ],
+        },
+      },
+      {
+        id: "learned",
+        title: { fr: "Ce que j'en retire", en: "What I took away" },
+        bullets: {
+          fr: [
+            "Mesurer chaque choix avant de le défendre, et garder les mesures qui contredisent l'intuition",
+            "Pourquoi deux outils se complètent : l'un pour charger de gros volumes, l'autre pour répondre vite",
+            "Construire une chaîne de traitement qui se contrôle elle-même : compteurs, lignes écartées gardées à part, arrêt automatique quand un chiffre ne tombe pas juste",
+            "Penser la protection des données dès le départ plutôt qu'à la fin",
+            "Transmettre un résultat à une équipe pour que chacun parte des mêmes données, sur sa propre machine",
+          ],
+          en: [
+            "Measure every choice before defending it, and keep the measurements that contradict intuition",
+            "Why two tools complement each other: one to load large volumes, the other to answer fast",
+            "Building a processing chain that checks itself: counters, rejected rows kept apart, automatic stop when a figure does not add up",
+            "Designing data protection from the start rather than at the end",
+            "Handing a result over to a team so that everyone starts from the same data, on their own machine",
+          ],
+        },
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
     slug: "tsp-resolver",
     featured: false,
     status: "shipped",
@@ -2171,6 +2481,7 @@ const displayOrder = [
   "camera-ptz",
   "breezy",
   "easysave",
+  "chu-big-data",
   "tsp-resolver",
   "stagelink",
   "qualite-air",

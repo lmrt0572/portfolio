@@ -244,6 +244,29 @@ export default async function ProjectPage({
           </div>
         ) : null}
 
+        {/* ---- Galerie en tête ---------------------------------------
+            Pour les projets dont le visuel est la meilleure preuve (un tableau
+            de bord, par exemple) : pleine largeur, avant le texte. */}
+        {project.gallery?.length && project.galleryFirst ? (
+          <section className="reveal mb-20">
+            <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+              {project.galleryTitle ? project.galleryTitle[locale] : t("gallery")}
+            </h2>
+            {project.galleryLead ? (
+              <p className="mt-3 max-w-2xl leading-relaxed text-muted">
+                {project.galleryLead[locale]}
+              </p>
+            ) : null}
+            <div className="mt-7">
+              <ProjectGallery
+                images={project.gallery}
+                locale={locale}
+                trackHeight={560}
+              />
+            </div>
+          </section>
+        ) : null}
+
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-20">
           <div className="min-w-0">
             {/* ---- Points clés ---------------------------------------- */}
@@ -400,7 +423,7 @@ export default async function ProjectPage({
             {/* ---- Sections rédigées ----------------------------------- */}
             <div className="mt-16 grid gap-14">
               {project.sections.map((section) => (
-                <section key={section.id} className="reveal">
+                <section key={section.id} className="reveal min-w-0">
                   <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
                     {section.title[locale]}
                   </h2>
@@ -409,6 +432,21 @@ export default async function ProjectPage({
                       {section.body[locale]}
                     </p>
                   ) : null}
+                  {section.images?.map((image) => (
+                    <figure key={pickSource(image.src, locale)} className="mt-7">
+                      <Image
+                        src={pickSource(image.src, locale)}
+                        alt={image.alt[locale]}
+                        width={image.width ?? 1600}
+                        height={image.height ?? 900}
+                        sizes="(min-width: 1024px) 52rem, 92vw"
+                        className="h-auto w-full rounded-xl border border-line-soft"
+                      />
+                      <figcaption className="mt-3 text-sm text-muted-dim">
+                        {image.alt[locale]}
+                      </figcaption>
+                    </figure>
+                  ))}
                   {section.bullets ? (
                     <ul className="mt-5 grid gap-3">
                       {section.bullets[locale].map((b) => (
@@ -478,7 +516,7 @@ export default async function ProjectPage({
         </div>
 
         {/* ---- Galerie -------------------------------------------------- */}
-        {project.gallery?.length ? (
+        {project.gallery?.length && !project.galleryFirst ? (
           <section className="reveal mt-20">
             <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-accent-text">
               {t("gallery")}
